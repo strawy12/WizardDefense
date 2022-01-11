@@ -84,7 +84,7 @@ public class TowerAttack : MonoBehaviour
 
             if (towerState == TowerState.InControl)
             {
-                obj.transform.rotation = transform.rotation;
+                obj.transform.rotation = bulletPosition.rotation;
             }
 
             else

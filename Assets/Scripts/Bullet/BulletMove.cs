@@ -15,8 +15,12 @@ public class BulletMove : PoolObject
     public void Init(TowerAttack towerAttack)
     {
         this.towerAttack = towerAttack;
-        targetTransform = towerAttack.targetEnemy?.transform;
         state = towerAttack.towerState;
+
+        if (state == TowerState.OutControl)
+        {
+            targetTransform = towerAttack.targetEnemy?.transform;
+        }
         Debug.Log(towerAttack.towerBase.attribute.attributeName);
     }
 
@@ -67,7 +71,7 @@ public class BulletMove : PoolObject
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            if (targetTransform == null)
+            if (towerAttack.targetEnemy == null)
             {
                 collision.gameObject.GetComponent<Eneminyoung>().Damaged(towerAttack.towerBase.attackPower);
             }
