@@ -746,7 +746,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 963194227}
-  m_PlaneDistance: 10
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -754,7 +754,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!224 &950485621
 RectTransform:
@@ -1020,7 +1020,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1400261234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1171,7 +1171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 1924674254}
   home: {fileID: 2102469270}
-  center: {fileID: 950485621}
+  screenCenter: {x: 0, y: 0, z: 0}
   enemies: []
   attributes:
   - attributeName: "\uBB3C"
@@ -1462,7 +1462,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1924674254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a141b85ecf813714f9620955178833ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 4058c50a1d767fd4b95c36913182a840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
@@ -1569,7 +1569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1991658886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1754,7 +1754,6 @@ GameObject:
   - component: {fileID: 2030156386}
   - component: {fileID: 2030156385}
   - component: {fileID: 2030156389}
-  - component: {fileID: 2030156390}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -1851,22 +1850,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ePoolingType: 0
---- !u!54 &2030156390
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030156384}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &2102469270
 GameObject:
   m_ObjectHideFlags: 0

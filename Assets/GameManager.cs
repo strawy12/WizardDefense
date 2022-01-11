@@ -7,16 +7,16 @@ public class GameManager : MonoSingleton<GameManager>
     public GameObject enemy;
     public GameObject home;
 
-    public RectTransform center;
+    public Vector3 screenCenter;
 
-    public List<Eneminyoung> enemies = new List<Eneminyoung>();
+    public List<Enemy> enemies = new List<Enemy>();
     public List<Attribute> attributes = new List<Attribute>();
 
     void Start()
     {
+        screenCenter = (new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2));
         StartCoroutine(SpawnEnemies());
     }
-
     private void SpawnEnemy()
     {
         GameObject obj = Instantiate(enemy);
@@ -24,7 +24,7 @@ public class GameManager : MonoSingleton<GameManager>
         obj.transform.position = new Vector3(20, 1, 8);
         obj.SetActive(true);
 
-        enemies.Add(obj.GetComponent<Eneminyoung>());
+        enemies.Add(obj.GetComponent<Enemy>());
     }
 
     private IEnumerator SpawnEnemies()

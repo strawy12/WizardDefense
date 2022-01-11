@@ -5,11 +5,15 @@ using UnityEngine;
 public class BulletMove : PoolObject
 {
     TowerAttack towerAttack;
-    Transform targetTransform;
+    Enemy targetEenemy;
     TowerState state;
+    SphereCollider col;
+    float originRad;
 
     protected override void Awake()
     {
+        col = GetComponent<SphereCollider>();
+        originRad = col.radius;
         base.Awake();
     }
     public void Init(TowerAttack towerAttack)
@@ -19,16 +23,20 @@ public class BulletMove : PoolObject
 
         if (state == TowerState.OutControl)
         {
-            targetTransform = towerAttack.targetEnemy?.transform;
+            targetEenemy = towerAttack.targetEnemy;
+            col.radius = originRad;
         }
-        Debug.Log(towerAttack.towerBase.attribute.attributeName);
+        else
+        {
+            col.radius = originRad * 2.5f;
+        }
     }
 
     private void Update()
     {
         if (state == TowerState.OutControl)
         {
-            if (targetTransform == null)
+            if (targetEenemy == null)
             {
                 towerAttack.SetTargetEnemy();
                 if (towerAttack.targetEnemy == null)
@@ -36,7 +44,6 @@ public class BulletMove : PoolObject
                     Despawn();
                     return;
                 }
-                targetTransform = towerAttack.targetEnemy.transform;
             }
 
             Move_OutControl();
@@ -50,7 +57,7 @@ public class BulletMove : PoolObject
 
     private void Move_OutControl()
     {
-        transform.position = Vector3.MoveTowards(transform.localPosition, targetTransform.position, Time.deltaTime * 30f);
+        transform.position = Vector3.MoveTowards(transform.localPosition, targetEenemy.transform.position, Time.deltaTime * 30f);
     }
     private void Move_InControl()
     {
@@ -71,13 +78,13 @@ public class BulletMove : PoolObject
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            if (towerAttack.targetEnemy == null)
+            if (targetEenemy == null)
             {
-                collision.gameObject.GetComponent<Eneminyoung>().Damaged(towerAttack.towerBase.attackPower);
+                collision.gameObject.GetComponent<Enemy>().Damaged(towerAttack.towerBase.attackPower);
             }
-            else if (targetTransform?.gameObject == collision.gameObject)
+            else if (targetEenemy?.gameObject == collision.gameObject)
             {
-                towerAttack.targetEnemy.Damaged(towerAttack.towerBase.attackPower);
+                towerAttack.targetEnemy?.Damaged(towerAttack.towerBase.attackPower);
             }
 
             Despawn();

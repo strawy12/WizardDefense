@@ -7,7 +7,7 @@ public class TowerAttack : MonoBehaviour
 {
     public TowerBase towerBase;
     public Transform bulletPosition;
-    public Eneminyoung targetEnemy;
+    public Enemy targetEnemy;
     private PoolManager pool;
     public TowerState towerState;
     private float curTime = 0f;
@@ -16,6 +16,8 @@ public class TowerAttack : MonoBehaviour
     void Start()
     {
         pool = FindObjectOfType<PoolManager>();
+
+
     }
 
     private void Update()
@@ -63,7 +65,10 @@ public class TowerAttack : MonoBehaviour
         Camera.main.transform.localEulerAngles =
             new Vector3(Mathf.Clamp(xRot + rot.eulerAngles.x, 0, 80), rot.eulerAngles.y + yRot, 0f);
 
-        bulletPosition.LookAt(GameManager.Instance.center.transform);
+        Ray ray = Camera.main.ScreenPointToRay(GameManager.Instance.screenCenter);
+        bulletPosition.LookAt(ray.GetPoint(towerBase.distance));
+
+
     }
     private void Fire()
     {
@@ -80,10 +85,11 @@ public class TowerAttack : MonoBehaviour
         if (towerState == TowerState.InControl || SetTargetEnemy())
         {
             GameObject obj = pool.GetPoolObject(EPoolingType.BulletMove).gameObject;
-            obj.transform.localPosition = transform.position;
+            obj.transform.position = bulletPosition.position;
 
             if (towerState == TowerState.InControl)
             {
+
                 obj.transform.rotation = bulletPosition.rotation;
             }
 
@@ -96,10 +102,9 @@ public class TowerAttack : MonoBehaviour
             obj.GetComponent<BulletMove>().Init(this);
         }
     }
-
     public bool SetTargetEnemy()
     {
-        List<Eneminyoung> enemies = GameManager.Instance.enemies;
+        List<Enemy> enemies = GameManager.Instance.enemies;
         if (enemies.Count == 0) return false;
 
         float minDistance = 100f;
@@ -135,5 +140,5 @@ public class TowerAttack : MonoBehaviour
     public void GetAttribute(Attribute attribute)
     {
         towerBase.attribute = attribute;
-    }    
+    }
 }
