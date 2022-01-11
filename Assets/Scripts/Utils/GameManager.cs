@@ -6,7 +6,11 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private Monster monster;
     [SerializeField] private List<Item> itemList;
+    [SerializeField] private WayPoints wayPoints;
+    [SerializeField] private List<GameObject> prefabs;
+    [SerializeField] private Transform enemySpawnPoint;
     public static GameManager Inst = null;
+    public WayPoints WayPoints {  get { return wayPoints; } }
 
     private void Awake()
     {
@@ -14,8 +18,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        //for(int i = 0; i < 1000; i++)
-        //    monster.Damaged(1);
+        StartCoroutine(GenerateMonsters());
     }
     private void Update()
     {
@@ -52,5 +55,29 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(item, monster.transform.position, Quaternion.identity);
         }
+    }
+
+    private IEnumerator GenerateMonsters()
+    {
+        for(int j = 0; j < 5; j++)
+        {
+            int generateCount = Random.Range(3, 10);
+
+            for (int i = 0; i < generateCount; i++)
+            {
+                SpawnMonster();
+
+                yield return new WaitForSeconds(2f);
+            }
+            yield return new WaitForSeconds(5f);
+        }
+        
+    }
+
+    private void SpawnMonster()
+    {
+        int randIndex = Random.Range(0, prefabs.Count);
+
+        Instantiate(prefabs[randIndex], enemySpawnPoint.position, Quaternion.identity);
     }
 }

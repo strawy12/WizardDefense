@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Monster : MonoBehaviour
 {
     [SerializeField] private MonsterBase monsterData;
+    
     private int currentHp = 0;
+    private int wayPointCnt = 0;
+    private float rotateSpeed = 0f;
     private float currentTime = 0f;
     private float waitingTime = 0f;
 
     private Vector3 currentDir = Vector3.zero;
+    private Transform targetWayPoint;
+
     private void Awake()
     {
 
@@ -22,32 +28,54 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
-        currentTime += Time.deltaTime;
-        if (currentTime >= waitingTime)
-        {
-            ChangeDir();
-            currentTime = 0f;
-        }
-
         DoMove();
     }
 
     private void Init()
     {
+        wayPointCnt = 0;
+        rotateSpeed = 10f;
+        waitingTime = 0f;
+        currentTime = 0f;
         currentHp = monsterData.maxHp;
-        waitingTime = Random.Range(3f, 7f);
         currentTime = waitingTime;
+        targetWayPoint = transform;
         ChangeDir();
-    }
-
-    private void DoMove()
-    {
-        transform.Translate(currentDir * monsterData.speed * Time.deltaTime);
     }
 
     private void ChangeDir()
     {
-        currentDir = Utils.GetRandomDir();
+        Transform beforeTarget = targetWayPoint;
+        targetWayPoint = GameManager.Inst.WayPoints.GetWayPoint(wayPointCnt++);
+        currentDir = (targetWayPoint.position - beforeTarget.position).normalized;
+        currentDir.y = 0f;
+
+        transform.DORotateQuaternion(Quaternion.LookRotation(currentDir), 0.5f);
+    }
+
+    private bool CheckWayPointDistance()
+    {
+        Vector3 position = transform.position;
+        position.y = 0f;
+        float distance = Vector3.Distance(targetWayPoint.position, position);
+
+        if(distance <= 0.35f)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void DoMove()
+    {
+        if(CheckWayPointDistance())
+        {
+            ChangeDir();
+            return;
+        }
+
+        transform.Translate(Vector3.forward * monsterData.speed * Time.deltaTime);
     }
 
     public void Damaged(int damage)
