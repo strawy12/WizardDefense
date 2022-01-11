@@ -5,16 +5,13 @@ using DG.Tweening;
 
 public class TowerAttack : MonoBehaviour
 {
-
-
     public TowerBase towerBase;
     public Transform bulletPosition;
-    [SerializeField] private GameObject bulletPrefab;
-    public Eneminyoung targetEnemey;
-    PoolManager pool;
+    public Eneminyoung targetEnemy;
+    private PoolManager pool;
     public TowerState towerState;
-
     private float curTime = 0f;
+
     void Start()
     {
         pool = FindObjectOfType<PoolManager>();
@@ -22,13 +19,26 @@ public class TowerAttack : MonoBehaviour
 
     private void Update()
     {
-        Fire();
+        curTime += Time.deltaTime;
+
+        if (towerState == TowerState.OutControl)
+        {
+            Fire();
+        }
+
+        if (Input.GetMouseButton(0) && towerState == TowerState.InControl && curTime > towerBase.handFireRate)
+        {
+            InstantiateOrPooling();
+            curTime = 0f;
+        }
+
 
         if (Input.GetKeyDown(KeyCode.Escape) && towerState == TowerState.InControl)
         {
             towerState = TowerState.OutControl;
             Camera.main.transform.DOMove(new Vector3(0, 11.5f, -10f), 1f);
             Camera.main.transform.DORotate(new Vector3(31f, 0f, 0f), 1f);
+            curTime = 0f;
         }
 
         if (towerState == TowerState.InControl)
@@ -45,13 +55,12 @@ public class TowerAttack : MonoBehaviour
         Quaternion rot = Camera.main.transform.rotation;
 
         Camera.main.transform.localEulerAngles =
-            new Vector3(Mathf.Clamp(xRot + rot.eulerAngles.x, 10, 80), rot.eulerAngles.y + yRot, 0f);
+            new Vector3(Mathf.Clamp(xRot + rot.eulerAngles.x, 0, 80), rot.eulerAngles.y + yRot, 0f);
 
+        bulletPosition.LookAt(GameManager.Instance.center.transform);
     }
     private void Fire()
     {
-        curTime += Time.deltaTime;
-
         if (curTime > towerBase.fireRate)
         {
             InstantiateOrPooling();
@@ -61,39 +70,50 @@ public class TowerAttack : MonoBehaviour
 
     private void InstantiateOrPooling()
     {
-        if (SetTargetEnemy())
+        Camera mainCam = Camera.main;
+        if (towerState == TowerState.InControl || SetTargetEnemy())
         {
             GameObject obj = pool.GetPoolObject(EPoolingType.BulletMove).gameObject;
-            obj.GetComponent<BulletMove>().Init(this);
-            obj.transform.position = bulletPosition.position;
+            obj.transform.localPosition = bulletPosition.position;
+
+            if (towerState == TowerState.InControl)
+            {
+                obj.transform.rotation = bulletPosition.rotation;
+            }
+            else
+            {
+                obj.transform.rotation = Quaternion.identity;
+            }
+
             obj.SetActive(true);
+
+            obj.GetComponent<BulletMove>().Init(this);
         }
     }
 
     public bool SetTargetEnemy()
     {
-        List<Eneminyoung> enemies = GameManager.Instance.eneminyoungs;
+        List<Eneminyoung> enemies = GameManager.Instance.enemies;
         if (enemies.Count == 0) return false;
 
-        float minDistance = Vector3.Distance(enemies[0].transform.position, bulletPosition.position);
+        float minDistance = 100f;
+        float distance = 0f;
 
         for (int i = 0; i < enemies.Count; i++)
         {
-            float distance = Vector3.Distance(enemies[i].transform.position, bulletPosition.position);
+            if (Vector3.Distance(enemies[i].transform.position, transform.position) > towerBase.distance)
+                continue;
 
-            if (distance <= minDistance && distance <= towerBase.distance)
+            distance = Vector3.Distance(enemies[i].transform.position, GameManager.Instance.home.transform.position);
+
+            if (distance < minDistance)
             {
+                targetEnemy = enemies[i];
                 minDistance = distance;
-                targetEnemey = enemies[i];
             }
         }
 
-        if (targetEnemey == null)
-        {
-            targetEnemey = enemies[0];
-            return false;
-        }
-
+        if (targetEnemy == null) return false;
         return true;
     }
 

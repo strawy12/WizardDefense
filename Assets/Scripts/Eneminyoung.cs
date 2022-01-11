@@ -8,11 +8,13 @@ public class Eneminyoung : MonoBehaviour
     public int hp = 3;
     private MeshRenderer meshRenderer;
     Color originalColor;
+
     private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         originalColor = meshRenderer.material.color;
     }
+
     void Update()
     {
         transform.Translate(Vector3.left * Time.deltaTime * speed);
@@ -24,7 +26,7 @@ public class Eneminyoung : MonoBehaviour
 
         if (hp < 0)
         {
-            GameManager.Instance.eneminyoungs.Remove(this);
+            GameManager.Instance.enemies.Remove(this);
             Destroy(gameObject);
         }
         else

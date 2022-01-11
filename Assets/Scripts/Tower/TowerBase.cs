@@ -6,6 +6,7 @@ public class TowerBase
     public int level;
     public Attribute attribute;
     public float fireRate;
+    public float handFireRate;
     public float distance;
     public int mana;
     public int hp;

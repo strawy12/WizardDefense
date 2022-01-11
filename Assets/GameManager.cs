@@ -5,11 +5,16 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
     public GameObject enemy;
-    public List<Eneminyoung> eneminyoungs = new List<Eneminyoung>();
+    public GameObject home;
+
+    public RectTransform center;
+
+    public List<Eneminyoung> enemies = new List<Eneminyoung>();
+    public List<Attribute> attributes = new List<Attribute>();
 
     void Start()
     {
-        StartCoroutine(SpawnEnemies());
+        //StartCoroutine(SpawnEnemies());
     }
 
     private void SpawnEnemy()
@@ -19,7 +24,7 @@ public class GameManager : MonoSingleton<GameManager>
         obj.transform.position = new Vector3(20, 1, 8);
         obj.SetActive(true);
 
-        eneminyoungs.Add(obj.GetComponent<Eneminyoung>());
+        enemies.Add(obj.GetComponent<Eneminyoung>());
     }
 
     private IEnumerator SpawnEnemies()
