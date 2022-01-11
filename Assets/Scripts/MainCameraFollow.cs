@@ -8,8 +8,8 @@ public class MainCameraFollow : MonoBehaviour
     [SerializeField] private Vector3 offset;
 
     [Header("Ä«¸Þ¶ó")]
-    [SerializeField] private SubCamera mainCamera;
-    [SerializeField] private SubCamera subCamera;
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private Camera subCamera;
 
     private bool isChange = false;
     private void Update()

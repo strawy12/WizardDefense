@@ -8,10 +8,18 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float normalSpeed;
     [SerializeField] private float runSpeed;
     [SerializeField] private float jumpPower;
+
+    [Header("°¨µµ")]
+    [SerializeField] private float lookSensitivity;
+
+    [SerializeField] private float cameraRotationLimit;
+    private float currentCameraRotationX;
+
+    [SerializeField] private Camera thisCamera;
     private float hAxis;
     private float vAxis;
 
-    bool isRun = false; 
+    bool isRun = false;
     bool jDown = false;
     bool isJump = false;
 
@@ -32,6 +40,8 @@ public class PlayerMove : MonoBehaviour
         Run();
         Jump();
         PlayerAnimation();
+        CameraRotation();
+        CharacterRotation();
     }
 
     private void Move()
@@ -44,8 +54,6 @@ public class PlayerMove : MonoBehaviour
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
         transform.position += moveVec * speed * Time.deltaTime;
-
-        transform.LookAt(transform.position + moveVec);
     }
 
     private void PlayerAnimation()
@@ -56,7 +64,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Run()
     {
-        if(isRun)
+        if (isRun)
         {
             speed = runSpeed;
         }
@@ -85,4 +93,22 @@ public class PlayerMove : MonoBehaviour
             isJump = false;
         }
     }
+
+    private void CameraRotation()
+    {
+        float _xRotation = Input.GetAxisRaw("Mouse Y");
+        float _cameraRotationX = _xRotation * lookSensitivity;
+        currentCameraRotationX -= _cameraRotationX;
+        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
+
+        thisCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
+    }
+
+    private void CharacterRotation()
+    {
+        float _yRotation = Input.GetAxisRaw("Mouse X");
+        Vector3 _characterRotationY = new Vector3(0f, _yRotation, 0f) * lookSensitivity;
+        myrigidbody.MoveRotation(myrigidbody.rotation * Quaternion.Euler(_characterRotationY));
+    }
+
 }

@@ -416,7 +416,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1075303612}
   - component: {fileID: 1075303611}
-  - component: {fileID: 1075303610}
   m_Layer: 0
   m_Name: subCamera
   m_TagString: Untagged
@@ -424,20 +423,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1075303610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075303609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72565e09546210740a08ef28926f30c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1151261925}
-  offset: {x: 0, y: 0.2, z: 0.24}
 --- !u!20 &1075303611
 Camera:
   m_ObjectHideFlags: 0
@@ -489,7 +474,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1075303609}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.274, z: 0.304}
+  m_LocalPosition: {x: 0, y: 0.274, z: 0.533}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1151261925}
@@ -710,6 +695,9 @@ MonoBehaviour:
   normalSpeed: 11
   runSpeed: 15
   jumpPower: 7
+  lookSensitivity: 7.51
+  cameraRotationLimit: 45
+  thisCamera: {fileID: 1075303611}
 --- !u!54 &1151261927
 Rigidbody:
   m_ObjectHideFlags: 0
