@@ -11,6 +11,7 @@ public class TowerAttack : MonoBehaviour
     private PoolManager pool;
     public TowerState towerState;
     private float curTime = 0f;
+    public GameObject boundary;
 
     void Start()
     {
@@ -19,11 +20,21 @@ public class TowerAttack : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            boundary.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * transform.localScale * 0.5f;
+        }
+
         curTime += Time.deltaTime;
 
         if (towerState == TowerState.OutControl)
         {
             Fire();
+            return;
+        }
+        else
+        {
+            CameraMove();
         }
 
         if (Input.GetMouseButton(0) && towerState == TowerState.InControl && curTime > towerBase.handFireRate)
@@ -31,7 +42,6 @@ public class TowerAttack : MonoBehaviour
             InstantiateOrPooling();
             curTime = 0f;
         }
-
 
         if (Input.GetKeyDown(KeyCode.Escape) && towerState == TowerState.InControl)
         {
@@ -41,10 +51,6 @@ public class TowerAttack : MonoBehaviour
             curTime = 0f;
         }
 
-        if (towerState == TowerState.InControl)
-        {
-            CameraMove();
-        }
     }
 
     private void CameraMove()
@@ -74,19 +80,19 @@ public class TowerAttack : MonoBehaviour
         if (towerState == TowerState.InControl || SetTargetEnemy())
         {
             GameObject obj = pool.GetPoolObject(EPoolingType.BulletMove).gameObject;
-            obj.transform.localPosition = bulletPosition.position;
+            obj.transform.localPosition = transform.position;
 
             if (towerState == TowerState.InControl)
             {
-                obj.transform.rotation = bulletPosition.rotation;
+                obj.transform.rotation = transform.rotation;
             }
+
             else
             {
                 obj.transform.rotation = Quaternion.identity;
             }
 
             obj.SetActive(true);
-
             obj.GetComponent<BulletMove>().Init(this);
         }
     }
@@ -125,4 +131,9 @@ public class TowerAttack : MonoBehaviour
         Camera.main.transform.DOMove(cameraPosition, 1f);
         towerState = TowerState.InControl;
     }
+
+    public void GetAttribute(Attribute attribute)
+    {
+        towerBase.attribute = attribute;
+    }    
 }

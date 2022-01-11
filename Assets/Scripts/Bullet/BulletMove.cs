@@ -6,12 +6,10 @@ public class BulletMove : PoolObject
 {
     TowerAttack towerAttack;
     Transform targetTransform;
-    Rigidbody rigid;
     TowerState state;
 
     protected override void Awake()
     {
-        rigid = GetComponent<Rigidbody>();
         base.Awake();
     }
     public void Init(TowerAttack towerAttack)
@@ -19,8 +17,7 @@ public class BulletMove : PoolObject
         this.towerAttack = towerAttack;
         targetTransform = towerAttack.targetEnemy?.transform;
         state = towerAttack.towerState;
-
-        rigid.velocity = Vector3.zero;
+        Debug.Log(towerAttack.towerBase.attribute.attributeName);
     }
 
     private void Update()

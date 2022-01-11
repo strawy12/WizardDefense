@@ -14,7 +14,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     void Start()
     {
-        //StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnEnemies());
     }
 
     private void SpawnEnemy()
