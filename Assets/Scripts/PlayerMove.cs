@@ -7,21 +7,32 @@ public class PlayerMove : MonoBehaviour
     private float speed;
     [SerializeField] private float normalSpeed;
     [SerializeField] private float runSpeed;
+    [SerializeField] private float crouchSpeed;
     [SerializeField] private float jumpPower;
 
+    private float sitValue = 0.1f;
+
+    // 카메라 변수
     [Header("감도")]
     [SerializeField] private float lookSensitivity;
 
     [SerializeField] private float cameraRotationLimit;
     private float currentCameraRotationX;
 
-    [SerializeField] private Camera thisCamera;
-    private float hAxis;
-    private float vAxis;
 
+    // 앉기 변수
+    [SerializeField]
+    private float crouchPosY;
+    private float originPosY;
+    private float applyCrouchPosY;
+
+    [SerializeField] private Camera thisCamera;
+
+    // 점프, 달리기 등등 상태 변수
     bool isRun = false;
     bool jDown = false;
     bool isJump = false;
+    bool isCrouch = false;
 
     Vector3 moveVec;
 
@@ -32,34 +43,40 @@ public class PlayerMove : MonoBehaviour
     {
         anim = GetComponentInChildren<Animator>();
         myrigidbody = GetComponent<Rigidbody>();
+        originPosY = thisCamera.transform.localPosition.y;
+        applyCrouchPosY = originPosY;
     }
 
     private void Update()
     {
-        Move();
-        Run();
-        Jump();
+        Player();
         PlayerAnimation();
         CameraRotation();
         CharacterRotation();
     }
 
+    private void Player()
+    {
+        Move();
+        Run();
+        Jump();
+        TryCrough();
+    }
     private void Move()
     {
-        hAxis = Input.GetAxisRaw(ConstantManager.KEYINPUT_HMOVE);
-        vAxis = Input.GetAxisRaw(ConstantManager.KEYINPUT_VMOVE);
+        float moveX = Input.GetAxisRaw(ConstantManager.KEYINPUT_HMOVE);
+        float moveY = Input.GetAxisRaw(ConstantManager.KEYINPUT_VMOVE);
         isRun = Input.GetKey(KeyCode.LeftShift);
         jDown = Input.GetButtonDown(ConstantManager.KEYINPUT_JUMP);
 
-        moveVec = new Vector3(hAxis, 0, vAxis).normalized;
+        Vector3 _moveHo = transform.right * moveX;
+        Vector3 _moveVer = transform.forward * moveY;
+
+        moveVec = (_moveHo + _moveVer).normalized * speed;
+
+        myrigidbody.MovePosition(transform.position + moveVec * Time.deltaTime);
 
         transform.position += moveVec * speed * Time.deltaTime;
-    }
-
-    private void PlayerAnimation()
-    {
-        anim.SetBool("isWalk", moveVec != Vector3.zero);
-        anim.SetBool("isRun", isRun);
     }
 
     private void Run()
@@ -83,6 +100,37 @@ public class PlayerMove : MonoBehaviour
             anim.SetTrigger("doJump");
             isJump = true;
         }
+    }
+    
+    private void TryCrough()
+    {
+        if(Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Crouch();
+        }
+    }
+
+    private void Crouch()
+    {
+        isCrouch = !isCrouch;
+        if(isCrouch)
+        {
+            speed = crouchSpeed;
+            applyCrouchPosY = crouchPosY;
+        }
+        else
+        {
+            speed = normalSpeed;
+            applyCrouchPosY = originPosY;
+        }
+
+        thisCamera.transform.localPosition = new Vector3(thisCamera.transform.localPosition.x, applyCrouchPosY, thisCamera.transform.localPosition.z);
+    }
+
+    private void PlayerAnimation()
+    {
+        anim.SetBool("isWalk", moveVec != Vector3.zero);
+        anim.SetBool("isRun", isRun);
     }
 
     private void OnCollisionEnter(Collision collision)
