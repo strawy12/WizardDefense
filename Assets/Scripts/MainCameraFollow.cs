@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class MainCameraFollow : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private Vector3 offset;
-
     [Header("Ä«¸Þ¶ó")]
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Camera subCamera;
 
     private bool isChange = false;
+
+    private void Start()
+    {
+        MainCameraOn();
+    }
+
     private void Update()
     {
-        transform.position = target.position + offset;
-        if(Input.GetKeyDown(KeyCode.T))
+        if(Input.GetKeyDown(KeyCode.F5))
         {
             ChangeView();
         }
