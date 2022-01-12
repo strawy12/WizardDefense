@@ -12,6 +12,8 @@ public class TpsController : MonoBehaviour
     [Header("°¨µµ")] [SerializeField] private float sensivity;
     [Header("Á¡ÇÁ Èû")] [SerializeField] private float jumpPower = 2f;
 
+    private RaycastHit hitInfo;
+
     bool jDown;
     bool isJump;
 
@@ -71,7 +73,7 @@ public class TpsController : MonoBehaviour
     private void Jump()
     {
         jDown = Input.GetButtonDown(ConstantManager.KEYINPUT_JUMP);
-        if(jDown && !isJump)
+        if (jDown && !isJump)
         {
             myrigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             isJump = true;
@@ -85,4 +87,6 @@ public class TpsController : MonoBehaviour
             isJump = false;
         }
     }
+
+    
 }
