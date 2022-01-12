@@ -406,7 +406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &773428324
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -499,18 +499,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerBase:
     name: "\uC544\uC544\u314F"
-    attackPower: 1
+    attackPower: 3
     level: 0
     attribute:
       attributeName: 
-    fireRate: 1
+    fireRate: 0.6
     handFireRate: 0.1
     distance: 20
     mana: 0
     hp: 0
-  bulletPosition: {fileID: 851187358}
-  targetEnemy: {fileID: 0}
-  towerState: 0
+  muzzlePosition: {fileID: 851187358}
   boundary: {fileID: 1175675235}
 --- !u!1001 &843486958
 PrefabInstance:
@@ -769,7 +767,7 @@ RectTransform:
   m_Children:
   - {fileID: 356989651}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -820,7 +818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPoolData:
-  - prefab: {fileID: 2030156389}
+  - prefab: {fileID: 8341332336548344853, guid: afac6c302e358fd449a981ad469ab00a, type: 3}
     prefabCreateCount: 2
 --- !u!1 &963194225
 GameObject:
@@ -918,6 +916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42561bd32b1b5a947bf393e023de12e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
 --- !u!1001 &1175675233
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1035,18 +1034,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerBase:
     name: "\uC544\uC544\u314F"
-    attackPower: 1
+    attackPower: 3
     level: 0
     attribute:
       attributeName: 
     fireRate: 1
-    handFireRate: 0.1
+    handFireRate: 0.3
     distance: 20
     mana: 0
     hp: 0
-  bulletPosition: {fileID: 1834344903}
-  targetEnemy: {fileID: 0}
-  towerState: 0
+  muzzlePosition: {fileID: 1834344903}
   boundary: {fileID: 843486959}
 --- !u!65 &1400261235
 BoxCollider:
@@ -1124,7 +1121,7 @@ Transform:
   - {fileID: 1834344903}
   - {fileID: 843486960}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1408286257
 GameObject:
@@ -1172,11 +1169,12 @@ MonoBehaviour:
   enemy: {fileID: 1924674254}
   home: {fileID: 2102469270}
   screenCenter: {x: 0, y: 0, z: 0}
-  enemies: []
   attributes:
   - attributeName: "\uBB3C"
   - attributeName: "\uBD88"
   - attributeName: "\uBC14\uB78C"
+  mainCam: {fileID: 0}
+  inputAxis: {x: 0, y: 0}
 --- !u!1 &1419150435
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,7 +1433,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1924674259
 Rigidbody:
@@ -1465,8 +1463,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4058c50a1d767fd4b95c36913182a840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 10
   hp: 10
+  virtualHP: 0
 --- !u!1001 &1936940769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1569,7 +1568,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1991658886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1584,18 +1583,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerBase:
     name: "\uC544\uC544\u314F"
-    attackPower: 1
+    attackPower: 3
     level: 0
     attribute:
       attributeName: 
     fireRate: 1
-    handFireRate: 0.1
+    handFireRate: 0.2
     distance: 20
     mana: 0
     hp: 0
-  bulletPosition: {fileID: 1419150436}
-  targetEnemy: {fileID: 0}
-  towerState: 0
+  muzzlePosition: {fileID: 1419150436}
   boundary: {fileID: 1936940770}
 --- !u!65 &1991658887
 BoxCollider:
@@ -1673,7 +1670,7 @@ Transform:
   - {fileID: 1419150436}
   - {fileID: 1936940771}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2028751372
 GameObject:
@@ -1739,117 +1736,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2030156384
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2030156388}
-  - component: {fileID: 2030156387}
-  - component: {fileID: 2030156386}
-  - component: {fileID: 2030156385}
-  - component: {fileID: 2030156389}
-  m_Layer: 0
-  m_Name: Bullet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!135 &2030156385
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030156384}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &2030156386
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030156384}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: c3f6edbd7eb40294086d847271205741, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &2030156387
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030156384}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &2030156388
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030156384}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.64966303, y: 0.8863481, z: 0.1308465}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2030156389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030156384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5481792c0ca2834f9a806a6ab68e132, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ePoolingType: 0
 --- !u!1 &2102469270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1943,5 +1831,5 @@ Transform:
   m_LocalScale: {x: 3, y: 10, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

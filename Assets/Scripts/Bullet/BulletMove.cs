@@ -4,47 +4,33 @@ using UnityEngine;
 
 public class BulletMove : PoolObject
 {
-    TowerAttack towerAttack;
-    Enemy targetEenemy;
-    TowerState state;
-    SphereCollider col;
-    float originRad;
+    private TowerAttack towerAttack;
+    private Enemy targetEnemy;
+    private TowerState state;
+
+    private SphereCollider col;
+    private float originRad;
+    private TrailRenderer trail;
+
+    [SerializeField] private float speed;
 
     protected override void Awake()
     {
         col = GetComponent<SphereCollider>();
+        trail = GetComponent<TrailRenderer>();
         originRad = col.radius;
         base.Awake();
-    }
-    public void Init(TowerAttack towerAttack)
-    {
-        this.towerAttack = towerAttack;
-        state = towerAttack.towerState;
-
-        if (state == TowerState.OutControl)
-        {
-            targetEenemy = towerAttack.targetEnemy;
-            col.radius = originRad;
-        }
-        else
-        {
-            col.radius = originRad * 2.5f;
-        }
     }
 
     private void Update()
     {
         if (state == TowerState.OutControl)
         {
-            if (targetEenemy == null)
-            {
-                towerAttack.SetTargetEnemy();
-                if (towerAttack.targetEnemy == null)
-                {
-                    Despawn();
-                    return;
-                }
-            }
+            //if (targetEenemy == null)
+            //{
+            //    towerAttack.SetTargetEnemy();
+            //    if (targetEenemy == null) return;
+            //}
 
             Move_OutControl();
         }
@@ -53,41 +39,74 @@ public class BulletMove : PoolObject
         {
             Move_InControl();
         }
+
+        transform.Translate(Vector3.forward * speed, Space.Self);
     }
 
+    #region SetData
+    public void Init(TowerAttack towerAttack)
+    {
+        this.towerAttack = towerAttack;
+        state = towerAttack.GetTowerState();
+
+        if (state == TowerState.OutControl)
+        {
+            targetEnemy = towerAttack.GetTargetEnemy();
+            col.radius = originRad;
+        }
+
+        else
+        {
+            col.radius = originRad * 2.5f;
+        }
+
+        trail.enabled = true;
+    }
+    #endregion
+
+    #region Fire
     private void Move_OutControl()
     {
-        transform.position = Vector3.MoveTowards(transform.localPosition, targetEenemy.transform.position, Time.deltaTime * 30f);
+        transform.LookAt(targetEnemy.transform);
     }
+
     private void Move_InControl()
     {
-        transform.Translate(Vector3.forward * 0.3f, Space.Self);
-
-        if (Vector3.Distance(transform.position, towerAttack.bulletPosition.position) > towerAttack.towerBase.distance)
+        if (Vector3.Distance(transform.position, towerAttack.muzzlePosition.position) > towerAttack.towerBase.distance)
         {
             Despawn();
         }
     }
+    #endregion
 
-    public override void Despawn()
-    {
-        base.Despawn();
-    }
-
+    #region Collide
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            if (targetEenemy == null)
-            {
-                collision.gameObject.GetComponent<Enemy>().Damaged(towerAttack.towerBase.attackPower);
-            }
-            else if (targetEenemy?.gameObject == collision.gameObject)
-            {
-                towerAttack.targetEnemy?.Damaged(towerAttack.towerBase.attackPower);
-            }
-
-            Despawn();
+            CollideEnemy(collision);
         }
+    }
+
+    private void CollideEnemy(Collision collision)
+    {
+        if (targetEnemy == null)
+        {
+            collision.gameObject.GetComponent<Enemy>().Damaged(towerAttack.towerBase.attackPower);
+        }
+
+        else if (targetEnemy?.gameObject == collision.gameObject)
+        {
+            targetEnemy?.Damaged(towerAttack.towerBase.attackPower);
+        }
+
+        Despawn();
+    }
+    #endregion
+
+    public override void Despawn()
+    {
+        trail.enabled = false;
+        base.Despawn();
     }
 }

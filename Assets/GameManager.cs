@@ -9,14 +9,25 @@ public class GameManager : MonoSingleton<GameManager>
 
     public Vector3 screenCenter;
 
-    public List<Enemy> enemies = new List<Enemy>();
+    public List<Enemy> enemies { get; private set; } = new List<Enemy>();
     public List<Attribute> attributes = new List<Attribute>();
+
+    public CameraMove mainCam;
+
+    public Vector2 inputAxis;
 
     void Start()
     {
-        screenCenter = (new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2));
+        mainCam = Camera.main.GetComponent<CameraMove>();
+        screenCenter = (new Vector3(mainCam.cam.pixelWidth / 2, mainCam.cam.pixelHeight / 2));
         StartCoroutine(SpawnEnemies());
     }
+
+    private void Update()
+    {
+        inputAxis = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+    }
+
     private void SpawnEnemy()
     {
         GameObject obj = Instantiate(enemy);

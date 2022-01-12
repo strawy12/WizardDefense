@@ -8,11 +8,13 @@ public class Enemy : MonoBehaviour
     public int hp = 3;
     private MeshRenderer meshRenderer;
     Color originalColor;
+    public int virtualHP;
 
     private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         originalColor = meshRenderer.material.color;
+        virtualHP = hp;
     }
 
     void Update()
@@ -24,7 +26,7 @@ public class Enemy : MonoBehaviour
     {
         hp -= damage;
 
-        if (hp < 0)
+        if (hp <= 0)
         {
             GameManager.Instance.enemies.Remove(this);
             Destroy(gameObject);
@@ -41,5 +43,10 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         meshRenderer.material.color = originalColor;
 
+    }
+
+    public void VirtualDamaged(int power)
+    {
+        virtualHP -= power;
     }
 }
