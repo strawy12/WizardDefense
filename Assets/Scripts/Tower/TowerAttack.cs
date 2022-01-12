@@ -24,6 +24,7 @@ public class TowerAttack : MonoBehaviour
     {
         curTime += Time.deltaTime;
 
+        SetMuzzleRotation();
         if (towerState == TowerState.OutControl)
         {
             Fire();
@@ -41,10 +42,7 @@ public class TowerAttack : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            ZoomInTower();
-        }
+        ZoomInTower();
     }
 
     #region Fire
@@ -59,15 +57,23 @@ public class TowerAttack : MonoBehaviour
 
     private void SetMuzzleRotation()
     {
-        Ray ray = GameManager.Instance.mainCam.cam.ScreenPointToRay(GameManager.Instance.screenCenter);
-        muzzlePosition.LookAt(ray.GetPoint(towerBase.distance));
+        //Ray ray = GameManager.Instance.mainCam.cam.ScreenPointToRay(GameManager.Instance.screenCenter);
+        Ray ray = GameManager.Instance.mainCam.cam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+        RaycastHit hitInfo;
+        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.blue);
+
+        if (Physics.Raycast(ray, out hitInfo, 999f))
+        {
+            //muzzlePosition.localEulerAngles = GameManager.Instance.mainCam.transform.localEulerAngles;
+            Debug.DrawRay(muzzlePosition.position, hitInfo.point - muzzlePosition.position, Color.red);
+            muzzlePosition.LookAt(hitInfo.point);
+        }
     }
 
     private void Fire()
     {
         if (curTime > towerBase.fireRate)
         {
-            SetMuzzleRotation();
             InstantiateOrPooling();
             curTime = 0;
         }
@@ -111,14 +117,14 @@ public class TowerAttack : MonoBehaviour
             }
         }
 
-        if(towerState == TowerState.OutControl)
+        if (towerState == TowerState.OutControl)
         {
             targetEnemy?.VirtualDamaged(towerBase.attackPower);
         }
 
         return (targetEnemy != null);
     }
-    #endregion]
+    #endregion
 
     #region Control
     private void ZoomInTower()
@@ -126,6 +132,8 @@ public class TowerAttack : MonoBehaviour
         Vector3 cameraPosition = transform.position;
         cameraPosition.y += 2f;
         GameManager.Instance.mainCam.CameraMoveToPosition(cameraPosition, 1f);
+        //이거 fireRate 다름
+        GameManager.Instance.UIManager.ShowTowerStatBar(true, towerBase.attackPower, towerBase.fireRate);
         towerState = TowerState.InControl;
     }
 
@@ -136,6 +144,7 @@ public class TowerAttack : MonoBehaviour
             towerState = TowerState.OutControl;
             GameManager.Instance.mainCam.CameraMoveToPosition(new Vector3(0, 11.5f, -10f), 1f);
             GameManager.Instance.mainCam.CameraRotate(new Vector3(31f, 0f, 0f), 1f);
+            GameManager.Instance.UIManager.ShowTowerStatBar(true);
             curTime = 0f;
         }
     }
@@ -150,9 +159,9 @@ public class TowerAttack : MonoBehaviour
 
     private void CameraMove()
     {
-        Vector2 mouse = GameManager.Instance.inputAxis;
+        Vector2 mouse = GameManager.Instance.inputAxis*4f;
         Quaternion rot = GameManager.Instance.mainCam.transform.rotation;
-        GameManager.Instance.mainCam.ChangeLocalEulerAngle(new Vector3(Mathf.Clamp(mouse.x + rot.eulerAngles.x, 0, 80), rot.eulerAngles.y + mouse.y, 0f));
+        GameManager.Instance.mainCam.ChangeLocalEulerAngle(new Vector3(Mathf.Clamp(-mouse.y + rot.eulerAngles.x, 0, 80), mouse.x + rot.eulerAngles.y, 0f));
     }
     #endregion
 

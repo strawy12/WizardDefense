@@ -16,10 +16,13 @@ public class GameManager : MonoSingleton<GameManager>
 
     public Vector2 inputAxis;
 
+    public UIManager UIManager { get; private set; }
+
     void Start()
     {
         mainCam = Camera.main.GetComponent<CameraMove>();
         screenCenter = (new Vector3(mainCam.cam.pixelWidth / 2, mainCam.cam.pixelHeight / 2));
+        UIManager = GetComponent<UIManager>();
         StartCoroutine(SpawnEnemies());
     }
 

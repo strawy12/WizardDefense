@@ -10,14 +10,14 @@ public class BulletMove : PoolObject
 
     private SphereCollider col;
     private float originRad;
-    private TrailRenderer trail;
+    //private TrailRenderer trail;
 
     [SerializeField] private float speed;
 
     protected override void Awake()
     {
         col = GetComponent<SphereCollider>();
-        trail = GetComponent<TrailRenderer>();
+        //trail = GetComponent<TrailRenderer>();
         originRad = col.radius;
         base.Awake();
     }
@@ -60,7 +60,7 @@ public class BulletMove : PoolObject
             col.radius = originRad * 2.5f;
         }
 
-        trail.enabled = true;
+        //trail.enabled = true;
     }
     #endregion
 
@@ -106,7 +106,7 @@ public class BulletMove : PoolObject
 
     public override void Despawn()
     {
-        trail.enabled = false;
+        //trail.enabled = false;
         base.Despawn();
     }
 }
