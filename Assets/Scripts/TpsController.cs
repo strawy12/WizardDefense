@@ -20,7 +20,7 @@ public class TpsController : MonoBehaviour
 
     private void Start()
     {
-        myrigid = characterBody.GetComponent<Rigidbody>();
+        myrigid = GetComponent<Rigidbody>();
         animator = characterBody.GetComponent<Animator>();
     }
 
@@ -82,7 +82,6 @@ public class TpsController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("floor"))
         {
-            Debug.Log("¶¥");
             isJump = false;
         }
     }
