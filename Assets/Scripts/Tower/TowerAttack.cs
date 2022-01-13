@@ -38,6 +38,12 @@ public class TowerAttack : MonoBehaviour
         }
 
         ShowBoundary();
+
+        if (Input.GetKeyDown(KeyCode.Q) && towerState == TowerState.InControl)
+        {
+            GameObject obj = pool.GetPoolObject(EPoolingType.RangeBullet).gameObject;
+            InstantiateOrPooling(obj);
+        }
     }
 
     private void OnMouseUp()
@@ -50,7 +56,7 @@ public class TowerAttack : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && curTime > towerBase.handFireRate)
         {
-            InstantiateOrPooling();
+            InstantiateOrPooling(pool.GetPoolObject(EPoolingType.DefaultBullet).gameObject);
             curTime = 0f;
         }
     }
@@ -65,7 +71,7 @@ public class TowerAttack : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, 999f))
         {
             //muzzlePosition.localEulerAngles = GameManager.Instance.mainCam.transform.localEulerAngles;
-            Debug.DrawRay(muzzlePosition.position, hitInfo.point - muzzlePosition.position, Color.red);
+            //Debug.DrawRay(muzzlePosition.position, hitInfo.point - muzzlePosition.position, Color.red);
             muzzlePosition.LookAt(hitInfo.point);
         }
     }
@@ -74,17 +80,17 @@ public class TowerAttack : MonoBehaviour
     {
         if (curTime > towerBase.fireRate)
         {
-            InstantiateOrPooling();
+            InstantiateOrPooling(pool.GetPoolObject(EPoolingType.DefaultBullet).gameObject);
             curTime = 0;
         }
     }
 
-    private void InstantiateOrPooling()
+    private void InstantiateOrPooling(GameObject obj)
     {
         if (towerState == TowerState.InControl || SetTargetEnemy())
         {
-            GameObject obj = pool.GetPoolObject(EPoolingType.BulletMove).gameObject;
             obj.GetComponent<BulletMove>().Init(this);
+            obj.GetComponent<BulletAttack>().Init(this);
 
             obj.transform.position = muzzlePosition.position;
             obj.transform.rotation = muzzlePosition.rotation;

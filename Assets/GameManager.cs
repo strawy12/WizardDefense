@@ -11,11 +11,10 @@ public class GameManager : MonoSingleton<GameManager>
 
     public List<Enemy> enemies { get; private set; } = new List<Enemy>();
     public List<Attribute> attributes = new List<Attribute>();
-
-    public CameraMove mainCam;
+    public CameraMove mainCam { get; private set; }
 
     public Vector2 inputAxis;
-
+    public GameObject boundary;
     public UIManager UIManager { get; private set; }
 
     void Start()
@@ -48,5 +47,14 @@ public class GameManager : MonoSingleton<GameManager>
             SpawnEnemy();
             yield return new WaitForSeconds(1f);
         }
+    }
+
+    public IEnumerator ShowBoundary(Vector3 position,Vector3 scale)
+    {
+        boundary.transform.position = new Vector3(position.x, 0.13f, position.z);
+        boundary.transform.localScale = scale;
+        boundary.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        boundary.SetActive(false);
     }
 }

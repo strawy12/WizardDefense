@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +7,18 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Image towerStatBar;
+    [SerializeField] private Image skillImage;
+
     private Text towerStatText;
 
     void Start()
     {
         towerStatText = towerStatBar.GetComponentInChildren<Text>();
+    }
+    
+    internal void ShowSkillUI(Skill skill)
+    {
+        skillImage.gameObject.SetActive(true);
     }
 
     public void ShowTowerStatBar(bool isShow, int attack = 0, float speed = 0)
