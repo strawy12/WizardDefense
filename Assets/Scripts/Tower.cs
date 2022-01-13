@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : MonoBehaviour
+[System.Serializable]
+public class Tower 
 {
-    
+    public int energy;
+    public string name;
 }

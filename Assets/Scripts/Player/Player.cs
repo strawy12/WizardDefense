@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     private RaycastHit hitInfo;
 
     private bool isArea;
-    private bool[] towers;
 
     private void Update()
     {
@@ -32,7 +31,6 @@ public class Player : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     Chang();
-                    Debug.Log("³ª¿Í");
                 }
             }
             else
@@ -59,28 +57,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void OnClickTo1()
+    public void OnClickOutChang()
     {
-        towers[0] = true;
-
-        towers[1] = false;
-        towers[2] = false;
+        isArea = !isArea;
+        FMark.SetActive(false);
+        buildChang.SetActive(false);
     }
-
-    public void OnClickTo2()
-    {
-        towers[1] = true;
-
-        towers[0] = false;
-        towers[2] = false;
-    }
-
-    public void OnClickTo3()
-    {
-        towers[2] = true;
-
-        towers[0] = false;
-        towers[1] = false;
-    }
-
 }
