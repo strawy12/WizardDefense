@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &172162916
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1350,6 +1350,7 @@ GameObject:
   - component: {fileID: 1408286258}
   - component: {fileID: 1408286259}
   - component: {fileID: 1408286260}
+  - component: {fileID: 1408286261}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1401,6 +1402,7 @@ MonoBehaviour:
     skillSprite: {fileID: 21300000, guid: 48359a1494feed748b44bc1d2cdb5bcf, type: 3}
   inputAxis: {x: 0, y: 0}
   boundary: {fileID: 1002951450}
+  selectedTower: {fileID: 0}
 --- !u!114 &1408286260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1413,8 +1415,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee8017f744c63b45b18099ff8cf5a22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerUI: {fileID: 172162915}
   towerStatBar: {fileID: 829122023}
-  skillImage: {fileID: 0}
+  skillImage: {fileID: 1325061417}
+  skillCoolTimeImage: {fileID: 1647960089}
+--- !u!114 &1408286261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408286257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6026c028ee6d2de45b509b640af9276a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1419150435
 GameObject:
   m_ObjectHideFlags: 0
@@ -1608,7 +1624,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1647960088
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1653,7 +1669,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -2005,6 +2021,12 @@ MonoBehaviour:
     hp: 0
   muzzlePosition: {fileID: 1419150436}
   boundary: {fileID: 1936940770}
+  useSkillTime: 0
+  skill:
+    bulletPrefab: {fileID: 0}
+    coolTime: 0
+    attributeName: 
+    skillSprite: {fileID: 0}
 --- !u!65 &1991658887
 BoxCollider:
   m_ObjectHideFlags: 0

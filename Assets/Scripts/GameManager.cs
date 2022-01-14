@@ -18,6 +18,8 @@ public class GameManager : MonoSingleton<GameManager>
     public GameObject boundary;
     public UIManager UIManager { get; private set; }
 
+    public TowerAttack selectedTower;
+
     void Start()
     {
         mainCam = FindObjectOfType<CameraMove>();

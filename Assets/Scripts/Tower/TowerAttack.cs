@@ -13,18 +13,23 @@ public class TowerAttack : MonoBehaviour
     private PoolManager pool;
 
     private TowerState towerState;
-    private float curTime = 0f;
+    private float curFireTime = 0f;
+    public float useSkillTime = 0f;
+
+    public Skill skill;
 
     void Start()
     {
         pool = FindObjectOfType<PoolManager>();
+        useSkillTime = 100f;
     }
 
     private void Update()
     {
-        curTime += Time.deltaTime;
+        curFireTime += Time.deltaTime;
 
         SetMuzzleRotation();
+        SkillCoolTime();
 
         if (towerState == TowerState.OutControl)
         {
@@ -50,10 +55,10 @@ public class TowerAttack : MonoBehaviour
     #region Fire
     private void FireByPlayer()
     {
-        if (Input.GetMouseButton(0) && curTime > towerBase.handFireRate)
+        if (Input.GetKey(KeyManager.keySettings[KeyAction.Fire]) && curFireTime > towerBase.handFireRate)
         {
             InstantiateOrPooling(pool.GetPoolObject(EPoolingType.DefaultBullet).gameObject);
-            curTime = 0f;
+            curFireTime = 0f;
         }
     }
 
@@ -74,10 +79,10 @@ public class TowerAttack : MonoBehaviour
 
     private void Fire()
     {
-        if (curTime > towerBase.fireRate)
+        if (curFireTime > towerBase.fireRate)
         {
             InstantiateOrPooling(pool.GetPoolObject(EPoolingType.DefaultBullet).gameObject);
-            curTime = 0;
+            curFireTime = 0;
         }
     }
 
@@ -136,18 +141,20 @@ public class TowerAttack : MonoBehaviour
         GameManager.Instance.mainCam.CameraMoveToPosition(cameraPosition, 1f);
         //이거 fireRate 다름
         GameManager.Instance.UIManager.ShowTowerStatBar(true, towerBase.attackPower, towerBase.fireRate);
+        GameManager.Instance.selectedTower = this;
         towerState = TowerState.InControl;
     }
 
     private void ZoomOutTower()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.ExitTower]))
         {
             towerState = TowerState.OutControl;
             GameManager.Instance.mainCam.CameraMoveToPosition(new Vector3(0, 11.5f, -10f), 1f);
             GameManager.Instance.mainCam.CameraRotate(new Vector3(31f, 0f, 0f), 1f);
             GameManager.Instance.UIManager.ShowTowerStatBar(true);
-            curTime = 0f;
+            GameManager.Instance.selectedTower = null;
+            curFireTime = 0f;
         }
     }
 
@@ -168,27 +175,41 @@ public class TowerAttack : MonoBehaviour
 
     private void CameraMove()
     {
-        Vector2 mouse = GameManager.Instance.inputAxis*4f;
+        Vector2 mouse = GameManager.Instance.inputAxis * 4f;
         Quaternion rot = GameManager.Instance.mainCam.transform.rotation;
         GameManager.Instance.mainCam.ChangeLocalEulerAngle(new Vector3(Mathf.Clamp(-mouse.y + rot.eulerAngles.x, 0, 80), mouse.x + rot.eulerAngles.y, 0f));
     }
     #endregion
 
-    #region
+    #region Skill
     private void OnUseSKill()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && towerState == TowerState.InControl)
+        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Skill]) && towerState == TowerState.InControl)
         {
-            Skill skill = GetSkill();
+            skill = GetSkill();
+
+            if (!CheckSkillCoolTime()) return;
 
             GameObject obj = pool.GetPoolObject(skill.bulletPrefab.PoolType).gameObject;
             InstantiateOrPooling(obj);
+
+            useSkillTime = 0f;
         }
     }
 
     private Skill GetSkill()
     {
         return GameManager.Instance.skills.Find(skill => skill.attributeName == towerBase.attribute.attributeName);
+    }
+
+    private void SkillCoolTime()
+    {
+        useSkillTime += Time.deltaTime;
+    }
+
+    public bool CheckSkillCoolTime()
+    {
+        return (useSkillTime > skill.coolTime);
     }
     #endregion
 
