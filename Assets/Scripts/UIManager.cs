@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    #region
+    #region Tower UI Various
     [SerializeField] private GameObject towerUI;
 
     [SerializeField] private Image towerStatBar;
@@ -16,15 +16,44 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image skillCoolTimeImage;
     #endregion
 
+    #region Panels Various
+    [SerializeField] private GameObject keyPanelTemplate;
+    private List<KeyPanel> keyPanels = new List<KeyPanel>();
+    #endregion
+
     void Start()
     {
         towerStatText = towerStatBar.GetComponentInChildren<Text>();
+
+        InstantiatePanel();
     }
 
     private void Update()
     {
         ShowSkillUI(GameManager.Instance.selectedTower);
     }
+
+    private void InstantiatePanel()
+    {
+        for (int i = 0; i < (int)KeyAction.Count; i++)
+        {
+            GameObject panel = Instantiate(keyPanelTemplate, keyPanelTemplate.transform.parent);
+            KeyPanel keyPanel = panel.GetComponent<KeyPanel>();
+            keyPanel.Initialize(i);
+            keyPanels.Add(keyPanel);
+        }
+
+        keyPanelTemplate.SetActive(false);
+    }
+
+    public void ResetKeyPanel()
+    {
+        foreach(KeyPanel panel in keyPanels)
+        {
+            panel.ResetData();
+        }
+    }
+
 
     #region TowerUI
     public void ShowSkillUI(TowerAttack tower)
@@ -34,7 +63,7 @@ public class UIManager : MonoBehaviour
             if (towerUI.gameObject.activeSelf)
                 towerUI.gameObject.SetActive(false);
 
-            skillCoolTimeImage.fillAmount = 1f;
+            skillCoolTimeImage.fillAmount = 0f;
             return;
         }
 

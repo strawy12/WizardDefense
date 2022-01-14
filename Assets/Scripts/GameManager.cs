@@ -17,6 +17,7 @@ public class GameManager : MonoSingleton<GameManager>
     public Vector2 inputAxis;
     public GameObject boundary;
     public UIManager UIManager { get; private set; }
+    public KeyManager KeyManager { get; private set; }
 
     public TowerAttack selectedTower;
 
@@ -25,6 +26,7 @@ public class GameManager : MonoSingleton<GameManager>
         mainCam = FindObjectOfType<CameraMove>();
         screenCenter = (new Vector3(mainCam.cam.pixelWidth / 2, mainCam.cam.pixelHeight / 2));
         UIManager = GetComponent<UIManager>();
+        KeyManager = GetComponent<KeyManager>();
         StartCoroutine(SpawnEnemies());
     }
 
