@@ -19,7 +19,6 @@ public class BulletAttack : PoolObject
     private TowerAttack towerAttack;
     private Enemy targetEnemy;
     private Collision enemy;
-    private Vector3 hitPosiiton;
     public float rangeDistance;
 
     protected override void Awake()

@@ -25,6 +25,7 @@ public class TowerAttack : MonoBehaviour
         curTime += Time.deltaTime;
 
         SetMuzzleRotation();
+
         if (towerState == TowerState.OutControl)
         {
             Fire();
@@ -38,12 +39,7 @@ public class TowerAttack : MonoBehaviour
         }
 
         ShowBoundary();
-
-        if (Input.GetKeyDown(KeyCode.Q) && towerState == TowerState.InControl)
-        {
-            GameObject obj = pool.GetPoolObject(EPoolingType.RangeBullet).gameObject;
-            InstantiateOrPooling(obj);
-        }
+        OnUseSKill();
     }
 
     private void OnMouseUp()
@@ -159,7 +155,14 @@ public class TowerAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            boundary.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * transform.localScale * 0.5f;
+            if (boundary.activeSelf)
+            {
+                boundary.SetActive(false);
+            }
+            else
+            {
+                boundary.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * transform.localScale * 0.5f;
+            }
         }
     }
 
@@ -168,6 +171,24 @@ public class TowerAttack : MonoBehaviour
         Vector2 mouse = GameManager.Instance.inputAxis*4f;
         Quaternion rot = GameManager.Instance.mainCam.transform.rotation;
         GameManager.Instance.mainCam.ChangeLocalEulerAngle(new Vector3(Mathf.Clamp(-mouse.y + rot.eulerAngles.x, 0, 80), mouse.x + rot.eulerAngles.y, 0f));
+    }
+    #endregion
+
+    #region
+    private void OnUseSKill()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && towerState == TowerState.InControl)
+        {
+            Skill skill = GetSkill();
+
+            GameObject obj = pool.GetPoolObject(skill.bulletPrefab.PoolType).gameObject;
+            InstantiateOrPooling(obj);
+        }
+    }
+
+    private Skill GetSkill()
+    {
+        return GameManager.Instance.skills.Find(skill => skill.attributeName == towerBase.attribute.attributeName);
     }
     #endregion
 

@@ -11,6 +11,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public List<Enemy> enemies { get; private set; } = new List<Enemy>();
     public List<Attribute> attributes = new List<Attribute>();
+    public List<Skill> skills = new List<Skill>();
     public CameraMove mainCam { get; private set; }
 
     public Vector2 inputAxis;
@@ -19,7 +20,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     void Start()
     {
-        mainCam = Camera.main.GetComponent<CameraMove>();
+        mainCam = FindObjectOfType<CameraMove>();
         screenCenter = (new Vector3(mainCam.cam.pixelWidth / 2, mainCam.cam.pixelHeight / 2));
         UIManager = GetComponent<UIManager>();
         StartCoroutine(SpawnEnemies());

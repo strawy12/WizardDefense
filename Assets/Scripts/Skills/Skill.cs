@@ -1,20 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill : MonoBehaviour
+[System.Serializable]
+public class Skill
 {
-    public GameObject bulletPrefab;
+    public PoolObject bulletPrefab;
     public float coolTime;
-    protected Attribute attribute;
-
-    public virtual void OnTowerZoomIn()
-    {
-        GameManager.Instance.UIManager.ShowSkillUI(this);
-    }
-
-    public virtual void OnUseSkill()
-    {
-        Instantiate(bulletPrefab);
-    }
+    public string attributeName;
+    public Sprite skillSprite;
 }

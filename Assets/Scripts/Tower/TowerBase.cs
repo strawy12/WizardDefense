@@ -8,6 +8,5 @@ public class TowerBase
     public float fireRate;
     public float handFireRate;
     public float distance;
-    public int mana;
     public int hp;
 }
