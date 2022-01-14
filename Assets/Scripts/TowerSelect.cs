@@ -8,13 +8,25 @@ public class TowerSelect : MonoBehaviour
     [SerializeField] private Text towerName;
     [SerializeField] private Text needText;
     [SerializeField] private Image towerImage;
-    private int curRune;
+    [SerializeField] private Button buildBtn;
+    [HideInInspector] public int curRune;
 
     public List<Tower> towerList = new List<Tower>();
 
     [SerializeField] private Sprite[] towerSprite;
 
-    private int needMax;
+    [HideInInspector] public int needMax;
+
+    [SerializeField] private GameObject[] tower;
+
+    public static Transform buildTrn;
+
+    private int selectTower;
+
+    private void Start()
+    {
+        OnClickTower1();
+    }
 
     public void OnClickTower1()
     {
@@ -31,31 +43,49 @@ public class TowerSelect : MonoBehaviour
         SetValue(2);
     }
 
+    private void UpdateUI()
+    {
+        needText.text = $"{curRune} / {needMax}";
+        CheckCanBuild();
+    }
+
     private void SetValue(int num)
     {
+        selectTower = num;
         needMax = towerList[num].energy;
         towerImage.sprite = towerSprite[num];
 
-        needText.text = $"{curRune} / {needMax}";
+        UpdateUI();
         towerName.text = towerList[num].name;
     }
 
     public void AddRune()
     {
-        Debug.Log("add");
         curRune++;
+        UpdateUI();
     }
 
     public void MinusRune()
     {
-        curRune--;
+        if (needMax > 0)
+        {
+            curRune--;
+            UpdateUI();
+        }
+        else
+        {
+            return;
+        }
     }
 
     public void OnClickBuild()
     {
-        if (curRune == needMax)
+        if (curRune >= needMax)
         {
+            curRune -= needMax;
             Debug.Log("설치성공");
+            UpdateUI();
+            SelectTower();
         }
         else
         {
@@ -63,4 +93,33 @@ public class TowerSelect : MonoBehaviour
         }
     }
 
+    private void SelectTower()
+    {
+        if(selectTower==0)
+        {
+            Instantiate(tower[0],buildTrn);
+        }
+        else if(selectTower == 1)
+        {
+            Instantiate(tower[1],buildTrn);
+        }
+
+        else if(selectTower == 2)
+        {
+            Instantiate(tower[2],buildTrn);
+        }
+
+    }
+
+    private void CheckCanBuild()
+    {
+        if (curRune >= needMax)
+        {
+            buildBtn.interactable = true;
+        }
+        else
+        {
+            buildBtn.interactable = false;
+        }
+    }
 }
