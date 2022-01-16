@@ -2,17 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConstantManager : MonoBehaviour
+public static class ConstantManager
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public const string INVENTORY_CLICK_LEFT = "IN_C_L";
+    public const string INVENTORY_CLICK_RIGHT = "IN_C_R";
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class WayPoints : MonoBehaviour
 {
     private Transform[] wayPoints;
+    public int Length { get { return wayPoints.Length; } }
 
     private void Awake()
     {
@@ -23,7 +24,7 @@ public class WayPoints : MonoBehaviour
         return list.ToArray();
     }
 
-    public Transform GetWayPoint(int index)
+    public virtual Transform GetWayPoint(int index)
     {
         if(index < wayPoints.Length)
         {

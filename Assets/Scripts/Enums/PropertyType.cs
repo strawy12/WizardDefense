@@ -3,7 +3,9 @@ public enum PropertyType
     Normal,
     Fire,
     Water,
-    Leaf,
-    Metal,
-    Rock
+    Terra,
+    Holy,
+    Void,
+    Air,
+    Rainbow
 }
