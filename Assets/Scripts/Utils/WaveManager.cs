@@ -37,7 +37,7 @@ public class WaveManager : MonoBehaviour
     }
     private IEnumerator InitPatternData(int index)
     {
-        currentPattern = GameManager.Inst.Data.GetPatternData(index);
+        currentPattern = GameManager.Instance.Data.GetPatternData(index);
 
         nextPatternDelay = currentPattern.nextPatternDelay;
         currentCost += currentPattern.cost;
@@ -53,8 +53,8 @@ public class WaveManager : MonoBehaviour
         for(int i = 0; i < currentPattern.spawnMonsterCnt; i++)
         {
             currentSpawnInfo = currentPattern.monsterInfoList[i];
-            currentMonsterPref = GameManager.Inst.Data.FindMonsterPrefab(currentSpawnInfo.monsterId);
-            currentMonsterBase = GameManager.Inst.Data.Find_SetMonsterBase(currentSpawnInfo.monsterId, currentSpawnInfo.monsterData);
+            currentMonsterPref = GameManager.Instance.Data.FindMonsterPrefab(currentSpawnInfo.monsterId);
+            currentMonsterBase = GameManager.Instance.Data.Find_SetMonsterBase(currentSpawnInfo.monsterId, currentSpawnInfo.monsterData);
 
             for (int j = 0; j < currentSpawnInfo.spawnCount; j++)
             {

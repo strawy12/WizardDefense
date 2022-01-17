@@ -21,13 +21,31 @@ public class GameManager : MonoSingleton<GameManager>
 
     public TowerAttack selectedTower;
 
+    private WaveManager waveManager;
+    private InGameDataManager dataManager;
+
+    public WaveManager Wave { get { return waveManager; } }
+    public InGameDataManager Data { get { return dataManager; } }
+
+    private void Awake()
+    {
+        waveManager = GetComponent<WaveManager>();
+        dataManager = GetComponent<InGameDataManager>();
+    }
+
     void Start()
     {
         mainCam = FindObjectOfType<CameraMove>();
         screenCenter = (new Vector3(mainCam.cam.pixelWidth / 2, mainCam.cam.pixelHeight / 2));
         UIManager = GetComponent<UIManager>();
         KeyManager = GetComponent<KeyManager>();
-        StartCoroutine(SpawnEnemies());
+        //StartCoroutine(SpawnEnemies());
+        Init();
+    }
+
+    private void Init()
+    {
+        StartCoroutine(Wave.StartWave());
     }
 
     private void Update()

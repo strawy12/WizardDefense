@@ -1,17 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CameraMove : MonoBehaviour
 {
-    private Vector2 targetDir = Vector2.zero;
-    [SerializeField] private float speed = 3f;
-    void Update()
+    public Camera cam;
+
+    private void Awake()
     {
-        targetDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        cam = GetComponent<Camera>();
+    }
 
-        transform.Translate(targetDir * speed * Time.deltaTime);
+    public void CameraMoveToPosition(Vector3 position, float second)
+    {
+        transform.DOMove(position, second);
+    }
 
+    public void ChangeLocalEulerAngle(Vector3 angle)
+    {
+        transform.localEulerAngles = angle;
+    }
 
+    public void CameraRotate(Vector3 rotation, float second)
+    {
+        transform.DORotate(rotation, second);
     }
 }
