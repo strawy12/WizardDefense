@@ -31,6 +31,8 @@ public class PatternData
 
     public List<SpawnMonsterInfo> monsterInfoList;
 
+    public int spawnMonsterCnt { get { return monsterInfoList.Count; } }
+
     public PatternData(string ID, int cost, float nextPatternDelay, float monsterSpawnDelay, DirectionType direction, List<SpawnMonsterInfo> monsterInfoList)
     {
         this.cost = cost;

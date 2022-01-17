@@ -39508,6 +39508,7 @@ GameObject:
   - component: {fileID: 1168447614}
   - component: {fileID: 1168447613}
   - component: {fileID: 1168447615}
+  - component: {fileID: 1168447616}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -39534,8 +39535,6 @@ MonoBehaviour:
   - {fileID: 8511945468871222710, guid: f2aa66b3d8361ba4386a27aafe2969d2, type: 3}
   - {fileID: 3085146731109757823, guid: 7f308361977a08a4598d2780272dec42, type: 3}
   - {fileID: 8909800874760356790, guid: 4e3545d6c6f605c4fa8a935fdf72eca7, type: 3}
-  monsterDatas: {fileID: 11400000, guid: 3636dff01b0d4a74d82adf8ae4ce018f, type: 2}
-  patterns: {fileID: 11400000, guid: de201f73ed1734a478c7f35ac8acba4a, type: 2}
 --- !u!4 &1168447614
 Transform:
   m_ObjectHideFlags: 0
@@ -39575,6 +39574,20 @@ MonoBehaviour:
   - {fileID: 7960861432123780286, guid: a7f95270cd5bd6e4ea8946511504655e, type: 3}
   - {fileID: 7960861432123780286, guid: f0bf65fa7a5439947aedd0c3f16cb106, type: 3}
   - {fileID: 7960861432123780286, guid: e1125c608e6099b488ec444d73247510, type: 3}
+--- !u!114 &1168447616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168447612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d1f94e8b02d5684db2426098e807ee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterDatas: {fileID: 11400000, guid: 3636dff01b0d4a74d82adf8ae4ce018f, type: 2}
+  patterns: {fileID: 11400000, guid: de201f73ed1734a478c7f35ac8acba4a, type: 2}
 --- !u!1 &1171773487
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ public class MonsterBase
     public string monsterName;
     public string monsterId;
     public PropertyType monsterType;
-    public MonsterInfo data;
+    public MonsterInfo  info;
     public List<ItemBase> dropItemList;
 
 
@@ -30,7 +30,7 @@ public class MonsterBase
         monsterName = name;
         monsterId = id;
         this.monsterType = type;
-        data = null;
+        info = null;
     }
 }
 

@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9608c1aa01d4414aa27098831147822, type: 3}
+  m_Name: MonsterPrefabDatas
+  m_EditorClassIdentifier: 
+  monsterPrefabDatas:
+  - monster_ID: N_F_01
+    monster_Prefab: {fileID: 2321958354770156328, guid: a8795e41472f3ca40b9415cb75acaa5f, type: 3}
+  - monster_ID: N_F_02
+    monster_Prefab: {fileID: 2321958354770156328, guid: 1c5e96af9a45f3f45bf5f498b0b5a79a, type: 3}
+  - monster_ID: M_F_01
+    monster_Prefab: {fileID: 2321958354770156328, guid: 96b0650fa063c154d8b7980fdd8b5a7a, type: 3}
+  - monster_ID: N_W_01
+    monster_Prefab: {fileID: 2321958354770156328, guid: c7f1bda1cca2d044c972bc35eac43d81, type: 3}
+  - monster_ID: N_W_02
+    monster_Prefab: {fileID: 2321958354770156328, guid: 4f7b2ff65894b3541a56ef3ccfd18e22, type: 3}
+  - monster_ID: M_W_01
+    monster_Prefab: {fileID: 2321958354770156328, guid: e40b3e157da396d44b810251e8788457, type: 3}
+  - monster_ID: N_T_01
+    monster_Prefab: {fileID: 2321958354770156328, guid: f97d4f058dff8ce4385f44ef1d05ad19, type: 3}
+  - monster_ID: N_T_02
+    monster_Prefab: {fileID: 2321958354770156328, guid: bf22c92910d37fa49b0ac21a3a049507, type: 3}
+  - monster_ID: M_T_01
+    monster_Prefab: {fileID: 2321958354770156328, guid: c24fa29df62428149aa37b856b0ea297, type: 3}
+  - monster_ID: N_A_01
+    monster_Prefab: {fileID: 2321958354770156328, guid: 93855cf7d73a3be41853ab471d848322, type: 3}
+  - monster_ID: N_A_02
+    monster_Prefab: {fileID: 2321958354770156328, guid: 7484df937c8d4204b983a8cafcc6418c, type: 3}
+  - monster_ID: M_A_01
+    monster_Prefab: {fileID: 2321958354770156328, guid: 968daffef64730e468bad290740e3276, type: 3}
+  - monster_ID: N_H_01
+    monster_Prefab: {fileID: 2321958354770156328, guid: fdd31637ba4ef494cbe6526b881cb6e4, type: 3}
+  - monster_ID: M_H_01
+    monster_Prefab: {fileID: 2321958354770156328, guid: aa927c2588ff19842b5764eb4e122d27, type: 3}
+  - monster_ID: N_V_01
+    monster_Prefab: {fileID: 2321958354770156328, guid: 09bdf56fa091c114c934c5118ef37ff9, type: 3}
+  - monster_ID: M_V_01
+    monster_Prefab: {fileID: 2321958354770156328, guid: 673a0cbc8ce3b384c81092ae4aa0211d, type: 3}
+  - monster_ID: N_R_02
+    monster_Prefab: {fileID: 2321958354770156328, guid: c3c3327c33d7a884ca498b86515f586f, type: 3}
+  - monster_ID: N_N_01
+    monster_Prefab: {fileID: 2321958354770156328, guid: 438e0ed0fbbc6a644b55f9691b5177b7, type: 3}

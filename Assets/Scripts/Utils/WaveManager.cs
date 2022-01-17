@@ -4,67 +4,68 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] private WayPoints[] wayPoints;
-    [SerializeField] private MainWayPoints mainWayPoints;
-    [SerializeField] private Transform[] enemySpawnPoints;
-    [SerializeField] private List<Monster> enemyPrefabs;
+    [SerializeField] private Transform enemySpawnPoint;
+    [SerializeField] private Transform targetPoint;
+    [SerializeField] private int waveMaxCost;
+
+    private PatternData currentPattern;
+    private WaveData currentWave;
+
+    private int currentCost = 0;
+    private float nextPatternDelay = 0f;
+
+    private SpawnMonsterInfo currentSpawnInfo = null;
+    private MonsterMove currentMonsterPref = null;
+    private MonsterBase currentMonsterBase = null;
+
+    public void Init()
+    {
+        //Wave 데이터 가져오는 코드
+    }
+
+    
+    public IEnumerator StartWave()
+    {
+        int patternIndex = 0;
+        while (currentCost < waveMaxCost)//currentWave.maxCost)
+        {
+
+            yield return InitPatternData(patternIndex);
+
+            yield return new WaitForSeconds(nextPatternDelay);
+        }
+    }
+    private IEnumerator InitPatternData(int index)
+    {
+        currentPattern = GameManager.Inst.Data.GetPatternData(index);
+
+        nextPatternDelay = currentPattern.nextPatternDelay;
+        currentCost += currentPattern.cost;
+
+        yield return GenerateMonsters();
+    }
+    
 
     public IEnumerator GenerateMonsters()
     {
-        yield return new WaitForSeconds(2f);
+        MonsterMove monster = null;
 
-        for (int j = 0; j < 5; j++)
+        for(int i = 0; i < currentPattern.spawnMonsterCnt; i++)
         {
-            int generateCount = Random.Range(3, 10);
+            currentSpawnInfo = currentPattern.monsterInfoList[i];
+            currentMonsterPref = GameManager.Inst.Data.FindMonsterPrefab(currentSpawnInfo.monsterId);
+            currentMonsterBase = GameManager.Inst.Data.Find_SetMonsterBase(currentSpawnInfo.monsterId, currentSpawnInfo.monsterData);
 
-            for (int i = 0; i < generateCount; i++)
+            for (int j = 0; j < currentSpawnInfo.spawnCount; j++)
             {
-                SpawnMonster();
-                yield return new WaitForSeconds(2f);
+                monster = Instantiate(currentMonsterPref, enemySpawnPoint.position, Quaternion.identity);
+                monster.Init(currentMonsterBase, targetPoint);
+
+                yield return new WaitForSeconds(currentPattern.monsterSpawnDelay);
             }
-            yield return new WaitForSeconds(5f);
+
         }
-
-    }
-
-    private void SpawnMonster()
-    {
-        int randIndex = Random.Range(0, enemyPrefabs.Count);
-        int randPosIndex = Random.Range(0, enemySpawnPoints.Length);
-
-        Monster monster = Instantiate(enemyPrefabs[randIndex], enemySpawnPoints[randPosIndex].localPosition, Quaternion.identity);
-        monster.SetDirType((DirectionType)randPosIndex);
-        monster.Init();
     }
 
 
-    public Transform GetWayPoint(int index, DirectionType dirType)
-    {
-        if(index < wayPoints[(int)dirType].Length)
-        {
-            return wayPoints[(int)dirType].GetWayPoint(index);
-        }
-
-        else
-        {
-            int reLoadIndex = index - wayPoints[(int)dirType].Length;
-
-            switch (dirType)
-            {
-                case DirectionType.Left:
-                    Debug.Log("Left");
-                    return mainWayPoints.GetLeftWayPoint(reLoadIndex);
-
-                case DirectionType.Center:
-                    Debug.Log("Top");
-                    return mainWayPoints.GetTopWayPoint(reLoadIndex);
-
-                case DirectionType.Right:
-                    Debug.Log("Right");
-                    return mainWayPoints.GetRightWayPoint(reLoadIndex);
-            }
-        }
-
-        return null;
-    }
 }
