@@ -12,6 +12,7 @@ public class MonsterMove : MonoBehaviour
     private NavMeshAgent agent;
 
     private int currentHp = 0;
+    public int virtualHP;
 
     private bool finished_Init = false;
 
@@ -25,6 +26,7 @@ public class MonsterMove : MonoBehaviour
 
     private void Start()
     {
+        virtualHP = currentHp;
     }
 
     private void Update()
@@ -40,8 +42,26 @@ public class MonsterMove : MonoBehaviour
         finished_Init = true;
         targetPoint = target;
         agent.SetDestination(targetPoint.position);
-        agent.SetAreaCost(0, 1);
+        GameManager.Instance.enemies.Add(this);
     }
 
-    
+    public void Damaged(int damage)
+    {
+        currentHp -= damage;
+
+        if (currentHp <= 0)
+        {
+            GameManager.Instance.enemies.Remove(this);
+            Destroy(gameObject);
+        }
+        else
+        {
+            //StartCoroutine(OnDamagedEffect());
+        }
+    }
+
+    public void VirtualDamaged(int power)
+    {
+        virtualHP -= power;
+    }
 }

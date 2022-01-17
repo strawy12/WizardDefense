@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7363721301834318865}
   m_Layer: 0
   m_Name: M_W_01 _Bubble Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
       maxHp: 0
       defense: 0
     dropItemList: []
+  virtualHP: 0
 --- !u!195 &7363721301834318865
 NavMeshAgent:
   m_ObjectHideFlags: 0

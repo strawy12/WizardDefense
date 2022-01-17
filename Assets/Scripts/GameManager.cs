@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    public GameObject enemy;
+    //public GameObject enemy;
     public GameObject home;
 
     public Vector3 screenCenter;
 
-    public List<Enemy> enemies { get; private set; } = new List<Enemy>();
+    public List<MonsterMove> enemies { get; private set; } = new List<MonsterMove>();
     public List<Attribute> attributes = new List<Attribute>();
     public List<Skill> skills = new List<Skill>();
     public CameraMove mainCam { get; private set; }
+    public Camera TpsCamera;
 
     public Vector2 inputAxis;
     public GameObject boundary;
@@ -53,21 +54,21 @@ public class GameManager : MonoSingleton<GameManager>
         inputAxis = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
     }
 
-    private void SpawnEnemy()
-    {
-        GameObject obj = Instantiate(enemy);
+    //private void SpawnEnemy()
+    //{
+    //    GameObject obj = Instantiate(enemy);
 
-        obj.transform.position = new Vector3(20, 1, 8);
-        obj.SetActive(true);
+    //    obj.transform.position = new Vector3(20, 1, 8);
+    //    obj.SetActive(true);
 
-        enemies.Add(obj.GetComponent<Enemy>());
-    }
+    //    enemies.Add(obj.GetComponent<Enemy>());
+    //}
 
     private IEnumerator SpawnEnemies()
     {
         while (true)
         {
-            SpawnEnemy();
+            //SpawnEnemy();
             yield return new WaitForSeconds(1f);
         }
     }

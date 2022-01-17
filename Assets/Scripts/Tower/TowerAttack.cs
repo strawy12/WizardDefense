@@ -9,7 +9,7 @@ public class TowerAttack : MonoBehaviour
     public Transform muzzlePosition;
     public GameObject boundary;
 
-    private Enemy targetEnemy;
+    private MonsterMove targetEnemy;
     private PoolManager pool;
 
     private TowerState towerState;
@@ -105,7 +105,7 @@ public class TowerAttack : MonoBehaviour
     #region ToFire
     public bool SetTargetEnemy()
     {
-        List<Enemy> enemies = GameManager.Instance.enemies;
+        List<MonsterMove> enemies = GameManager.Instance.enemies;
         if (enemies.Count == 0) return false;
 
         float minDistance = 100f;
@@ -136,11 +136,12 @@ public class TowerAttack : MonoBehaviour
     #region Control
     private void ZoomInTower()
     {
+        GameManager.Instance.TpsCamera.gameObject.SetActive(false);
         Vector3 cameraPosition = transform.position;
         cameraPosition.y += 2f;
         GameManager.Instance.mainCam.CameraMoveToPosition(cameraPosition, 1f);
         //이거 fireRate 다름
-        GameManager.Instance.UIManager.ShowTowerStatBar(true, towerBase.attackPower, towerBase.fireRate);
+        //GameManager.Instance.UIManager.ShowTowerStatBar(true, towerBase.attackPower, towerBase.fireRate);
         GameManager.Instance.selectedTower = this;
         towerState = TowerState.InControl;
     }
@@ -152,7 +153,7 @@ public class TowerAttack : MonoBehaviour
             towerState = TowerState.OutControl;
             GameManager.Instance.mainCam.CameraMoveToPosition(new Vector3(0, 11.5f, -10f), 1f);
             GameManager.Instance.mainCam.CameraRotate(new Vector3(31f, 0f, 0f), 1f);
-            GameManager.Instance.UIManager.ShowTowerStatBar(true);
+            //GameManager.Instance.UIManager.ShowTowerStatBar(true);
             GameManager.Instance.selectedTower = null;
             curFireTime = 0f;
         }
@@ -219,7 +220,7 @@ public class TowerAttack : MonoBehaviour
         towerBase.attribute = attribute;
     }
 
-    public Enemy GetTargetEnemy()
+    public MonsterMove GetTargetEnemy()
     {
         return targetEnemy;
     }

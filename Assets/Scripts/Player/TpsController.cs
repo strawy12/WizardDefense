@@ -22,11 +22,12 @@ public class TpsController : MonoBehaviour
 
     private bool isArea;
 
-    bool jDown;
-    bool isJump;
+    private bool jDown;
+    private bool isJump;
+    private bool isTarget = false;
 
-    Animator animator;
-    Rigidbody myrigid;
+    private Animator animator;
+    private Rigidbody myrigid;
 
     private void Start()
     {
@@ -39,7 +40,14 @@ public class TpsController : MonoBehaviour
         LookAround();
         Move();
         Jump();
-        Hit(); 
+        Hit();
+        if(isTarget)
+        {
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                Chang();
+            }
+        }
     }
 
     private void LookAround()
@@ -99,6 +107,7 @@ public class TpsController : MonoBehaviour
 
     private void Hit()
     {
+
         Debug.DrawRay(theCam.transform.position, theCam.transform.forward * maxDistance, Color.blue);
         if (Physics.Raycast(theCam.transform.position, theCam.transform.forward, out hitInfo, maxDistance))
         {
@@ -106,17 +115,19 @@ public class TpsController : MonoBehaviour
             {
                 TowerSelect.buildTrn = hitInfo.transform;
                 FMark.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    Chang();
-                }
+                isTarget = true;
             }
             else
             {
                 isArea = false;
-                FMark.SetActive(false);
+                isTarget = false;
+                //FMark.SetActive(false);
                 return;
             }
+        }
+        else
+        {
+            isTarget = false;
         }
     }
 

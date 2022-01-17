@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
 
         if (hp <= 0)
         {
-            GameManager.Instance.enemies.Remove(this);
+            //GameManager.Instance.enemies.Remove(this);
             Destroy(gameObject);
         }
         else
@@ -49,4 +49,6 @@ public class Enemy : MonoBehaviour
     {
         virtualHP -= power;
     }
+
+
 }

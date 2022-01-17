@@ -83,7 +83,7 @@ public class TowerSelect : MonoBehaviour
         if (curRune >= needMax)
         {
             curRune -= needMax;
-            //Debug.Log("설치성공");
+            Debug.Log("설치성공");
             UpdateUI();
             SelectTower();
         }
@@ -95,20 +95,21 @@ public class TowerSelect : MonoBehaviour
 
     private void SelectTower()
     {
-        if(selectTower==0)
+        GameObject a = null;
+        if (selectTower == 0)
         {
-            Instantiate(tower[0],buildTrn);
+            a = Instantiate(tower[0], buildTrn);
         }
-        else if(selectTower == 1)
+        else if (selectTower == 1)
         {
-            Instantiate(tower[1],buildTrn);
-        }
-
-        else if(selectTower == 2)
-        {
-            Instantiate(tower[2],buildTrn);
+            a = Instantiate(tower[1], buildTrn);
         }
 
+        else if (selectTower == 2)
+        {
+            a = Instantiate(tower[2], buildTrn);
+        }
+        a.transform.SetParent(null);
     }
 
     private void CheckCanBuild()

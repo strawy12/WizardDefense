@@ -17,7 +17,7 @@ public class BulletAttack : PoolObject
 
     public AttackType state;
     private TowerAttack towerAttack;
-    private Enemy targetEnemy;
+    private MonsterMove targetEnemy;
     private Collision enemy;
     public float rangeDistance;
 
@@ -64,11 +64,11 @@ public class BulletAttack : PoolObject
         EndAttack();
     }
 
-    private void Attack(Enemy enemy)
+    private void Attack(MonsterMove enemy)
     {
         if (enemy == null)
         {
-            this.enemy.gameObject.GetComponent<Enemy>().Damaged(towerAttack.towerBase.attackPower);
+            this.enemy.gameObject.GetComponent<MonsterMove>().Damaged(towerAttack.towerBase.attackPower);
         }
 
         else

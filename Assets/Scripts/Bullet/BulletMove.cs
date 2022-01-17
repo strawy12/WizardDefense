@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletMove : PoolObject
 {
     private TowerAttack towerAttack;
-    private Enemy targetEnemy;
+    private MonsterMove targetEnemy;
     private TowerState state;
 
     private SphereCollider col;
