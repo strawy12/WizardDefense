@@ -108,7 +108,6 @@ public class TpsController : MonoBehaviour
                 FMark.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    Debug.Log(hitInfo.transform.position);
                     Chang();
                 }
             }

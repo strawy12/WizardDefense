@@ -83,7 +83,7 @@ public class TowerSelect : MonoBehaviour
         if (curRune >= needMax)
         {
             curRune -= needMax;
-            Debug.Log("설치성공");
+            //Debug.Log("설치성공");
             UpdateUI();
             SelectTower();
         }
