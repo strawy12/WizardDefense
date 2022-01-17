@@ -5426,9 +5426,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9dffb06476e3c45b618be1b8b99508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterDatas: {fileID: 0}
-  patterns: {fileID: 0}
-  monsterPrefabs: {fileID: 0}
+  monsterDatas: {fileID: 11400000, guid: 3636dff01b0d4a74d82adf8ae4ce018f, type: 2}
+  patterns: {fileID: 11400000, guid: de201f73ed1734a478c7f35ac8acba4a, type: 2}
+  monsterPrefabs: {fileID: 11400000, guid: 387029c9b58ace24ab9c6384232977fc, type: 2}
 --- !u!1 &1186309275
 GameObject:
   m_ObjectHideFlags: 0
