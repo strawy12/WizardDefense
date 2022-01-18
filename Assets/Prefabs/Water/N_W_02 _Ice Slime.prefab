@@ -114,7 +114,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &2321958354770156328
 MonoBehaviour:
@@ -135,6 +135,7 @@ MonoBehaviour:
     info:
       maxHp: 0
       defense: 0
+      attackPower: 0
     dropItemList: []
   virtualHP: 0
 --- !u!195 &-3618224226308081478

@@ -19,14 +19,18 @@ public class MonsterMove : MonoBehaviour
     private Vector3 currentDir = Vector3.zero;
     private Transform targetPoint = null;
 
+    private UnitInfo unitInfo;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+
     }
 
     private void Start()
     {
         virtualHP = currentHp;
+        unitInfo = new UnitInfo();
     }
 
     private void Update()
@@ -93,4 +97,25 @@ public class MonsterMove : MonoBehaviour
         EventManager<int>.TriggerEvent(ConstantManager.MONSTER_ATTACK, monsterBase.info.attackPower);
         Dead();
     }
+
+    public void GetInfo()
+    {
+        unitInfo.unitName = monsterBase.monsterName;
+        unitInfo.attackPower = monsterBase.info.attackPower;
+        unitInfo.defence = monsterBase.info.defense;
+        unitInfo.maxHp = monsterBase.info.maxHp;
+        unitInfo.currentHp = currentHp;
+
+        EventManager<UnitInfo>.TriggerEvent(ConstantManager.MONSTER_GETINFO, unitInfo);
+    }
 }
+public struct UnitInfo
+{
+    public string unitName;
+    public int attackPower;
+    public int defence;
+    public int maxHp;
+    public int currentHp;
+    public Sprite unitSprite;
+}
+

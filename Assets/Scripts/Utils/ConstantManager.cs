@@ -15,7 +15,12 @@ public static class ConstantManager
     public const string POINTTOWER_INIT = "PT_IN";
 
     public const string MONSTER_ATTACK = "MN_AT";
+<<<<<<< HEAD
 
     public const string TOWER_TAG = "Tower";
     public const string ENEMY_TAG = "Enemy";
+=======
+    public const string MONSTER_GETINFO = "MN_GI";
+
+>>>>>>> OIF
 }
