@@ -63,7 +63,7 @@ public class TowerAttack : MonoBehaviour
         isBuilding = true;
 
         transform.DOMoveY(-transform.localScale.y * 0.5f, 0f);
-        transform.DOMoveY(transform.localScale.y * 0.5f, 2f).OnComplete(() => isBuilding = false);
+        transform.DOMoveY(transform.localScale.y * 0.5f + 5f, 2f).OnComplete(() => isBuilding = false);
     }
 
     #region Fire

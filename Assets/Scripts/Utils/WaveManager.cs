@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] private Transform enemySpawnPoint;
+    [SerializeField] private Transform enemyLeftSpawnPoint;
+    [SerializeField] private Transform enemyRightSpawnPoint;
     [SerializeField] private Transform targetPoint;
     [SerializeField] private int waveMaxCost;
 
@@ -58,12 +59,25 @@ public class WaveManager : MonoBehaviour
 
             for (int j = 0; j < currentSpawnInfo.spawnCount; j++)
             {
-                monster = Instantiate(currentMonsterPref, enemySpawnPoint.position, Quaternion.identity);
+                monster = Instantiate(currentMonsterPref, GetSpawnDirTrn(), Quaternion.identity);
                 monster.Init(currentMonsterBase, targetPoint);
 
                 yield return new WaitForSeconds(currentPattern.monsterSpawnDelay);
             }
 
+        }
+    }
+
+    private Vector3 GetSpawnDirTrn()
+    {
+        if(currentPattern.direction == DirectionType.Left)
+        {
+            return enemyLeftSpawnPoint.position;
+        }
+
+        else
+        {
+            return enemyRightSpawnPoint.position;
         }
     }
 
