@@ -132,6 +132,7 @@ public class UIManager : MonoBehaviour
 
     public void Chang()
     {
+        Cursor.visible = true;
         isArea = !isArea;
         if (isArea)
         {
@@ -155,6 +156,7 @@ public class UIManager : MonoBehaviour
         FMark.SetActive(false);
         buildChang.SetActive(false);
         Time.timeScale = 1f;
+        Cursor.visible = false;
     }
 
     public void AreaCheack()

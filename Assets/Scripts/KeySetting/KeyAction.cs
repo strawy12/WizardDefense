@@ -2,7 +2,7 @@ public enum KeyAction
 {
     Fire,
     Skill,
-    ExitTower,
+    Interaction,
     Boundary,
     Count
 }
