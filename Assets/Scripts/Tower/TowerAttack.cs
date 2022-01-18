@@ -21,6 +21,9 @@ public class TowerAttack : MonoBehaviour
     {
         pool = FindObjectOfType<PoolManager>();
         useSkillTime = 100f;
+
+        boundary.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * transform.localScale * 0.5f;
+        boundary.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -160,7 +163,7 @@ public class TowerAttack : MonoBehaviour
 
     private void ShowBoundary()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Boundary]))
         {
             if (boundary.activeSelf)
             {
@@ -168,7 +171,7 @@ public class TowerAttack : MonoBehaviour
             }
             else
             {
-                boundary.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * transform.localScale * 0.5f;
+                boundary.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * (1 / transform.localScale.x);
             }
         }
     }

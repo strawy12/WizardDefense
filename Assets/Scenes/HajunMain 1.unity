@@ -6419,8 +6419,8 @@ MonoBehaviour:
   skillImage: {fileID: 1253667334}
   skillCoolTimeImage: {fileID: 1564320378}
   keyPanelTemplate: {fileID: 943060431}
-  FMark: {fileID: 0}
-  buildChang: {fileID: 0}
+  FMark: {fileID: 3190338562087938206}
+  buildChang: {fileID: 3190338562441343485}
 --- !u!1 &1185674893
 GameObject:
   m_ObjectHideFlags: 0
@@ -18722,7 +18722,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterBody: {fileID: 5201053438159182402}
   cameraArm: {fileID: 3981799114009212094}
-  speed: 5
+  normalSpeed: 5
+  runSpeed: 8
   sensivity: 3
   jumpPower: 8
   maxDistance: 10

@@ -17,9 +17,10 @@ public class TpsController : MonoBehaviour
     private float speed;
 
     private bool jDown;
+    private bool isRun;
     private bool isJump;
     private bool isTarget = false;
-    
+
     private RaycastHit hitInfo;
 
     private Animator animator;
@@ -36,7 +37,7 @@ public class TpsController : MonoBehaviour
         PlayerSet();
         if (isTarget)
         {
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 GameManager.Instance.UIManager.Chang();
             }
@@ -73,6 +74,7 @@ public class TpsController : MonoBehaviour
     {
         Vector2 moveInput = new Vector2(Input.GetAxis(ConstantManager.KEYINPUT_HMOVE), Input.GetAxis(ConstantManager.KEYINPUT_VMOVE));
         bool isMove = moveInput.magnitude != 0;
+        speed = normalSpeed;
         animator.SetBool("isMove", isMove);
 
         if (isMove)
@@ -100,7 +102,7 @@ public class TpsController : MonoBehaviour
 
     private void Run()
     {
-
+        speed = runSpeed;
     }
 
     private void OnCollisionEnter(Collision collision)
