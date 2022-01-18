@@ -14,24 +14,19 @@ public class TpsController : MonoBehaviour
     [Header("점프 힘")] [SerializeField] private float jumpPower = 2f;
     [Header("레이저 길이")] [SerializeField] private float maxDistance = 10f;
 
-<<<<<<< HEAD
     private float speed;
-=======
     [Header("포탑설치가능표시")] [SerializeField] private GameObject FMark;
     [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
 
     private RaycastHit hitTowerAreaInfo;
 
     private bool isArea;
->>>>>>> OIF
 
     private bool jDown;
     private bool isRun;
     private bool isJump;
     private bool isTarget = false;
     private bool isTargetTower = false;
-
-    private RaycastHit hitInfo;
 
     private MonsterMove targetMonster;
 
@@ -67,16 +62,6 @@ public class TpsController : MonoBehaviour
         Jump();
         Run();
         Hit();
-<<<<<<< HEAD
-=======
-        if (isTarget)
-        {
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                Chang();
-            }
-        }
->>>>>>> OIF
     }
     private void LookAround()
     {
@@ -141,20 +126,17 @@ public class TpsController : MonoBehaviour
 
     private void Hit()
     {
-<<<<<<< HEAD
         var cam = GameManager.Instance.tpsCamera;
-        Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance, Color.blue);
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, maxDistance))
-=======
-        Hit_TowerArea();
-        Hit_Monster();
+
+        Hit_TowerArea(cam);
+        Hit_Monster(cam);
     }
 
-    private void Hit_Monster()
+    private void Hit_Monster(Camera cam)
     {
-        Debug.DrawRay(theCam.transform.position, theCam.transform.forward * maxDistance * 2, Color.red);
+        Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance * 2, Color.red);
 
-        RaycastHit[] hits = Physics.RaycastAll(theCam.transform.position, theCam.transform.forward, maxDistance * 2);
+        RaycastHit[] hits = Physics.RaycastAll(cam.transform.position, cam.transform.forward, maxDistance * 2);
         Debug.Log(hits.Length);
 
         foreach (var hit in hits)
@@ -176,30 +158,26 @@ public class TpsController : MonoBehaviour
 
     }
 
-    private void Hit_TowerArea()
+    private void Hit_TowerArea(Camera cam)
     {
-        Debug.DrawRay(theCam.transform.position, theCam.transform.forward * maxDistance, Color.blue);
+        Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance, Color.blue);
 
-        if (Physics.Raycast(theCam.transform.position, theCam.transform.forward, out hitTowerAreaInfo, maxDistance))
->>>>>>> OIF
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitTowerAreaInfo, maxDistance))
         {
             if (hitTowerAreaInfo.transform.gameObject.CompareTag("area"))
             {
-<<<<<<< HEAD
-                TowerSelect.buildTrn = hitInfo.transform;
+                TowerSelect.buildTrn = hitTowerAreaInfo.transform;
                 GameManager.Instance.UIManager.FMarkTrue();
-=======
                 TowerSelect.buildTrn = hitTowerAreaInfo.transform;
                 FMark.SetActive(true);
->>>>>>> OIF
                 isTarget = true;
             }
-            else if (hitInfo.transform.gameObject.CompareTag(ConstantManager.TOWER_TAG))
+            else if (hitTowerAreaInfo.transform.gameObject.CompareTag(ConstantManager.TOWER_TAG))
             {
-                TowerSelect.buildTrn = hitInfo.transform;
+                TowerSelect.buildTrn = hitTowerAreaInfo.transform;
                 GameManager.Instance.UIManager.FMarkTrue();
                 isTargetTower = true;
-                tower = hitInfo.collider.gameObject.GetComponent<TowerAttack>();
+                tower = hitTowerAreaInfo.collider.gameObject.GetComponent<TowerAttack>();
             }
             else
             {
