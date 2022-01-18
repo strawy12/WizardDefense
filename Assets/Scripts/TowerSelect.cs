@@ -23,6 +23,8 @@ public class TowerSelect : MonoBehaviour
 
     private int selectTower;
 
+    public TpsController tpsController;
+
     private void Start()
     {
         OnClickTower1();
@@ -83,6 +85,9 @@ public class TowerSelect : MonoBehaviour
         if (curRune >= needMax)
         {
             curRune -= needMax;
+            Time.timeScale = 1f;
+            GameManager.Instance.UIManager.OnClickOutChang();
+            tpsController.isDonCamera = false;
             Debug.Log("설치성공");
             UpdateUI();
             SelectTower();

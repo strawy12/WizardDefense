@@ -13,7 +13,7 @@ public class GameManager : MonoSingleton<GameManager>
     public List<Attribute> attributes = new List<Attribute>();
     public List<Skill> skills = new List<Skill>();
     public CameraMove mainCam { get; private set; }
-    public Camera TpsCamera;
+    public Camera tpsCamera;
 
     public Vector2 inputAxis;
     public GameObject boundary;

@@ -101,11 +101,15 @@ public class UIManager : MonoBehaviour
         {
             FMark.SetActive(false);
             buildChang.SetActive(true);
+            
+            Time.timeScale = 0f;
         }
         else
         {
             FMark.SetActive(false);
             buildChang.SetActive(false);
+            
+            Time.timeScale = 1f;
         }
     }
 
@@ -114,6 +118,7 @@ public class UIManager : MonoBehaviour
         isArea = !isArea;
         FMark.SetActive(false);
         buildChang.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void AreaCheack()

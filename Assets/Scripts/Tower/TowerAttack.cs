@@ -136,7 +136,7 @@ public class TowerAttack : MonoBehaviour
     #region Control
     private void ZoomInTower()
     {
-        GameManager.Instance.TpsCamera.gameObject.SetActive(false);
+        GameManager.Instance.tpsCamera.gameObject.SetActive(false);
         Vector3 cameraPosition = transform.position;
         cameraPosition.y += 2f;
         GameManager.Instance.mainCam.CameraMoveToPosition(cameraPosition, 1f);
