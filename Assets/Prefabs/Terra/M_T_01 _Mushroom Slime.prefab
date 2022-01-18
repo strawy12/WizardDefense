@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2628006920943607073}
   - component: {fileID: 2321958354770156328}
   - component: {fileID: 66818311906376693}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: M_T_01 _Mushroom Slime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 8407114704495320232}
   - component: {fileID: 3560565269800685368}
   - component: {fileID: 2214093263753500724}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
