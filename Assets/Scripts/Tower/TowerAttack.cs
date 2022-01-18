@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class TowerAttack : MonoBehaviour
 {
@@ -18,12 +19,17 @@ public class TowerAttack : MonoBehaviour
 
     public Skill skill;
 
+    public bool isBuilding;
     void Start()
     {
         pool = FindObjectOfType<PoolManager>();
         useSkillTime = 100f;
 
-        boundary.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * transform.localScale * 0.5f;
+        TowerBuild();
+
+        Vector3 scale = transform.localScale;
+        scale.y = scale.x;
+        boundary.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * scale * 0.5f;
         boundary.gameObject.SetActive(true);
     }
 
@@ -50,6 +56,14 @@ public class TowerAttack : MonoBehaviour
 
         ShowBoundary();
         OnUseSKill();
+    }
+
+    private void TowerBuild()
+    {
+        isBuilding = true;
+
+        transform.DOMoveY(-transform.localScale.y * 0.5f, 0f);
+        transform.DOMoveY(transform.localScale.y * 0.5f, 2f).OnComplete(() => isBuilding = false);
     }
 
     #region Fire
@@ -136,10 +150,13 @@ public class TowerAttack : MonoBehaviour
     #region Control
     public void ZoomInTower()
     {
-        Debug.Log("ZZ");
-        GameManager.Instance.tpsCamera.gameObject.SetActive(false);
+        GameManager.Instance.mainCam.cam.enabled = true;
+
+        GameManager.Instance.tpsCamera.enabled = false;
+        
         Vector3 cameraPosition = transform.position;
         cameraPosition.y += 2f;
+        muzzlePosition.transform.position = cameraPosition;
         GameManager.Instance.mainCam.CameraMoveToPosition(cameraPosition, 1f);
         //이거 fireRate 다름
         GameManager.Instance.UIManager.ShowTowerStatBar(true, towerBase.attackPower, towerBase.fireRate);
@@ -154,9 +171,12 @@ public class TowerAttack : MonoBehaviour
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && selectedTime > 1f)
         {
             //고정값이니 바꾸어도 됨
-            GameManager.Instance.mainCam.CameraMoveToPosition(new Vector3(0, 11.5f, -10f), 1f);
-            GameManager.Instance.mainCam.CameraRotate(new Vector3(31f, 0f, 0f), 1f);
-            //GameManager.Instance.UIManager.ShowTowerStatBar(true);
+            GameManager.Instance.player.SetActive(true);
+
+            Vector3 pos = GameManager.Instance.tpsCamera.transform.position;
+            Vector3 rot = GameManager.Instance.tpsCamera.transform.parent.eulerAngles;
+            GameManager.Instance.mainCam.ZoomOutCamera(pos, rot, 1f);
+            //GameManager.Instance.UIManager.ShowTowerStatBar(true);    
             GameManager.Instance.selectedTower = null;
 
             curFireTime = 0f;
@@ -182,6 +202,8 @@ public class TowerAttack : MonoBehaviour
 
     private void CameraMove()
     {
+        if (GameManager.Instance.gameState == GameState.Setting) return;
+
         Vector2 mouse = GameManager.Instance.inputAxis * 4f;
         Quaternion rot = GameManager.Instance.mainCam.transform.rotation;
         GameManager.Instance.mainCam.ChangeLocalEulerAngle(new Vector3(Mathf.Clamp(-mouse.y + rot.eulerAngles.x, 0, 80), mouse.x + rot.eulerAngles.y, 0f));

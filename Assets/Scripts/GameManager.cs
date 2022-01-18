@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    public GameState gameState;
     //public GameObject enemy;
     public GameObject home;
 
@@ -22,6 +23,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     public TowerAttack selectedTower;
 
+    public GameObject player;
+
 
     private WaveManager waveManager;
     private InGameDataManager dataManager;
@@ -35,7 +38,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         waveManager = GetComponent<WaveManager>();
         dataManager = GetComponent<InGameDataManager>();
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Start()
@@ -44,6 +47,7 @@ public class GameManager : MonoSingleton<GameManager>
         screenCenter = (new Vector3(mainCam.cam.pixelWidth / 2, mainCam.cam.pixelHeight / 2));
         UIManager = GetComponent<UIManager>();
         KeyManager = GetComponent<KeyManager>();
+        gameState = GameState.Playing;
         //StartCoroutine(SpawnEnemies());
     }
 
@@ -74,6 +78,7 @@ public class GameManager : MonoSingleton<GameManager>
             yield return new WaitForSeconds(1f);
         }
     }
+
 
     public IEnumerator ShowBoundary(Vector3 position,Vector3 scale)
     {

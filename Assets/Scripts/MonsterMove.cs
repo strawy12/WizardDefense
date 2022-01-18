@@ -77,8 +77,7 @@ public class MonsterMove : MonoBehaviour
 
         if (currentHp <= 0)
         {
-            GameManager.Instance.enemies.Remove(this);
-            Destroy(gameObject);
+            Dead();
         }
     }
 
@@ -89,6 +88,7 @@ public class MonsterMove : MonoBehaviour
 
     public void Dead()
     {
+        GameManager.Instance.enemies.Remove(this);
         Destroy(gameObject);
     }
 

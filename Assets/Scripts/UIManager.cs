@@ -54,15 +54,16 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             GameObject panel = settingPanelsParent.parent.gameObject;
-            Cursor.visible = !panel.activeSelf;
-            if(panel.activeSelf)
+            CursorLocked(!panel.activeSelf);
+            if (panel.activeSelf)
             {
-                Time.timeScale = 1f;
+                ActiveUIPanalState(false);
             }
             else
             {
-                Time.timeScale = 0f;
+                ActiveUIPanalState(true);
             }
+
             panel.SetActive(!panel.activeSelf);
         }
     }
@@ -70,7 +71,7 @@ public class UIManager : MonoBehaviour
     #region Setting Panel
     private void OnClickSettingButton(int index)
     {
-        for (int i = 0; i< settingPanelsParent.childCount; i++)
+        for (int i = 0; i < settingPanelsParent.childCount; i++)
         {
             settingPanelsParent.GetChild(i).gameObject.SetActive(i == index);
         }
@@ -132,21 +133,22 @@ public class UIManager : MonoBehaviour
 
     public void Chang()
     {
-        Cursor.visible = true;
+        CursorLocked(false);
+
         isArea = !isArea;
         if (isArea)
         {
             FMark.SetActive(false);
             buildChang.SetActive(true);
-            
-            Time.timeScale = 0f;
+
+            ActiveUIPanalState(true);
         }
         else
         {
             FMark.SetActive(false);
             buildChang.SetActive(false);
-            
-            Time.timeScale = 1f;
+
+            ActiveUIPanalState(false);
         }
     }
 
@@ -155,8 +157,36 @@ public class UIManager : MonoBehaviour
         isArea = !isArea;
         FMark.SetActive(false);
         buildChang.SetActive(false);
-        Time.timeScale = 1f;
-        Cursor.visible = false;
+        ActiveUIPanalState(false);
+        CursorLocked(true);
+    }
+
+    public void ActiveUIPanalState(bool isActive)
+    {
+        if (isActive)
+        {
+            Time.timeScale = 0f;
+            GameManager.Instance.gameState = GameState.Setting;
+        }
+
+        else
+        {
+            Time.timeScale = 1f;
+            GameManager.Instance.gameState = GameState.Playing;
+        }
+    }
+
+    public void CursorLocked(bool isLocked)
+    {
+        if(isLocked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     public void AreaCheack()

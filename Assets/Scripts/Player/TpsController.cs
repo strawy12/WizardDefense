@@ -15,9 +15,6 @@ public class TpsController : MonoBehaviour
     [Header("레이저 길이")] [SerializeField] private float maxDistance = 10f;
 
     private float speed;
-    [Header("포탑설치가능표시")] [SerializeField] private GameObject FMark;
-    [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
-
     private RaycastHit hitTowerAreaInfo;
 
     private bool isArea;
@@ -51,7 +48,12 @@ public class TpsController : MonoBehaviour
                 GameManager.Instance.UIManager.Chang();
 
             if (isTargetTower && GameManager.Instance.selectedTower == null)
+            {
                 tower.ZoomInTower();
+                gameObject.SetActive(false);
+            }
+
+
         }
     }
 
@@ -65,6 +67,8 @@ public class TpsController : MonoBehaviour
     }
     private void LookAround()
     {
+        if (GameManager.Instance.gameState == GameState.Setting) return;
+
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * sensivity, Input.GetAxis("Mouse Y") * sensivity);
         Vector3 cameraAngle = cameraArm.rotation.eulerAngles;
         float x = cameraAngle.x - mouseDelta.y;
@@ -137,12 +141,9 @@ public class TpsController : MonoBehaviour
         Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance * 2, Color.red);
 
         RaycastHit[] hits = Physics.RaycastAll(cam.transform.position, cam.transform.forward, maxDistance * 2);
-        Debug.Log(hits.Length);
 
         foreach (var hit in hits)
         {
-            Debug.Log(hit.transform.name);
-
             if (hit.transform.CompareTag("Enemy"))
             {
                 targetMonster = hit.transform.GetComponent<MonsterMove>();
@@ -168,16 +169,27 @@ public class TpsController : MonoBehaviour
             {
                 TowerSelect.buildTrn = hitTowerAreaInfo.transform;
                 GameManager.Instance.UIManager.FMarkTrue();
-                TowerSelect.buildTrn = hitTowerAreaInfo.transform;
-                FMark.SetActive(true);
                 isTarget = true;
             }
             else if (hitTowerAreaInfo.transform.gameObject.CompareTag(ConstantManager.TOWER_TAG))
             {
-                TowerSelect.buildTrn = hitTowerAreaInfo.transform;
-                GameManager.Instance.UIManager.FMarkTrue();
-                isTargetTower = true;
+
                 tower = hitTowerAreaInfo.collider.gameObject.GetComponent<TowerAttack>();
+
+                if(!tower.isBuilding)
+                {
+                    isTargetTower = true;
+                    isTarget = false;
+                    GameManager.Instance.UIManager.FMarkTrue();
+                }
+
+                else
+                {
+                    GameManager.Instance.UIManager.FMarkFalse();
+                    isTarget = false;
+                    isTargetTower = false;
+                    tower = null;
+                }
             }
             else
             {

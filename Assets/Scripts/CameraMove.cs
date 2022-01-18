@@ -26,4 +26,15 @@ public class CameraMove : MonoBehaviour
     {
         transform.DORotate(rotation, second);
     }
+
+    public void ZoomOutCamera(Vector3 position, Vector3 rotation, float second)
+    {
+        transform.DOMove(position, second);
+        transform.DORotate(rotation, second).OnComplete(() => 
+        { 
+            cam.enabled = false; 
+            GameManager.Instance.tpsCamera.enabled = true; 
+        }
+        );
+    }
 }
