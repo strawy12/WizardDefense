@@ -41,12 +41,10 @@ public class GameManager : MonoSingleton<GameManager>
         UIManager = GetComponent<UIManager>();
         KeyManager = GetComponent<KeyManager>();
         //StartCoroutine(SpawnEnemies());
-        Init();
     }
 
     private void Init()
     {
-        StartCoroutine(Wave.StartWave());
     }
 
     private void Update()

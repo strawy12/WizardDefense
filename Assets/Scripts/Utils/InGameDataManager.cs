@@ -41,6 +41,8 @@ public class InGameDataManager : MonoBehaviour
     {
         yield return StartMonsterDataDownLoad();
         yield return StartWavePatternDataDownLoad();
+
+        StartCoroutine(GameManager.Instance.Wave.StartWave());
     }
 
 
