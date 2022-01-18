@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Image skillImage;
     [SerializeField] private Image skillCoolTimeImage;
+
     #endregion
 
     #region Panels Various

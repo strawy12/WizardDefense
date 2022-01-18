@@ -31,7 +31,10 @@ public class MonsterMove : MonoBehaviour
 
     private void Update()
     {
-        if (!finished_Init) return;
+        if (agent.remainingDistance <= 3f)
+        {
+            AttackPointTower();
+        }
 
     }
 
@@ -45,6 +48,26 @@ public class MonsterMove : MonoBehaviour
         GameManager.Instance.enemies.Add(this);
     }
 
+    private bool CheckIsMoved()
+    {
+        if (agent.velocity.x > 0f)
+        {
+            return true;
+        }
+
+        if (agent.velocity.y > 0f)
+        {
+            return true;
+        }
+
+        if (agent.velocity.z > 0f)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public void Damaged(int damage)
     {
         currentHp -= damage;
@@ -56,12 +79,25 @@ public class MonsterMove : MonoBehaviour
         }
         else
         {
+            Dead();
             //StartCoroutine(OnDamagedEffect());
         }
     }
 
+
     public void VirtualDamaged(int power)
     {
         virtualHP -= power;
+    }
+
+    public void Dead()
+    {
+        Destroy(gameObject);
+    }
+
+    public void AttackPointTower()
+    {
+        EventManager<int>.TriggerEvent(ConstantManager.MONSTER_ATTACK, monsterBase.info.attackPower);
+        Dead();
     }
 }
