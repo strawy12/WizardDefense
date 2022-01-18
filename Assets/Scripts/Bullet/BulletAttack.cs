@@ -18,7 +18,7 @@ public class BulletAttack : PoolObject
     public AttackType state;
     private TowerAttack towerAttack;
     private MonsterMove targetEnemy;
-    private Collision enemy;
+    private Collider enemy;
     public float rangeDistance;
 
     protected override void Awake()
@@ -34,10 +34,10 @@ public class BulletAttack : PoolObject
         fsm.ChangeState(AttackType.None);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (!collision.gameObject.CompareTag("Enemy")) return;
-        enemy = collision;
+        if (!other.CompareTag("Enemy")) return;
+        enemy = other;
         //hitPosiiton = collision.gameObject.transform.position;
         fsm.ChangeState(state);
         base.Despawn();
