@@ -22,11 +22,17 @@ public class GameManager : MonoSingleton<GameManager>
 
     public TowerAttack selectedTower;
 
+
     private WaveManager waveManager;
     private InGameDataManager dataManager;
+    private UIManager uiManager;
 
     public WaveManager Wave { get { return waveManager; } }
     public InGameDataManager Data { get { return dataManager; } }
+    public UIManager UI { get { return uiManager; } }
+
+
+
 
     private void Awake()
     {
