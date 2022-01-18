@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class TowerAttack : MonoBehaviour
 {
@@ -161,7 +160,7 @@ public class TowerAttack : MonoBehaviour
 
     private void ShowBoundary()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             if (boundary.activeSelf)
             {

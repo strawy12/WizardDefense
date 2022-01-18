@@ -107,8 +107,6 @@ public class TpsController : MonoBehaviour
 
     private void Hit()
     {
-
-        Debug.DrawRay(theCam.transform.position, theCam.transform.forward * maxDistance, Color.blue);
         if (Physics.Raycast(theCam.transform.position, theCam.transform.forward, out hitInfo, maxDistance))
         {
             if (hitInfo.transform.gameObject.CompareTag("area"))
