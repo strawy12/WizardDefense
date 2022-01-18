@@ -73,7 +73,7 @@ public class BulletAttack : PoolObject
 
         else
         {
-            enemy?.Damaged(towerAttack.towerBase.attackPower);
+            enemy.Damaged(towerAttack.towerBase.attackPower);
         }
     }
 

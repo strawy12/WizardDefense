@@ -35,7 +35,6 @@ public class MonsterMove : MonoBehaviour
         {
             AttackPointTower();
         }
-
     }
 
     public void Init(MonsterBase monsterBase, Transform target)
@@ -77,13 +76,7 @@ public class MonsterMove : MonoBehaviour
             GameManager.Instance.enemies.Remove(this);
             Destroy(gameObject);
         }
-        else
-        {
-            Dead();
-            //StartCoroutine(OnDamagedEffect());
-        }
     }
-
 
     public void VirtualDamaged(int power)
     {
