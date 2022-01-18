@@ -14,6 +14,7 @@ public class TowerAttack : MonoBehaviour
     private TowerState towerState;
     private float curFireTime = 0f;
     public float useSkillTime = 0f;
+    public float selectedTime = 0f;
 
     public Skill skill;
 
@@ -29,6 +30,8 @@ public class TowerAttack : MonoBehaviour
     private void Update()
     {
         curFireTime += Time.deltaTime;
+        selectedTime += Time.deltaTime;
+        Mathf.Clamp(selectedTime, 0f, 2f);
 
         SetMuzzleRotation();
         SkillCoolTime();
@@ -47,11 +50,6 @@ public class TowerAttack : MonoBehaviour
 
         ShowBoundary();
         OnUseSKill();
-    }
-
-    private void OnMouseUp()
-    {
-        ZoomInTower();
     }
 
     #region Fire
@@ -136,28 +134,34 @@ public class TowerAttack : MonoBehaviour
     #endregion
 
     #region Control
-    private void ZoomInTower()
+    public void ZoomInTower()
     {
+        Debug.Log("ZZ");
         GameManager.Instance.tpsCamera.gameObject.SetActive(false);
         Vector3 cameraPosition = transform.position;
         cameraPosition.y += 2f;
         GameManager.Instance.mainCam.CameraMoveToPosition(cameraPosition, 1f);
         //이거 fireRate 다름
-        //GameManager.Instance.UIManager.ShowTowerStatBar(true, towerBase.attackPower, towerBase.fireRate);
+        GameManager.Instance.UIManager.ShowTowerStatBar(true, towerBase.attackPower, towerBase.fireRate);
+        
         GameManager.Instance.selectedTower = this;
         towerState = TowerState.InControl;
+        selectedTime = 0f;
     }
 
     private void ZoomOutTower()
     {
-        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.ExitTower]))
+        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && selectedTime > 1f)
         {
-            towerState = TowerState.OutControl;
+            //고정값이니 바꾸어도 됨
             GameManager.Instance.mainCam.CameraMoveToPosition(new Vector3(0, 11.5f, -10f), 1f);
             GameManager.Instance.mainCam.CameraRotate(new Vector3(31f, 0f, 0f), 1f);
             //GameManager.Instance.UIManager.ShowTowerStatBar(true);
             GameManager.Instance.selectedTower = null;
+
             curFireTime = 0f;
+
+            towerState = TowerState.OutControl;
         }
     }
 

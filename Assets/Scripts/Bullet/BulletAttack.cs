@@ -36,7 +36,7 @@ public class BulletAttack : PoolObject
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Enemy")) return;
+        if (!other.CompareTag(ConstantManager.ENEMY_TAG)) return;
         enemy = other;
         //hitPosiiton = collision.gameObject.transform.position;
         fsm.ChangeState(state);

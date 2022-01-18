@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - area
   - floor
+  - Tower
   layers:
   - Default
   - TransparentFX

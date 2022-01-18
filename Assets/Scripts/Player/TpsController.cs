@@ -20,11 +20,14 @@ public class TpsController : MonoBehaviour
     private bool isRun;
     private bool isJump;
     private bool isTarget = false;
+    private bool isTargetTower = false;
 
     private RaycastHit hitInfo;
 
     private Animator animator;
     private Rigidbody myrigid;
+
+    private TowerAttack tower;
 
     private void Start()
     {
@@ -35,12 +38,14 @@ public class TpsController : MonoBehaviour
     private void Update()
     {
         PlayerSet();
-        if (isTarget)
+
+        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]))
         {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
+            if (isTarget)
                 GameManager.Instance.UIManager.Chang();
-            }
+
+            if (isTargetTower && GameManager.Instance.selectedTower == null)
+                tower.ZoomInTower();
         }
     }
 
@@ -125,6 +130,13 @@ public class TpsController : MonoBehaviour
                 GameManager.Instance.UIManager.FMarkTrue();
                 isTarget = true;
             }
+            else if (hitInfo.transform.gameObject.CompareTag(ConstantManager.TOWER_TAG))
+            {
+                TowerSelect.buildTrn = hitInfo.transform;
+                GameManager.Instance.UIManager.FMarkTrue();
+                isTargetTower = true;
+                tower = hitInfo.collider.gameObject.GetComponent<TowerAttack>();
+            }
             else
             {
                 GameManager.Instance.UIManager.AreaCheack();
@@ -136,6 +148,8 @@ public class TpsController : MonoBehaviour
         else
         {
             isTarget = false;
+            isTargetTower = false;
+            tower = null;
         }
     }
 }
