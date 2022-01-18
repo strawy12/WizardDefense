@@ -878,10 +878,7 @@ MonoBehaviour:
   speed: 5
   sensivity: 3
   jumpPower: 8
-  theCam: {fileID: 1999694692}
   maxDistance: 10
-  FMark: {fileID: 1005591997}
-  buildChang: {fileID: 771785950}
 --- !u!54 &580511942
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1150,7 +1147,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 76
+    m_FontSize: 71
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10

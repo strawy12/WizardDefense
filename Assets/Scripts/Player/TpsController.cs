@@ -8,23 +8,19 @@ public class TpsController : MonoBehaviour
 
     [SerializeField] private Transform cameraArm;
 
-    [Header("이동속도")] [SerializeField] private float speed = 5f;
+    [Header("이동속도")] [SerializeField] private float normalSpeed = 5f;
+    [Header("달리기속도")] [SerializeField] private float runSpeed = 8f;
     [Header("감도")] [SerializeField] private float sensivity;
     [Header("점프 힘")] [SerializeField] private float jumpPower = 2f;
-
-    [SerializeField] private Camera theCam;
     [Header("레이저 길이")] [SerializeField] private float maxDistance = 10f;
 
-    [Header("포탑설치가능표시")] [SerializeField] private GameObject FMark;
-    [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
-
-    private RaycastHit hitInfo;
-
-    private bool isArea;
+    private float speed;
 
     private bool jDown;
     private bool isJump;
     private bool isTarget = false;
+    
+    private RaycastHit hitInfo;
 
     private Animator animator;
     private Rigidbody myrigid;
@@ -37,19 +33,24 @@ public class TpsController : MonoBehaviour
 
     private void Update()
     {
-        LookAround();
-        Move();
-        Jump();
-        Hit();
-        if(isTarget)
+        PlayerSet();
+        if (isTarget)
         {
             if (Input.GetKeyDown(KeyCode.C))
             {
-                Chang();
+                GameManager.Instance.UIManager.Chang();
             }
         }
     }
 
+    private void PlayerSet()
+    {
+        LookAround();
+        Move();
+        Jump();
+        Run();
+        Hit();
+    }
     private void LookAround()
     {
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * sensivity, Input.GetAxis("Mouse Y") * sensivity);
@@ -97,6 +98,11 @@ public class TpsController : MonoBehaviour
         }
     }
 
+    private void Run()
+    {
+
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("floor"))
@@ -107,19 +113,21 @@ public class TpsController : MonoBehaviour
 
     private void Hit()
     {
-        if (Physics.Raycast(theCam.transform.position, theCam.transform.forward, out hitInfo, maxDistance))
+        var cam = GameManager.Instance.TpsCamera;
+        Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance, Color.blue);
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, maxDistance))
         {
             if (hitInfo.transform.gameObject.CompareTag("area"))
             {
                 TowerSelect.buildTrn = hitInfo.transform;
-                FMark.SetActive(true);
+                GameManager.Instance.UIManager.FMarkTrue();
                 isTarget = true;
             }
             else
             {
-                isArea = false;
+                GameManager.Instance.UIManager.AreaCheack();
+                GameManager.Instance.UIManager.FMarkFalse();
                 isTarget = false;
-                //FMark.SetActive(false);
                 return;
             }
         }
@@ -127,27 +135,5 @@ public class TpsController : MonoBehaviour
         {
             isTarget = false;
         }
-    }
-
-    private void Chang()
-    {
-        isArea = !isArea;
-        if (isArea)
-        {
-            FMark.SetActive(false);
-            buildChang.SetActive(true);
-        }
-        else
-        {
-            FMark.SetActive(false);
-            buildChang.SetActive(false);
-        }
-    }
-
-    public void OnClickOutChang()
-    {
-        isArea = !isArea;
-        FMark.SetActive(false);
-        buildChang.SetActive(false);
     }
 }
