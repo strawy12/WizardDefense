@@ -38,6 +38,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         waveManager = GetComponent<WaveManager>();
         dataManager = GetComponent<InGameDataManager>();
+        Cursor.visible = false;
     }
 
     void Start()

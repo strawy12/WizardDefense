@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     #region Tower UI Various
+    [Header("타워 UI")]
     [SerializeField] private GameObject towerUI;
 
     [SerializeField] private Image towerStatBar;
@@ -18,9 +19,15 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region Panels Various
+    [Header("패널 UI")]
+
     [SerializeField] private GameObject keyPanelTemplate;
     private List<KeyPanel> keyPanels = new List<KeyPanel>();
     #endregion
+
+    [Header("설정창")]
+    [SerializeField] private Transform settingPanelsParent;
+    [SerializeField] private Transform settingButtonsParent;
 
     [Header("포탑설치가능표시")] [SerializeField] private GameObject FMark;
     [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
@@ -32,11 +39,33 @@ public class UIManager : MonoBehaviour
         towerStatText = towerStatBar.GetComponentInChildren<Text>();
 
         InstantiatePanel();
+
+        for (int i = 0; i < settingButtonsParent.childCount; i++)
+        {
+            Button button = settingButtonsParent.GetChild(i).GetComponent<Button>();
+            button.onClick.AddListener(() => OnClickSettingButton(button.transform.GetSiblingIndex()));
+        }
     }
 
     private void Update()
     {
         ShowSkillUI(GameManager.Instance.selectedTower);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameObject panel = settingPanelsParent.parent.gameObject;
+            Cursor.visible = !panel.activeSelf;
+            panel.SetActive(!panel.activeSelf);
+        }
+    }
+
+    #region Setting Panel
+    private void OnClickSettingButton(int index)
+    {
+        for (int i = 0; i< settingPanelsParent.childCount; i++)
+        {
+            settingPanelsParent.GetChild(i).gameObject.SetActive(i == index);
+        }
     }
 
     private void InstantiatePanel()
@@ -54,12 +83,12 @@ public class UIManager : MonoBehaviour
 
     public void ResetKeyPanel()
     {
-        foreach(KeyPanel panel in keyPanels)
+        foreach (KeyPanel panel in keyPanels)
         {
             panel.ResetData();
         }
     }
-
+    #endregion
 
     #region TowerUI
     public void ShowSkillUI(TowerAttack tower)
@@ -80,7 +109,6 @@ public class UIManager : MonoBehaviour
 
             if (!tower.CheckSkillCoolTime())
             {
-                Debug.Log("sdf");
                 skillCoolTimeImage.fillAmount = (tower.skill.coolTime - tower.useSkillTime) / tower.skill.coolTime;
             }
         }
@@ -93,7 +121,6 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
-    
 
     public void Chang()
     {

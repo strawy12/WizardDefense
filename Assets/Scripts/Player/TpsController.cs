@@ -17,13 +17,10 @@ public class TpsController : MonoBehaviour
     private float speed;
 
     private bool jDown;
-    private bool isJump;
-
     private bool isRun;
-
+    private bool isJump;
     private bool isTarget = false;
-    [HideInInspector]  public bool isDonCamera = false;
-    
+
     private RaycastHit hitInfo;
 
     private Animator animator;
@@ -43,7 +40,6 @@ public class TpsController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 GameManager.Instance.UIManager.Chang();
-                DonMove();
             }
         }
     }
@@ -71,19 +67,11 @@ public class TpsController : MonoBehaviour
             x = Mathf.Clamp(x, 335f, 361f);
         }
 
-        if(isDonCamera)
-        {
-            cameraArm.rotation = Quaternion.Euler(cameraArm.rotation.x, cameraArm.rotation.y, cameraArm.rotation.z);
-        }
-        else
-        {
-            cameraArm.rotation = Quaternion.Euler(x, cameraAngle.y + mouseDelta.x, cameraAngle.z);
-        }
+        cameraArm.rotation = Quaternion.Euler(x, cameraAngle.y + mouseDelta.x, cameraAngle.z);
     }
 
     private void Move()
     {
-        isRun = Input.GetKey(KeyCode.LeftShift);
         Vector2 moveInput = new Vector2(Input.GetAxis(ConstantManager.KEYINPUT_HMOVE), Input.GetAxis(ConstantManager.KEYINPUT_VMOVE));
         bool isMove = moveInput.magnitude != 0;
         speed = normalSpeed;
@@ -114,15 +102,7 @@ public class TpsController : MonoBehaviour
 
     private void Run()
     {
-        if(isRun)
-        {
-            speed = runSpeed;
-        }
-        else
-        {
-            speed = normalSpeed;
-        }
-        
+        speed = runSpeed;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -130,13 +110,12 @@ public class TpsController : MonoBehaviour
         if (collision.gameObject.CompareTag("floor"))
         {
             isJump = false;
-            
         }
     }
 
     private void Hit()
     {
-        var cam = GameManager.Instance.tpsCamera;
+        var cam = GameManager.Instance.TpsCamera;
         Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance, Color.blue);
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, maxDistance))
         {
@@ -158,10 +137,5 @@ public class TpsController : MonoBehaviour
         {
             isTarget = false;
         }
-    }
-
-    private void DonMove()
-    {
-        isDonCamera = true;
     }
 }
