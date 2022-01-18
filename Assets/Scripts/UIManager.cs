@@ -21,6 +21,11 @@ public class UIManager : MonoBehaviour
     private List<KeyPanel> keyPanels = new List<KeyPanel>();
     #endregion
 
+    [Header("포탑설치가능표시")] [SerializeField] private GameObject FMark;
+    [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
+
+    private bool isArea;
+
     void Start()
     {
         towerStatText = towerStatBar.GetComponentInChildren<Text>();
@@ -86,4 +91,43 @@ public class UIManager : MonoBehaviour
         towerStatText.text = string.Format("공격력 {0}\n공격속도 {1}", attack, speed);
     }
     #endregion
+
+    
+
+    public void Chang()
+    {
+        isArea = !isArea;
+        if (isArea)
+        {
+            FMark.SetActive(false);
+            buildChang.SetActive(true);
+        }
+        else
+        {
+            FMark.SetActive(false);
+            buildChang.SetActive(false);
+        }
+    }
+
+    public void OnClickOutChang()
+    {
+        isArea = !isArea;
+        FMark.SetActive(false);
+        buildChang.SetActive(false);
+    }
+
+    public void AreaCheack()
+    {
+        isArea = false;
+    }
+
+    public void FMarkTrue()
+    {
+        FMark.SetActive(true);
+    }
+
+    public void FMarkFalse()
+    {
+        FMark.SetActive(false);
+    }
 }
