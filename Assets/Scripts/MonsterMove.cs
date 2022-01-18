@@ -79,7 +79,7 @@ public class MonsterMove : MonoBehaviour
         }
         else
         {
-            Dead();
+            //Dead();
             //StartCoroutine(OnDamagedEffect());
         }
     }
