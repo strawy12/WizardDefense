@@ -12,14 +12,11 @@ public class HpBar : MonoBehaviour
 
     private int maxHp;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         backHpPanal = transform.GetChild(0).GetComponent<Image>();
         frontHpPanal = transform.GetChild(1).GetComponent<Image>();
         hpInfoText = transform.GetChild(2).GetComponent<Text>();
-
-        EventManager<int>.StartListening(ConstantManager.POINTTOWER_INIT, InitHpBar);
-        EventManager<int>.StartListening(ConstantManager.POINTTOWER_DAMAGED, UpdateHpBar);
     }
 
     public void InitHpBar(int maxHp)

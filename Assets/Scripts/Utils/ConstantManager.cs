@@ -15,4 +15,6 @@ public static class ConstantManager
     public const string POINTTOWER_INIT = "PT_IN";
 
     public const string MONSTER_ATTACK = "MN_AT";
+    public const string MONSTER_GETINFO = "MN_GI";
+
 }

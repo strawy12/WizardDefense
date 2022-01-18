@@ -18,13 +18,15 @@ public class TpsController : MonoBehaviour
     [Header("포탑설치가능표시")] [SerializeField] private GameObject FMark;
     [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
 
-    private RaycastHit hitInfo;
+    private RaycastHit hitTowerAreaInfo;
 
     private bool isArea;
 
     private bool jDown;
     private bool isJump;
     private bool isTarget = false;
+
+    private MonsterMove targetMonster;
 
     private Animator animator;
     private Rigidbody myrigid;
@@ -41,7 +43,7 @@ public class TpsController : MonoBehaviour
         Move();
         Jump();
         Hit();
-        if(isTarget)
+        if (isTarget)
         {
             if (Input.GetKeyDown(KeyCode.C))
             {
@@ -107,13 +109,45 @@ public class TpsController : MonoBehaviour
 
     private void Hit()
     {
+        Hit_TowerArea();
+        Hit_Monster();
+    }
 
-        Debug.DrawRay(theCam.transform.position, theCam.transform.forward * maxDistance, Color.blue);
-        if (Physics.Raycast(theCam.transform.position, theCam.transform.forward, out hitInfo, maxDistance))
+    private void Hit_Monster()
+    {
+        Debug.DrawRay(theCam.transform.position, theCam.transform.forward * maxDistance * 2, Color.red);
+
+        RaycastHit[] hits = Physics.RaycastAll(theCam.transform.position, theCam.transform.forward, maxDistance * 2);
+        Debug.Log(hits.Length);
+
+        foreach (var hit in hits)
         {
-            if (hitInfo.transform.gameObject.CompareTag("area"))
+            Debug.Log(hit.transform.name);
+
+            if (hit.transform.CompareTag("Enemy"))
             {
-                TowerSelect.buildTrn = hitInfo.transform;
+                targetMonster = hit.transform.GetComponent<MonsterMove>();
+
+                if (targetMonster != null)
+                {
+                    targetMonster.GetInfo();
+                    return;
+                }
+
+            }
+        }
+
+    }
+
+    private void Hit_TowerArea()
+    {
+        Debug.DrawRay(theCam.transform.position, theCam.transform.forward * maxDistance, Color.blue);
+
+        if (Physics.Raycast(theCam.transform.position, theCam.transform.forward, out hitTowerAreaInfo, maxDistance))
+        {
+            if (hitTowerAreaInfo.transform.gameObject.CompareTag("area"))
+            {
+                TowerSelect.buildTrn = hitTowerAreaInfo.transform;
                 FMark.SetActive(true);
                 isTarget = true;
             }
@@ -125,6 +159,7 @@ public class TpsController : MonoBehaviour
                 return;
             }
         }
+
         else
         {
             isTarget = false;
