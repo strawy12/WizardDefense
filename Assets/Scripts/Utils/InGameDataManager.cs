@@ -189,6 +189,7 @@ public class InGameDataManager : MonoBehaviour
         int spawnCnt = 0;
         int hp = 0;
         int defense = 0;
+        int attackPower = 0;
 
         for (int i = 0; i < monsterInfoArr.Length; i++)
         {
@@ -198,7 +199,8 @@ public class InGameDataManager : MonoBehaviour
             spawnCnt = int.Parse(infos[1]);
             hp = int.Parse(infos[2]);
             defense = int.Parse(infos[3]);
-            monsterInfoList.Add(new SpawnMonsterInfo(id, spawnCnt, hp, defense));
+            attackPower = int.Parse(infos[4]);
+            monsterInfoList.Add(new SpawnMonsterInfo(id, spawnCnt, hp, defense, attackPower));
         }
 
         return monsterInfoList;
@@ -207,9 +209,8 @@ public class InGameDataManager : MonoBehaviour
     public MonsterBase Find_SetMonsterBase(string monster_ID, MonsterInfo info)
     {
         MonsterBase monsterBase = monsterDatas.monsterDatas.Find((monster) => monster.monsterId.Equals(monster_ID));
-        monsterBase.info = info;
 
-        return monsterBase;
+        return new MonsterBase(monsterBase, info);
     }
 
     public MonsterMove FindMonsterPrefab(string monster_ID)

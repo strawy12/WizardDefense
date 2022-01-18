@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Image skillImage;
     [SerializeField] private Image skillCoolTimeImage;
+
     #endregion
 
     #region Panels Various
@@ -54,6 +55,14 @@ public class UIManager : MonoBehaviour
         {
             GameObject panel = settingPanelsParent.parent.gameObject;
             Cursor.visible = !panel.activeSelf;
+            if(panel.activeSelf)
+            {
+                Time.timeScale = 1f;
+            }
+            else
+            {
+                Time.timeScale = 0f;
+            }
             panel.SetActive(!panel.activeSelf);
         }
     }
@@ -128,11 +137,15 @@ public class UIManager : MonoBehaviour
         {
             FMark.SetActive(false);
             buildChang.SetActive(true);
+            
+            Time.timeScale = 0f;
         }
         else
         {
             FMark.SetActive(false);
             buildChang.SetActive(false);
+            
+            Time.timeScale = 1f;
         }
     }
 
@@ -141,6 +154,7 @@ public class UIManager : MonoBehaviour
         isArea = !isArea;
         FMark.SetActive(false);
         buildChang.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void AreaCheack()

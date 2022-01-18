@@ -7,11 +7,13 @@ public class MonsterInfo
 {
     public int maxHp;
     public int defense;
+    public int attackPower;
 
-    public MonsterInfo(int maxHp, int defense)
+    public MonsterInfo(int maxHp, int defense, int attackPower)
     {
         this.maxHp = maxHp;
         this.defense = defense;
+        this.attackPower = attackPower;
     }
 }
 
@@ -31,6 +33,14 @@ public class MonsterBase
         monsterId = id;
         this.monsterType = type;
         info = null;
+    }
+
+    public MonsterBase(MonsterBase baseData, MonsterInfo info)
+    {
+        monsterName = baseData.monsterName;
+        monsterId = baseData.monsterId;
+        monsterType = baseData.monsterType;
+        this.info = info;
     }
 }
 

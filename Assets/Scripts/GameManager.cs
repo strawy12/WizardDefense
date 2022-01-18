@@ -13,7 +13,7 @@ public class GameManager : MonoSingleton<GameManager>
     public List<Attribute> attributes = new List<Attribute>();
     public List<Skill> skills = new List<Skill>();
     public CameraMove mainCam { get; private set; }
-    public Camera TpsCamera;
+    public Camera tpsCamera;
 
     public Vector2 inputAxis;
     public GameObject boundary;
@@ -22,11 +22,14 @@ public class GameManager : MonoSingleton<GameManager>
 
     public TowerAttack selectedTower;
 
+
     private WaveManager waveManager;
     private InGameDataManager dataManager;
+    private UIManager uiManager;
 
     public WaveManager Wave { get { return waveManager; } }
     public InGameDataManager Data { get { return dataManager; } }
+    public UIManager UI { get { return uiManager; } }
 
     private void Awake()
     {

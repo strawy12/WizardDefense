@@ -3663,7 +3663,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 100
-  currentHp: 0
 --- !u!1 &578261414
 GameObject:
   m_ObjectHideFlags: 0
@@ -7181,7 +7180,7 @@ MonoBehaviour:
     coolTime: 0
     attributeName: 
     skillSprite: {fileID: 0}
-  TpsCamera: {fileID: 0}
+  tpsCamera: {fileID: 3981799114135569593}
   inputAxis: {x: 0, y: 0}
   boundary: {fileID: 7660168442070018560}
   selectedTower: {fileID: 0}
@@ -8146,10 +8145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e407443a2c33d9428d07bd85eef797c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontHpPanal: {fileID: 0}
-  backHpPanal: {fileID: 0}
-  hpInfoText: {fileID: 0}
-  maxHp: 0
 --- !u!222 &1307011156
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15990,6 +15985,7 @@ MonoBehaviour:
   - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
   - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
   - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
+  tpsController: {fileID: 3981799115404936984}
 --- !u!4 &3190338561154849371
 Transform:
   m_ObjectHideFlags: 0

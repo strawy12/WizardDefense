@@ -9,11 +9,11 @@ public class SpawnMonsterInfo
     public int spawnCount;
     public MonsterInfo monsterData;
 
-    public SpawnMonsterInfo(string id, int spawnCount, int maxHp, int defense)
+    public SpawnMonsterInfo(string id, int spawnCount, int maxHp, int defense, int attackPower)
     {
         monsterId = id;
         this.spawnCount = spawnCount;
-        monsterData = new MonsterInfo(maxHp, defense);
+        monsterData = new MonsterInfo(maxHp, defense, attackPower);
     }
 }
 

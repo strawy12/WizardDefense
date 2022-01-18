@@ -22,6 +22,7 @@ public class KeyPanel : MonoBehaviour
         Event curEvent = Event.current;
 
         if (curEvent.keyCode.ToString() == "None") return;
+        if (KeyManager.keySettings.ContainsValue(curEvent.keyCode)) return;
         if (isSelect && curEvent.isKey)
         {
             //if (curEvent.isKey)
