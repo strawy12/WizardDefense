@@ -115,7 +115,7 @@ public class TpsController : MonoBehaviour
 
     private void Hit()
     {
-        var cam = GameManager.Instance.TpsCamera;
+        var cam = GameManager.Instance.tpsCamera;
         Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance, Color.blue);
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, maxDistance))
         {

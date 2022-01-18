@@ -31,9 +31,6 @@ public class GameManager : MonoSingleton<GameManager>
     public InGameDataManager Data { get { return dataManager; } }
     public UIManager UI { get { return uiManager; } }
 
-
-
-
     private void Awake()
     {
         waveManager = GetComponent<WaveManager>();
