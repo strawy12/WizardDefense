@@ -18723,8 +18723,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterBody: {fileID: 5201053438159182402}
   cameraArm: {fileID: 3981799114009212094}
-  normalSpeed: 5
-  runSpeed: 10
+  normalSpeed: 4
+  runSpeed: 8
   sensivity: 3
   jumpPower: 8
   maxDistance: 10
