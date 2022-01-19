@@ -10,4 +10,14 @@ public static class ConstantManager
     public const string KEYINPUT_HMOVE = "Horizontal";
     public const string KEYINPUT_VMOVE = "Vertical";
     public const string KEYINPUT_JUMP = "Jump";
+
+    public const string POINTTOWER_DAMAGED = "PT_DG";
+    public const string POINTTOWER_INIT = "PT_IN";
+
+    public const string MONSTER_ATTACK = "MN_AT";
+    public const string MONSTER_GETINFO = "MN_GI";
+
+    public const string TOWER_TAG = "Tower";
+    public const string ENEMY_TAG = "Enemy";
+
 }

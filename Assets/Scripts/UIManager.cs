@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     #region Tower UI Various
+    [Header("타워 UI")]
     [SerializeField] private GameObject towerUI;
 
     [SerializeField] private Image towerStatBar;
@@ -14,23 +15,65 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Image skillImage;
     [SerializeField] private Image skillCoolTimeImage;
+
     #endregion
 
     #region Panels Various
+    [Header("패널 UI")]
+
     [SerializeField] private GameObject keyPanelTemplate;
     private List<KeyPanel> keyPanels = new List<KeyPanel>();
     #endregion
+
+    [Header("설정창")]
+    [SerializeField] private Transform settingPanelsParent;
+    [SerializeField] private Transform settingButtonsParent;
+
+    [Header("포탑설치가능표시")] [SerializeField] private GameObject FMark;
+    [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
+
+    private List<GameObject> currentUIPanels = new List<GameObject>();
+
+    private bool isArea;
 
     void Start()
     {
         towerStatText = towerStatBar.GetComponentInChildren<Text>();
 
         InstantiatePanel();
+
+        for (int i = 0; i < settingButtonsParent.childCount; i++)
+        {
+            Button button = settingButtonsParent.GetChild(i).GetComponent<Button>();
+            button.onClick.AddListener(() => OnClickSettingButton(button.transform.GetSiblingIndex()));
+        }
     }
 
     private void Update()
     {
         ShowSkillUI(GameManager.Instance.selectedTower);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(currentUIPanels.Count > 0)
+            {
+                currentUIPanels[0].gameObject.SetActive(false);
+                currentUIPanels.RemoveAt(0);
+            }
+            else
+            {
+                ActiveSettingPanel();
+            }
+        }
+    }
+
+    #region Setting Panel
+    private void OnClickSettingButton(int index)
+    {
+        for (int i = 0; i < settingPanelsParent.childCount; i++)
+        {
+            settingPanelsParent.GetChild(i).gameObject.SetActive(i == index);
+        }
     }
 
     private void InstantiatePanel()
@@ -48,12 +91,28 @@ public class UIManager : MonoBehaviour
 
     public void ResetKeyPanel()
     {
-        foreach(KeyPanel panel in keyPanels)
+        foreach (KeyPanel panel in keyPanels)
         {
             panel.ResetData();
         }
     }
 
+    private void ActiveSettingPanel()
+    {
+        GameObject panel = settingPanelsParent.parent.gameObject;
+        CursorLocked(panel.activeSelf);
+        if (panel.activeSelf)
+        {
+            ActiveUIPanalState(false);
+        }
+        else
+        {
+            ActiveUIPanalState(true);
+        }
+
+        panel.SetActive(!panel.activeSelf);
+    }
+    #endregion
 
     #region TowerUI
     public void ShowSkillUI(TowerAttack tower)
@@ -74,7 +133,6 @@ public class UIManager : MonoBehaviour
 
             if (!tower.CheckSkillCoolTime())
             {
-                Debug.Log("sdf");
                 skillCoolTimeImage.fillAmount = (tower.skill.coolTime - tower.useSkillTime) / tower.skill.coolTime;
             }
         }
@@ -86,4 +144,87 @@ public class UIManager : MonoBehaviour
         towerStatText.text = string.Format("공격력 {0}\n공격속도 {1}", attack, speed);
     }
     #endregion
+
+
+    public void Chang()
+    {
+        CursorLocked(false);
+
+        isArea = !isArea;
+        if (isArea)
+        {
+            FMark.SetActive(false);
+            buildChang.SetActive(true);
+
+            ActiveUIPanalState(true);
+        }
+        else
+        {
+            FMark.SetActive(false);
+            buildChang.SetActive(false);
+
+            ActiveUIPanalState(false);
+        }
+
+        currentUIPanels.Add(buildChang);
+    }
+
+    public void OnClickOutChang()
+    {
+        isArea = !isArea;
+        FMark.SetActive(false);
+        buildChang.SetActive(false);
+        ActiveUIPanalState(false);
+        CursorLocked(true);
+    }
+
+    public void ActiveUIPanalState(bool isActive)
+    {
+        if (isActive)
+        {
+            Time.timeScale = 0f;
+            GameManager.Instance.gameState = GameState.Setting;
+        }
+
+        else
+        {
+            Time.timeScale = 1f;
+            GameManager.Instance.gameState = GameState.Playing;
+        }
+    }
+
+    
+
+    public void CursorLocked(bool isLocked)
+    {
+        if(isLocked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+    public void AreaCheack()
+    {
+        isArea = false;
+    }
+
+    public void FMarkTrue()
+    {
+        FMark.SetActive(true);
+    }
+
+    public void FMarkFalse()
+    {
+        FMark.SetActive(false);
+    }
+
+    public void RemoveCurrentPanels(GameObject panel)
+    {
+        currentUIPanels.Remove(panel);
+    }
 }

@@ -8,8 +8,10 @@ public class KeyManager : MonoBehaviour
         {
             KeyCode.Mouse0,
             KeyCode.Q,
-            KeyCode.F
+            KeyCode.F,
+            KeyCode.A
         };
+    public List<string> actionNames;
 
     private void Start()
     {

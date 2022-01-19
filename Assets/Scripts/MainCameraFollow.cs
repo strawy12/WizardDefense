@@ -21,6 +21,11 @@ public class MainCameraFollow : MonoBehaviour
         {
             ChangeView();
         }
+
+        if(Input.GetKeyUp(KeyCode.F5))
+        {
+            ChangeView();
+        }
     }
 
     private void ChangeView()

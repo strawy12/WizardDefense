@@ -8,26 +8,29 @@ public class TpsController : MonoBehaviour
 
     [SerializeField] private Transform cameraArm;
 
-    [Header("이동속도")] [SerializeField] private float speed = 5f;
+    [Header("이동속도")] [SerializeField] private float normalSpeed = 5f;
+    [Header("달리기속도")] [SerializeField] private float runSpeed = 8f;
     [Header("감도")] [SerializeField] private float sensivity;
     [Header("점프 힘")] [SerializeField] private float jumpPower = 2f;
-
-    [SerializeField] private Camera theCam;
     [Header("레이저 길이")] [SerializeField] private float maxDistance = 10f;
 
-    [Header("포탑설치가능표시")] [SerializeField] private GameObject FMark;
-    [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
-
-    private RaycastHit hitInfo;
+    private float speed;
+    private RaycastHit hitTowerAreaInfo;
 
     private bool isArea;
 
     private bool jDown;
+    private bool isRun;
     private bool isJump;
     private bool isTarget = false;
+    private bool isTargetTower = false;
+
+    private MonsterMove targetMonster;
 
     private Animator animator;
     private Rigidbody myrigid;
+
+    private TowerAttack tower;
 
     private void Start()
     {
@@ -37,21 +40,35 @@ public class TpsController : MonoBehaviour
 
     private void Update()
     {
-        LookAround();
-        Move();
-        Jump();
-        Hit();
-        if(isTarget)
+        PlayerSet();
+
+        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]))
         {
-            if (Input.GetKeyDown(KeyCode.C))
+            if (isTarget)
+                GameManager.Instance.UIManager.Chang();
+
+            if (isTargetTower && GameManager.Instance.selectedTower == null)
             {
-                Chang();
+                tower.ZoomInTower();
+                gameObject.SetActive(false);
             }
+
+
         }
     }
 
+    private void PlayerSet()
+    {
+        LookAround();
+        Move();
+        Jump();
+        Run();
+        Hit();
+    }
     private void LookAround()
     {
+        if (GameManager.Instance.gameState == GameState.Setting) return;
+
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * sensivity, Input.GetAxis("Mouse Y") * sensivity);
         Vector3 cameraAngle = cameraArm.rotation.eulerAngles;
         float x = cameraAngle.x - mouseDelta.y;
@@ -70,6 +87,7 @@ public class TpsController : MonoBehaviour
 
     private void Move()
     {
+        isRun = Input.GetKey(KeyCode.LeftShift);
         Vector2 moveInput = new Vector2(Input.GetAxis(ConstantManager.KEYINPUT_HMOVE), Input.GetAxis(ConstantManager.KEYINPUT_VMOVE));
         bool isMove = moveInput.magnitude != 0;
         animator.SetBool("isMove", isMove);
@@ -97,6 +115,18 @@ public class TpsController : MonoBehaviour
         }
     }
 
+    private void Run()
+    {
+        if (isRun)
+        {
+            speed = runSpeed;
+        }
+        else
+        {
+            speed = normalSpeed;
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("floor"))
@@ -107,49 +137,81 @@ public class TpsController : MonoBehaviour
 
     private void Hit()
     {
+        var cam = GameManager.Instance.tpsCamera;
 
-        Debug.DrawRay(theCam.transform.position, theCam.transform.forward * maxDistance, Color.blue);
-        if (Physics.Raycast(theCam.transform.position, theCam.transform.forward, out hitInfo, maxDistance))
+        Hit_TowerArea(cam);
+        Hit_Monster(cam);
+    }
+
+    private void Hit_Monster(Camera cam)
+    {
+        Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance * 2, Color.red);
+
+        RaycastHit[] hits = Physics.RaycastAll(cam.transform.position, cam.transform.forward, maxDistance * 2);
+
+        foreach (var hit in hits)
         {
-            if (hitInfo.transform.gameObject.CompareTag("area"))
+            if (hit.transform.CompareTag("Enemy"))
             {
-                TowerSelect.buildTrn = hitInfo.transform;
-                FMark.SetActive(true);
+                targetMonster = hit.transform.GetComponent<MonsterMove>();
+
+                if (targetMonster != null)
+                {
+                    targetMonster.GetInfo();
+                    return;
+                }
+
+            }
+        }
+
+    }
+
+    private void Hit_TowerArea(Camera cam)
+    {
+        Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance, Color.blue);
+
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitTowerAreaInfo, maxDistance))
+        {
+            if (hitTowerAreaInfo.transform.gameObject.CompareTag("area"))
+            {
+                TowerSelect.buildTrn = hitTowerAreaInfo.transform;
+                GameManager.Instance.UIManager.FMarkTrue();
                 isTarget = true;
+            }
+            else if (hitTowerAreaInfo.transform.gameObject.CompareTag(ConstantManager.TOWER_TAG))
+            {
+
+                tower = hitTowerAreaInfo.collider.gameObject.GetComponent<TowerAttack>();
+
+                if(!tower.isBuilding)
+                {
+                    isTargetTower = true;
+                    isTarget = false;
+                    GameManager.Instance.UIManager.FMarkTrue();
+                }
+
+                else
+                {
+                    GameManager.Instance.UIManager.FMarkFalse();
+                    isTarget = false;
+                    isTargetTower = false;
+                    tower = null;
+                }
             }
             else
             {
-                isArea = false;
+                GameManager.Instance.UIManager.AreaCheack();
+                GameManager.Instance.UIManager.FMarkFalse();
                 isTarget = false;
-                //FMark.SetActive(false);
                 return;
             }
         }
+
         else
         {
             isTarget = false;
+            isTargetTower = false;
+            tower = null;
         }
-    }
-
-    private void Chang()
-    {
-        isArea = !isArea;
-        if (isArea)
-        {
-            FMark.SetActive(false);
-            buildChang.SetActive(true);
-        }
-        else
-        {
-            FMark.SetActive(false);
-            buildChang.SetActive(false);
-        }
-    }
-
-    public void OnClickOutChang()
-    {
-        isArea = !isArea;
-        FMark.SetActive(false);
-        buildChang.SetActive(false);
     }
 }
