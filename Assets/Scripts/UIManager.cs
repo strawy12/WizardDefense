@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
     [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
 
     private bool isArea;
+    [HideInInspector] public bool isTarget;
 
     void Start()
     {
@@ -197,10 +198,12 @@ public class UIManager : MonoBehaviour
     public void FMarkTrue()
     {
         FMark.SetActive(true);
+        isTarget = true;
     }
 
     public void FMarkFalse()
     {
         FMark.SetActive(false);
+        isTarget = false;
     }
 }

@@ -17,12 +17,10 @@ public class TpsController : MonoBehaviour
     private float speed;
     private RaycastHit hitTowerAreaInfo;
 
-    private bool isArea;
-
     private bool jDown;
     private bool isRun;
     private bool isJump;
-    private bool isTarget = false;
+    
     private bool isTargetTower = false;
 
     private MonsterMove targetMonster;
@@ -44,7 +42,7 @@ public class TpsController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]))
         {
-            if (isTarget)
+            if (GameManager.Instance.UIManager.isTarget)
                 GameManager.Instance.UIManager.Chang();
 
             if (isTargetTower && GameManager.Instance.selectedTower == null)
@@ -75,11 +73,11 @@ public class TpsController : MonoBehaviour
 
         if (x < 180f)
         {
-            x = Mathf.Clamp(x, -1, 70f);
+            x = Mathf.Clamp(x, -1, 60f);
         }
         else
         {
-            x = Mathf.Clamp(x, 335f, 361f);
+            x = Mathf.Clamp(x, 350f, 400f);
         }
 
         cameraArm.rotation = Quaternion.Euler(x, cameraAngle.y + mouseDelta.x, cameraAngle.z);
@@ -87,9 +85,9 @@ public class TpsController : MonoBehaviour
 
     private void Move()
     {
+        isRun = Input.GetKey(KeyCode.LeftShift);
         Vector2 moveInput = new Vector2(Input.GetAxis(ConstantManager.KEYINPUT_HMOVE), Input.GetAxis(ConstantManager.KEYINPUT_VMOVE));
         bool isMove = moveInput.magnitude != 0;
-        speed = normalSpeed;
         animator.SetBool("isMove", isMove);
 
         if (isMove)
@@ -117,22 +115,40 @@ public class TpsController : MonoBehaviour
 
     private void Run()
     {
-        speed = runSpeed;
+        if (isRun)
+        {
+            speed = runSpeed;
+        }
+        else
+        {
+            speed = normalSpeed;
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("canbuild"))
+        {
+            Debug.Log("설치가가능능");
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("floor"))
         {
+            
             isJump = false;
         }
+
+        
     }
 
     private void Hit()
     {
         var cam = GameManager.Instance.tpsCamera;
 
-        Hit_TowerArea(cam);
+        //Hit_TowerArea(cam);
         Hit_Monster(cam);
     }
 
@@ -165,28 +181,19 @@ public class TpsController : MonoBehaviour
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitTowerAreaInfo, maxDistance))
         {
-            if (hitTowerAreaInfo.transform.gameObject.CompareTag("area"))
+            if (hitTowerAreaInfo.transform.gameObject.CompareTag(ConstantManager.TOWER_TAG))
             {
-                TowerSelect.buildTrn = hitTowerAreaInfo.transform;
-                GameManager.Instance.UIManager.FMarkTrue();
-                isTarget = true;
-            }
-            else if (hitTowerAreaInfo.transform.gameObject.CompareTag(ConstantManager.TOWER_TAG))
-            {
-
                 tower = hitTowerAreaInfo.collider.gameObject.GetComponent<TowerAttack>();
 
                 if(!tower.isBuilding)
                 {
                     isTargetTower = true;
-                    isTarget = false;
                     GameManager.Instance.UIManager.FMarkTrue();
                 }
 
                 else
                 {
                     GameManager.Instance.UIManager.FMarkFalse();
-                    isTarget = false;
                     isTargetTower = false;
                     tower = null;
                 }
@@ -195,14 +202,13 @@ public class TpsController : MonoBehaviour
             {
                 GameManager.Instance.UIManager.AreaCheack();
                 GameManager.Instance.UIManager.FMarkFalse();
-                isTarget = false;
                 return;
             }
         }
 
         else
         {
-            isTarget = false;
+            GameManager.Instance.UIManager.FMarkFalse();
             isTargetTower = false;
             tower = null;
         }
