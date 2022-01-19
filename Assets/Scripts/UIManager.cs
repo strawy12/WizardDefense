@@ -55,10 +55,16 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(currentUIPanels.Count > 0)
+            if (currentUIPanels.Count > 0)
             {
-                currentUIPanels[0].gameObject.SetActive(false);
-                currentUIPanels.RemoveAt(0);
+                currentUIPanels[currentUIPanels.Count - 1].gameObject.SetActive(false);
+                currentUIPanels.RemoveAt(currentUIPanels.Count - 1);
+
+                if (currentUIPanels.Count == 0)
+                {
+                    ActiveUIPanalState(false);
+                    CursorLocked(true);
+                }
             }
             else
             {
@@ -155,6 +161,7 @@ public class UIManager : MonoBehaviour
         {
             FMark.SetActive(false);
             buildChang.SetActive(true);
+            currentUIPanels.Add(buildChang);
 
             ActiveUIPanalState(true);
         }
@@ -162,11 +169,11 @@ public class UIManager : MonoBehaviour
         {
             FMark.SetActive(false);
             buildChang.SetActive(false);
+            currentUIPanels.Remove(buildChang);
 
             ActiveUIPanalState(false);
         }
 
-        currentUIPanels.Add(buildChang);
     }
 
     public void OnClickOutChang()
@@ -193,18 +200,20 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    
+
 
     public void CursorLocked(bool isLocked)
     {
-        if(isLocked)
+        if (isLocked)
         {
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         else
         {
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
