@@ -14,7 +14,11 @@ public class TpsController : MonoBehaviour
     [Header("점프 힘")] [SerializeField] private float jumpPower = 2f;
     [Header("레이저 길이")] [SerializeField] private float maxDistance = 10f;
 
+    [Header("플레이어 오브젝트")] [SerializeField] private GameObject player = null;
+
     private float speed;
+
+    private bool isDonMove = false;
 
     private bool jDown;
     private bool isJump;
@@ -22,7 +26,7 @@ public class TpsController : MonoBehaviour
     private bool isRun;
 
     private bool isTarget = false;
-    [HideInInspector]  public bool isDonCamera = false;
+    private bool isDonCamera = false;
     
     private RaycastHit hitInfo;
 
@@ -80,25 +84,35 @@ public class TpsController : MonoBehaviour
             cameraArm.rotation = Quaternion.Euler(x, cameraAngle.y + mouseDelta.x, cameraAngle.z);
         }
     }
-
     private void Move()
     {
         isRun = Input.GetKey(KeyCode.LeftShift);
         Vector2 moveInput = new Vector2(Input.GetAxis(ConstantManager.KEYINPUT_HMOVE), Input.GetAxis(ConstantManager.KEYINPUT_VMOVE));
+        
         bool isMove = moveInput.magnitude != 0;
-        animator.SetBool("isMove", isMove);
 
         if (isMove)
         {
-            Vector3 lookForWard = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
-            Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
-            Vector3 moveDir = lookForWard * moveInput.y + lookRight * moveInput.x;
+            if(isDonMove)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                player.gameObject.SetActive(false);
+            }
+            else
+            {
+                player.gameObject.SetActive(true);
+                animator.SetBool("isMove", isMove);
+                Vector3 lookForWard = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
+                Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
+                Vector3 moveDir = lookForWard * moveInput.y + lookRight * moveInput.x;
 
-            //characterBody.forward = lookForWard;
-            characterBody.forward = moveDir;
+                //characterBody.forward = lookForWard;
+                characterBody.forward = moveDir;
 
-            transform.position += moveDir * speed * Time.deltaTime;
+                transform.position += moveDir * speed * Time.deltaTime;
+            }
         }
+        
     }
 
     private void Jump()
@@ -159,8 +173,15 @@ public class TpsController : MonoBehaviour
         }
     }
 
-    private void DonMove()
+    public void DonMove()
     {
         isDonCamera = true;
+        isDonMove = true;
+    }
+
+    public void CanMove()
+    {
+        isDonCamera = false;
+        isDonMove = false;
     }
 }

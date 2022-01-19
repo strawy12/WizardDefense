@@ -84,17 +84,17 @@ public class TowerSelect : MonoBehaviour
     {
         if (curRune >= needMax)
         {
+            tpsController.CanMove();
             curRune -= needMax;
-            Time.timeScale = 1f;
             GameManager.Instance.UIManager.OnClickOutChang();
-            tpsController.isDonCamera = false;
-            Debug.Log("설치성공");
+            //Debug.Log("설치성공");
             UpdateUI();
             SelectTower();
         }
         else
         {
-            Debug.Log("룬이 부족하자나;;");
+            tpsController.DonMove();
+            //Debug.Log("룬이 부족하자나;;");
         }
     }
 

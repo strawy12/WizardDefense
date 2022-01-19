@@ -24,6 +24,8 @@ public class UIManager : MonoBehaviour
     [Header("포탑설치가능표시")] [SerializeField] private GameObject FMark;
     [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
 
+    public TpsController tpsController;
+
     private bool isArea;
 
     void Start()
@@ -101,24 +103,24 @@ public class UIManager : MonoBehaviour
         {
             FMark.SetActive(false);
             buildChang.SetActive(true);
-            
-            Time.timeScale = 0f;
+
+            tpsController.DonMove();
         }
         else
         {
             FMark.SetActive(false);
             buildChang.SetActive(false);
-            
-            Time.timeScale = 1f;
+
+            tpsController.CanMove();
         }
     }
 
     public void OnClickOutChang()
     {
+        tpsController.CanMove();
         isArea = !isArea;
         FMark.SetActive(false);
         buildChang.SetActive(false);
-        Time.timeScale = 1f;
     }
 
     public void AreaCheack()
