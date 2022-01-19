@@ -77,16 +77,10 @@ public class UIManager : MonoBehaviour
     {
         if (currentUIPanels.Count > 0)
         {
-<<<<<<< HEAD
             currentUIPanels[currentUIPanels.Count - 1].gameObject.SetActive(false);
             currentUIPanels.RemoveAt(currentUIPanels.Count - 1);
 
             if (currentUIPanels.Count == 0)
-=======
-            GameObject panel = settingPanelsParent.parent.gameObject;
-            CursorLocked(panel.activeSelf);
-            if (panel.activeSelf)
->>>>>>> OIF
             {
                 ActiveUIPanalState(false);
                 CursorLocked(true);
@@ -176,9 +170,7 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
-<<<<<<< HEAD
     #region Tower Build UI
-=======
     public void ActivePanal(GameObject panal)
     {
         panal.SetActive(true);
@@ -192,7 +184,6 @@ public class UIManager : MonoBehaviour
         panal.transform.DOScaleY(0f, 0.2f).SetUpdate(true).OnComplete(() => panal.SetActive(false));
     }
 
->>>>>>> OIF
     public void Chang()
     {
         CursorLocked(false);
