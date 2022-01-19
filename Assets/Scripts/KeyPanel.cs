@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class KeyPanel : MonoBehaviour
 {
-    [SerializeField] private Text keyActionText;
-    [SerializeField] private Text keyCodeText;
+    private Text keyActionText;
+    private Text keyCodeText;
     private Button button;
     private bool isSelect = false;
     private int index;

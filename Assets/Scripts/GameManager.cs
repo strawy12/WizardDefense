@@ -60,6 +60,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Init()
     {
+
     }
 
     private void Update()
