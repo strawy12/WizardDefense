@@ -42,7 +42,7 @@ public class InGameDataManager : MonoBehaviour
         yield return StartMonsterDataDownLoad();
         yield return StartWavePatternDataDownLoad();
 
-       // StartCoroutine(GameManager.Instance.Wave.StartWave());
+       StartCoroutine(GameManager.Instance.Wave.StartWave());
     }
 
 
@@ -51,7 +51,7 @@ public class InGameDataManager : MonoBehaviour
         const string UPDATEURL = "https://docs.google.com/spreadsheets/d/1RbsXVREigxOpq7ozlbjoLSYzNgFlV6enstlbATOXQ-4/export?format=tsv&gid=0&range=A1";
         UnityWebRequest www = UnityWebRequest.Get(UPDATEURL);
         yield return www.SendWebRequest();
-        if (www.downloadHandler.text == monsterDatas.updateVersion && !www.downloadHandler.text.Contains("T"))
+        if (www.downloadHandler.text == monsterDatas.updateVersion/* && !www.downloadHandler.text.Contains("T")*/)
         {
             yield break;
         }
@@ -65,7 +65,7 @@ public class InGameDataManager : MonoBehaviour
         const string UPDATEURL = "https://docs.google.com/spreadsheets/d/1RbsXVREigxOpq7ozlbjoLSYzNgFlV6enstlbATOXQ-4/export?format=tsv&gid=706645150&range=A1";
         UnityWebRequest www = UnityWebRequest.Get(UPDATEURL);
         yield return www.SendWebRequest();
-        if (www.downloadHandler.text == patterns.updateVersion && !www.downloadHandler.text.Contains("T"))
+        if (www.downloadHandler.text == patterns.updateVersion/* && !www.downloadHandler.text.Contains("T")*/)
         {
             yield break;
         }

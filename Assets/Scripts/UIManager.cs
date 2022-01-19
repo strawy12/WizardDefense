@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class UIManager : MonoBehaviour
     {
         towerStatText = towerStatBar.GetComponentInChildren<Text>();
 
-        InstantiatePanel();
+        //InstantiatePanel();
 
         for (int i = 0; i < settingButtonsParent.childCount; i++)
         {
@@ -54,7 +55,7 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             GameObject panel = settingPanelsParent.parent.gameObject;
-            CursorLocked(!panel.activeSelf);
+            CursorLocked(panel.activeSelf);
             if (panel.activeSelf)
             {
                 ActiveUIPanalState(false);
@@ -130,6 +131,18 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    public void ActivePanal(GameObject panal)
+    {
+        panal.SetActive(true);
+        panal.transform.DOKill();
+        panal.transform.DOScaleY(1f, 0.3f).SetUpdate(true);
+    }
+
+    public void UnActivePanal(GameObject panal)
+    {
+        panal.transform.DOKill();
+        panal.transform.DOScaleY(0f, 0.2f).SetUpdate(true).OnComplete(() => panal.SetActive(false));
+    }
 
     public void Chang()
     {
