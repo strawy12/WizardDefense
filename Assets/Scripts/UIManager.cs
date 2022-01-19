@@ -32,6 +32,10 @@ public class UIManager : MonoBehaviour
     [Header("포탑설치가능표시")] [SerializeField] private GameObject FMark;
     [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
 
+    [Header("시간 텍스트")]
+    [SerializeField] private GameObject timeBar;
+    [SerializeField] private Text timeText;
+
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
     private bool isArea;
@@ -53,23 +57,35 @@ public class UIManager : MonoBehaviour
     {
         ShowSkillUI(GameManager.Instance.selectedTower);
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (currentUIPanels.Count > 0)
-            {
-                currentUIPanels[currentUIPanels.Count - 1].gameObject.SetActive(false);
-                currentUIPanels.RemoveAt(currentUIPanels.Count - 1);
+        if (Input.GetKeyDown(KeyCode.Escape)) SetCurrentPanels();
+    }
 
-                if (currentUIPanels.Count == 0)
-                {
-                    ActiveUIPanalState(false);
-                    CursorLocked(true);
-                }
-            }
-            else
+    public void SetTimer(float time)
+    {
+        timeText.text = string.Format("{0} : {1}", (int)time / 60, (time % 60).ToString("F1"));
+    }
+
+    public void ActiveTimer(bool isActive)
+    {
+        timeBar.SetActive(isActive);
+    }
+
+    private void SetCurrentPanels()
+    {
+        if (currentUIPanels.Count > 0)
+        {
+            currentUIPanels[currentUIPanels.Count - 1].gameObject.SetActive(false);
+            currentUIPanels.RemoveAt(currentUIPanels.Count - 1);
+
+            if (currentUIPanels.Count == 0)
             {
-                ActiveSettingPanel();
+                ActiveUIPanalState(false);
+                CursorLocked(true);
             }
+        }
+        else
+        {
+            ActiveSettingPanel();
         }
     }
 
@@ -151,7 +167,7 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
-
+    #region Tower Build UI
     public void Chang()
     {
         CursorLocked(false);
@@ -184,6 +200,7 @@ public class UIManager : MonoBehaviour
         ActiveUIPanalState(false);
         CursorLocked(true);
     }
+    #endregion
 
     public void ActiveUIPanalState(bool isActive)
     {
@@ -200,8 +217,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
-
     public void CursorLocked(bool isLocked)
     {
         if (isLocked)
@@ -217,6 +232,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    #region Set
     public void AreaCheack()
     {
         isArea = false;
@@ -236,4 +252,5 @@ public class UIManager : MonoBehaviour
     {
         currentUIPanels.Remove(panel);
     }
+    #endregion
 }

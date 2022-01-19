@@ -23,19 +23,17 @@ public class WaveManager : MonoBehaviour
     {
         //Wave 데이터 가져오는 코드
     }
-
     
     public IEnumerator StartWave()
     {
         int patternIndex = 0;
         while (currentCost < waveMaxCost)//currentWave.maxCost)
         {
-
             yield return InitPatternData(patternIndex);
-
             yield return new WaitForSeconds(nextPatternDelay);
         }
     }
+
     private IEnumerator InitPatternData(int index)
     {
         currentPattern = GameManager.Instance.Data.GetPatternData(index);
@@ -46,7 +44,6 @@ public class WaveManager : MonoBehaviour
         yield return GenerateMonsters();
     }
     
-
     public IEnumerator GenerateMonsters()
     {
         MonsterMove monster = null;
@@ -64,7 +61,6 @@ public class WaveManager : MonoBehaviour
 
                 yield return new WaitForSeconds(currentPattern.monsterSpawnDelay);
             }
-
         }
     }
 
@@ -80,6 +76,4 @@ public class WaveManager : MonoBehaviour
             return enemyRightSpawnPoint.position;
         }
     }
-
-
 }

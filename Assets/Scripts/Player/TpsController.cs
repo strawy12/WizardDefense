@@ -52,8 +52,6 @@ public class TpsController : MonoBehaviour
                 tower.ZoomInTower();
                 gameObject.SetActive(false);
             }
-
-
         }
     }
 
@@ -160,7 +158,6 @@ public class TpsController : MonoBehaviour
                     targetMonster.GetInfo();
                     return;
                 }
-
             }
         }
 
