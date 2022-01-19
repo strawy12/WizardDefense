@@ -6277,8 +6277,8 @@ MonoBehaviour:
   settingButtonsParent: {fileID: 656167385}
   FMark: {fileID: 3190338562087938206}
   buildChang: {fileID: 3190338562441343485}
-  timeBar: {fileID: 408089507}
-  timeText: {fileID: 247765002}
+  timeBar: {fileID: 0}
+  timeText: {fileID: 0}
 --- !u!1 &1186309275
 GameObject:
   m_ObjectHideFlags: 0
@@ -18857,7 +18857,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0.8181815, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.14875397, g: 0.22593921, b: 0.5754717, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
