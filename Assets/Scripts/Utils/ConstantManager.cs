@@ -16,5 +16,5 @@ public static class ConstantManager
     public const string TOWER_TAG = "Tower";
     public const string ENEMY_TAG = "Enemy";
 
-    public const float BREAK_TIME = 5f;
+    public const float BREAK_TIME = 30f;
 }

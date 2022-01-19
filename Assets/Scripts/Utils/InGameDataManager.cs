@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using Random = UnityEngine.Random;
 
 public class InGameDataManager : MonoBehaviour
 {
@@ -182,7 +181,6 @@ public class InGameDataManager : MonoBehaviour
         string[] monsterIdArr = monsterIds.Split(',');
         string[] monsterInfoArr = monsterInfos.Split(',');
         string[] infos;
-
 
         string id = "";
         int spawnCnt = 0;

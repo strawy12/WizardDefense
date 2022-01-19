@@ -169,15 +169,14 @@ public class TpsController : MonoBehaviour
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitTowerAreaInfo, maxDistance))
         {
-            if (hitTowerAreaInfo.transform.gameObject.CompareTag("area"))
+            if (hitTowerAreaInfo.transform.gameObject.CompareTag("area") && GameManager.Instance.inGameState == InGameState.BreakTime)
             {
                 TowerSelect.buildTrn = hitTowerAreaInfo.transform;
                 GameManager.Instance.UIManager.FMarkTrue();
                 isTarget = true;
             }
-            else if (hitTowerAreaInfo.transform.gameObject.CompareTag(ConstantManager.TOWER_TAG))
+            else if (hitTowerAreaInfo.transform.gameObject.CompareTag(ConstantManager.TOWER_TAG) && GameManager.Instance.inGameState == InGameState.DefenseTime)
             {
-
                 tower = hitTowerAreaInfo.collider.gameObject.GetComponent<TowerAttack>();
 
                 if(!tower.isBuilding)
