@@ -32,6 +32,8 @@ public class UIManager : MonoBehaviour
     [Header("포탑설치가능표시")] [SerializeField] private GameObject FMark;
     [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
 
+    private List<GameObject> currentUIPanels = new List<GameObject>();
+
     private bool isArea;
 
     void Start()
@@ -53,18 +55,15 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GameObject panel = settingPanelsParent.parent.gameObject;
-            CursorLocked(panel.activeSelf);
-            if (panel.activeSelf)
+            if(currentUIPanels.Count > 0)
             {
-                ActiveUIPanalState(false);
+                currentUIPanels[0].gameObject.SetActive(false);
+                currentUIPanels.RemoveAt(0);
             }
             else
             {
-                ActiveUIPanalState(true);
+                ActiveSettingPanel();
             }
-
-            panel.SetActive(!panel.activeSelf);
         }
     }
 
@@ -96,6 +95,22 @@ public class UIManager : MonoBehaviour
         {
             panel.ResetData();
         }
+    }
+
+    private void ActiveSettingPanel()
+    {
+        GameObject panel = settingPanelsParent.parent.gameObject;
+        CursorLocked(panel.activeSelf);
+        if (panel.activeSelf)
+        {
+            ActiveUIPanalState(false);
+        }
+        else
+        {
+            ActiveUIPanalState(true);
+        }
+
+        panel.SetActive(!panel.activeSelf);
     }
     #endregion
 
@@ -150,6 +165,8 @@ public class UIManager : MonoBehaviour
 
             ActiveUIPanalState(false);
         }
+
+        currentUIPanels.Add(buildChang);
     }
 
     public void OnClickOutChang()
@@ -175,6 +192,8 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.gameState = GameState.Playing;
         }
     }
+
+    
 
     public void CursorLocked(bool isLocked)
     {
@@ -202,5 +221,10 @@ public class UIManager : MonoBehaviour
     public void FMarkFalse()
     {
         FMark.SetActive(false);
+    }
+
+    public void RemoveCurrentPanels(GameObject panel)
+    {
+        currentUIPanels.Remove(panel);
     }
 }

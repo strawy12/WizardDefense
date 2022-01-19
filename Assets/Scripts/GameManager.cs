@@ -5,11 +5,9 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
     public GameState gameState;
-    //public GameObject enemy;
     public GameObject home;
 
     public Vector3 screenCenter;
-
     public List<MonsterMove> enemies { get; private set; } = new List<MonsterMove>();
     public List<Attribute> attributes = new List<Attribute>();
     public List<Skill> skills = new List<Skill>();
@@ -24,7 +22,6 @@ public class GameManager : MonoSingleton<GameManager>
     public TowerAttack selectedTower;
 
     public GameObject player;
-
 
     private WaveManager waveManager;
     private InGameDataManager dataManager;
@@ -60,16 +57,6 @@ public class GameManager : MonoSingleton<GameManager>
         inputAxis = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
     }
 
-    //private void SpawnEnemy()
-    //{
-    //    GameObject obj = Instantiate(enemy);
-
-    //    obj.transform.position = new Vector3(20, 1, 8);
-    //    obj.SetActive(true);
-
-    //    enemies.Add(obj.GetComponent<Enemy>());
-    //}
-
     private IEnumerator SpawnEnemies()
     {
         while (true)
@@ -78,7 +65,6 @@ public class GameManager : MonoSingleton<GameManager>
             yield return new WaitForSeconds(1f);
         }
     }
-
 
     public IEnumerator ShowBoundary(Vector3 position,Vector3 scale)
     {
