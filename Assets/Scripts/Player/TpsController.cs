@@ -87,9 +87,9 @@ public class TpsController : MonoBehaviour
 
     private void Move()
     {
+        isRun = Input.GetKey(KeyCode.LeftShift);
         Vector2 moveInput = new Vector2(Input.GetAxis(ConstantManager.KEYINPUT_HMOVE), Input.GetAxis(ConstantManager.KEYINPUT_VMOVE));
         bool isMove = moveInput.magnitude != 0;
-        speed = normalSpeed;
         animator.SetBool("isMove", isMove);
 
         if (isMove)
@@ -117,7 +117,14 @@ public class TpsController : MonoBehaviour
 
     private void Run()
     {
-        speed = runSpeed;
+        if (isRun)
+        {
+            speed = runSpeed;
+        }
+        else
+        {
+            speed = normalSpeed;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
