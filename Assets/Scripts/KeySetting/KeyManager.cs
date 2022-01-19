@@ -9,7 +9,8 @@ public class KeyManager : MonoBehaviour
             KeyCode.Mouse0,
             KeyCode.Q,
             KeyCode.F,
-            KeyCode.A
+            KeyCode.R,
+            KeyCode.V
         };
     public List<string> actionNames;
 
