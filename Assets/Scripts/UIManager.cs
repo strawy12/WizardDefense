@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             GameObject panel = settingPanelsParent.parent.gameObject;
-            CursorLocked(!panel.activeSelf);
+            CursorLocked(panel.activeSelf);
             if (panel.activeSelf)
             {
                 ActiveUIPanalState(false);
