@@ -4,5 +4,6 @@ public enum KeyAction
     Skill,
     Interaction,
     Boundary,
+    Skip,
     Count
 }

@@ -33,8 +33,9 @@ public class UIManager : MonoBehaviour
     [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
 
     [Header("시간 텍스트")]
-    [SerializeField] private GameObject timeBar;
+    [SerializeField] private GameObject breakTimeUI;
     [SerializeField] private Text timeText;
+    [SerializeField] private Text skipKeyText;
 
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
@@ -65,9 +66,10 @@ public class UIManager : MonoBehaviour
         timeText.text = string.Format("{0} : {1}", (int)time / 60, (time % 60).ToString("F1"));
     }
 
-    public void ActiveTimer(bool isActive)
+    public void ActiveBreakTimeUI(bool isActive)
     {
-        timeBar.SetActive(isActive);
+        breakTimeUI.SetActive(isActive);
+        skipKeyText.text = KeyManager.keySettings[KeyAction.Skip].ToString();
     }
 
     private void SetCurrentPanels()

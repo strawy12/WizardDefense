@@ -66,14 +66,19 @@ public class GameManager : MonoSingleton<GameManager>
     {
         inputAxis = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
-        if(inGameState == InGameState.BreakTime)
+        if (inGameState == InGameState.BreakTime)
         {
+            if (Input.GetKeyUp(KeyManager.keySettings[KeyAction.Skip]))
+            {
+                SkipBreakTime();
+            }
+
             breakTime -= Time.deltaTime;
             UIManager.SetTimer(breakTime);
 
             if(breakTime < 0)
             {
-                UIManager.ActiveTimer(false);
+                UIManager.ActiveBreakTimeUI(false);
                 inGameState = InGameState.DefenseTime;
                 waveManager.StartCoroutine(waveManager.StartWave());
             }
@@ -93,6 +98,11 @@ public class GameManager : MonoSingleton<GameManager>
     {
         breakTime = ConstantManager.BREAK_TIME;
         inGameState = InGameState.BreakTime;
-        UIManager.ActiveTimer(true);
+        UIManager.ActiveBreakTimeUI(true);
+    }
+
+    public void SkipBreakTime()
+    {
+        breakTime = 0f;
     }
 }
