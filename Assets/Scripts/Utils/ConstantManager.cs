@@ -16,6 +16,6 @@ public static class ConstantManager
     public const string TOWER_TAG = "Tower";
     public const string ENEMY_TAG = "Enemy";
 
-    public const float BREAK_TIME = 180f;
+    public const float BREAK_TIME = 15f;
     public const string CLICK_KEYSETTINGBTN = "CK_KSB";
 }

@@ -26,9 +26,11 @@ public class GameManager : MonoSingleton<GameManager>
 
     #region InGame
     public GameObject boundary;
-    public TowerAttack selectedTower;
     public GameObject player;
     public GameObject home;
+
+    public TowerAttack selectedTower;
+    public TowerAttack censorTower;
 
     public List<MonsterMove> enemies { get; private set; } = new List<MonsterMove>();
     public List<Attribute> attributes = new List<Attribute>();
@@ -81,7 +83,7 @@ public class GameManager : MonoSingleton<GameManager>
             {
                 UIManager.ActiveBreakTimeUI(false);
                 inGameState = InGameState.DefenseTime;
-                //dataManager.DownLoadInGameData();
+                dataManager.DownLoadInGameData();
             }
         }
     }
