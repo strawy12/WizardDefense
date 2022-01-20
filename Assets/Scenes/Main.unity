@@ -4498,7 +4498,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.85}
   m_AnchorMax: {x: 0.5, y: 0.85}
-  m_AnchoredPosition: {x: -634, y: 91.76181}
+  m_AnchoredPosition: {x: -634, y: 91.761826}
   m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &324071926
@@ -14262,7 +14262,6 @@ MonoBehaviour:
   enemyLeftSpawnPoint: {fileID: 1961337793}
   enemyRightSpawnPoint: {fileID: 893993276}
   targetPoint: {fileID: 516763630}
-  waveMaxCost: 1
 --- !u!114 &1168447616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14277,6 +14276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterDatas: {fileID: 11400000, guid: 3636dff01b0d4a74d82adf8ae4ce018f, type: 2}
   patterns: {fileID: 11400000, guid: de201f73ed1734a478c7f35ac8acba4a, type: 2}
+  waveDatas: {fileID: 11400000, guid: 2477b6a49e94d6a4f9d481ade889746e, type: 2}
   monsterPrefabs: {fileID: 11400000, guid: 387029c9b58ace24ab9c6384232977fc, type: 2}
 --- !u!114 &1168447617
 MonoBehaviour:

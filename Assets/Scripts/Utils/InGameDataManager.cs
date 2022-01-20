@@ -36,7 +36,7 @@ public class InGameDataManager : MonoBehaviour
 
         if(waveDatas == null)
         {
-            monsterPrefabs = Resources.Load<MonsterPrefabDatas>(SAVE_PATH + "Waves");
+            waveDatas = Resources.Load<Waves>(SAVE_PATH + "Waves");
         }
 
         StartCoroutine(DataDownLoad());
