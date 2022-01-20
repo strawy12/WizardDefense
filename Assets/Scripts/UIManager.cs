@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
@@ -21,32 +22,38 @@ public class UIManager : MonoBehaviour
     #region Panels Various
     [Header("패널 UI")]
 
-    [SerializeField] private GameObject keyPanelTemplate;
-    private List<KeyPanel> keyPanels = new List<KeyPanel>();
     #endregion
 
     [Header("설정창")]
-    [SerializeField] private Transform settingPanelsParent;
-    [SerializeField] private Transform settingButtonsParent;
+    [SerializeField] private GameObject settingPanel;
 
     [Header("포탑설치가능표시")] [SerializeField] private GameObject FMark;
     [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
 
+    [Header("시간 텍스트")]
+    [SerializeField] private GameObject breakTimeUI;
+    [SerializeField] private Text timeText;
+    [SerializeField] private Text skipKeyText;
+
+    [Header("사용자 지정 키 전용")]
+    [SerializeField] private GameObject keySettingPanal;
+
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
     private bool isArea;
+    [HideInInspector] public bool isTarget;
 
     void Start()
     {
         towerStatText = towerStatBar.GetComponentInChildren<Text>();
 
-        InstantiatePanel();
+        //InstantiatePanel();
 
-        for (int i = 0; i < settingButtonsParent.childCount; i++)
-        {
-            Button button = settingButtonsParent.GetChild(i).GetComponent<Button>();
-            button.onClick.AddListener(() => OnClickSettingButton(button.transform.GetSiblingIndex()));
-        }
+        //for (int i = 0; i < settingButtonsParent.childCount; i++)
+        //{
+        //    Button button = settingButtonsParent.GetChild(i).GetComponent<Button>();
+        //    button.onClick.AddListener(() => OnClickSettingButton(button.transform.GetSiblingIndex()));
+        //}
     }
 
     private void Update()
@@ -55,53 +62,75 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(currentUIPanels.Count > 0)
+            SetCurrentPanels();
+        }
+    }
+
+    public void SetTimer(float time)
+    {
+        timeText.text = string.Format("{0} : {1}", (int)time / 60, (time % 60).ToString("F1"));
+    }
+
+    public void ActiveBreakTimeUI(bool isActive)
+    {
+        breakTimeUI.SetActive(isActive);
+        skipKeyText.text = KeyManager.keySettings[KeyAction.Skip].ToString();
+    }
+
+    private void SetCurrentPanels()
+    {
+        if (currentUIPanels.Count > 0)
+        {
+            currentUIPanels[currentUIPanels.Count - 1].gameObject.SetActive(false);
+            currentUIPanels.RemoveAt(currentUIPanels.Count - 1);
+
+            if (currentUIPanels.Count == 0)
             {
-                currentUIPanels[0].gameObject.SetActive(false);
-                currentUIPanels.RemoveAt(0);
+                ActiveUIPanalState(false);
+                CursorLocked(true);
             }
-            else
-            {
-                ActiveSettingPanel();
-            }
+        }
+        else
+        {
+            ActiveSettingPanel();
         }
     }
 
     #region Setting Panel
-    private void OnClickSettingButton(int index)
-    {
-        for (int i = 0; i < settingPanelsParent.childCount; i++)
-        {
-            settingPanelsParent.GetChild(i).gameObject.SetActive(i == index);
-        }
-    }
+    //private void OnClickSettingButton(int index)
+    //{
+    //    for (int i = 0; i < settingPanelsParent.childCount; i++)
+    //    {
+    //        settingPanelsParent.GetChild(i).gameObject.SetActive(i == index);
+    //    }
+    //}
 
-    private void InstantiatePanel()
-    {
-        for (int i = 0; i < (int)KeyAction.Count; i++)
-        {
-            GameObject panel = Instantiate(keyPanelTemplate, keyPanelTemplate.transform.parent);
-            KeyPanel keyPanel = panel.GetComponent<KeyPanel>();
-            keyPanel.Initialize(i);
-            keyPanels.Add(keyPanel);
-        }
+    //private void InstantiatePanel()
+    //{
+    //    for (int i = 0; i < (int)KeyAction.Count; i++)
+    //    {
+    //        GameObject panel = Instantiate(keyPanelTemplate, keyPanelTemplate.transform.parent);
+    //        KeyPanel keyPanel = panel.GetComponent<KeyPanel>();
+    //        keyPanel.Initialize(i);
+    //        keyPanels.Add(keyPanel);
+    //    }
 
-        keyPanelTemplate.SetActive(false);
-    }
+    //    keyPanelTemplate.SetActive(false);
+    //}
 
     public void ResetKeyPanel()
     {
-        foreach (KeyPanel panel in keyPanels)
-        {
-            panel.ResetData();
-        }
+        EventManager.TriggerEvent(ConstantManager.CLICK_KEYSETTINGBTN);
+        //foreach (KeyPanel panel in keyPanels)
+        //{
+        //    panel.ResetData();
+        //}
     }
 
     private void ActiveSettingPanel()
     {
-        GameObject panel = settingPanelsParent.parent.gameObject;
-        CursorLocked(panel.activeSelf);
-        if (panel.activeSelf)
+        CursorLocked(settingPanel.activeSelf);
+        if (settingPanel.activeSelf)
         {
             ActiveUIPanalState(false);
         }
@@ -110,7 +139,7 @@ public class UIManager : MonoBehaviour
             ActiveUIPanalState(true);
         }
 
-        panel.SetActive(!panel.activeSelf);
+        settingPanel.SetActive(!settingPanel.activeSelf);
     }
     #endregion
 
@@ -145,6 +174,34 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    #region Tower Build UI
+    public void ActivePanal(GameObject panal)
+    {
+        panal.SetActive(true);
+        currentUIPanels.Add(panal);
+        panal.transform.DOKill();
+        panal.transform.DOScaleY(1f, 0.3f).SetUpdate(true);
+    }
+
+    public void ActiveKeySettingPanal(bool isActive)
+    {
+        if(isActive)
+        {
+            ActivePanal(keySettingPanal);
+        }
+
+        else
+        {
+            UnActivePanal(keySettingPanal);
+        }
+    }
+
+    public void UnActivePanal(GameObject panal)
+    {
+        currentUIPanels.Remove(panal);
+        panal.transform.DOKill();
+        panal.transform.DOScaleY(0f, 0.2f).SetUpdate(true).OnComplete(() => panal.SetActive(false));
+    }
 
     public void Chang()
     {
@@ -155,6 +212,7 @@ public class UIManager : MonoBehaviour
         {
             FMark.SetActive(false);
             buildChang.SetActive(true);
+            currentUIPanels.Add(buildChang);
 
             ActiveUIPanalState(true);
         }
@@ -162,11 +220,11 @@ public class UIManager : MonoBehaviour
         {
             FMark.SetActive(false);
             buildChang.SetActive(false);
+            currentUIPanels.Remove(buildChang);
 
             ActiveUIPanalState(false);
         }
 
-        currentUIPanels.Add(buildChang);
     }
 
     public void OnClickOutChang()
@@ -177,6 +235,7 @@ public class UIManager : MonoBehaviour
         ActiveUIPanalState(false);
         CursorLocked(true);
     }
+    #endregion
 
     public void ActiveUIPanalState(bool isActive)
     {
@@ -193,21 +252,22 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    
-
     public void CursorLocked(bool isLocked)
     {
-        if(isLocked)
+        if (isLocked)
         {
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         else
         {
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
+    #region Set
     public void AreaCheack()
     {
         isArea = false;
@@ -216,15 +276,18 @@ public class UIManager : MonoBehaviour
     public void FMarkTrue()
     {
         FMark.SetActive(true);
+        isTarget = true;
     }
 
     public void FMarkFalse()
     {
         FMark.SetActive(false);
+        isTarget = false;
     }
 
     public void RemoveCurrentPanels(GameObject panel)
     {
         currentUIPanels.Remove(panel);
     }
+    #endregion
 }

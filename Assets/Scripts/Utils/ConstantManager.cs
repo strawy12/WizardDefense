@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public static class ConstantManager
 {
     public const string INVENTORY_CLICK_LEFT = "IN_C_L";
@@ -20,4 +16,7 @@ public static class ConstantManager
     public const string TOWER_TAG = "Tower";
     public const string ENEMY_TAG = "Enemy";
 
+    public const string CLICK_KEYSETTINGBTN = "CK_KSB";
+
+    public const float BREAK_TIME = 30f;
 }

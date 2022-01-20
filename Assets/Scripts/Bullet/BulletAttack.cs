@@ -48,7 +48,7 @@ public class BulletAttack : PoolObject
         Attack(targetEnemy);
         EndAttack();
     }
-
+    
     private void Range_Enter()
     {
         for (int i = 0; i < GameManager.Instance.enemies.Count; i++)

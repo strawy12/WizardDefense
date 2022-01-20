@@ -20,6 +20,7 @@ public class TowerSelect : MonoBehaviour
     [SerializeField] private GameObject[] tower;
 
     public static Transform buildTrn;
+    public static GameObject buildObj;
 
     private int selectTower;
 
@@ -85,9 +86,8 @@ public class TowerSelect : MonoBehaviour
         if (curRune >= needMax)
         {
             curRune -= needMax;
-            Time.timeScale = 1f;
             GameManager.Instance.UIManager.OnClickOutChang();
-            //tpsController.isDonCamera = false;
+            GameManager.Instance.UIManager.FMarkFalse();
             Debug.Log("설치성공");
             UpdateUI();
             SelectTower();
@@ -115,6 +115,7 @@ public class TowerSelect : MonoBehaviour
             a = Instantiate(tower[2], buildTrn);
         }
         a.transform.SetParent(null);
+        Destroy(buildObj);
     }
 
     private void CheckCanBuild()
@@ -127,5 +128,10 @@ public class TowerSelect : MonoBehaviour
         {
             buildBtn.interactable = false;
         }
+    }
+
+    public void OnClickPreView()
+    {
+        Debug.Log("프리뷰 누름");
     }
 }
