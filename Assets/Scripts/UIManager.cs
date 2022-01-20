@@ -41,6 +41,7 @@ public class UIManager : MonoBehaviour
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
     private bool isArea;
+    [HideInInspector] public bool isTarget;
 
     void Start()
     {
@@ -275,11 +276,13 @@ public class UIManager : MonoBehaviour
     public void FMarkTrue()
     {
         FMark.SetActive(true);
+        isTarget = true;
     }
 
     public void FMarkFalse()
     {
         FMark.SetActive(false);
+        isTarget = false;
     }
 
     public void RemoveCurrentPanels(GameObject panel)
