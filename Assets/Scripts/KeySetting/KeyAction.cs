@@ -1,9 +1,20 @@
 public enum KeyAction
 {
-    Fire,
+    Forward,
+    Back,
+    Left,
+    Right,
+    Jump,
+    Run,
     Skill,
+    Inventory,
     Interaction,
+    ChangeView,
     Boundary,
     Skip,
+    QuitSlot1,
+    QuitSlot2,
+    QuitSlot3,
+    QuitSlot4,
     Count
 }

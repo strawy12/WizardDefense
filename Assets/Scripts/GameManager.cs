@@ -55,7 +55,7 @@ public class GameManager : MonoSingleton<GameManager>
         gameState = GameState.Playing;
         //StartCoroutine(SpawnEnemies());
 
-        EnterBreakTime();
+        //EnterBreakTime();
     }
 
     private void Init()
@@ -67,23 +67,23 @@ public class GameManager : MonoSingleton<GameManager>
     {
         inputAxis = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
-        if (inGameState == InGameState.BreakTime)
-        {
-            if (Input.GetKeyUp(KeyManager.keySettings[KeyAction.Skip]))
-            {
-                SkipBreakTime();
-            }
+        //if (inGameState == InGameState.BreakTime)
+        //{
+        //    if (Input.GetKeyUp(KeyManager.keySettings[KeyAction.Skip]))
+        //    {
+        //        SkipBreakTime();
+        //    }
 
-            breakTime -= Time.deltaTime;
-            UIManager.SetTimer(breakTime);
+        //    breakTime -= Time.deltaTime;
+        //    UIManager.SetTimer(breakTime);
 
-            if(breakTime < 0)
-            {
-                UIManager.ActiveBreakTimeUI(false);
-                inGameState = InGameState.DefenseTime;
-                waveManager.StartCoroutine(waveManager.StartWave());
-            }
-        }
+        //    if(breakTime < 0)
+        //    {
+        //        UIManager.ActiveBreakTimeUI(false);
+        //        inGameState = InGameState.DefenseTime;
+        //        waveManager.StartCoroutine(waveManager.StartWave());
+        //    }
+        //}
     }
 
     public IEnumerator ShowBoundary(Vector3 position, Vector3 scale)

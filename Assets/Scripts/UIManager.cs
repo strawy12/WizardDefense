@@ -38,6 +38,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text timeText;
     [SerializeField] private Text skipKeyText;
 
+    [Header("사용자 지정 키 전용")]
+    [SerializeField] private GameObject keySettingPanal;
+
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
     private bool isArea;
@@ -59,7 +62,10 @@ public class UIManager : MonoBehaviour
     {
         ShowSkillUI(GameManager.Instance.selectedTower);
 
-        if (Input.GetKeyDown(KeyCode.Escape)) SetCurrentPanels();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetCurrentPanels();
+        }
     }
 
     public void SetTimer(float time)
@@ -101,18 +107,18 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void InstantiatePanel()
-    {
-        for (int i = 0; i < (int)KeyAction.Count; i++)
-        {
-            GameObject panel = Instantiate(keyPanelTemplate, keyPanelTemplate.transform.parent);
-            KeyPanel keyPanel = panel.GetComponent<KeyPanel>();
-            keyPanel.Initialize(i);
-            keyPanels.Add(keyPanel);
-        }
+    //private void InstantiatePanel()
+    //{
+    //    for (int i = 0; i < (int)KeyAction.Count; i++)
+    //    {
+    //        GameObject panel = Instantiate(keyPanelTemplate, keyPanelTemplate.transform.parent);
+    //        KeyPanel keyPanel = panel.GetComponent<KeyPanel>();
+    //        keyPanel.Initialize(i);
+    //        keyPanels.Add(keyPanel);
+    //    }
 
-        keyPanelTemplate.SetActive(false);
-    }
+    //    keyPanelTemplate.SetActive(false);
+    //}
 
     public void ResetKeyPanel()
     {
@@ -174,12 +180,27 @@ public class UIManager : MonoBehaviour
     public void ActivePanal(GameObject panal)
     {
         panal.SetActive(true);
+        currentUIPanels.Add(panal);
         panal.transform.DOKill();
         panal.transform.DOScaleY(1f, 0.3f).SetUpdate(true);
     }
 
+    public void ActiveKeySettingPanal(bool isActive)
+    {
+        if(isActive)
+        {
+            ActivePanal(keySettingPanal);
+        }
+
+        else
+        {
+            UnActivePanal(keySettingPanal);
+        }
+    }
+
     public void UnActivePanal(GameObject panal)
     {
+        currentUIPanels.Remove(panal);
         panal.transform.DOKill();
         panal.transform.DOScaleY(0f, 0.2f).SetUpdate(true).OnComplete(() => panal.SetActive(false));
     }
