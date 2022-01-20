@@ -22,13 +22,10 @@ public class UIManager : MonoBehaviour
     #region Panels Various
     [Header("패널 UI")]
 
-    [SerializeField] private GameObject keyPanelTemplate;
-    private List<KeyPanel> keyPanels = new List<KeyPanel>();
     #endregion
 
     [Header("설정창")]
-    [SerializeField] private Transform settingPanelsParent;
-    [SerializeField] private Transform settingButtonsParent;
+    [SerializeField] private GameObject settingPanel;
 
     [Header("포탑설치가능표시")] [SerializeField] private GameObject FMark;
     [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
@@ -37,6 +34,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject breakTimeUI;
     [SerializeField] private Text timeText;
     [SerializeField] private Text skipKeyText;
+
+    [Header("사용자 지정 키 전용")]
+    [SerializeField] private GameObject keySettingPanal;
 
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
@@ -49,18 +49,21 @@ public class UIManager : MonoBehaviour
 
         //InstantiatePanel();
 
-        for (int i = 0; i < settingButtonsParent.childCount; i++)
-        {
-            Button button = settingButtonsParent.GetChild(i).GetComponent<Button>();
-            button.onClick.AddListener(() => OnClickSettingButton(button.transform.GetSiblingIndex()));
-        }
+        //for (int i = 0; i < settingButtonsParent.childCount; i++)
+        //{
+        //    Button button = settingButtonsParent.GetChild(i).GetComponent<Button>();
+        //    button.onClick.AddListener(() => OnClickSettingButton(button.transform.GetSiblingIndex()));
+        //}
     }
 
     private void Update()
     {
         ShowSkillUI(GameManager.Instance.selectedTower);
 
-        if (Input.GetKeyDown(KeyCode.Escape)) SetCurrentPanels();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetCurrentPanels();
+        }
     }
 
     public void SetTimer(float time)
@@ -94,40 +97,40 @@ public class UIManager : MonoBehaviour
     }
 
     #region Setting Panel
-    private void OnClickSettingButton(int index)
-    {
-        for (int i = 0; i < settingPanelsParent.childCount; i++)
-        {
-            settingPanelsParent.GetChild(i).gameObject.SetActive(i == index);
-        }
-    }
+    //private void OnClickSettingButton(int index)
+    //{
+    //    for (int i = 0; i < settingPanelsParent.childCount; i++)
+    //    {
+    //        settingPanelsParent.GetChild(i).gameObject.SetActive(i == index);
+    //    }
+    //}
 
-    private void InstantiatePanel()
-    {
-        for (int i = 0; i < (int)KeyAction.Count; i++)
-        {
-            GameObject panel = Instantiate(keyPanelTemplate, keyPanelTemplate.transform.parent);
-            KeyPanel keyPanel = panel.GetComponent<KeyPanel>();
-            keyPanel.Initialize(i);
-            keyPanels.Add(keyPanel);
-        }
+    //private void InstantiatePanel()
+    //{
+    //    for (int i = 0; i < (int)KeyAction.Count; i++)
+    //    {
+    //        GameObject panel = Instantiate(keyPanelTemplate, keyPanelTemplate.transform.parent);
+    //        KeyPanel keyPanel = panel.GetComponent<KeyPanel>();
+    //        keyPanel.Initialize(i);
+    //        keyPanels.Add(keyPanel);
+    //    }
 
-        keyPanelTemplate.SetActive(false);
-    }
+    //    keyPanelTemplate.SetActive(false);
+    //}
 
     public void ResetKeyPanel()
     {
-        foreach (KeyPanel panel in keyPanels)
-        {
-            panel.ResetData();
-        }
+        EventManager.TriggerEvent(ConstantManager.CLICK_KEYSETTINGBTN);
+        //foreach (KeyPanel panel in keyPanels)
+        //{
+        //    panel.ResetData();
+        //}
     }
 
     private void ActiveSettingPanel()
     {
-        GameObject panel = settingPanelsParent.parent.gameObject;
-        CursorLocked(panel.activeSelf);
-        if (panel.activeSelf)
+        CursorLocked(settingPanel.activeSelf);
+        if (settingPanel.activeSelf)
         {
             ActiveUIPanalState(false);
         }
@@ -136,7 +139,7 @@ public class UIManager : MonoBehaviour
             ActiveUIPanalState(true);
         }
 
-        panel.SetActive(!panel.activeSelf);
+        settingPanel.SetActive(!settingPanel.activeSelf);
     }
     #endregion
 
@@ -175,12 +178,27 @@ public class UIManager : MonoBehaviour
     public void ActivePanal(GameObject panal)
     {
         panal.SetActive(true);
+        currentUIPanels.Add(panal);
         panal.transform.DOKill();
         panal.transform.DOScaleY(1f, 0.3f).SetUpdate(true);
     }
 
+    public void ActiveKeySettingPanal(bool isActive)
+    {
+        if(isActive)
+        {
+            ActivePanal(keySettingPanal);
+        }
+
+        else
+        {
+            UnActivePanal(keySettingPanal);
+        }
+    }
+
     public void UnActivePanal(GameObject panal)
     {
+        currentUIPanels.Remove(panal);
         panal.transform.DOKill();
         panal.transform.DOScaleY(0f, 0.2f).SetUpdate(true).OnComplete(() => panal.SetActive(false));
     }

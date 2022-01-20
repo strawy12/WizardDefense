@@ -1,20 +1,30 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class KeyPanel : MonoBehaviour
 {
-    private Text keyActionText;
-    private Text keyCodeText;
+    [SerializeField] private KeyAction currentKeyAction;
+    //private Text keyActionText;
+    private Text keyCodeText = null;
     private Button button;
     private bool isSelect = false;
     private int index;
 
+    private void Awake()
+    {
+        EventManager.StartListening(ConstantManager.CLICK_KEYSETTINGBTN, ResetData);
+    }
+
     private void Start()
     {
-        button = GetComponentInChildren<Button>();
+        currentKeyAction = (KeyAction)Enum.Parse(typeof(KeyAction), name);
+        button = transform.GetChild(1).GetComponent<Button>();
+        keyCodeText = button.transform.GetChild(0).GetComponent<Text>();
         button.onClick.AddListener(() => OnSelect());
+        Initialize();
     }
 
     private void OnGUI()
@@ -25,30 +35,33 @@ public class KeyPanel : MonoBehaviour
         if (KeyManager.keySettings.ContainsValue(curEvent.keyCode)) return;
         if (isSelect && curEvent.isKey)
         {
-            //if (curEvent.isKey)
+            if (curEvent.keyCode == KeyCode.Escape)
             {
-                keyCodeText.text = Event.current.keyCode.ToString();
+                isSelect = false;
+                return;
             }
+            //if (curEvent.isKey)
+            keyCodeText.text = curEvent.keyCode.ToString();
+            isSelect = false;
 
             //else if (curEvent.isMouse)
             //{
             //    keyCodeText.text = Event.current.pointerType.ToString();
             //}
-
-            GameManager.Instance.KeyManager.SetKeySetting((KeyAction)index, Event.current.keyCode);
+            GameManager.Instance.UIManager.ActiveKeySettingPanal(false);
+            GameManager.Instance.KeyManager.SetKeySetting(currentKeyAction, Event.current.keyCode);
         }
     }
 
-    public void Initialize(int index)
+    public void Initialize()
     {
-        keyActionText.text = GameManager.Instance.KeyManager.actionNames[index];
-        keyCodeText.text = KeyManager.keySettings[(KeyAction)index].ToString();
-        this.index = index;
+        keyCodeText.text = KeyManager.keySettings[currentKeyAction].ToString();
     }
 
     private void OnSelect()
     {
         GameManager.Instance.UIManager.ResetKeyPanel();
+        GameManager.Instance.UIManager.ActiveKeySettingPanal(true);
         isSelect = true;
     }
 
