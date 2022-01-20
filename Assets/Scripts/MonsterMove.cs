@@ -11,8 +11,8 @@ public class MonsterMove : MonoBehaviour
 
     private NavMeshAgent agent;
 
-    private int currentHp = 0;
-    public int virtualHP;
+    private float currentHp = 0;
+    public float virtualHP;
 
     private bool finished_Init = false;
 
@@ -113,9 +113,9 @@ public struct UnitInfo
 {
     public string unitName;
     public int attackPower;
-    public int defence;
-    public int maxHp;
-    public int currentHp;
+    public float defence;
+    public float maxHp;
+    public float currentHp;
     public Sprite unitSprite;
 }
 

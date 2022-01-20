@@ -5,11 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class MonsterInfo
 {
-    public int maxHp;
-    public int defense;
+    public float maxHp;
+    public float defense;
     public int attackPower;
 
-    public MonsterInfo(int maxHp, int defense, int attackPower)
+    public MonsterInfo(float maxHp, float defense, int attackPower)
     {
         this.maxHp = maxHp;
         this.defense = defense;

@@ -1,6 +1,7 @@
 public enum DirectionType
 {
     Left,
-    Right
+    Right,
+    Random
 }
 

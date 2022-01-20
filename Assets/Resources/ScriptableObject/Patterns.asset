@@ -12,35 +12,161 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38878ced57bee4b44933133b301b2d23, type: 3}
   m_Name: Patterns
   m_EditorClassIdentifier: 
+  updateVersion: T.0.0.1
   patterns:
-  - ID: D_WER
-    cost: 2
-    nextPatternDelay: 3.8
+  - ID: P_1
+    doReUse: 0
+    nextPatternDelay: 2
+    direction: 1
+    monsterSpawnDelay: 2
     monsterInfoList:
-    - direction: 0
-      nextDelay: 4.97
-      spawnCount: 0
-      monsterName: 1
+    - monsterId: N_F_01
+      spawnCount: 3
       monsterData:
-        maxHp: 33
-        damage: 37
-        speed: 1.83
-        dropItemList: []
-    - direction: 1
-      nextDelay: 4.73
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+    - monsterId: N_N_01
+      spawnCount: 3
+      monsterData:
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+    - monsterId: N_F_01
+      spawnCount: 3
+      monsterData:
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+    - monsterId: N_N_01
+      spawnCount: 3
+      monsterData:
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+  - ID: P_2
+    doReUse: 0
+    nextPatternDelay: 2
+    direction: 1
+    monsterSpawnDelay: 2
+    monsterInfoList:
+    - monsterId: N_N_01
+      spawnCount: 3
+      monsterData:
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+    - monsterId: N_W_01
+      spawnCount: 5
+      monsterData:
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+    - monsterId: N_N_01
+      spawnCount: 3
+      monsterData:
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+  - ID: P_3
+    doReUse: 0
+    nextPatternDelay: 2
+    direction: 1
+    monsterSpawnDelay: 2
+    monsterInfoList:
+    - monsterId: N_N_01
       spawnCount: 10
-      monsterName: 0
       monsterData:
-        maxHp: 33
-        damage: 37
-        speed: 1.83
-        dropItemList: []
-    - direction: 0
-      nextDelay: 4.97
-      spawnCount: 0
-      monsterName: 0
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+  - ID: P_4
+    doReUse: 0
+    nextPatternDelay: 2
+    direction: 1
+    monsterSpawnDelay: 2
+    monsterInfoList:
+    - monsterId: N_T_01
+      spawnCount: 3
       monsterData:
-        maxHp: 33
-        damage: 37
-        speed: 1.83
-        dropItemList: []
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+    - monsterId: N_N_01
+      spawnCount: 1
+      monsterData:
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+    - monsterId: N_A_01
+      spawnCount: 2
+      monsterData:
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+    - monsterId: N_N_01
+      spawnCount: 1
+      monsterData:
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+    - monsterId: N_T_01
+      spawnCount: 2
+      monsterData:
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+    - monsterId: N_A_01
+      spawnCount: 1
+      monsterData:
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+  - ID: P_5
+    doReUse: 0
+    nextPatternDelay: 2
+    direction: 1
+    monsterSpawnDelay: 2
+    monsterInfoList:
+    - monsterId: N_W_01
+      spawnCount: 2
+      monsterData:
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+    - monsterId: N_A_01
+      spawnCount: 5
+      monsterData:
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+    - monsterId: N_W_01
+      spawnCount: 3
+      monsterData:
+        maxHp: 10
+        defense: 0
+        attackPower: 1
+  - ID: P_6
+    doReUse: 0
+    nextPatternDelay: 3
+    direction: 1
+    monsterSpawnDelay: 3
+    monsterInfoList:
+    - monsterId: N_H_01
+      spawnCount: 4
+      monsterData:
+        maxHp: 16
+        defense: 0
+        attackPower: 2
+  - ID: P_7
+    doReUse: 0
+    nextPatternDelay: 3
+    direction: 1
+    monsterSpawnDelay: 3
+    monsterInfoList:
+    - monsterId: N_V_01
+      spawnCount: 4
+      monsterData:
+        maxHp: 16
+        defense: 0
+        attackPower: 2

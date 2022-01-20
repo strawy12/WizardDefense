@@ -10,7 +10,7 @@ public class HpBar : MonoBehaviour
     private Image backHpPanal;
     private Text hpInfoText;
 
-    private int maxHp;
+    private float maxHp;
 
     protected virtual void Awake()
     {
@@ -19,7 +19,7 @@ public class HpBar : MonoBehaviour
         hpInfoText = transform.GetChild(2).GetComponent<Text>();
     }
 
-    public void InitHpBar(int maxHp)
+    public void InitHpBar(float maxHp)
     {
         this.maxHp = maxHp;
         backHpPanal.transform.localScale = Vector3.one;
@@ -27,7 +27,7 @@ public class HpBar : MonoBehaviour
         UpdateHpText(maxHp);
     }
 
-    public void UpdateHpBar(int hp)
+    public void UpdateHpBar(float hp)
     {
         float value = (1f / maxHp) * hp;
 
@@ -36,9 +36,9 @@ public class HpBar : MonoBehaviour
         UpdateHpText(hp);
     }
 
-    private void UpdateHpText(int hp)
+    private void UpdateHpText(float hp)
     {
-        hpInfoText.text = string.Format("{0} / {1}", hp, maxHp);
+        hpInfoText.text = string.Format("{0:0.00} / {1:0.00}", hp, maxHp);
     }
 
 
