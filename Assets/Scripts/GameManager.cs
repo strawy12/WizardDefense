@@ -26,9 +26,11 @@ public class GameManager : MonoSingleton<GameManager>
 
     #region InGame
     public GameObject boundary;
-    public TowerAttack selectedTower;
     public GameObject player;
     public GameObject home;
+
+    public TowerAttack selectedTower;
+    public TowerAttack censorTower;
 
     public List<MonsterMove> enemies { get; private set; } = new List<MonsterMove>();
     public List<Attribute> attributes = new List<Attribute>();
@@ -55,7 +57,7 @@ public class GameManager : MonoSingleton<GameManager>
         gameState = GameState.Playing;
         //StartCoroutine(SpawnEnemies());
 
-        //EnterBreakTime();
+        EnterBreakTime();
     }
 
     private void Init()
@@ -67,28 +69,28 @@ public class GameManager : MonoSingleton<GameManager>
     {
         inputAxis = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
-        //if (inGameState == InGameState.BreakTime)
-        //{
-        //    if (Input.GetKeyUp(KeyManager.keySettings[KeyAction.Skip]))
-        //    {
-        //        SkipBreakTime();
-        //    }
+        if (inGameState == InGameState.BreakTime)
+        {
+            if (Input.GetKeyUp(KeyManager.keySettings[KeyAction.Skip]))
+            {
+                SkipBreakTime();
+            }
 
-        //    breakTime -= Time.deltaTime;
-        //    UIManager.SetTimer(breakTime);
+            breakTime -= Time.deltaTime;
+            UIManager.SetTimer(breakTime);
 
-        //    if(breakTime < 0)
-        //    {
-        //        UIManager.ActiveBreakTimeUI(false);
-        //        inGameState = InGameState.DefenseTime;
-        //        waveManager.StartCoroutine(waveManager.StartWave());
-        //    }
-        //}
+            if(breakTime < 0)
+            {
+                UIManager.ActiveBreakTimeUI(false);
+                inGameState = InGameState.DefenseTime;
+                dataManager.DownLoadInGameData();
+            }
+        }
     }
 
     public IEnumerator ShowBoundary(Vector3 position, Vector3 scale)
     {
-        boundary.transform.position = new Vector3(position.x, 0.13f, position.z);
+        boundary.transform.position = new Vector3(position.x, 4f, position.z);
         boundary.transform.localScale = scale;
         boundary.SetActive(true);
         yield return new WaitForSeconds(0.5f);

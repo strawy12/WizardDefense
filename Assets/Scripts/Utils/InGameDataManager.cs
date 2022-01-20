@@ -12,7 +12,7 @@ public class InGameDataManager : MonoBehaviour
 
     private void Awake()
     {
-        DownLoadInGameData();
+        //DownLoadInGameData();
     }
 
     public void DownLoadInGameData()
