@@ -69,14 +69,14 @@ public class GameManager : MonoSingleton<GameManager>
     {
         inputAxis = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
-        if (inGameState == InGameState.BreakTime)
+        if (inGameState == InGameState.BreakTime && gameState != GameState.Setting)
         {
             if (Input.GetKeyUp(KeyManager.keySettings[KeyAction.Skip]))
             {
                 SkipBreakTime();
             }
 
-            breakTime -= Time.deltaTime;
+            breakTime -= Time.unscaledDeltaTime;
             UIManager.SetTimer(breakTime);
 
             if(breakTime < 0)
