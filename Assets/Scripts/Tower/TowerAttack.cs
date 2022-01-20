@@ -69,7 +69,7 @@ public class TowerAttack : MonoBehaviour
     #region Fire
     private void FireByPlayer()
     {
-        if (Input.GetKey(KeyManager.keySettings[KeyAction.Fire]) && curFireTime > towerBase.handFireRate)
+        if (Input.GetKey(KeyCode.Mouse0) && curFireTime > towerBase.handFireRate)
         {
             InstantiateOrPooling(pool.GetPoolObject(EPoolingType.DefaultBullet).gameObject);
             curFireTime = 0f;
