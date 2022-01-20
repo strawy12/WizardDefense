@@ -13,6 +13,11 @@ public class KeyPanel : MonoBehaviour
     private bool isSelect = false;
     private int index;
 
+    private void Awake()
+    {
+        EventManager.StartListening(ConstantManager.CLICK_KEYSETTINGBTN, ResetData);
+    }
+
     private void Start()
     {
         currentKeyAction = (KeyAction)Enum.Parse(typeof(KeyAction), name);

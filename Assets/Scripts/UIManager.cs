@@ -22,13 +22,10 @@ public class UIManager : MonoBehaviour
     #region Panels Various
     [Header("패널 UI")]
 
-    [SerializeField] private GameObject keyPanelTemplate;
-    private List<KeyPanel> keyPanels = new List<KeyPanel>();
     #endregion
 
     [Header("설정창")]
-    [SerializeField] private Transform settingPanelsParent;
-    [SerializeField] private Transform settingButtonsParent;
+    [SerializeField] private GameObject settingPanel;
 
     [Header("포탑설치가능표시")] [SerializeField] private GameObject FMark;
     [Header("포탑설치창")] [SerializeField] private GameObject buildChang;
@@ -51,11 +48,11 @@ public class UIManager : MonoBehaviour
 
         //InstantiatePanel();
 
-        for (int i = 0; i < settingButtonsParent.childCount; i++)
-        {
-            Button button = settingButtonsParent.GetChild(i).GetComponent<Button>();
-            button.onClick.AddListener(() => OnClickSettingButton(button.transform.GetSiblingIndex()));
-        }
+        //for (int i = 0; i < settingButtonsParent.childCount; i++)
+        //{
+        //    Button button = settingButtonsParent.GetChild(i).GetComponent<Button>();
+        //    button.onClick.AddListener(() => OnClickSettingButton(button.transform.GetSiblingIndex()));
+        //}
     }
 
     private void Update()
@@ -99,13 +96,13 @@ public class UIManager : MonoBehaviour
     }
 
     #region Setting Panel
-    private void OnClickSettingButton(int index)
-    {
-        for (int i = 0; i < settingPanelsParent.childCount; i++)
-        {
-            settingPanelsParent.GetChild(i).gameObject.SetActive(i == index);
-        }
-    }
+    //private void OnClickSettingButton(int index)
+    //{
+    //    for (int i = 0; i < settingPanelsParent.childCount; i++)
+    //    {
+    //        settingPanelsParent.GetChild(i).gameObject.SetActive(i == index);
+    //    }
+    //}
 
     //private void InstantiatePanel()
     //{
@@ -122,17 +119,17 @@ public class UIManager : MonoBehaviour
 
     public void ResetKeyPanel()
     {
-        foreach (KeyPanel panel in keyPanels)
-        {
-            panel.ResetData();
-        }
+        EventManager.TriggerEvent(ConstantManager.CLICK_KEYSETTINGBTN);
+        //foreach (KeyPanel panel in keyPanels)
+        //{
+        //    panel.ResetData();
+        //}
     }
 
     private void ActiveSettingPanel()
     {
-        GameObject panel = settingPanelsParent.parent.gameObject;
-        CursorLocked(panel.activeSelf);
-        if (panel.activeSelf)
+        CursorLocked(settingPanel.activeSelf);
+        if (settingPanel.activeSelf)
         {
             ActiveUIPanalState(false);
         }
@@ -141,7 +138,7 @@ public class UIManager : MonoBehaviour
             ActiveUIPanalState(true);
         }
 
-        panel.SetActive(!panel.activeSelf);
+        settingPanel.SetActive(!settingPanel.activeSelf);
     }
     #endregion
 
