@@ -81,7 +81,7 @@ public class GameManager : MonoSingleton<GameManager>
             {
                 UIManager.ActiveBreakTimeUI(false);
                 inGameState = InGameState.DefenseTime;
-                waveManager.StartCoroutine(waveManager.StartWave());
+                dataManager.DownLoadInGameData();
             }
         }
     }
