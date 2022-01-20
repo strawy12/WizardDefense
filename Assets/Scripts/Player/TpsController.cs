@@ -13,6 +13,7 @@ public class TpsController : MonoBehaviour
     [Header("감도")] [SerializeField] private float sensivity;
     [Header("점프 힘")] [SerializeField] private float jumpPower = 2f;
     [Header("레이저 길이")] [SerializeField] private float maxDistance = 10f;
+    
 
     private float speed;
     private RaycastHit hitTowerAreaInfo;
@@ -42,7 +43,7 @@ public class TpsController : MonoBehaviour
     {
         PlayerSet();
 
-        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]))
+        if (Input.GetKeyDown(/*KeyManager.keySettings[KeyAction.Interaction]*/KeyCode.F))
         {
             if (GameManager.Instance.UIManager.isTarget)
                 GameManager.Instance.UIManager.Chang();

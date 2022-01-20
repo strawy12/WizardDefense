@@ -5,24 +5,29 @@ using UnityEngine.UI;
 
 public class TowerSelect : MonoBehaviour
 {
-    [SerializeField] private Text towerName;
-    [SerializeField] private Text needText;
-    [SerializeField] private Image towerImage;
-    [SerializeField] private Button buildBtn;
+    [Header("타워 이름 텍스트")] [SerializeField] private Text towerName;
+    [Header("설치에 필요한 룬 텍스트")] [SerializeField] private Text needText;
+    [Header("타워 이미지")] [SerializeField] private Image towerImage;
+    [Header("설치 버튼")] [SerializeField] private Button buildBtn;
+    [Header("프리뷰 나가는 버튼")] [SerializeField] private GameObject previewOutBtn;
+
     [HideInInspector] public int curRune;
 
-    public List<Tower> towerList = new List<Tower>();
 
-    [SerializeField] private Sprite[] towerSprite;
+    [Header("타워 정보 리스트")] public List<Tower> towerList = new List<Tower>();
+
+    [Header("타워들 스프라이트")] [SerializeField] private Sprite[] towerSprite;
+    [Header("타워들 오브젝트 배열")] [SerializeField] private GameObject[] tower;
 
     [HideInInspector] public int needMax;
 
-    [SerializeField] private GameObject[] tower;
+    [Header("프리뷰 카메라")] [SerializeField] private Camera previewCamera = null;
 
     public static Transform buildTrn;
     public static GameObject buildObj;
 
     private int selectTower;
+    private bool isOutPreView = false;
 
     public TpsController tpsController;
 
@@ -101,20 +106,8 @@ public class TowerSelect : MonoBehaviour
     private void SelectTower()
     {
         GameObject a = null;
-        if (selectTower == 0)
-        {
-            a = Instantiate(tower[0], buildTrn);
-        }
-        else if (selectTower == 1)
-        {
-            a = Instantiate(tower[1], buildTrn);
-        }
 
-        else if (selectTower == 2)
-        {
-            a = Instantiate(tower[2], buildTrn);
-        }
-        a.transform.SetParent(null);
+        TowerNum(a);
         Destroy(buildObj);
     }
 
@@ -130,8 +123,74 @@ public class TowerSelect : MonoBehaviour
         }
     }
 
+    public void OnClickPreviewOut()
+    {
+        isOutPreView = true;
+    }
+
     public void OnClickPreView()
     {
-        Debug.Log("프리뷰 누름");
+        PreView();
+    }
+
+    private void PreView()
+    {
+        GameObject a = null;
+
+        switch (selectTower)
+        {
+            case 0:
+                a = Instantiate(tower[0], buildTrn);
+                break;
+
+            case 1:
+                a = Instantiate(tower[1], buildTrn);
+                break;
+
+            case 2:
+                a = Instantiate(tower[2], buildTrn);
+                break;
+
+            default:
+                break;
+        }
+
+        a.transform.SetParent(null);
+
+        GameManager.Instance.UIManager.Chang();
+
+        previewCamera.transform.parent = a.transform;
+        previewCamera.transform.position = new Vector3(0f, 2f, -2.3f);
+
+        previewCamera.enabled = true;
+    }
+
+    private void PreviewCameraSetting(GameObject _parent)
+    {
+        previewCamera.transform.parent = _parent.transform;
+        previewCamera.transform.position = new Vector3(0f, 2f, -2.3f);
+    }
+
+    private void TowerNum(GameObject _tower)
+    {
+        switch (selectTower)
+        {
+            case 0:
+                _tower = Instantiate(tower[0], buildTrn);
+                break;
+
+            case 1:
+                _tower = Instantiate(tower[1], buildTrn);
+                break;
+
+            case 2:
+                _tower = Instantiate(tower[2], buildTrn);
+                break;
+
+            default:
+                break;
+        }
+
+        _tower.transform.SetParent(null);
     }
 }

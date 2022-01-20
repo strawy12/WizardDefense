@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7280627589862013460}
   - component: {fileID: 7280627589862013461}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: Tower 3
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dd6e5ef9e90dc7643baf4a79def5bc29, type: 2}
+  - {fileID: 2100000, guid: 69b6097de1a9d54429e3a4b98264d42b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
