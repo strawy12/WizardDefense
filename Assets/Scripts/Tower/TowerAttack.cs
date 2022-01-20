@@ -7,7 +7,7 @@ public class TowerAttack : MonoBehaviour
 {
     public TowerBase towerBase;
     public Transform muzzlePosition;
-    public GameObject boundary;
+    public SpriteRenderer boundary;
 
     private MonsterMove targetEnemy;
     private PoolManager pool;
@@ -20,6 +20,7 @@ public class TowerAttack : MonoBehaviour
     public Skill skill;
 
     public bool isBuilding;
+
     void Start()
     {
         pool = FindObjectOfType<PoolManager>();
@@ -29,7 +30,7 @@ public class TowerAttack : MonoBehaviour
 
         Vector3 scale = transform.localScale;
         scale.y = scale.x;
-        boundary.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * scale * 0.5f;
+        boundary.gameObject.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) *2f * (1 / scale.x);
         boundary.gameObject.SetActive(true);
     }
 
@@ -45,6 +46,16 @@ public class TowerAttack : MonoBehaviour
         if (towerState == TowerState.OutControl)
         {
             Fire();
+
+            if (IsInBoundary())
+            {
+                ChangeBoundaryColor(Color.white);
+                ShowBoundary(true);
+            }
+            else
+            {
+                ShowBoundary(false);
+            }
         }
 
         else
@@ -54,7 +65,6 @@ public class TowerAttack : MonoBehaviour
             FireByPlayer();
         }
 
-        ShowBoundary();
         OnUseSKill();
     }
 
@@ -102,7 +112,9 @@ public class TowerAttack : MonoBehaviour
 
     private void InstantiateOrPooling(GameObject obj)
     {
-        if (towerState == TowerState.InControl || SetTargetEnemy())
+        bool isTargeting = SetTargetEnemy();
+
+        if (towerState == TowerState.InControl || isTargeting)
         {
             obj.GetComponent<BulletMove>().Init(this);
             obj.GetComponent<BulletAttack>().Init(this);
@@ -125,6 +137,7 @@ public class TowerAttack : MonoBehaviour
         float minDistance = 100f;
         float distance;
         targetEnemy = null;
+
         for (int i = 0; i < enemies.Count; i++)
         {
             if (Vector3.Distance(enemies[i].transform.position, transform.position) > towerBase.distance) continue;
@@ -145,6 +158,20 @@ public class TowerAttack : MonoBehaviour
 
         return (targetEnemy != null);
     }
+
+    public bool IsInBoundary()
+    {
+        List<MonsterMove> enemies = GameManager.Instance.enemies;
+        Vector2 pos;
+
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            if (Vector3.Distance(enemies[i].transform.position, transform.position) <= towerBase.distance)
+                return true;
+        }
+
+        return false;
+    }
     #endregion
 
     #region Control
@@ -153,17 +180,20 @@ public class TowerAttack : MonoBehaviour
         GameManager.Instance.mainCam.cam.enabled = true;
 
         GameManager.Instance.tpsCamera.enabled = false;
-        
+
         Vector3 cameraPosition = transform.position;
         cameraPosition.y += 2f;
         muzzlePosition.transform.position = cameraPosition;
         GameManager.Instance.mainCam.CameraMoveToPosition(cameraPosition, 1f);
         //이거 fireRate 다름
         GameManager.Instance.UIManager.ShowTowerStatBar(true, towerBase.attackPower, towerBase.fireRate);
-        
+
         GameManager.Instance.selectedTower = this;
         towerState = TowerState.InControl;
         selectedTime = 0f;
+
+        ShowBoundary(true);
+        ChangeBoundaryColor(Color.red);
     }
 
     private void ZoomOutTower()
@@ -185,19 +215,9 @@ public class TowerAttack : MonoBehaviour
         }
     }
 
-    private void ShowBoundary()
+    private void ShowBoundary(bool isActive)
     {
-        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Boundary]))
-        {
-            if (boundary.activeSelf)
-            {
-                boundary.SetActive(false);
-            }
-            else
-            {
-                boundary.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * (1 / transform.localScale.x);
-            }
-        }
+        boundary.gameObject.SetActive(isActive);
     }
 
     private void CameraMove()
@@ -258,4 +278,9 @@ public class TowerAttack : MonoBehaviour
         return towerState;
     }
     #endregion
+
+    public void ChangeBoundaryColor(Color color)
+    {
+        boundary.color = color;
+    }
 }
