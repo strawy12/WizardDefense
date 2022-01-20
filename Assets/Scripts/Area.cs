@@ -8,6 +8,8 @@ public class Area : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private float distance = 4f;
 
+    private bool isArea;
+
     private void Start()    
     {
         rb = GetComponent<Rigidbody>();
@@ -22,11 +24,18 @@ public class Area : MonoBehaviour
     private void FollowTarget()
     {
 
-        if (Vector3.Distance(transform.position, target.position) < distance)
+        if (Vector3.Distance(transform.position, target.position) < distance + 2)
         {
-            TowerSelect.buildObj = gameObject;
-            TowerSelect.buildTrn = gameObject.transform;
-            GameManager.Instance.UIManager.FMarkTrue();
+            if (Vector3.Distance(transform.position, target.position) < distance)
+            {
+                TowerSelect.buildObj = gameObject;
+                TowerSelect.buildTrn = gameObject.transform;
+                GameManager.Instance.UIManager.FMarkTrue();
+            }
+            else
+            {
+                GameManager.Instance.UIManager.FMarkFalse();
+            }
         }
     }
 }
