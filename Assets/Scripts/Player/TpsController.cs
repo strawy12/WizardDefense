@@ -44,7 +44,7 @@ public class TpsController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]))
         {
-            if (isTarget)
+            if (GameManager.Instance.UIManager.isTarget)
                 GameManager.Instance.UIManager.Chang();
 
             if (isTargetTower && GameManager.Instance.selectedTower == null)
@@ -137,7 +137,7 @@ public class TpsController : MonoBehaviour
     {
         var cam = GameManager.Instance.tpsCamera;
 
-        Hit_TowerArea(cam);
+        //Hit_TowerArea(cam);
         Hit_Monster(cam);
     }
 
