@@ -129,4 +129,9 @@ public class TowerSelect : MonoBehaviour
             buildBtn.interactable = false;
         }
     }
+
+    public void OnClickPreView()
+    {
+        Debug.Log("ÇÁ¸®ºä ´©¸§");
+    }
 }

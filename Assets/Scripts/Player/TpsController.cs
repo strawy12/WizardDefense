@@ -137,7 +137,7 @@ public class TpsController : MonoBehaviour
     {
         var cam = GameManager.Instance.tpsCamera;
 
-        //Hit_TowerArea(cam);
+        Hit_TowerArea(cam);
         Hit_Monster(cam);
     }
 
