@@ -161,7 +161,7 @@ public class UIManager : MonoBehaviour
             if(towerUI.gameObject.activeSelf)
             {
                 towerUI.gameObject.SetActive(false);
-                ActiveUIPanalState(false);
+                SetGameState(GameState.Playing);
                 currentUIPanels.Remove(towerUI.gameObject);
                 return;
             }
@@ -171,7 +171,7 @@ public class UIManager : MonoBehaviour
             currentUIPanels.Add(towerUI.gameObject);
 
             CursorLocked(false);
-            ActiveUIPanalState(true);
+            SetGameState(GameState.InGameSetting);
 
             if (!tower.CheckSkillCoolTime())
             {
@@ -227,7 +227,7 @@ public class UIManager : MonoBehaviour
             buildChang.SetActive(true);
             currentUIPanels.Add(buildChang);
 
-            ActiveUIPanalState(true);
+            SetGameState(GameState.InGameSetting);
         }
         else
         {
@@ -235,7 +235,7 @@ public class UIManager : MonoBehaviour
             buildChang.SetActive(false);
             currentUIPanels.Remove(buildChang);
 
-            ActiveUIPanalState(false);
+            SetGameState(GameState.Playing);
         }
 
     }
@@ -254,13 +254,13 @@ public class UIManager : MonoBehaviour
     {
         if (isActive)
         {
-            Time.timeScale = 0f;
+            SetGameState(GameState.InGameSetting);
             GameManager.Instance.gameState = GameState.Setting;
         }
 
         else
         {
-            Time.timeScale = 1f;
+            SetGameState(GameState.Playing);
             GameManager.Instance.gameState = GameState.Playing;
         }
     }
@@ -312,5 +312,10 @@ public class UIManager : MonoBehaviour
     public bool IsFMarkActive()
     {
         return FMark.activeSelf;
+    }
+
+    private void SetGameState(GameState gameState)
+    {
+        GameManager.Instance.gameState = gameState;
     }
 }

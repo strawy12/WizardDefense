@@ -19,9 +19,9 @@ public class TowerArea : Area
 
     protected override void FollowTarget()
     {
-        if (Mathf.Abs(transform.position.x - target.position.x) < distance + 2)
+        if (Vector3.Distance(transform.position, target.position) < distance + 2)
         {
-            if (Mathf.Abs(transform.position.x - target.position.x) < distance)
+            if (Vector3.Distance(transform.position, target.position) < distance)
             {
                 GameManager.Instance.UIManager.FMarkTrue();
                 GameManager.Instance.censorTower = tower;

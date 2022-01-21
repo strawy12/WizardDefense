@@ -71,15 +71,18 @@ public class TpsController : MonoBehaviour
 
     private void PlayerSet()
     {
-        LookAround();
         Move();
+
+        if (GameManager.Instance.gameState == GameState.InGameSetting) return;
+
+        LookAround();
         Jump();
         Run();
         Hit();
     }
     private void LookAround()
     {
-        if (GameManager.Instance.gameState == GameState.Setting) return;
+        if (GameManager.Instance.gameState == GameState.Setting || GameManager.Instance.gameState == GameState.InGameSetting) return;
 
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * sensivity, Input.GetAxis("Mouse Y") * sensivity);
         Vector3 cameraAngle = cameraArm.rotation.eulerAngles;
@@ -99,6 +102,12 @@ public class TpsController : MonoBehaviour
 
     private void Move()
     {
+        if (GameManager.Instance.gameState == GameState.InGameSetting)
+        {
+            animator.SetBool("isMove", false);
+            return;
+        }
+
         isRun = Input.GetKey(KeyCode.LeftShift);
         Vector2 moveInput = new Vector2(Input.GetAxis(ConstantManager.KEYINPUT_HMOVE), Input.GetAxis(ConstantManager.KEYINPUT_VMOVE));
         bool isMove = moveInput.magnitude != 0;

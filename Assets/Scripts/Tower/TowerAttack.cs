@@ -23,7 +23,7 @@ public class TowerAttack : MonoBehaviour
 
     private Outline outline;
 
-    void Start()
+    void Awake()
     {
         pool = FindObjectOfType<PoolManager>();
         outline = GetComponent<Outline>();
@@ -294,6 +294,8 @@ public class TowerAttack : MonoBehaviour
 
     public void ShowOutLine(bool isShow)
     {
+        outline ??= GetComponent<Outline>();
+
         if (isShow)
         {
             outline.OutlineWidth = outline.thisOutLine;
