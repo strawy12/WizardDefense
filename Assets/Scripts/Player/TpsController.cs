@@ -8,11 +8,12 @@ public class TpsController : MonoBehaviour
 
     [SerializeField] private Transform cameraArm;
 
-    [Header("ÀÌµ¿¼Óµµ")] [SerializeField] private float normalSpeed = 5f;
-    [Header("´Þ¸®±â¼Óµµ")] [SerializeField] private float runSpeed = 8f;
-    [Header("°¨µµ")] [SerializeField] private float sensivity;
-    [Header("Á¡ÇÁ Èû")] [SerializeField] private float jumpPower = 2f;
-    [Header("·¹ÀÌÀú ±æÀÌ")] [SerializeField] private float maxDistance = 10f;
+    [Header("ï¿½Ìµï¿½ï¿½Óµï¿½")] [SerializeField] private float normalSpeed = 5f;
+    [Header("ï¿½Þ¸ï¿½ï¿½ï¿½Óµï¿½")] [SerializeField] private float runSpeed = 8f;
+    [Header("ï¿½ï¿½ï¿½ï¿½")] [SerializeField] private float sensivity;
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½")] [SerializeField] private float jumpPower = 2f;
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")] [SerializeField] private float maxDistance = 10f;
+    
 
     private float speed;
     private RaycastHit hitTowerAreaInfo;
@@ -42,7 +43,7 @@ public class TpsController : MonoBehaviour
     {
         PlayerSet();
 
-        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
+        if (Input.GetKeyDown(/*KeyManager.keySettings[KeyAction.Interaction]*/KeyCode.F))
         {
             if (GameManager.Instance.inGameState == InGameState.BreakTime)
                 GameManager.Instance.UIManager.Chang();
