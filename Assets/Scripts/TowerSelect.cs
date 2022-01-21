@@ -22,6 +22,7 @@ public class TowerSelect : MonoBehaviour
     [HideInInspector] public int needMax;
 
     [Header("프리뷰 카메라")] [SerializeField] private Camera previewCamera = null;
+    [Header("타워 부모 위치")] [SerializeField] private Transform towerMom;
 
     public static Transform buildTrn;
     public static GameObject buildObj;
@@ -130,45 +131,7 @@ public class TowerSelect : MonoBehaviour
 
     public void OnClickPreView()
     {
-        PreView();
-    }
 
-    private void PreView()
-    {
-        GameObject a = null;
-
-        switch (selectTower)
-        {
-            case 0:
-                a = Instantiate(tower[0], buildTrn);
-                break;
-
-            case 1:
-                a = Instantiate(tower[1], buildTrn);
-                break;
-
-            case 2:
-                a = Instantiate(tower[2], buildTrn);
-                break;
-
-            default:
-                break;
-        }
-
-        a.transform.SetParent(null);
-
-        GameManager.Instance.UIManager.Chang();
-
-        previewCamera.transform.parent = a.transform;
-        previewCamera.transform.position = new Vector3(0f, 2f, -2.3f);
-
-        previewCamera.enabled = true;
-    }
-
-    private void PreviewCameraSetting(GameObject _parent)
-    {
-        previewCamera.transform.parent = _parent.transform;
-        previewCamera.transform.position = new Vector3(0f, 2f, -2.3f);
     }
 
     private void TowerNum(GameObject _tower)
@@ -191,6 +154,6 @@ public class TowerSelect : MonoBehaviour
                 break;
         }
 
-        _tower.transform.SetParent(null);
+        _tower.transform.SetParent(towerMom);
     }
 }
