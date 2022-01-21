@@ -133,7 +133,7 @@ public class TpsController : MonoBehaviour
             isJump = false;
         }
     }
-
+  
     private void Hit()
     {
         var cam = GameManager.Instance.tpsCamera;
