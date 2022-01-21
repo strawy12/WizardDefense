@@ -19,6 +19,7 @@ public class MonsterMove : MonoBehaviour
     private Vector3 currentDir = Vector3.zero;
     private Transform targetPoint = null;
 
+
     private UnitInfo unitInfo;
 
     private void Awake()
@@ -35,6 +36,7 @@ public class MonsterMove : MonoBehaviour
 
     private void Update()
     {
+        if (!finished_Init) return;
         if (agent.remainingDistance <= 3f)
         {
             AttackPointTower();
@@ -49,6 +51,8 @@ public class MonsterMove : MonoBehaviour
         targetPoint = target;
         agent.SetDestination(targetPoint.position);
         GameManager.Instance.enemies.Add(this);
+
+        finished_Init = true;
     }
 
     private bool CheckIsMoved()
