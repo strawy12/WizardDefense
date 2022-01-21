@@ -38,6 +38,7 @@ public class UnitInfoPanal : MonoBehaviour
             if(timer >= 3f)
             {
                 ClearPanal();
+                GameManager.Instance.selectedMonster?.ShowOutLine(false);
             }
         }
     }

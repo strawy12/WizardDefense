@@ -41,6 +41,8 @@ public class TpsController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.gameState == GameState.Setting) return;
+
         PlayerSet();
 
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
@@ -102,7 +104,7 @@ public class TpsController : MonoBehaviour
 
     private void Move()
     {
-        if (GameManager.Instance.gameState == GameState.InGameSetting)
+        if (GameManager.Instance.gameState != GameState.Playing)
         {
             animator.SetBool("isMove", false);
             return;
@@ -184,7 +186,10 @@ public class TpsController : MonoBehaviour
 
                 if (targetMonster != null)
                 {
+                    GameManager.Instance.selectedMonster?.ShowOutLine(false);
                     targetMonster.GetInfo();
+                    targetMonster.ShowOutLine(true);
+                    GameManager.Instance.selectedMonster = targetMonster;
                     return;
                 }
             }
@@ -201,6 +206,7 @@ public class TpsController : MonoBehaviour
             {
                 TowerSelect.buildTrn = hitTowerAreaInfo.transform;
                 GameManager.Instance.UIManager.FMarkTrue();
+                hitTowerAreaInfo.transform.GetComponent<Area>()?.ShowOutline(true);
                 isTarget = true;
             }
 
@@ -208,6 +214,7 @@ public class TpsController : MonoBehaviour
             {
                 GameManager.Instance.UIManager.AreaCheack();
                 GameManager.Instance.UIManager.FMarkFalse();
+                hitTowerAreaInfo.transform.GetComponent<Area>()?.ShowOutline(false);
                 isTarget = false;
             }
         }
