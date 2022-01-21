@@ -12,6 +12,7 @@ public class TpsController : MonoBehaviour
     [Header("달리기속도")] [SerializeField] private float runSpeed = 8f;
     [Header("감도")] [SerializeField] private float sensivity;
     [Header("점프 힘")] [SerializeField] private float jumpPower = 2f;
+    [Header("밀리는 힘")] [SerializeField] private float backPower = 2f;
     [Header("레이저 길이")] [SerializeField] private float maxDistance = 10f;
 
     private float speed;
@@ -132,8 +133,13 @@ public class TpsController : MonoBehaviour
         {
             isJump = false;
         }
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("j");
+            myrigid.AddForce(Vector3.back * backPower);
+        }
     }
-  
+
     private void Hit()
     {
         var cam = GameManager.Instance.tpsCamera;
