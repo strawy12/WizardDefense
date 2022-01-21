@@ -186,13 +186,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7098593624091938457}
   - component: {fileID: 1422488582}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7098593624091938457
 Transform:
   m_ObjectHideFlags: 0
@@ -268,7 +268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6677934092007756092}
   - component: {fileID: 6267943322738057718}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: MinMapSprite1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
