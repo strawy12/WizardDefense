@@ -30,7 +30,7 @@ public class TowerAttack : MonoBehaviour
 
         Vector3 scale = transform.localScale;
         scale.y = scale.x;
-        boundary.gameObject.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) *2f * (1 / scale.x);
+        boundary.gameObject.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * 2f * (1 / scale.x);
         boundary.gameObject.SetActive(true);
     }
 
@@ -74,6 +74,11 @@ public class TowerAttack : MonoBehaviour
 
         transform.DOMoveY(-transform.localScale.y * 0.5f, 0f);
         transform.DOMoveY(transform.localScale.y * 0.5f + 5f, 2f).OnComplete(() => isBuilding = false);
+    }
+
+    public void EquipItems()
+    {
+        //GameManager.Instance.UIManager.
     }
 
     #region Fire
@@ -263,7 +268,7 @@ public class TowerAttack : MonoBehaviour
     #endregion
 
     #region GetSet
-    public void GetAttribute(Attribute attribute)
+    public void SetAttribute(Attribute attribute)
     {
         towerBase.attribute = attribute;
     }

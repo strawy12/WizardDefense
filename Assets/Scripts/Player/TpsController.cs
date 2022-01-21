@@ -45,13 +45,25 @@ public class TpsController : MonoBehaviour
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
         {
             if (GameManager.Instance.inGameState == InGameState.BreakTime)
-                GameManager.Instance.UIManager.Chang();
+            {
+                if(GameManager.Instance.censorTower == null)
+                {
+                    GameManager.Instance.UIManager.Chang();
+                }
+                else
+                {
+                    TowerBase tower = GameManager.Instance.censorTower.towerBase;
+                    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
+                    GameManager.Instance.UIManager.ShowTowerStatBar(true, tower.attackPower, tower.fireRate);
+                }
+            }
 
-            if (GameManager.Instance.inGameState == InGameState.DefenseTime && GameManager.Instance.selectedTower == null)
+            else if (GameManager.Instance.inGameState == InGameState.DefenseTime && GameManager.Instance.selectedTower == null)
             {
                 //tower.ZoomInTower();
                 //gameObject.SetActive(false);
                 GameManager.Instance.censorTower?.ZoomInTower();
+                GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
             }
         }
     }
@@ -194,6 +206,7 @@ public class TpsController : MonoBehaviour
                     isTargetTower = false;
                     tower = null;
                 }
+
             }
             else
             {

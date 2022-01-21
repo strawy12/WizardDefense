@@ -14,10 +14,7 @@ public class TowerArea : Area
 
     private void Update()
     {
-        if (GameManager.Instance.inGameState == InGameState.DefenseTime)
-        {
-            FollowTarget();
-        }
+        FollowTarget();
     }
 
     protected override void FollowTarget()

@@ -4,7 +4,7 @@ using UnityEngine;
 public class KeyManager : MonoBehaviour
 {
     public static Dictionary<KeyAction, KeyCode> keySettings;
-    public List<KeyCode> defaultKeyCodes;
+    private List<KeyCode> defaultKeyCodes;
     public List<string> actionNames;
 
     private void Awake()
