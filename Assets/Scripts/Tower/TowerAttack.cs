@@ -21,9 +21,12 @@ public class TowerAttack : MonoBehaviour
 
     public bool isBuilding;
 
+    private Outline outline;
+
     void Start()
     {
         pool = FindObjectOfType<PoolManager>();
+        outline = GetComponent<Outline>();
         useSkillTime = 100f;
 
         TowerBuild();
@@ -287,5 +290,17 @@ public class TowerAttack : MonoBehaviour
     public void ChangeBoundaryColor(Color color)
     {
         boundary.color = color;
+    }
+
+    public void ShowOutLine(bool isShow)
+    {
+        if (isShow)
+        {
+            outline.OutlineWidth = outline.thisOutLine;
+        }
+        else
+        {
+            outline.OutlineWidth = 0f;
+        }
     }
 }

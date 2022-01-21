@@ -25,11 +25,13 @@ public class TowerArea : Area
             {
                 GameManager.Instance.UIManager.FMarkTrue();
                 GameManager.Instance.censorTower = tower;
+                tower.ShowOutLine(true);
             }
             else
             {
                 GameManager.Instance.UIManager.FMarkFalse();
                 GameManager.Instance.censorTower = null;
+                tower.ShowOutLine(false);
             }
         }
     }
