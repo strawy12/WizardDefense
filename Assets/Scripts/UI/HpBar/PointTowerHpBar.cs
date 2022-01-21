@@ -8,7 +8,7 @@ public class PointTowerHpBar : HpBar
     {
         base.Awake();
 
-        EventManager<int>.StartListening(ConstantManager.POINTTOWER_INIT, InitHpBar);
-        EventManager<int>.StartListening(ConstantManager.POINTTOWER_DAMAGED, UpdateHpBar);
+        EventManager<float>.StartListening(ConstantManager.POINTTOWER_INIT, InitHpBar);
+        EventManager<float>.StartListening(ConstantManager.POINTTOWER_DAMAGED, UpdateHpBar);
     }
 }

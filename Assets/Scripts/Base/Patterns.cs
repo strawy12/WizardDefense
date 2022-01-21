@@ -9,7 +9,7 @@ public class SpawnMonsterInfo
     public int spawnCount;
     public MonsterInfo monsterData;
 
-    public SpawnMonsterInfo(string id, int spawnCount, int maxHp, int defense, int attackPower)
+    public SpawnMonsterInfo(string id, int spawnCount, float maxHp, float defense, int attackPower)
     {
         monsterId = id;
         this.spawnCount = spawnCount;
@@ -22,7 +22,7 @@ public class PatternData
 {
     [Header("Pattern Setting")]
     public string ID;
-    public int cost;
+    public bool doReUse;
     public float nextPatternDelay;
 
     [Header("Monster Setting")]
@@ -33,15 +33,15 @@ public class PatternData
 
     public int spawnMonsterCnt { get { return monsterInfoList.Count; } }
 
-    public PatternData(string ID, int cost, float nextPatternDelay, float monsterSpawnDelay, DirectionType direction, List<SpawnMonsterInfo> monsterInfoList)
+    public PatternData(string ID, bool doReUse, float nextPatternDelay, float monsterSpawnDelay, DirectionType direction, List<SpawnMonsterInfo> monsterInfoList)
     {
-        this.cost = cost;
+        this.ID = ID;
+        this.doReUse = doReUse;
         this.direction = direction;
         this.monsterInfoList = monsterInfoList;
         this.nextPatternDelay = nextPatternDelay;
         this.monsterSpawnDelay = monsterSpawnDelay;
         this.monsterInfoList = monsterInfoList;
-
     }
 
 }

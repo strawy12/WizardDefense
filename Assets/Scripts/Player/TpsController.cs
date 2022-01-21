@@ -42,15 +42,16 @@ public class TpsController : MonoBehaviour
     {
         PlayerSet();
 
-        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]))
+        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
         {
-            if (GameManager.Instance.UIManager.isTarget)
+            if (GameManager.Instance.inGameState == InGameState.BreakTime)
                 GameManager.Instance.UIManager.Chang();
 
-            if (isTargetTower && GameManager.Instance.selectedTower == null)
+            if (GameManager.Instance.inGameState == InGameState.DefenseTime && GameManager.Instance.selectedTower == null)
             {
-                tower.ZoomInTower();
-                gameObject.SetActive(false);
+                //tower.ZoomInTower();
+                //gameObject.SetActive(false);
+                GameManager.Instance.censorTower?.ZoomInTower();
             }
         }
     }

@@ -5,25 +5,28 @@ using UnityEngine;
 public class Area : MonoBehaviour
 {
     Rigidbody rb;
-    [SerializeField] private Transform target;
-    [SerializeField] private float distance = 4f;
+    [SerializeField] protected Transform target;
+    [SerializeField] protected float distance = 4f;
 
     private bool isArea;
 
-    private void Start()    
+    protected virtual void Start()    
     {
         rb = GetComponent<Rigidbody>();
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        //target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        target = GameManager.Instance.player.transform;
     }
 
     private void Update()
     {
-        FollowTarget();
+        if(GameManager.Instance.inGameState == InGameState.BreakTime)
+        {
+            FollowTarget();
+        }
     }
 
-    private void FollowTarget()
+    protected virtual void FollowTarget()
     {
-
         if (Vector3.Distance(transform.position, target.position) < distance + 2)
         {
             if (Vector3.Distance(transform.position, target.position) < distance)
