@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fd59c42a10d8942ab10798c979e535, type: 3}
   m_Name: Waves
   m_EditorClassIdentifier: 
+  updateVersion: T.0.0.1
   waves:
-  - waveIndex: 0
-    maxCost: 0
-    patternIDs:
-    - 
-    - 
-    - 
+  - waveIndex: 1
+    availablePatternIDs:
+    - P_1
+    - P_2
+    - P_3
+    - P_4
+    - P_5
+    executionCnt: 5
+    existBoss: 0
+    bossID: 

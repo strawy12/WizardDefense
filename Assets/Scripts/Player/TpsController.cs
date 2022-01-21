@@ -8,11 +8,11 @@ public class TpsController : MonoBehaviour
 
     [SerializeField] private Transform cameraArm;
 
-    [Header("ÀÌµ¿¼Óµµ")] [SerializeField] private float normalSpeed = 5f;
-    [Header("´Þ¸®±â¼Óµµ")] [SerializeField] private float runSpeed = 8f;
-    [Header("°¨µµ")] [SerializeField] private float sensivity;
-    [Header("Á¡ÇÁ Èû")] [SerializeField] private float jumpPower = 2f;
-    [Header("·¹ÀÌÀú ±æÀÌ")] [SerializeField] private float maxDistance = 10f;
+    [Header("ï¿½Ìµï¿½ï¿½Óµï¿½")] [SerializeField] private float normalSpeed = 5f;
+    [Header("ï¿½Þ¸ï¿½ï¿½ï¿½Óµï¿½")] [SerializeField] private float runSpeed = 8f;
+    [Header("ï¿½ï¿½ï¿½ï¿½")] [SerializeField] private float sensivity;
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½")] [SerializeField] private float jumpPower = 2f;
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")] [SerializeField] private float maxDistance = 10f;
     
 
     private float speed;
@@ -45,13 +45,14 @@ public class TpsController : MonoBehaviour
 
         if (Input.GetKeyDown(/*KeyManager.keySettings[KeyAction.Interaction]*/KeyCode.F))
         {
-            if (GameManager.Instance.UIManager.isTarget)
+            if (GameManager.Instance.inGameState == InGameState.BreakTime)
                 GameManager.Instance.UIManager.Chang();
 
-            if (isTargetTower && GameManager.Instance.selectedTower == null)
+            if (GameManager.Instance.inGameState == InGameState.DefenseTime && GameManager.Instance.selectedTower == null)
             {
-                tower.ZoomInTower();
-                gameObject.SetActive(false);
+                //tower.ZoomInTower();
+                //gameObject.SetActive(false);
+                GameManager.Instance.censorTower?.ZoomInTower();
             }
         }
     }

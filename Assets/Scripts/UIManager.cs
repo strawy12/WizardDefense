@@ -290,4 +290,9 @@ public class UIManager : MonoBehaviour
         currentUIPanels.Remove(panel);
     }
     #endregion
+
+    public bool IsFMarkActive()
+    {
+        return FMark.activeSelf;
+    }
 }

@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] private Transform enemyLeftSpawnPoint;
-    [SerializeField] private Transform enemyRightSpawnPoint;
-    [SerializeField] private Transform targetPoint;
-    [SerializeField] private int waveMaxCost;
+    [SerializeField] private Transform enemyLeftSpawnPoint = null;
+    [SerializeField] private Transform enemyRightSpawnPoint = null;
+    [SerializeField] private Transform targetPoint = null;
+
+    private List<PatternData> patternDataList;
 
     private PatternData currentPattern;
     private WaveData currentWave;
 
-    private int currentCost = 0;
+    private Transform currentSpawnPoint;
+
+    private int waveIndex = 0;
+    private int currentPatternCnt = 0;
     private float nextPatternDelay = 0f;
 
     private SpawnMonsterInfo currentSpawnInfo = null;
@@ -23,32 +28,68 @@ public class WaveManager : MonoBehaviour
     {
         //Wave 데이터 가져오는 코드
     }
-    
+
     public IEnumerator StartWave()
     {
-        int patternIndex = 0;
-        while (currentCost < waveMaxCost)//currentWave.maxCost)
+        currentWave = GameManager.Instance.Data.GetWaveData(waveIndex);
+
+        SettingWaveData();
+
+        for(int i = 0; i < patternDataList.Count; i++)
         {
-            yield return InitPatternData(patternIndex);
+            Debug.Log(patternDataList[i].ID);
+        }
+
+        while (currentPatternCnt < currentWave.executionCnt)//currentWave.maxCost)
+        {
+            yield return InitPatternData(currentPatternCnt);
             yield return new WaitForSeconds(nextPatternDelay);
+        }
+    }
+
+    private void SettingWaveData()
+    {
+        int randIndex = 0;
+        patternDataList = new List<PatternData>();
+
+        List<string> patternIDList = currentWave.availablePatternIDs.ToList();
+
+        string pattern_ID = "";
+        PatternData pattern = null;
+
+        for (int i = 0; i < currentWave.executionCnt; i++)
+        {
+            randIndex = Random.Range(0, patternIDList.Count);
+
+            pattern_ID = patternIDList[randIndex];
+            pattern = GameManager.Instance.Data.FindPatternData(pattern_ID);
+            patternDataList.Add(pattern);
+
+            if(!pattern.doReUse)
+            {
+                patternIDList.RemoveAt(randIndex);
+            }
         }
     }
 
     private IEnumerator InitPatternData(int index)
     {
-        currentPattern = GameManager.Instance.Data.GetPatternData(index);
+        currentPattern = patternDataList[index];
 
         nextPatternDelay = currentPattern.nextPatternDelay;
-        currentCost += currentPattern.cost;
+
+        SetSpawnDirTrn();
 
         yield return GenerateMonsters();
+
+        currentPatternCnt++;
     }
-    
+
     public IEnumerator GenerateMonsters()
     {
         MonsterMove monster = null;
 
-        for(int i = 0; i < currentPattern.spawnMonsterCnt; i++)
+        for (int i = 0; i < currentPattern.spawnMonsterCnt; i++)
         {
             currentSpawnInfo = currentPattern.monsterInfoList[i];
             currentMonsterPref = GameManager.Instance.Data.FindMonsterPrefab(currentSpawnInfo.monsterId);
@@ -56,7 +97,7 @@ public class WaveManager : MonoBehaviour
 
             for (int j = 0; j < currentSpawnInfo.spawnCount; j++)
             {
-                monster = Instantiate(currentMonsterPref, GetSpawnDirTrn(), Quaternion.identity);
+                monster = Instantiate(currentMonsterPref, currentSpawnPoint.position, Quaternion.identity);
                 monster.Init(currentMonsterBase, targetPoint);
 
                 yield return new WaitForSeconds(currentPattern.monsterSpawnDelay);
@@ -64,16 +105,21 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private Vector3 GetSpawnDirTrn()
+    private void SetSpawnDirTrn()
     {
-        if(currentPattern.direction == DirectionType.Left)
+        switch (currentPattern.direction)
         {
-            return enemyLeftSpawnPoint.position;
-        }
+            case DirectionType.Left:
+                currentSpawnPoint = enemyLeftSpawnPoint;
+                break;
 
-        else
-        {
-            return enemyRightSpawnPoint.position;
+            case DirectionType.Right:
+                currentSpawnPoint = enemyRightSpawnPoint;
+                break;
+
+            case DirectionType.Random:
+                currentSpawnPoint = Random.Range(0, 2) == 0 ? enemyLeftSpawnPoint : enemyRightSpawnPoint;
+                break;
         }
     }
 }
