@@ -14,25 +14,24 @@ public class TowerArea : Area
 
     private void Update()
     {
-        if (GameManager.Instance.inGameState == InGameState.DefenseTime)
-        {
-            FollowTarget();
-        }
+        FollowTarget();
     }
 
     protected override void FollowTarget()
     {
-        if (Mathf.Abs(transform.position.x - target.position.x) < distance + 2)
+        if (Vector3.Distance(transform.position, target.position) < distance + 2)
         {
-            if (Mathf.Abs(transform.position.x - target.position.x) < distance)
+            if (Vector3.Distance(transform.position, target.position) < distance)
             {
                 GameManager.Instance.UIManager.FMarkTrue();
                 GameManager.Instance.censorTower = tower;
+                tower.ShowOutLine(true);
             }
             else
             {
                 GameManager.Instance.UIManager.FMarkFalse();
                 GameManager.Instance.censorTower = null;
+                tower.ShowOutLine(false);
             }
         }
     }

@@ -9,14 +9,17 @@ public class UIManager : MonoBehaviour
 {
     #region Tower UI Various
     [Header("Å¸¿ö UI")]
-    [SerializeField] private GameObject towerUI;
+    [SerializeField] private Image towerUI;
 
     [SerializeField] private Image towerStatBar;
     private Text towerStatText;
 
+    [SerializeField] private Transform towerButtons;
+
     [SerializeField] private Image skillImage;
     [SerializeField] private Image skillCoolTimeImage;
 
+    private EquipmentButton currentEquipButton;
     #endregion
 
     #region Panels Various
@@ -58,7 +61,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        ShowSkillUI(GameManager.Instance.selectedTower);
+        //ShowSkillUI(GameManager.Instance.selectedTower);
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -144,21 +147,31 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region TowerUI
-    public void ShowSkillUI(TowerAttack tower)
+    public void ShowSkillUI(TowerAttack tower, bool isActive)
     {
-        if (tower == null)
+        if (!isActive)
         {
-            if (towerUI.gameObject.activeSelf)
-                towerUI.gameObject.SetActive(false);
-
+            towerUI.gameObject.SetActive(false);
             skillCoolTimeImage.fillAmount = 0f;
-            return;
+            currentUIPanels.Remove(towerUI.gameObject);
         }
 
         else
         {
-            if (!towerUI.gameObject.activeSelf)
-                towerUI.gameObject.SetActive(true);
+            if(towerUI.gameObject.activeSelf)
+            {
+                towerUI.gameObject.SetActive(false);
+                SetGameState(GameState.Playing);
+                currentUIPanels.Remove(towerUI.gameObject);
+                return;
+            }
+
+            towerUI.gameObject.SetActive(true);
+            towerButtons.gameObject.SetActive(GameManager.Instance.inGameState == InGameState.BreakTime);
+            currentUIPanels.Add(towerUI.gameObject);
+
+            CursorLocked(false);
+            SetGameState(GameState.InGameSetting);
 
             if (!tower.CheckSkillCoolTime())
             {
@@ -185,7 +198,7 @@ public class UIManager : MonoBehaviour
 
     public void ActiveKeySettingPanal(bool isActive)
     {
-        if(isActive)
+        if (isActive)
         {
             ActivePanal(keySettingPanal);
         }
@@ -214,7 +227,7 @@ public class UIManager : MonoBehaviour
             buildChang.SetActive(true);
             currentUIPanels.Add(buildChang);
 
-            ActiveUIPanalState(true);
+            SetGameState(GameState.InGameSetting);
         }
         else
         {
@@ -222,7 +235,7 @@ public class UIManager : MonoBehaviour
             buildChang.SetActive(false);
             currentUIPanels.Remove(buildChang);
 
-            ActiveUIPanalState(false);
+            SetGameState(GameState.Playing);
         }
 
     }
@@ -241,13 +254,13 @@ public class UIManager : MonoBehaviour
     {
         if (isActive)
         {
-            Time.timeScale = 0f;
+            SetGameState(GameState.InGameSetting);
             GameManager.Instance.gameState = GameState.Setting;
         }
 
         else
         {
-            Time.timeScale = 1f;
+            SetGameState(GameState.Playing);
             GameManager.Instance.gameState = GameState.Playing;
         }
     }
@@ -289,10 +302,20 @@ public class UIManager : MonoBehaviour
     {
         currentUIPanels.Remove(panel);
     }
+
+    public void SetCurEquipBtn(EquipmentButton button)
+    {
+        currentEquipButton = button;
+    }
     #endregion
 
     public bool IsFMarkActive()
     {
         return FMark.activeSelf;
+    }
+
+    private void SetGameState(GameState gameState)
+    {
+        GameManager.Instance.gameState = gameState;
     }
 }

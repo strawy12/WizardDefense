@@ -46,28 +46,43 @@ public class TpsController : MonoBehaviour
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
         {
             if (GameManager.Instance.inGameState == InGameState.BreakTime)
-                GameManager.Instance.UIManager.Chang();
+            {
+                if (GameManager.Instance.censorTower == null)
+                {
+                    GameManager.Instance.UIManager.Chang();
+                }
+                else
+                {
+                    TowerBase tower = GameManager.Instance.censorTower.towerBase;
+                    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
+                    GameManager.Instance.UIManager.ShowTowerStatBar(true, tower.attackPower, tower.fireRate);
+                }
+            }
 
-            if (GameManager.Instance.inGameState == InGameState.DefenseTime && GameManager.Instance.selectedTower == null)
+            else if (GameManager.Instance.inGameState == InGameState.DefenseTime && GameManager.Instance.selectedTower == null)
             {
                 //tower.ZoomInTower();
                 //gameObject.SetActive(false);
                 GameManager.Instance.censorTower?.ZoomInTower();
+                GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
             }
         }
     }
 
     private void PlayerSet()
     {
-        LookAround();
         Move();
+
+        if (GameManager.Instance.gameState == GameState.InGameSetting) return;
+
+        LookAround();
         Jump();
         Run();
         Hit();
     }
     private void LookAround()
     {
-        if (GameManager.Instance.gameState == GameState.Setting) return;
+        if (GameManager.Instance.gameState == GameState.Setting || GameManager.Instance.gameState == GameState.InGameSetting) return;
 
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * sensivity, Input.GetAxis("Mouse Y") * sensivity);
         Vector3 cameraAngle = cameraArm.rotation.eulerAngles;
@@ -87,6 +102,12 @@ public class TpsController : MonoBehaviour
 
     private void Move()
     {
+        if (GameManager.Instance.gameState == GameState.InGameSetting)
+        {
+            animator.SetBool("isMove", false);
+            return;
+        }
+
         isRun = Input.GetKey(KeyCode.LeftShift);
         Vector2 moveInput = new Vector2(Input.GetAxis(ConstantManager.KEYINPUT_HMOVE), Input.GetAxis(ConstantManager.KEYINPUT_VMOVE));
         bool isMove = moveInput.magnitude != 0;
@@ -146,6 +167,7 @@ public class TpsController : MonoBehaviour
 
         Hit_TowerArea(cam);
         Hit_Monster(cam);
+        Hit_Tower(cam);
     }
 
     private void Hit_Monster(Camera cam)
@@ -167,12 +189,11 @@ public class TpsController : MonoBehaviour
                 }
             }
         }
-
     }
 
     private void Hit_TowerArea(Camera cam)
     {
-        Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance, Color.blue);
+        Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance, Color.red);
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitTowerAreaInfo, maxDistance))
         {
@@ -182,39 +203,54 @@ public class TpsController : MonoBehaviour
                 GameManager.Instance.UIManager.FMarkTrue();
                 isTarget = true;
             }
-            else if (hitTowerAreaInfo.transform.gameObject.CompareTag(ConstantManager.TOWER_TAG) && GameManager.Instance.inGameState == InGameState.DefenseTime)
-            {
-                tower = hitTowerAreaInfo.collider.gameObject.GetComponent<TowerAttack>();
 
-                if(!tower.isBuilding)
-                {
-                    isTargetTower = true;
-                    isTarget = false;
-                    GameManager.Instance.UIManager.FMarkTrue();
-                }
-
-                else
-                {
-                    GameManager.Instance.UIManager.FMarkFalse();
-                    isTarget = false;
-                    isTargetTower = false;
-                    tower = null;
-                }
-            }
             else
             {
                 GameManager.Instance.UIManager.AreaCheack();
                 GameManager.Instance.UIManager.FMarkFalse();
                 isTarget = false;
-                return;
             }
         }
 
         else
         {
             isTarget = false;
-            isTargetTower = false;
-            tower = null;
+        }
+    }
+
+    private void Hit_Tower(Camera cam)
+    {
+        Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance * 3, Color.white);
+
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitTowerAreaInfo, maxDistance * 3))
+        {
+            if (hitTowerAreaInfo.transform.gameObject.CompareTag(ConstantManager.TOWER_TAG))
+            {
+                tower = hitTowerAreaInfo.collider.gameObject.GetComponent<TowerAttack>();
+                GameManager.Instance.censorTower = tower;
+
+                if (!tower.isBuilding)
+                {
+                    isTargetTower = true;
+                    GameManager.Instance.UIManager.FMarkTrue();
+                    tower.ShowOutLine(true);
+                }
+
+                else
+                {
+                    GameManager.Instance.UIManager.FMarkFalse();
+                    tower.ShowOutLine(false);
+                    isTargetTower = false;
+                }
+            }
+            else
+            {
+                tower?.ShowOutLine(false);
+            }
+        }
+        else
+        {
+            tower?.ShowOutLine(false);
         }
     }
 }

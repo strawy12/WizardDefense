@@ -6,4 +6,5 @@ using UnityEngine;
 public class Attribute
 {
     public string attributeName;
+    public Sprite sprite;
 }
