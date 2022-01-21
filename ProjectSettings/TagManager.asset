@@ -18,9 +18,9 @@ TagManager:
   - UI
   - Enemy
   - Player
-  - 
-  - 
-  - 
+  - MinMapSprite
+  - World
+  - Boundary
   - 
   - 
   - 
