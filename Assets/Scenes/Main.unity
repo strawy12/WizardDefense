@@ -8534,9 +8534,9 @@ GameObject:
   - component: {fileID: 532996718}
   - component: {fileID: 532996720}
   - component: {fileID: 532996719}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -36397,7 +36397,6 @@ MonoBehaviour:
   - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
   - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
   needMax: 0
-  previewCamera: {fileID: 0}
   towerMom: {fileID: 252666117}
   tpsController: {fileID: 3981799115404936984}
 --- !u!4 &3190338561154849371
