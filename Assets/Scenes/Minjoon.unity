@@ -6623,7 +6623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &483931971
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7701,7 +7701,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22666
+  m_Name: pb_Mesh23686
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16218,10 +16218,14 @@ MonoBehaviour:
   home: {fileID: 516763626}
   selectedTower: {fileID: 0}
   censorTower: {fileID: 0}
+  selectedMonster: {fileID: 0}
   attributes:
   - attributeName: "\uBD88"
+    sprite: {fileID: 0}
   - attributeName: "\uBB3C"
+    sprite: {fileID: 0}
   - attributeName: "\uB178\uBA40"
+    sprite: {fileID: 0}
   skills:
   - bulletPrefab: {fileID: 3502457983775720577, guid: 020bc58a1ca1add47ac59ff48cc7a044, type: 3}
     coolTime: 3
@@ -16289,7 +16293,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6026c028ee6d2de45b509b640af9276a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultKeyCodes: 430100007100000066000000
   actionNames: []
 --- !u!114 &1168447618
 MonoBehaviour:
@@ -16305,6 +16308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerUI: {fileID: 170325786}
   towerStatBar: {fileID: 1137801653}
+  towerButtons: {fileID: 0}
   skillImage: {fileID: 1253667334}
   skillCoolTimeImage: {fileID: 1564320378}
   settingPanel: {fileID: 0}
