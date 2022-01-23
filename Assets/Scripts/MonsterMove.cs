@@ -22,10 +22,12 @@ public class MonsterMove : MonoBehaviour
 
     private UnitInfo unitInfo;
 
+    private Outline outline;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-
+        outline = GetComponent<Outline>();
     }
 
     private void Start()
@@ -36,11 +38,11 @@ public class MonsterMove : MonoBehaviour
 
     private void Update()
     {
-        if (!finished_Init) return;
-        if (agent.remainingDistance <= 3f)
-        {
-            AttackPointTower();
-        }
+        //if (!finished_Init) return;
+        //if (agent.remainingDistance <= 3f)
+        //{
+        //    AttackPointTower();
+        //}
     }
 
     public void Init(MonsterBase monsterBase, Transform target)
@@ -111,6 +113,18 @@ public class MonsterMove : MonoBehaviour
         unitInfo.currentHp = currentHp;
 
         EventManager<UnitInfo>.TriggerEvent(ConstantManager.MONSTER_GETINFO, unitInfo);
+    }
+
+    public void ShowOutLine(bool isShow)
+    {
+        if(isShow)
+        {
+            outline.OutlineWidth = outline.thisOutLine;
+        }
+        else
+        {
+            outline.OutlineWidth = 0f;
+        }
     }
 }
 public struct UnitInfo

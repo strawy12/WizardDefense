@@ -10,11 +10,14 @@ public class Area : MonoBehaviour
 
     private bool isArea;
 
+    Outline outline;
+
     protected virtual void Start()    
     {
         rb = GetComponent<Rigidbody>();
         //target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         target = GameManager.Instance.player.transform;
+        outline = GetComponent<Outline>();
     }
 
     private void Update()
@@ -34,11 +37,25 @@ public class Area : MonoBehaviour
                 TowerSelect.buildObj = gameObject;
                 TowerSelect.buildTrn = gameObject.transform;
                 GameManager.Instance.UIManager.FMarkTrue();
+                ShowOutline(true);
             }
             else
             {
                 GameManager.Instance.UIManager.FMarkFalse();
+                ShowOutline(false);
             }
+        }
+    }
+
+    public void ShowOutline(bool isShow)
+    {
+        if(isShow)
+        {
+            outline.OutlineWidth = outline.thisOutLine;
+        }
+        else
+        {
+            outline.OutlineWidth = 0f;
         }
     }
 }
