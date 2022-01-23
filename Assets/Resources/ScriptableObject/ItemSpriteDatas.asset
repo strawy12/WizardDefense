@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d87716fb4d34e7d4589356400a4cd94a, type: 3}
+  m_Name: ItemSpriteDatas
+  m_EditorClassIdentifier: 
+  itemSpriteDatas:
+  - itemId: I_FireCrystal
+    itemSprite: {fileID: -3696225328785611619, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_FireMushroom
+    itemSprite: {fileID: -7634698977955767800, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_Coal
+    itemSprite: {fileID: 3996138432854981312, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_WaterCrystal
+    itemSprite: {fileID: -7389470788071104723, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_HolyTear
+    itemSprite: {fileID: -8809284872407378732, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_BottleWithIcecap
+    itemSprite: {fileID: 7798176430303134427, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_TerraCrystal
+    itemSprite: {fileID: -295526885773654649, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_VenomRose
+    itemSprite: {fileID: -7436705337072871680, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_GolemParts
+    itemSprite: {fileID: 430185730278402344, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_CrystalAir
+    itemSprite: {fileID: -985634954173160559, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_FrozenCloud
+    itemSprite: {fileID: 6853479487659562942, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_SunOre
+    itemSprite: {fileID: -5889097526070578767, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_CrystalHoly
+    itemSprite: {fileID: -4393043739661462933, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_BottleWithWave
+    itemSprite: {fileID: 14152417229983804, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_ShadowParts
+    itemSprite: {fileID: 2367165233766041728, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_CrystalVoid
+    itemSprite: {fileID: -4076563384065651524, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_EternalFire
+    itemSprite: {fileID: -2080429644947752335, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
+  - itemId: I_VoidGap
+    itemSprite: {fileID: -189592961984123364, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}

@@ -106,7 +106,7 @@ public class MonsterMove : MonoBehaviour
         unitInfo.maxHp = monsterBase.info.maxHp;
         unitInfo.currentHp = currentHp;
 
-        EventManager<UnitInfo>.TriggerEvent(ConstantManager.MONSTER_GETINFO, unitInfo);
+        EventManager<UnitInfo>.TriggerEvent(ConstantManager.VIEW_UNITINFO, unitInfo);
     }
 }
 public struct UnitInfo

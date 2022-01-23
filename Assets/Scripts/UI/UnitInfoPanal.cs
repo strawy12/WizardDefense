@@ -25,7 +25,7 @@ public class UnitInfoPanal : MonoBehaviour
         unitHp = transform.GetChild(3).GetComponent<HpBar>();
         unitStatText = transform.GetChild(4).GetComponent<Text>();
 
-        EventManager<UnitInfo>.StartListening(ConstantManager.MONSTER_GETINFO, UpdateInfo);
+        EventManager<UnitInfo>.StartListening(ConstantManager.VIEW_UNITINFO, UpdateInfo);
         ClearPanal();
     }
 

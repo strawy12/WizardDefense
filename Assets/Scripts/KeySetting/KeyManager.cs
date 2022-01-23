@@ -28,14 +28,17 @@ public class KeyManager : MonoBehaviour
         defaultKeyCodes.Add(KeyCode.Alpha2);
         defaultKeyCodes.Add(KeyCode.Alpha3);
         defaultKeyCodes.Add(KeyCode.Alpha4);
-    }
 
-    private void Start()
-    {
+
         for (int i = 0; i < (int)KeyAction.Count; i++)
         {
             keySettings.Add((KeyAction)i, defaultKeyCodes[i]);
         }
+    }
+
+    private void Start()
+    {
+        
     }
 
     public void SetKeySetting(KeyAction action, KeyCode keycode)

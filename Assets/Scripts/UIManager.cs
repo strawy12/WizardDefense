@@ -37,13 +37,16 @@ public class UIManager : MonoBehaviour
 
     [Header("사용자 지정 키 전용")]
     [SerializeField] private GameObject keySettingPanal;
+    [SerializeField] private CanvasGroup inventoryCanvasGroup;
 
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
     private bool isArea;
     [HideInInspector] public bool isTarget;
 
-    void Start()
+    private bool turnOnInventory;
+
+    public void Awake()
     {
         towerStatText = towerStatBar.GetComponentInChildren<Text>();
 
@@ -63,6 +66,12 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SetCurrentPanels();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            turnOnInventory = !turnOnInventory;
+            TurnOnInventory(turnOnInventory);
         }
     }
 
@@ -294,5 +303,24 @@ public class UIManager : MonoBehaviour
     public bool IsFMarkActive()
     {
         return FMark.activeSelf;
+    }
+
+    private void TurnOnInventory(bool turnOn)
+    {
+        GameManager.Instance.gameState = turnOn? GameState.Setting : GameState.Playing;
+        CursorLocked(!turnOn);
+        inventoryCanvasGroup.DOKill();
+        inventoryCanvasGroup.DOFade(turnOn ? 1f : 0f, 0.25f).SetUpdate(true);
+
+        if(turnOn)
+        {
+            currentUIPanels.Add(inventoryCanvasGroup.gameObject);
+            EventManager.TriggerEvent(ConstantManager.TURNON_INVENTORY);
+        }
+
+        else
+        {
+            currentUIPanels.Remove(inventoryCanvasGroup.gameObject);
+        }
     }
 }
