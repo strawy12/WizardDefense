@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.49192142, g: 0.68285924, b: 0.7869214, a: 1}
+  m_IndirectSpecularColor: {r: 0.49181455, g: 0.6827746, b: 0.78682506, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8534,7 +8534,7 @@ GameObject:
   - component: {fileID: 532996718}
   - component: {fileID: 532996720}
   - component: {fileID: 532996719}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12883,7 +12883,7 @@ GameObject:
   m_Component:
   - component: {fileID: 849981576}
   - component: {fileID: 849981577}
-  m_Layer: 11
+  m_Layer: 16
   m_Name: MinMapSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27997,7 +27997,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 98304
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: f1ba6bf3afeafa940a59cde40b44b6b9, type: 2}
   m_TargetDisplay: 0
@@ -33511,6 +33511,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 18080964397476881, guid: 6f8bace23876a074ca3cc1e76f74fe96, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2026250792155139495, guid: 6f8bace23876a074ca3cc1e76f74fe96, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -36397,7 +36401,6 @@ MonoBehaviour:
   - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
   - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
   needMax: 0
-  previewCamera: {fileID: 0}
   towerMom: {fileID: 252666117}
   tpsController: {fileID: 3981799115404936984}
 --- !u!4 &3190338561154849371
@@ -40523,7 +40526,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3337387513816233599}
   - component: {fileID: 1290240726584610544}
-  m_Layer: 11
+  m_Layer: 16
   m_Name: MinMapSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40540,7 +40543,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3337387513546771885}
   - component: {fileID: 1290240726315169058}
-  m_Layer: 11
+  m_Layer: 16
   m_Name: MinMapSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40557,7 +40560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3337387513492533565}
   - component: {fileID: 1290240726261402034}
-  m_Layer: 11
+  m_Layer: 16
   m_Name: MinMapSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40574,7 +40577,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3337387512258313269}
   - component: {fileID: 1290240726100952250}
-  m_Layer: 11
+  m_Layer: 16
   m_Name: MinMapSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40591,7 +40594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3337387512260226140}
   - component: {fileID: 1290240726103102675}
-  m_Layer: 11
+  m_Layer: 16
   m_Name: MinMapSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40608,7 +40611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3337387512069301878}
   - component: {fileID: 1290240725911428857}
-  m_Layer: 11
+  m_Layer: 16
   m_Name: MinMapSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40625,7 +40628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3337387512874459060}
   - component: {fileID: 1290240725643077435}
-  m_Layer: 11
+  m_Layer: 16
   m_Name: MinMapSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40642,7 +40645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3337387512517191966}
   - component: {fileID: 1290240725286326673}
-  m_Layer: 11
+  m_Layer: 16
   m_Name: MinMapSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40725,7 +40728,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2047
+    m_Bits: 33791
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
