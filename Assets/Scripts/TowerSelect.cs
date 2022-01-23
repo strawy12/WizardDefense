@@ -21,14 +21,12 @@ public class TowerSelect : MonoBehaviour
 
     [HideInInspector] public int needMax;
 
-    [Header("프리뷰 카메라")] [SerializeField] private Camera previewCamera = null;
     [Header("타워 부모 위치")] [SerializeField] private Transform towerMom;
 
     public static Transform buildTrn;
     public static GameObject buildObj;
 
     private int selectTower;
-    private bool isOutPreView = false;
 
     public TpsController tpsController;
 
@@ -123,17 +121,7 @@ public class TowerSelect : MonoBehaviour
             buildBtn.interactable = false;
         }
     }
-
-    public void OnClickPreviewOut()
-    {
-        isOutPreView = true;
-    }
-
-    public void OnClickPreView()
-    {
-
-    }
-
+    
     private void TowerNum(GameObject _tower)
     {
         switch (selectTower)
