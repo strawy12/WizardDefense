@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 7280627589862013460}
   - component: {fileID: 7280627589862013461}
   - component: {fileID: -6421482014747537087}
+  - component: {fileID: -2862012984650801508}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Tower
@@ -94,7 +95,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dd6e5ef9e90dc7643baf4a79def5bc29, type: 2}
+  - {fileID: 2100000, guid: c3f6edbd7eb40294086d847271205741, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -147,6 +148,7 @@ MonoBehaviour:
     level: 0
     attribute:
       attributeName: "\uB178\uBA40"
+      sprite: {fileID: 0}
     fireRate: 1
     handFireRate: 0.2
     distance: 25
@@ -161,6 +163,7 @@ MonoBehaviour:
     attributeName: 
     skillSprite: {fileID: 0}
   isBuilding: 0
+  outlineWidth: 15
 --- !u!114 &-6421482014747537087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +177,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  distance: 7
+  distance: 4
+--- !u!114 &-2862012984650801508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7280627589862013462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &7622507184708523043
 GameObject:
   m_ObjectHideFlags: 0

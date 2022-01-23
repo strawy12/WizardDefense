@@ -1,0 +1,258 @@
+fileFormatVersion: 2
+guid: c2605268e0f8c664daeb8ca6b1b2577f
+labels:
+- fantasy
+- Creature
+- Monster
+- Slime
+timeCreated: 1445069057
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Bone001
+    100002: Bone002
+    100004: Com
+    100006: Crown
+    100008: //RootNode
+    100010: King_SlimeDM
+    100012: Slime
+    400000: Bone001
+    400002: Bone002
+    400004: Com
+    400006: Crown
+    400008: //RootNode
+    400010: King_SlimeDM
+    400012: Slime
+    4300000: Crown
+    4300002: Slime
+    7400000: King_Slime_Idle
+    7400002: King_Slime_Walk
+    7400004: King_Slime_Damage
+    7400006: King_Slime_Attack01
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Crown
+    13700002: Slime
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: King_Slime_Idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: King_SlimeDM
+        weight: 1
+      - path: King_SlimeDM/Com
+        weight: 1
+      - path: King_SlimeDM/Com/Bone001
+        weight: 1
+      - path: King_SlimeDM/Com/Bone001/Crown
+        weight: 1
+      - path: King_SlimeDM/Com/Bone002
+        weight: 1
+      - path: Slime
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: King_Slime_Walk
+      takeName: Take 001
+      firstFrame: 35
+      lastFrame: 65
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: King_SlimeDM
+        weight: 1
+      - path: King_SlimeDM/Com
+        weight: 1
+      - path: King_SlimeDM/Com/Bone001
+        weight: 1
+      - path: King_SlimeDM/Com/Bone001/Crown
+        weight: 1
+      - path: King_SlimeDM/Com/Bone002
+        weight: 1
+      - path: Slime
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: King_Slime_Damage
+      takeName: Take 001
+      firstFrame: 70
+      lastFrame: 90
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: King_SlimeDM
+        weight: 1
+      - path: King_SlimeDM/Com
+        weight: 1
+      - path: King_SlimeDM/Com/Bone001
+        weight: 1
+      - path: King_SlimeDM/Com/Bone001/Crown
+        weight: 1
+      - path: King_SlimeDM/Com/Bone002
+        weight: 1
+      - path: Slime
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: King_Slime_Attack01
+      takeName: Take 001
+      firstFrame: 90
+      lastFrame: 115
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: King_SlimeDM
+        weight: 1
+      - path: King_SlimeDM/Com
+        weight: 1
+      - path: King_SlimeDM/Com/Bone001
+        weight: 1
+      - path: King_SlimeDM/Com/Bone001/Crown
+        weight: 1
+      - path: King_SlimeDM/Com/Bone002
+        weight: 1
+      - path: Slime
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

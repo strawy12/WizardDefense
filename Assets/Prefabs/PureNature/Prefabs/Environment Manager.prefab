@@ -43,13 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c87be04fee6674ab4942ca4762d482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseWindPower: 1
-  baseWindSpeed: 1
-  burstsPower: 2
-  burstsSpeed: 5
-  burstsScale: 7
-  microPower: 0.1
-  microSpeed: 1
-  microFrequency: 3
-  renderDistance: 30
-  showWind: 0
+  baseWindPower: 0
+  baseWindSpeed: 0.1
+  burstsPower: 0
+  burstsSpeed: -5.18
+  burstsScale: -158
+  microPower: 1
+  microSpeed: -40.74
+  microFrequency: -8.25
+  renderDistance: 8.62
+  showWind: 1

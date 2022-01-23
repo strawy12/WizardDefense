@@ -1,0 +1,72 @@
+
+[Org_Slime_Ani]
+
+Org_Slime_Idle : 0-30 Frame
+
+Org_Slime_Walk : 35-65 Frame
+
+Org_Slime_Damage : 70-85 or 70-90 Frame
+
+Org_Slime_Attack : 90-110 or 90-115 Frame
+
+
+[Helmet_Slime_Ani]
+
+Helmet_Slime_Idle : 0-30 Frame
+
+Helmet_Slime_Walk : 30-60 Frame
+
+Helmet_Slime_Damage : 65-80 or 65-85 Frame
+
+Helmet_Slime_Attack01 : 85-105 or 85-110 Frame
+
+Helmet_Slime_Attack02 : 110-135 or 110-140 Frame
+
+
+[Boom_Slime_Ani]
+
+Boom_Slime_Idle : 0-30 Frame
+
+Boom_Slime_Walk : 30-60 Frame
+
+Boom_Slime_Damage : 65-80 or 65-85 Frame
+
+Boom_Slime_Attack01 : 85-105 or 85-110 Frame
+
+Boom_Slime_Attack02 : 110-135 or 110-140 Frame
+
+
+[King_Slime_Ani]
+
+King_Slime_Idle : 0-30 Frame
+
+King_Slime_Walk : 35-65 Frame
+
+King_Slime_Damage : 70-85 or 70-90 Frame
+
+King_Slime_Attack : 90-110 or 90-115 Frame
+
+
+[Zombie_Slime_Ani]
+
+Zombie_Slime_Idle : 0-30 Frame
+
+Zombie_Slime_Walk : 30-60 Frame
+
+Zombie_Slime_Damage : 65-80 or 65-85 Frame
+
+Zombie_Slime_Attack01 : 85-105 or 85-110 Frame
+
+Zombie_Slime_Attack02 : 110-135 or 110-140 Frame
+
+
+[Ghost_Slime_Ani]
+
+Ghost_Slime_Idle : 0-30 Frame
+
+Ghost_Slime_Walk : 30-60 or 30-65 Frame 
+
+Ghost_Slime_Damage : 65-85 Frame or 65-90 Frame
+
+Ghost_Slime_Attack : 90-115 or 90-120 Frame
+

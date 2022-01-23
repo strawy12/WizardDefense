@@ -1,0 +1,191 @@
+fileFormatVersion: 2
+guid: e769ca8e733cf5940ab28fa810341e3a
+timeCreated: 1444574504
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: GlassDM
+    100002: GlassDM001
+    100004: GlassDM002
+    100006: GlassLink003
+    100008: GlassLink004
+    100010: GlassLink005
+    100012: GlassLink006
+    100014: GlassLink01
+    100016: GlassLink02
+    100018: Grass001
+    100020: Grass002
+    100022: Grass003
+    100024: //RootNode
+    100026: Ground
+    100028: stone034
+    100030: stone035
+    100032: stone036
+    100034: stone33
+    400000: GlassDM
+    400002: GlassDM001
+    400004: GlassDM002
+    400006: GlassLink003
+    400008: GlassLink004
+    400010: GlassLink005
+    400012: GlassLink006
+    400014: GlassLink01
+    400016: GlassLink02
+    400018: Grass001
+    400020: Grass002
+    400022: Grass003
+    400024: //RootNode
+    400026: Ground
+    400028: stone034
+    400030: stone035
+    400032: stone036
+    400034: stone33
+    2300000: Ground
+    2300002: stone034
+    2300004: stone035
+    2300006: stone036
+    2300008: stone33
+    3300000: Ground
+    3300002: stone034
+    3300004: stone035
+    3300006: stone036
+    3300008: stone33
+    4300000: Ground
+    4300002: Grass001
+    4300004: stone33
+    4300006: stone034
+    4300008: stone035
+    4300010: stone036
+    4300012: Grass002
+    4300014: Grass003
+    7400000: Ground_Grass_Ani
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Grass001
+    13700002: Grass002
+    13700004: Grass003
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Ground_Grass_Ani
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 150
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: GlassDM
+        weight: 1
+      - path: GlassDM/GlassLink01
+        weight: 1
+      - path: GlassDM/GlassLink01/GlassLink02
+        weight: 1
+      - path: GlassDM001
+        weight: 1
+      - path: GlassDM001/GlassLink003
+        weight: 1
+      - path: GlassDM001/GlassLink003/GlassLink004
+        weight: 1
+      - path: GlassDM002
+        weight: 1
+      - path: GlassDM002/GlassLink005
+        weight: 1
+      - path: GlassDM002/GlassLink005/GlassLink006
+        weight: 1
+      - path: Grass001
+        weight: 1
+      - path: Grass002
+        weight: 1
+      - path: Grass003
+        weight: 1
+      - path: Ground
+        weight: 1
+      - path: stone33
+        weight: 1
+      - path: stone034
+        weight: 1
+      - path: stone035
+        weight: 1
+      - path: stone036
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -31,6 +31,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public TowerAttack selectedTower;
     public TowerAttack censorTower;
+    public MonsterMove selectedMonster;
 
     public List<MonsterMove> enemies { get; private set; } = new List<MonsterMove>();
     public List<Attribute> attributes = new List<Attribute>();
@@ -108,4 +109,5 @@ public class GameManager : MonoSingleton<GameManager>
     {
         breakTime = 0f;
     }
+
 }
