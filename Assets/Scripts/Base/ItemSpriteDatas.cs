@@ -16,6 +16,6 @@ public class ItemSpriteDatas : ScriptableObject
 
     public Sprite FindItemSprite(string id)
     {
-        return itemSpriteDatas.Find((item) => item.itemId == id).itemSprite;
+        return itemSpriteDatas.Find((item) => item.itemId == id)?.itemSprite;
     }
 }

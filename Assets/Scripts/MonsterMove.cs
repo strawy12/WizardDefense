@@ -38,11 +38,11 @@ public class MonsterMove : MonoBehaviour
 
     private void Update()
     {
-        //if (!finished_Init) return;
-        //if (agent.remainingDistance <= 3f)
-        //{
-        //    AttackPointTower();
-        //}
+        if (!finished_Init) return;
+        if (agent.velocity.magnitude > 0.2f && agent.remainingDistance <= 3f)
+        {
+           AttackPointTower();
+        }
     }
 
     public void Init(MonsterBase monsterBase, Transform target)
@@ -95,6 +95,7 @@ public class MonsterMove : MonoBehaviour
     public void Dead()
     {
         GameManager.Instance.enemies.Remove(this);
+        GameManager.Instance.SpawnPropertyItem(monsterBase.monsterType, transform.position);
         Destroy(gameObject);
     }
 
