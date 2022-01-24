@@ -13,4 +13,9 @@ public class MonsterPrefab
 public class MonsterPrefabDatas : ScriptableObject
 {
     public List<MonsterPrefab> monsterPrefabDatas;
-}
+
+    public MonsterMove FindMonsterPrefab(string id)
+    {
+        return monsterPrefabDatas.Find((monster) => monster.monster_ID == id).monster_Prefab;
+    }
+} 

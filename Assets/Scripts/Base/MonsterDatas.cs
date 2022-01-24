@@ -24,7 +24,7 @@ public class MonsterBase
     public string monsterId;
     public PropertyType monsterType;
     public MonsterInfo  info;
-    public List<ItemBase> dropItemList;
+    public List<ItemDatas> dropItemList;
 
 
     public MonsterBase(string id,string name, PropertyType type)
