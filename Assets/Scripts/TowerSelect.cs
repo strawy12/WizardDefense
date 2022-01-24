@@ -21,8 +21,6 @@ public class TowerSelect : MonoBehaviour
 
     [HideInInspector] public int needMax;
 
-    [Header("타워 부모 위치")] [SerializeField] private Transform towerMom;
-
     public static Transform buildTrn;
     public static GameObject buildObj;
 
@@ -142,6 +140,6 @@ public class TowerSelect : MonoBehaviour
                 break;
         }
 
-        _tower.transform.SetParent(towerMom);
+        _tower.transform.SetParent(null);
     }
 }
