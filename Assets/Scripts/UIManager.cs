@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image towerUI;
 
     [SerializeField] private Image towerStatBar;
-    private Text towerStatText;
+    [SerializeField] private Text towerStatText;
 
     [SerializeField] private Transform towerButtons;
 
@@ -42,12 +42,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject keySettingPanal;
     [SerializeField] private InventoryUIManager inventoryUIManager;
 
-
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
     private bool isArea;
     private bool turnOnInventory;
     [HideInInspector] public bool isTarget;
+
+    public GameObject quickSlot;
 
     void Start()
     {
@@ -64,14 +65,14 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        //ShowSkillUI(GameManager.Instance.selectedTower);
+        ShowSkillUI(GameManager.Instance.selectedTower);
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SetCurrentPanels();
         }
 
-        if(Input.GetKeyDown(KeyManager.keySettings[KeyAction.Inventory]))
+        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Inventory]))
         {
             if (settingPanel.activeSelf) return;
 
@@ -145,13 +146,16 @@ public class UIManager : MonoBehaviour
     public void ActiveSettingPanel()
     {
         CursorLocked(settingPanel.activeSelf);
+
         if (settingPanel.activeSelf)
         {
             ActiveUIPanalState(false);
+            Time.timeScale = 1f;
         }
         else
         {
             ActiveUIPanalState(true);
+            Time.timeScale = 0f;
         }
 
         settingPanel.SetActive(!settingPanel.activeSelf);
@@ -159,30 +163,28 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region TowerUI
-    public void ShowSkillUI(TowerAttack tower, bool isActive)
+    public void ShowSkillUI(TowerAttack tower)
     {
-        if (tower == null) return;
-
-        if (!isActive)
+        if (tower == null)
         {
             towerUI.gameObject.SetActive(false);
             skillCoolTimeImage.fillAmount = 0f;
-            currentUIPanels.Remove(towerUI.gameObject);
+            return;
         }
 
         else
         {
-            if(towerUI.gameObject.activeSelf)
-            {
-                towerUI.gameObject.SetActive(false);
-                SetGameState(GameState.Playing);
-                currentUIPanels.Remove(towerUI.gameObject);
-                return;
-            }
+            //if (towerUI.gameObject.activeSelf)
+            //{
+            //    towerUI.gameObject.SetActive(false);
+            //    SetGameState(GameState.Playing);
+            //    //currentUIPanels.Remove(towerUI.gameObject);
+            //    return;
+            //}
 
             towerUI.gameObject.SetActive(true);
             towerButtons.gameObject.SetActive(GameManager.Instance.inGameState == InGameState.BreakTime);
-            currentUIPanels.Add(towerUI.gameObject);
+            //currentUIPanels.Add(towerUI.gameObject);
 
             CursorLocked(false);
             SetGameState(GameState.InGameSetting);
@@ -196,6 +198,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowTowerStatBar(bool isShow, int attack = 0, float speed = 0)
     {
+        Debug.Log("ff");
         towerStatBar.gameObject.SetActive(isShow);
         towerStatText.text = string.Format("공격력 {0}\n공격속도 {1}", attack, speed);
     }

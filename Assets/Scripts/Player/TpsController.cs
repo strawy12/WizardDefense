@@ -65,10 +65,10 @@ public class TpsController : MonoBehaviour
             //    GameManager.Instance.UIManager.ShowTowerStatBar(true, tower.attackPower, tower.fireRate);
             //}
 
-            if (GameManager.Instance.inGameState == InGameState.DefenseTime && GameManager.Instance.selectedTower == null && !isTargetTower)
+            if (GameManager.Instance.inGameState == InGameState.DefenseTime && GameManager.Instance.selectedTower == null && isTargetTower)
             {
                 GameManager.Instance.censorTower?.ZoomInTower();
-                GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
+                GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
             }
         }
 
