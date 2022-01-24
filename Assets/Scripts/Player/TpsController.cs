@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class TpsController : MonoBehaviour
 {
     [SerializeField] private Transform characterBody;
     [SerializeField] private Transform cameraArm;
-    public Vector3 originalRot;
+    public Vector3 towerPos;
 
     [Header("이동속도")] [SerializeField] private float normalSpeed = 5f;
     [Header("달리기속도")] [SerializeField] private float runSpeed = 8f;
@@ -23,6 +22,7 @@ public class TpsController : MonoBehaviour
     private bool jDown;
     private bool isRun;
     private bool isJump;
+    private bool isTowerRun;
     private bool isTarget = false;
     private bool isTargetTower = false;
 
@@ -32,6 +32,7 @@ public class TpsController : MonoBehaviour
     private Rigidbody myrigid;
 
     private TowerAttack tower;
+    private float fieldOfView;
 
     private void Start()
     {
@@ -42,17 +43,13 @@ public class TpsController : MonoBehaviour
     private void Update()
     {
         if (GameManager.Instance.gameState == GameState.Setting) return;
-
         PlayerSet();
-
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
         {
+
             if (GameManager.Instance.inGameState == InGameState.BreakTime)
             {
-                if (GameManager.Instance.censorTower == null)
-                {
-                    GameManager.Instance.UIManager.Chang();
-                }
+                GameManager.Instance.UIManager.Chang();
                 //else
                 //{
                 //    TowerBase tower = GameManager.Instance.censorTower.towerBase;
@@ -68,6 +65,27 @@ public class TpsController : MonoBehaviour
                 GameManager.Instance.censorTower?.ZoomInTower();
                 GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
             }
+        }
+
+        if (Input.GetMouseButtonDown(0) && GameManager.Instance.censorTower != null && !isTowerRun)
+        {
+            towerPos = GameManager.Instance.censorTower.transform.position - new Vector3(0f, 0f, 5f);
+            if (Vector3.Distance(towerPos, transform.position) < 10f || GameManager.Instance.UIManager.IsFMarkActive()) return;
+            fieldOfView = 3f * Vector3.Distance(towerPos, transform.position);
+            fieldOfView = Mathf.Clamp(fieldOfView, 60f, 120f);
+
+            GameManager.Instance.tpsCamera.fieldOfView = fieldOfView;
+            isTowerRun = true;
+
+            transform.DOMove(towerPos, 1f).OnComplete(() =>
+            {
+                isTowerRun = false;
+            });
+        }
+
+        if (GameManager.Instance.tpsCamera.fieldOfView > 60f)
+        {
+            GameManager.Instance.tpsCamera.fieldOfView -= Time.deltaTime * (fieldOfView - 60f);
         }
     }
 
@@ -233,7 +251,7 @@ public class TpsController : MonoBehaviour
             else
             {
                 GameManager.Instance.UIManager.AreaCheack();
-                GameManager.Instance.UIManager.FMarkFalse();
+                //GameManager.Instance.UIManager.FMarkFalse();
                 hitTowerAreaInfo.transform.GetComponent<Area>()?.ShowOutline(false);
                 isTarget = false;
             }
@@ -247,25 +265,36 @@ public class TpsController : MonoBehaviour
 
     private void Hit_Tower(Camera cam)
     {
-        Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance * 3, Color.white);
-
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitTowerAreaInfo, maxDistance * 3))
+        Debug.DrawRay(cam.transform.position, cam.transform.forward * 999f, Color.white);
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitTowerAreaInfo, 999f))
         {
             if (hitTowerAreaInfo.transform.gameObject.CompareTag(ConstantManager.TOWER_TAG))
             {
                 tower = hitTowerAreaInfo.collider.gameObject.GetComponent<TowerAttack>();
                 GameManager.Instance.censorTower = tower;
 
+
                 if (!tower.isBuilding)
                 {
-                    isTargetTower = true;
-                    GameManager.Instance.UIManager.FMarkTrue();
+                    if (GameManager.Instance.inGameState == InGameState.DefenseTime)
+                    {
+                        if (Vector3.Distance(transform.position, tower.transform.position) > 10f)
+                        {
+                            isTargetTower = false;
+                            GameManager.Instance.UIManager.FMarkFalse();
+                        }
+                        else
+                        {
+                            GameManager.Instance.UIManager.FMarkTrue();
+                            isTargetTower = true;
+                        }
+                    }
+
                     tower.ShowOutLine(true);
                 }
 
                 else
                 {
-                    GameManager.Instance.UIManager.FMarkFalse();
                     tower.ShowOutLine(false);
                     isTargetTower = false;
                 }
@@ -273,11 +302,14 @@ public class TpsController : MonoBehaviour
             else
             {
                 tower?.ShowOutLine(false);
+                GameManager.Instance.censorTower = null;
+                isTargetTower = false;
             }
         }
         else
         {
             tower?.ShowOutLine(false);
+            isTargetTower = false;
         }
     }
 }

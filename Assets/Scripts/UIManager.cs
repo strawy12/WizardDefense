@@ -67,6 +67,9 @@ public class UIManager : MonoBehaviour
         {
             SetCurrentPanels();
         }
+
+        //Debug.Log(IsFMarkActive());
+
     }
 
     public void SetTimer(float time)

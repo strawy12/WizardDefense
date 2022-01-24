@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 7280627589862013467}
   - component: {fileID: 7280627589862013460}
   - component: {fileID: 7280627589862013461}
-  - component: {fileID: -6421482014747537087}
   m_Layer: 0
   m_Name: Tower 1
   m_TagString: Tower
@@ -151,7 +150,7 @@ MonoBehaviour:
       attributeName: "\uB178\uBA40"
       sprite: {fileID: 0}
     fireRate: 1
-    handFireRate: 0.2
+    handFireRate: 0.8
     distance: 25
     hp: 0
   muzzlePosition: {fileID: 7280627589289538551}
@@ -164,20 +163,6 @@ MonoBehaviour:
     attributeName: 
     skillSprite: {fileID: 0}
   isBuilding: 0
---- !u!114 &-6421482014747537087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7280627589862013462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 374ec18a0c82cc943b786e8fc8cb0f74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  distance: 7
 --- !u!1 &7622507184708523043
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,9 +434,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 8.7
+  outlineWidth: 0
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
