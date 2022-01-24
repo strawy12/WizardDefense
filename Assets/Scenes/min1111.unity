@@ -1725,7 +1725,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 892, y: -236.00003}
+  m_AnchoredPosition: {x: 892, y: -236}
   m_SizeDelta: {x: -1439.9999, y: -750.18146}
   m_Pivot: {x: -0.5, y: 0.9}
 --- !u!114 &61055338
@@ -19537,7 +19537,7 @@ RectTransform:
   - {fileID: 1899502339}
   - {fileID: 1865605737}
   m_Father: {fileID: 3190338561830825708}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -24054,12 +24054,12 @@ Transform:
   m_GameObject: {fileID: 983873105}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.99934936, y: 0.99934936, z: 0.99934936}
   m_Children:
   - {fileID: 692508598}
   - {fileID: 356545414}
   m_Father: {fileID: 3190338561830825708}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &983873107
 MonoBehaviour:
@@ -28112,10 +28112,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerUI: {fileID: 550523006}
-  towerStatBar: {fileID: 1137801653}
+  towerStatBar: {fileID: 1895921487}
+  towerStatText: {fileID: 928657466}
   towerButtons: {fileID: 2009820018}
-  skillImage: {fileID: 1253667334}
-  skillCoolTimeImage: {fileID: 1564320378}
+  skillImage: {fileID: 337842929}
+  skillCoolTimeImage: {fileID: 1671525243}
   settingPanel: {fileID: 292482971}
   FMark: {fileID: 1011739}
   buildChang: {fileID: 3190338562441343485}
@@ -28125,6 +28126,7 @@ MonoBehaviour:
   keySettingPanal: {fileID: 161511721}
   inventoryUIManager: {fileID: 466174379}
   isTarget: 0
+  quickSlot: {fileID: 790365573}
 --- !u!1 &1169776964
 GameObject:
   m_ObjectHideFlags: 0
@@ -42296,7 +42298,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1780939660}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.072945, y: -30.970001, z: 60.6}
+  m_LocalPosition: {x: 43.072945, y: -29.67, z: 60.6}
   m_LocalScale: {x: 160, y: 150, z: 140}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54291,8 +54293,8 @@ RectTransform:
   - {fileID: 550523005}
   - {fileID: 1463555056}
   - {fileID: 3190338562441343484}
-  - {fileID: 983873106}
   - {fileID: 790365574}
+  - {fileID: 983873106}
   - {fileID: 466174378}
   - {fileID: 292482972}
   m_Father: {fileID: 0}
