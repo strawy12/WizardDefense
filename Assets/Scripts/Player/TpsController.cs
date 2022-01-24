@@ -153,7 +153,7 @@ public class TpsController : MonoBehaviour
             //characterBody.forward = lookForWard;
 
 
-            characterBody.forward = moveDir;
+            characterBody.forward += moveDir;
 
             //transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
 
