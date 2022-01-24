@@ -44,6 +44,12 @@ public class InventorySettingPanal : MonoBehaviour, IPointerClickHandler
         TurnOffSettingPanal();
     }
 
+    public void OnClickEquipBtn()
+    {
+        EventManager.TriggerEvent(ConstantManager.INVENTORY_CLICK_EQUIPBTN);
+        TurnOffSettingPanal();
+    }
+
     private void TurnOffSettingPanal()
     {
         gameObject.SetActive(false);

@@ -5,6 +5,7 @@ public static class ConstantManager
     public const string INVENTORY_TURNOFF_SETTING = "IN_T_S";
     public const string INVENTORY_CLICK_MOVEBTN = "IN_C_MB";
     public const string INVENTORY_CLICK_DROPBTN = "IN_C_DB";
+    public const string INVENTORY_CLICK_EQUIPBTN = "IN_C_EB";
     public const string INVENTORY_CLICK_BACKGROUND = "IN_C_BG";
     public const string INVENTORY_DROP = "IN_DP";
 

@@ -9,6 +9,12 @@ public class InventoryUIManager : MonoBehaviour
     [SerializeField] private RectTransform targetPicker;
     [SerializeField] private InventorySettingPanal slotSettingPanal;
 
+    [SerializeField] private Transform quickSlotTrs;
+    [SerializeField] private Transform itemSlotTrs;
+
+    private InventoryQuickSlot[] quickSlots;
+    private InventorySlot[] itemSlots;
+
     private InventorySlot selectSlot;
     private ItemBase selectItem;
 
@@ -19,10 +25,14 @@ public class InventoryUIManager : MonoBehaviour
 
     private void Start()
     {
+        quickSlots = quickSlotTrs.GetChild(0).GetComponentsInChildren<InventoryQuickSlot>();
+        itemSlots = itemSlotTrs.GetChild(0).GetComponentsInChildren<InventorySlot>();
+
         EventManager<InventorySlot>.StartListening(ConstantManager.INVENTORY_CLICK_LEFT, SelectSlot);
         EventManager<InventorySlot>.StartListening(ConstantManager.INVENTORY_CLICK_RIGHT, SettingSlot);
         EventManager.StartListening(ConstantManager.INVENTORY_CLICK_MOVEBTN, SettingMoveEvent);
         EventManager.StartListening(ConstantManager.INVENTORY_CLICK_DROPBTN, DropEvent);
+        EventManager.StartListening(ConstantManager.INVENTORY_CLICK_EQUIPBTN, EquipEvent);
         EventManager.StartListening(ConstantManager.INVENTORY_CLICK_BACKGROUND, SelectItemDropEvent);
     }
 
@@ -39,18 +49,28 @@ public class InventoryUIManager : MonoBehaviour
     private void SelectSlot(InventorySlot slot)
     {
         SettingMoveEvent(slot);
-        SetTargetPickerPos(slot.rectTransform.position);
+        SetTargetPickerPos(slot.rectTransform.position, slot.slotType);
     }
 
     private void SettingSlot(InventorySlot slot)
     {
         selectSlot = slot;
-        SetTargetPickerPos(slot.rectTransform.position);
+        SetTargetPickerPos(slot.rectTransform.position, slot.slotType);
         SetSlotSettingPanalPos(slot.rectTransform.position);
     }
 
-    private void SetTargetPickerPos(Vector3 targetPos)
+    private void SetTargetPickerPos(Vector3 targetPos, string type)
     {
+        if (type.Contains("Quick"))
+        {
+            targetPicker.SetParent(quickSlotTrs);
+        }
+
+        else
+        {
+            targetPicker.SetParent(itemSlotTrs);
+        }
+
         targetPicker.DOKill();
         targetPicker.DOMove(targetPos, 0.25f);
 
@@ -58,6 +78,7 @@ public class InventoryUIManager : MonoBehaviour
 
     private void SetSlotSettingPanalPos(Vector3 targetPos)
     {
+
         slotSettingPanal.SetPosition(targetPos);
     }
     private void SettingMoveEvent(InventorySlot slot)
@@ -195,5 +216,54 @@ public class InventoryUIManager : MonoBehaviour
         selectSlot.ResetSlot();
         ReleaseMoveEvent();
         selectItem = null;
+    }
+
+    private void EquipEvent()
+    {
+        if(selectSlot.slotType.Contains("Quick"))
+        {
+            UnEquipItem();
+        }
+
+        else
+        {
+            EquipItem();
+        }
+    }
+
+    private void EquipItem()
+    {
+        foreach (var slot in quickSlots)
+        {
+            if (slot.targetItem == null)
+            {
+                slot.ChangeTargetItem(selectSlot.targetItem);
+                selectSlot.ResetSlot();
+                return;
+            }
+        }
+
+        ItemBase tempItem = quickSlots[0].targetItem;
+
+        quickSlots[0].ChangeTargetItem(selectSlot.targetItem);
+        selectSlot.ChangeTargetItem(tempItem);
+    }
+
+    private void UnEquipItem()
+    {
+        foreach (var slot in itemSlots)
+        {
+            if (slot.targetItem == null)
+            {
+                slot.ChangeTargetItem(selectSlot.targetItem);
+                selectSlot.ResetSlot();
+                return;
+            }
+        }
+
+        ItemBase tempItem = itemSlots[0].targetItem;
+
+        itemSlots[0].ChangeTargetItem(selectSlot.targetItem);
+        selectSlot.ChangeTargetItem(tempItem);
     }
 }

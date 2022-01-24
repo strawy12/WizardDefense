@@ -307,19 +307,23 @@ public class UIManager : MonoBehaviour
 
     private void TurnOnInventory(bool turnOn)
     {
-        GameManager.Instance.gameState = turnOn? GameState.Setting : GameState.Playing;
-        CursorLocked(!turnOn);
-        inventoryCanvasGroup.DOKill();
-        inventoryCanvasGroup.DOFade(turnOn ? 1f : 0f, 0.25f).SetUpdate(true);
-
         if(turnOn)
         {
+            GameManager.Instance.gameState = GameState.Setting;
+            CursorLocked(false);
+            inventoryCanvasGroup.gameObject.SetActive(true);
+            inventoryCanvasGroup.DOKill();
+            inventoryCanvasGroup.DOFade(1f, 0.25f).SetUpdate(true);
             currentUIPanels.Add(inventoryCanvasGroup.gameObject);
             EventManager.TriggerEvent(ConstantManager.TURNON_INVENTORY);
         }
 
         else
         {
+            GameManager.Instance.gameState = GameState.Playing;
+            CursorLocked(true);
+            inventoryCanvasGroup.DOKill();
+            inventoryCanvasGroup.DOFade(0f, 0.25f).SetUpdate(true).OnComplete(() => inventoryCanvasGroup.gameObject.SetActive(false));
             currentUIPanels.Remove(inventoryCanvasGroup.gameObject);
         }
     }

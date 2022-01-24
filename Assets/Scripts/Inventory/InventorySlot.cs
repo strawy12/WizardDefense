@@ -16,10 +16,12 @@ public class InventorySlot : Button, IPointerClickHandler
 
     private int currentIndex;
 
-    private Image currentImage;
+    protected Image currentImage;
 
     private ButtonClickedEvent onClick_Right;
     private bool isItemAdd = false;
+
+    public string slotType = "";
 
 
     protected override void Start()
@@ -82,7 +84,7 @@ public class InventorySlot : Button, IPointerClickHandler
         EventManager<InventorySlot>.TriggerEvent(ConstantManager.INVENTORY_CLICK_RIGHT, this);
     }
 
-    public void ChangeTargetItem(ItemBase item)
+    public virtual void ChangeTargetItem(ItemBase item)
     {
         targetItem = item;
         TargetItemImage.sprite = targetItem?.itemSprite;
@@ -98,7 +100,7 @@ public class InventorySlot : Button, IPointerClickHandler
         }
     }
 
-    public void ResetSlot()
+    public virtual void ResetSlot()
     {
         targetItem = null;
         TargetItemImage.gameObject.SetActive(false);
