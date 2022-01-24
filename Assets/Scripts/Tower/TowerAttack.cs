@@ -209,7 +209,7 @@ public class TowerAttack : MonoBehaviour
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && selectedTime > 1f)
         {
             //고정값이니 바꾸어도 됨
-            GameManager.Instance.player.SetActive(true);
+            GameManager.Instance.player.gameObject.SetActive(true);
 
             Vector3 pos = GameManager.Instance.tpsCamera.transform.position;
             Vector3 rot = GameManager.Instance.tpsCamera.transform.parent.eulerAngles;

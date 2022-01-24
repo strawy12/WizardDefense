@@ -412,6 +412,12 @@ public class InGameDataManager : MonoBehaviour
         return item;
     }
 
+    public ItemBase ConversionToItemBase(ItemData data)
+    {
+        ItemBase item = new ItemBase(data, FindItemSprite(data.item_ID));
+        return item;
+    }
+
     public PatternData FindPatternData(string patternData_ID)
     {
         PatternData patternData = patterns.patterns.Find((pattern) => pattern.ID == patternData_ID);

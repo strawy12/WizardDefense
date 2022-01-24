@@ -23,12 +23,13 @@ public class TpsController : MonoBehaviour
     private bool jDown;
     private bool isRun;
     private bool isJump;
-    private bool isTarget = false;
+    private bool isTargetItem = false;
     private bool isTargetTower = false;
+    private bool isTargetTowerArea = false;
     private bool isTowerRun;
 
     private MonsterMove targetMonster;
-    private ItemObject targetItem;
+    private PropertyItemObject targetPropertyEnegy;
 
     private Animator animator;
     private Rigidbody myrigid;
@@ -38,13 +39,16 @@ public class TpsController : MonoBehaviour
     private float fieldOfView;
 
 
+    private void Awake()
+    {
+        EventManager<float>.StartListening(ConstantManager.CHANGE_SENSITVITY, SetSentivity);
+    }
     private void Start()
     {
         myrigid = GetComponent<Rigidbody>();
         animator = characterBody.GetComponent<Animator>();
         EventManager<ItemBase>.StartListening(ConstantManager.INVENTORY_DROP, DropItem);
         EventManager.StartListening(ConstantManager.TURNON_INVENTORY, StopPlayer);
-        EventManager<float>.StartListening(ConstantManager.CHANGE_SENSITVITY, SetSentivity);
     }
 
     private void Update()
@@ -52,13 +56,16 @@ public class TpsController : MonoBehaviour
         if (GameManager.Instance.gameState == GameState.Setting) return;
 
         PlayerSet();
-        Debug.Log(GameManager.Instance.UIManager.IsFMarkActive());
+        Debug.Log(isTargetTowerArea);
+
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
         {
+
             if (GameManager.Instance.inGameState == InGameState.BreakTime)
             {
-                if (GameManager.Instance.censorTower == null)
+                if (GameManager.Instance.censorTower == null && isTargetTowerArea)
                 {
+
                     GameManager.Instance.UIManager.Chang();
                 }
                 //else
@@ -69,12 +76,22 @@ public class TpsController : MonoBehaviour
                 //}
             }
 
-            else if (GameManager.Instance.inGameState == InGameState.DefenseTime && GameManager.Instance.selectedTower == null)
+            else if (GameManager.Instance.inGameState == InGameState.DefenseTime)
             {
                 //tower.ZoomInTower();
                 //gameObject.SetActive(false);
-                GameManager.Instance.censorTower?.ZoomInTower();
-                GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
+                if (isTargetTower && GameManager.Instance.selectedTower == null)
+                {
+                    GameManager.Instance.censorTower?.ZoomInTower();
+                    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
+                }
+
+                else if(isTargetItem && targetPropertyEnegy != null)
+                {
+                    targetPropertyEnegy.AddPropertyEnergy();
+                    targetPropertyEnegy = null;
+                }
+
             }
         }
 
@@ -102,10 +119,9 @@ public class TpsController : MonoBehaviour
 
     private void PlayerSet()
     {
-        Move();
 
         if (GameManager.Instance.gameState == GameState.InGameSetting) return;
-
+        Move();
         LookAround();
         //Jump();
         Fly();
@@ -115,7 +131,7 @@ public class TpsController : MonoBehaviour
     private void LookAround()
     {
         if (GameManager.Instance.gameState == GameState.Setting || GameManager.Instance.gameState == GameState.InGameSetting) return;
-        
+
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * sensivity, Input.GetAxis("Mouse Y") * sensivity);
         Vector3 cameraAngle = cameraArm.rotation.eulerAngles;
         float x = cameraAngle.x - mouseDelta.y;
@@ -175,7 +191,7 @@ public class TpsController : MonoBehaviour
         float speed = 8f;
         if (isRun) speed *= 2f;
 
-        if (Input.GetButton(ConstantManager.KEYINPUT_JUMP) && !isJump)
+        if (Input.GetKey(KeyManager.keySettings[KeyAction.Jump]) && !isJump)
         {
             Vector3 flyPos = transform.position;
             flyPos.y += 0.1f;
@@ -219,9 +235,9 @@ public class TpsController : MonoBehaviour
     {
         var cam = GameManager.Instance.tpsCamera;
 
+        Hit_Unit(cam);
         Hit_TowerArea(cam);
         Hit_Tower(cam);
-        Hit_Unit(cam);
     }
 
     private void Hit_Unit(Camera cam)
@@ -242,22 +258,33 @@ public class TpsController : MonoBehaviour
                     targetMonster.GetInfo();
                     targetMonster.ShowOutLine(true);
                     GameManager.Instance.selectedMonster = targetMonster;
+                    isTargetItem = false;
                     return;
                 }
             }
 
-            if(hit.transform.CompareTag("Item"))
+            if (hit.transform.CompareTag("Property Item"))
             {
-                Debug.Log("dd");
-                targetItem = hit.transform.GetComponent<ItemObject>();
+                targetPropertyEnegy = hit.transform.GetComponent<PropertyItemObject>();
 
-                if(targetItem != null)
+                if (targetPropertyEnegy != null)
                 {
-                    targetItem.GetInfo();
+                    GameManager.Instance.selectedPropertyItem?.ShowOutLine(false);
+                    targetPropertyEnegy.ShowOutLine(true);
+                    GameManager.Instance.selectedPropertyItem = targetPropertyEnegy;
+                    isTargetItem = true;
+                    GameManager.Instance.UIManager.FMarkTrue();
                     return;
                 }
+            }
+
+            else
+            {
+                isTargetItem = false;
             }
         }
+
+        isTargetItem = false;
     }
 
     private void Hit_TowerArea(Camera cam)
@@ -271,7 +298,8 @@ public class TpsController : MonoBehaviour
                 TowerSelect.buildTrn = hitTowerAreaInfo.transform;
                 GameManager.Instance.UIManager.FMarkTrue();
                 hitTowerAreaInfo.transform.GetComponent<Area>()?.ShowOutline(true);
-                isTarget = true;
+                isTargetItem = false;
+                isTargetTowerArea = true;
             }
 
             else
@@ -279,13 +307,8 @@ public class TpsController : MonoBehaviour
                 GameManager.Instance.UIManager.AreaCheack();
                 GameManager.Instance.UIManager.FMarkFalse();
                 hitTowerAreaInfo.transform.GetComponent<Area>()?.ShowOutline(false);
-                isTarget = false;
+                isTargetTowerArea = false;
             }
-        }
-
-        else
-        {
-            isTarget = false;
         }
     }
 
@@ -313,9 +336,10 @@ public class TpsController : MonoBehaviour
                         {
                             GameManager.Instance.UIManager.FMarkTrue();
                             isTargetTower = true;
+                            isTargetItem = false;
                         }
                     }
-
+                    isTargetTower = true;
                     tower.ShowOutLine(true);
                 }
 
@@ -341,17 +365,24 @@ public class TpsController : MonoBehaviour
 
     private void DropItem(ItemBase item)
     {
-        GameManager.Instance.SpawnItem(item, transform.position);
+        //GameManager.Instance.SpawnItem(item, transform.position);
     }
-    
+
     private void StopPlayer()
     {
         animator.Play("Stand");
         animator.SetBool("isMove", false);
     }
 
+    public void TargetingTowerArea()
+    {
+        isTargetTowerArea = true;
+    }
+
     private void SetSentivity(float value)
     {
         sensivity = value;
+        DataManager.Instance.PlayerData.sensitivityValue = value;
+        DataManager.Instance.SaveToJson();
     }
 }

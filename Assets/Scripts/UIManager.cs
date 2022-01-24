@@ -340,6 +340,7 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.gameState = GameState.Setting;
             CursorLocked(false);
             inventoryUIManager.gameObject.SetActive(true);
+            inventoryUIManager.canvasGroup.blocksRaycasts = true;
             inventoryUIManager.canvasGroup.DOKill();
             inventoryUIManager.canvasGroup.DOFade(1f, 0.25f).SetUpdate(true);
             currentUIPanels.Add(inventoryUIManager.gameObject);
@@ -351,7 +352,7 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.gameState = GameState.Playing;
             CursorLocked(true);
             inventoryUIManager.canvasGroup.DOKill();
-            inventoryUIManager.canvasGroup.DOFade(0f, 0.25f).SetUpdate(true).OnComplete(() => inventoryUIManager.gameObject.SetActive(false));
+            inventoryUIManager.canvasGroup.DOFade(0f, 0.25f).SetUpdate(true).OnComplete(() => EventManager.TriggerEvent(ConstantManager.TURNOFF_INVENTORY));
             currentUIPanels.Remove(inventoryUIManager.gameObject);
         }
     }

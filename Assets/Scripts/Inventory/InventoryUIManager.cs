@@ -31,13 +31,16 @@ public class InventoryUIManager : MonoBehaviour
         itemSlots = itemSlotTrs.GetChild(0).GetComponentsInChildren<InventorySlot>();
         canvasGroup = GetComponent<CanvasGroup>();
 
+        InitItemSlot();
+
         EventManager<InventorySlot>.StartListening(ConstantManager.INVENTORY_CLICK_LEFT, SelectSlot);
         EventManager<InventorySlot>.StartListening(ConstantManager.INVENTORY_CLICK_RIGHT, SettingSlot);
         EventManager.StartListening(ConstantManager.INVENTORY_CLICK_MOVEBTN, SettingMoveEvent);
         EventManager.StartListening(ConstantManager.INVENTORY_CLICK_DROPBTN, DropEvent);
         EventManager.StartListening(ConstantManager.INVENTORY_CLICK_EQUIPBTN, EquipEvent);
         EventManager.StartListening(ConstantManager.INVENTORY_CLICK_BACKGROUND, SelectItemDropEvent);
-        EventManager.StartListening(ConstantManager.TURNOFF_INVENTORY, () => canvasGroup.alpha = 0f);
+        EventManager.StartListening(ConstantManager.TURNOFF_INVENTORY, TurnOffInventory);
+
     }
 
     private void Update()
@@ -54,6 +57,32 @@ public class InventoryUIManager : MonoBehaviour
     {
         EventManager.TriggerEvent(ConstantManager.TURNOFF_INVENTORY);
     }
+
+    private void InitItemSlot()
+    {
+        List<InventoryData> inventoryDatas = DataManager.Instance.PlayerData.inventoryList;
+        ItemBase item = null;
+        int index = 0;
+        for(int i = 0; i < itemSlots.Length; i++)
+        {
+            if(inventoryDatas[i].item.item_ID != "")
+            {
+                item = GameManager.Instance.Data.ConversionToItemBase(inventoryDatas[i].item);
+                itemSlots[i]?.Init(item);
+            }
+        }
+
+        for (int i = itemSlots.Length; i < inventoryDatas.Count; i++)
+        {
+            if (inventoryDatas[i].item.item_ID != "")
+            {
+                index = i - itemSlots.Length;
+                item = GameManager.Instance.Data.ConversionToItemBase(inventoryDatas[i].item);
+                quickSlots[i]?.Init(item);
+            }
+        }
+    }
+
 
     private void SelectSlot(InventorySlot slot)
     {
@@ -274,5 +303,11 @@ public class InventoryUIManager : MonoBehaviour
 
         itemSlots[0].ChangeTargetItem(selectSlot.targetItem);
         selectSlot.ChangeTargetItem(tempItem);
+    }
+
+    private void TurnOffInventory()
+    {
+        canvasGroup.alpha = 0f;
+        canvasGroup.blocksRaycasts = false;
     }
 }
