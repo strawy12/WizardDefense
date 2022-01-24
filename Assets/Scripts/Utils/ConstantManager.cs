@@ -9,6 +9,8 @@ public static class ConstantManager
     public const string INVENTORY_CLICK_BACKGROUND = "IN_C_BG";
     public const string INVENTORY_DROP = "IN_DP";
 
+    public const string CHANGE_SENSITVITY = "CH_SV";
+
     public const string TURNON_INVENTORY = "TO_IN";
     public const string TURNOFF_INVENTORY = "TF_IN";
 
