@@ -12,6 +12,7 @@ TagManager:
   - AreaTrigger
   - Wall
   - Item
+  - Property Item
   layers:
   - Default
   - TransparentFX

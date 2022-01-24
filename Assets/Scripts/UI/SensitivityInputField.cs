@@ -9,11 +9,12 @@ public class SensitivityInputField : MonoBehaviour
     private void Awake()
     {
         currentInputField = GetComponent<UnityEngine.UI.InputField>();
+        EventManager<float>.StartListening(ConstantManager.CHANGE_SENSITVITY, ChangeValue);
     }
 
     private void Start()
     {
-        EventManager<float>.StartListening(ConstantManager.CHANGE_SENSITVITY, ChangeValue);
+        ChangeValue(DataManager.Instance.PlayerData.sensitivityValue);
     }
 
     public void ChangeSensitivity(string valueStr)

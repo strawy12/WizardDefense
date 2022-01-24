@@ -9,11 +9,12 @@ public class SensitvitySlider : MonoBehaviour
     private void Awake()
     {
         currentSlider = GetComponent<UnityEngine.UI.Slider>();
+        EventManager<float>.StartListening(ConstantManager.CHANGE_SENSITVITY, ChangeValue);
     }
 
     private void Start()
     {
-        EventManager<float>.StartListening(ConstantManager.CHANGE_SENSITVITY, ChangeValue);
+        ChangeValue(DataManager.Instance.PlayerData.sensitivityValue);
     }
 
     public void ChangeSensitivity(float value)

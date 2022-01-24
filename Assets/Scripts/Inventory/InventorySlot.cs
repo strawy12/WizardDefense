@@ -15,6 +15,7 @@ public class InventorySlot : Button, IPointerClickHandler
     public InventorySlotState currentState;
 
     private int currentIndex;
+    private int targetItemCnt;
 
     protected Image currentImage;
 
@@ -23,22 +24,23 @@ public class InventorySlot : Button, IPointerClickHandler
 
     public string slotType = "";
 
-
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         rectTransform = GetComponent<RectTransform>();
         currentImage = GetComponent<Image>();
         TargetItemImage = transform.GetChild(0).GetComponent<Image>();
         onClick_Right = new ButtonClickedEvent();
-        
         currentState = InventorySlotState.Idle;
-
         currentIndex = transform.GetSiblingIndex();
+    }
 
-        onClick.AddListener(AddTargetItem);
+    protected override void Start()
+    {
+        base.Start();
+
+        onClick.AddListener(SelectSlot);
         onClick_Right.AddListener(SettingSlot);
-
     }
 
     public override void OnPointerClick(PointerEventData eventData)
@@ -52,6 +54,13 @@ public class InventorySlot : Button, IPointerClickHandler
         {
             onClick_Right.Invoke();
         }
+    }
+
+    public void Init(ItemBase item)
+    {
+        targetItem = item;
+        TargetItemImage.sprite = targetItem.itemSprite;
+        TargetItemImage.gameObject.SetActive(true);
     }
 
     private void AddTargetItem()
@@ -98,12 +107,17 @@ public class InventorySlot : Button, IPointerClickHandler
         {
             TargetItemImage.gameObject.SetActive(true);
         }
+
+        DataManager.Instance.SetInventoryData(currentIndex, item.itemData, currentIndex, slotType.Contains("Quick"));
+
     }
 
     public virtual void ResetSlot()
     {
         targetItem = null;
+        currentIndex = 0;
         TargetItemImage.gameObject.SetActive(false);
+        DataManager.Instance.SetInventoryData(currentIndex, null, currentIndex, slotType.Contains("Quick"));
     }
 
 
