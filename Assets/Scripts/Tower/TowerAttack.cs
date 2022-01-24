@@ -20,6 +20,7 @@ public class TowerAttack : MonoBehaviour
     public Skill skill;
 
     public bool isBuilding;
+    public GameObject towerUnit;
 
     private Outline outline;
 
@@ -189,9 +190,8 @@ public class TowerAttack : MonoBehaviour
 
         GameManager.Instance.tpsCamera.enabled = false;
 
-        Vector3 cameraPosition = transform.position;
-        cameraPosition.y += 2f;
-        muzzlePosition.transform.position = cameraPosition;
+        Vector3 cameraPosition = muzzlePosition.transform.position;
+        cameraPosition.y += 1.2f;
         GameManager.Instance.mainCam.CameraMoveToPosition(cameraPosition, 1f);
         //이거 fireRate 다름
         GameManager.Instance.UIManager.ShowTowerStatBar(true, towerBase.attackPower, towerBase.fireRate);
@@ -199,6 +199,9 @@ public class TowerAttack : MonoBehaviour
         GameManager.Instance.selectedTower = this;
         towerState = TowerState.InControl;
         selectedTime = 0f;
+
+        towerUnit.SetActive(false);
+        GameManager.Instance.player.SetActive(false);
 
         ShowBoundary(true);
         ChangeBoundaryColor(Color.red);
@@ -218,6 +221,8 @@ public class TowerAttack : MonoBehaviour
             GameManager.Instance.selectedTower = null;
 
             curFireTime = 0f;
+            towerUnit.SetActive(true);
+            GameManager.Instance.player.SetActive(true);
 
             towerState = TowerState.OutControl;
         }

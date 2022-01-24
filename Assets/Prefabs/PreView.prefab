@@ -124,7 +124,6 @@ GameObject:
   - component: {fileID: 7280627589862013466}
   - component: {fileID: 7280627589862013467}
   - component: {fileID: 7280627589862013460}
-  - component: {fileID: 7280627589862013461}
   m_Layer: 0
   m_Name: PreView
   m_TagString: Tower
@@ -212,39 +211,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7280627589862013461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7280627589862013462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea457b02d75340e44a6129a78774305a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerBase:
-    name: "\uB178\uBA40\uD3EC\uD0D1"
-    attackPower: 5
-    level: 0
-    attribute:
-      attributeName: "\uB178\uBA40"
-      sprite: {fileID: 0}
-    fireRate: 1
-    handFireRate: 0.2
-    distance: 10
-    hp: 0
-  muzzlePosition: {fileID: 7280627589289538551}
-  boundary: {fileID: 1422488582}
-  useSkillTime: 0
-  selectedTime: 0
-  skill:
-    bulletPrefab: {fileID: 8341332336548344853, guid: afac6c302e358fd449a981ad469ab00a, type: 3}
-    coolTime: 0
-    attributeName: 
-    skillSprite: {fileID: 0}
-  isBuilding: 0
 --- !u!1 &7622507184708523043
 GameObject:
   m_ObjectHideFlags: 0

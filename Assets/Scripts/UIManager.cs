@@ -161,6 +161,8 @@ public class UIManager : MonoBehaviour
     #region TowerUI
     public void ShowSkillUI(TowerAttack tower, bool isActive)
     {
+        if (tower == null) return;
+
         if (!isActive)
         {
             towerUI.gameObject.SetActive(false);

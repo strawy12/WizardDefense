@@ -163,6 +163,7 @@ MonoBehaviour:
     attributeName: 
     skillSprite: {fileID: 0}
   isBuilding: 0
+  towerUnit: {fileID: 1658995762269889828}
 --- !u!1 &7622507184708523043
 GameObject:
   m_ObjectHideFlags: 0
