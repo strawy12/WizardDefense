@@ -29,6 +29,7 @@ public class GameManager : MonoSingleton<GameManager>
     public GameObject boundary;
     public GameObject player;
     public GameObject pointTower;
+    public Transform mapBorder;
     public ItemObject Itempref;
 
     public TowerAttack selectedTower;
@@ -135,5 +136,21 @@ public class GameManager : MonoSingleton<GameManager>
     {
         ItemObject item = Instantiate(Itempref, spawnPos, Quaternion.identity);
         item.item = data;
+    }
+
+    public Vector3 ConversionBoundPosition(Vector3 pos)
+    {
+        float x = mapBorder.localScale.x / 2;
+        float additionX = mapBorder.position.x;
+        float y = mapBorder.localScale.y - 5f;
+        float additionY = mapBorder.position.y;
+        float z = mapBorder.localScale.z / 2;
+        float additionZ = mapBorder.position.z;
+
+        pos.x = Mathf.Clamp(pos.x, -x + additionX, x + additionX);
+        pos.y = Mathf.Clamp(pos.y, -35f, y + additionY);
+        pos.z = Mathf.Clamp(pos.z, -z + additionZ, z + additionZ);
+
+        return pos;
     }
 }

@@ -125,7 +125,11 @@ public class TpsController : MonoBehaviour
             Vector3 moveDir = lookForWard * moveInput.y + lookRight * moveInput.x;
 
             //characterBody.forward = lookForWard;
+
+
             characterBody.forward = moveDir;
+
+            transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
 
             transform.position += moveDir * speed * Time.deltaTime;
         }

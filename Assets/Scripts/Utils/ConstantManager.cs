@@ -10,6 +10,7 @@ public static class ConstantManager
     public const string INVENTORY_DROP = "IN_DP";
 
     public const string TURNON_INVENTORY = "TO_IN";
+    public const string TURNOFF_INVENTORY = "TF_IN";
 
     public const string KEYINPUT_HMOVE = "Horizontal";
     public const string KEYINPUT_VMOVE = "Vertical";
