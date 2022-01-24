@@ -9,10 +9,8 @@ public class TowerSelect : MonoBehaviour
     [Header("설치에 필요한 룬 텍스트")] [SerializeField] private Text needText;
     [Header("타워 이미지")] [SerializeField] private Image towerImage;
     [Header("설치 버튼")] [SerializeField] private Button buildBtn;
-    [Header("프리뷰 나가는 버튼")] [SerializeField] private GameObject previewOutBtn;
 
     [HideInInspector] public int curRune;
-
 
     [Header("타워 정보 리스트")] public List<Tower> towerList = new List<Tower>();
 
@@ -21,14 +19,10 @@ public class TowerSelect : MonoBehaviour
 
     [HideInInspector] public int needMax;
 
-    [Header("프리뷰 카메라")] [SerializeField] private Camera previewCamera = null;
-    [Header("타워 부모 위치")] [SerializeField] private Transform towerMom;
-
     public static Transform buildTrn;
     public static GameObject buildObj;
 
     private int selectTower;
-    private bool isOutPreView = false;
 
     public TpsController tpsController;
 
@@ -123,17 +117,7 @@ public class TowerSelect : MonoBehaviour
             buildBtn.interactable = false;
         }
     }
-
-    public void OnClickPreviewOut()
-    {
-        isOutPreView = true;
-    }
-
-    public void OnClickPreView()
-    {
-
-    }
-
+    
     private void TowerNum(GameObject _tower)
     {
         switch (selectTower)
@@ -154,6 +138,6 @@ public class TowerSelect : MonoBehaviour
                 break;
         }
 
-        _tower.transform.SetParent(towerMom);
+        _tower.transform.SetParent(null);
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2936447270266455175}
   - component: {fileID: 8359724401376675331}
-  m_Layer: 11
+  m_Layer: 16
   m_Name: MinMapSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
