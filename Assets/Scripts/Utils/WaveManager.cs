@@ -35,11 +35,6 @@ public class WaveManager : MonoBehaviour
 
         SettingWaveData();
 
-        for(int i = 0; i < patternDataList.Count; i++)
-        {
-            Debug.Log(patternDataList[i].ID);
-        }
-
         while (currentPatternCnt < currentWave.executionCnt)//currentWave.maxCost)
         {
             yield return InitPatternData(currentPatternCnt);
@@ -99,15 +94,12 @@ public class WaveManager : MonoBehaviour
             {
                 monster = Instantiate(currentMonsterPref, currentSpawnPoint.position, Quaternion.identity);
                 monster.Init(currentMonsterBase, targetPoint);
-                break;
 
                 yield return new WaitForSeconds(currentPattern.monsterSpawnDelay);
             }
 
-            break;
         }
 
-        StopAllCoroutines(); 
     }
 
     private void SetSpawnDirTrn()
