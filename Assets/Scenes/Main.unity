@@ -40825,7 +40825,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1052928252}
   m_HandleRect: {fileID: 1052928251}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 1.0000006
   m_Size: 0.68277943
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -49025,7 +49025,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2107198033}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.11, y: -1.38, z: 0.01}
+  m_LocalPosition: {x: 0, y: -1.38, z: 0.01}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1731937744}
@@ -55984,7 +55984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3981799114135569599}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: -4}
+  m_LocalPosition: {x: 0, y: 1, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3981799114009212094}
@@ -56140,7 +56140,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!1 &3981799115404936990
 GameObject:
