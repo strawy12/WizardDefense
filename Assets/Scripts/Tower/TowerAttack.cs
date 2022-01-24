@@ -26,7 +26,7 @@ public class TowerAttack : MonoBehaviour
     void Awake()
     {
         pool = FindObjectOfType<PoolManager>();
-        outline = GetComponent<Outline>();
+        outline = GetComponentInChildren<Outline>();
         useSkillTime = 100f;
 
         TowerBuild();
@@ -41,8 +41,6 @@ public class TowerAttack : MonoBehaviour
     {
         curFireTime += Time.deltaTime;
         selectedTime += Time.deltaTime;
-        Mathf.Clamp(selectedTime, 0f, 2f);
-
         SetMuzzleRotation();
         SkillCoolTime();
 
@@ -74,9 +72,11 @@ public class TowerAttack : MonoBehaviour
     private void TowerBuild()
     {
         isBuilding = true;
-
-        transform.DOMoveY(-transform.localScale.y * 0.5f, 0f);
-        transform.DOMoveY(transform.localScale.y * 0.5f + 5f, 2f).OnComplete(() => isBuilding = false);
+        float firstPosY = -40f;
+        float lastPosY = -26f;
+        transform.DOMoveY(firstPosY, 0f);
+        //transform.DOMoveY(transform.localScale.y * 0.5f/* + 5f*/, 2f).OnComplete(() => isBuilding = false);
+        transform.DOMoveY(lastPosY, 2f).OnComplete(() => isBuilding = false);
     }
 
     public void EquipItems()
@@ -150,7 +150,7 @@ public class TowerAttack : MonoBehaviour
         {
             if (Vector3.Distance(enemies[i].transform.position, transform.position) > towerBase.distance) continue;
 
-            distance = Vector3.Distance(enemies[i].transform.position, GameManager.Instance.home.transform.position);
+            distance = Vector3.Distance(enemies[i].transform.position, GameManager.Instance.pointTower.transform.position);
 
             if (distance < minDistance && enemies[i].virtualHP > 0)
             {
@@ -294,8 +294,7 @@ public class TowerAttack : MonoBehaviour
 
     public void ShowOutLine(bool isShow)
     {
-        outline ??= GetComponent<Outline>();
-
+        if (isBuilding || outline == null) return;
         if (isShow)
         {
             outline.OutlineWidth = outline.thisOutLine;

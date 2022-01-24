@@ -10,6 +10,7 @@ public class GameManager : MonoSingleton<GameManager>
     #region About Camera
     public CameraMove mainCam { get; private set; }
     public Camera tpsCamera;
+    public Camera uiCamara;
     public Vector3 screenCenter;
     #endregion
 
@@ -27,7 +28,8 @@ public class GameManager : MonoSingleton<GameManager>
     #region InGame
     public GameObject boundary;
     public GameObject player;
-    public GameObject home;
+    public GameObject pointTower;
+    public ItemObject Itempref;
 
     public TowerAttack selectedTower;
     public TowerAttack censorTower;
@@ -42,23 +44,42 @@ public class GameManager : MonoSingleton<GameManager>
     private float breakTime = ConstantManager.BREAK_TIME;
     #endregion
 
+    #region Utils
+
+    public Vector3 MousePos
+    {
+        get
+        {
+            Vector3 screenPoint = Input.mousePosition;
+            screenPoint.z = 3.0f; 
+            
+            return uiCamara.ScreenToWorldPoint(screenPoint);
+        }
+    }
+
+    #endregion
+
     private void Awake()
     {
+        gameState = GameState.Setting;
         waveManager = GetComponent<WaveManager>();
         dataManager = GetComponent<InGameDataManager>();
         Cursor.lockState = CursorLockMode.Locked;
-    }
 
-    void Start()
-    {
         mainCam = FindObjectOfType<CameraMove>();
-        screenCenter = (new Vector3(mainCam.cam.pixelWidth / 2, mainCam.cam.pixelHeight / 2));
         UIManager = GetComponent<UIManager>();
         KeyManager = GetComponent<KeyManager>();
         gameState = GameState.Playing;
         //StartCoroutine(SpawnEnemies());
 
+    }
+
+    void Start()
+    {
+        gameState = GameState.Playing;
+        screenCenter = (new Vector3(mainCam.cam.pixelWidth / 2, mainCam.cam.pixelHeight / 2));
         EnterBreakTime();
+
     }
 
     private void Init()
@@ -72,7 +93,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         if (inGameState == InGameState.BreakTime && gameState != GameState.Setting)
         {
-            if (Input.GetKeyUp(KeyManager.keySettings[KeyAction.Skip]))
+            if (Input.GetKeyUp(KeyCode.V))
             {
                 SkipBreakTime();
             }
@@ -80,11 +101,11 @@ public class GameManager : MonoSingleton<GameManager>
             breakTime -= Time.unscaledDeltaTime;
             UIManager.SetTimer(breakTime);
 
-            if(breakTime < 0)
+            if (breakTime < 0)
             {
                 UIManager.ActiveBreakTimeUI(false);
                 inGameState = InGameState.DefenseTime;
-                dataManager.DownLoadInGameData();
+                StartCoroutine(Wave.StartWave());
             }
         }
     }
@@ -110,4 +131,9 @@ public class GameManager : MonoSingleton<GameManager>
         breakTime = 0f;
     }
 
+    public void SpawnItem(ItemBase data, Vector3 spawnPos)
+    {
+        ItemObject item = Instantiate(Itempref, spawnPos, Quaternion.identity);
+        item.item = data;
+    }
 }

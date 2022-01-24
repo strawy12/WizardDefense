@@ -40,13 +40,16 @@ public class UIManager : MonoBehaviour
 
     [Header("사용자 지정 키 전용")]
     [SerializeField] private GameObject keySettingPanal;
+    [SerializeField] private InventoryUIManager inventoryUIManager;
 
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
     private bool isArea;
     [HideInInspector] public bool isTarget;
 
-    void Start()
+    private bool turnOnInventory;
+
+    public void Awake()
     {
         towerStatText = towerStatBar.GetComponentInChildren<Text>();
 
@@ -66,6 +69,12 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SetCurrentPanels();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            turnOnInventory = !turnOnInventory;
+            TurnOnInventory(turnOnInventory);
         }
     }
 
@@ -317,5 +326,32 @@ public class UIManager : MonoBehaviour
     private void SetGameState(GameState gameState)
     {
         GameManager.Instance.gameState = gameState;
+    }
+    private void TurnOnInventory(bool turnOn)
+    {
+        if(turnOn)
+        {
+            GameManager.Instance.gameState = GameState.Setting;
+            CursorLocked(false);
+            inventoryUIManager.gameObject.SetActive(true);
+            inventoryUIManager.canvasGroup.DOKill();
+            inventoryUIManager.canvasGroup.DOFade(1f, 0.25f).SetUpdate(true);
+            currentUIPanels.Add(inventoryUIManager.gameObject);
+            EventManager.TriggerEvent(ConstantManager.TURNON_INVENTORY);
+        }
+
+        else
+        {
+            GameManager.Instance.gameState = GameState.Playing;
+            CursorLocked(true);
+            inventoryUIManager.canvasGroup.DOKill();
+            inventoryUIManager.canvasGroup.DOFade(0f, 0.25f).SetUpdate(true).OnComplete(() => inventoryUIManager.gameObject.SetActive(false));
+            currentUIPanels.Remove(inventoryUIManager.gameObject);
+        }
+    }
+
+    public void ResetTurnOnInventory()
+    {
+        turnOnInventory = false;
     }
 }

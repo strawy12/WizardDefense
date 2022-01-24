@@ -49,6 +49,8 @@ public class Area : MonoBehaviour
 
     public void ShowOutline(bool isShow)
     {
+        if (outline == null) return;
+
         if(isShow)
         {
             outline.OutlineWidth = outline.thisOutLine;
