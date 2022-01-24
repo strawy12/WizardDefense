@@ -220,6 +220,7 @@ public class TowerAttack : MonoBehaviour
             Vector3 rot = GameManager.Instance.tpsCamera.transform.parent.eulerAngles;
             GameManager.Instance.mainCam.ZoomOutCamera(pos, rot, 1f);
             GameManager.Instance.UIManager.quickSlot.SetActive(true);
+            GameManager.Instance.gameState = GameState.Playing;
 
             GameManager.Instance.UIManager.ShowTowerStatBar(false);
             GameManager.Instance.selectedTower = null;
