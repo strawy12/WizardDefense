@@ -71,4 +71,9 @@ public class Runes : MonoBehaviour
             runeImg.color = new Color(1, 1f, 1f, 1f);
         }
     }
+
+    private void SetMaxNum()
+    {
+        maxNum = currentNum;
+    }
 }
