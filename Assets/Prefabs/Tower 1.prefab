@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7280627589289538544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.685, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280627589862013465}
@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 7280627589862013460}
   - component: {fileID: 7280627589862013461}
   - component: {fileID: -6421482014747537087}
-  - component: {fileID: 938611747094237072}
   m_Layer: 0
   m_Name: Tower 1
   m_TagString: Tower
@@ -179,25 +178,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   distance: 7
---- !u!114 &938611747094237072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7280627589862013462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 1
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
-  thisOutLine: 15
 --- !u!1 &7622507184708523043
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7098593624091938457}
   - component: {fileID: 1422488582}
-  m_Layer: 16
+  m_Layer: 3
   m_Name: Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,8 +427,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a5bd88d57150b24d8ab1a99d33ecf21, type: 3}
+--- !u!1 &6313140628273409394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a5bd88d57150b24d8ab1a99d33ecf21, type: 3}
+  m_PrefabInstance: {fileID: 6583609691629129763}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6689841470148638664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1a5bd88d57150b24d8ab1a99d33ecf21, type: 3}
   m_PrefabInstance: {fileID: 6583609691629129763}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2780684484600384521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6313140628273409394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 8.7
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+  thisOutLine: 15
