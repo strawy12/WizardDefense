@@ -62,6 +62,11 @@ public class UIManager : MonoBehaviour
         //}
     }
 
+    private void Start()
+    {
+        EventManager.StartListening(ConstantManager.TURNOFF_INVENTORY, () => turnOnInventory = false);
+    }
+
     private void Update()
     {
         //ShowSkillUI(GameManager.Instance.selectedTower);
@@ -348,10 +353,5 @@ public class UIManager : MonoBehaviour
             inventoryUIManager.canvasGroup.DOFade(0f, 0.25f).SetUpdate(true).OnComplete(() => inventoryUIManager.gameObject.SetActive(false));
             currentUIPanels.Remove(inventoryUIManager.gameObject);
         }
-    }
-
-    public void ResetTurnOnInventory()
-    {
-        turnOnInventory = false;
     }
 }
