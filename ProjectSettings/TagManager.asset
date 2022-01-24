@@ -9,6 +9,7 @@ TagManager:
   - floor
   - Tower
   - canbuild
+  - Item
   layers:
   - Default
   - TransparentFX
