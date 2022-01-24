@@ -9,10 +9,8 @@ public class TowerSelect : MonoBehaviour
     [Header("설치에 필요한 룬 텍스트")] [SerializeField] private Text needText;
     [Header("타워 이미지")] [SerializeField] private Image towerImage;
     [Header("설치 버튼")] [SerializeField] private Button buildBtn;
-    [Header("프리뷰 나가는 버튼")] [SerializeField] private GameObject previewOutBtn;
 
     [HideInInspector] public int curRune;
-
 
     [Header("타워 정보 리스트")] public List<Tower> towerList = new List<Tower>();
 
