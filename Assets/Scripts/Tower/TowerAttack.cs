@@ -203,7 +203,7 @@ public class TowerAttack : MonoBehaviour
         selectedTime = 0f;
 
         towerUnit.SetActive(false);
-        GameManager.Instance.player.SetActive(false);
+        GameManager.Instance.player.gameObject.SetActive(false);
 
         ShowBoundary(true);
         ChangeBoundaryColor(Color.red);
@@ -220,13 +220,14 @@ public class TowerAttack : MonoBehaviour
             Vector3 rot = GameManager.Instance.tpsCamera.transform.parent.eulerAngles;
             GameManager.Instance.mainCam.ZoomOutCamera(pos, rot, 1f);
             GameManager.Instance.UIManager.quickSlot.SetActive(true);
+            GameManager.Instance.gameState = GameState.Playing;
 
             GameManager.Instance.UIManager.ShowTowerStatBar(false);
             GameManager.Instance.selectedTower = null;
 
             curFireTime = 0f;
             towerUnit.SetActive(true);
-            GameManager.Instance.player.SetActive(true);
+            GameManager.Instance.player.gameObject.SetActive(true);
 
             towerState = TowerState.OutControl;
         }

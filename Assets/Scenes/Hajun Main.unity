@@ -28482,7 +28482,7 @@ MonoBehaviour:
   uiCamara: {fileID: 681700284}
   screenCenter: {x: 0, y: 0, z: 0}
   boundary: {fileID: 7660168442070018560}
-  player: {fileID: 3981799115404936984}
+  player: {fileID: 0}
   pointTower: {fileID: 1151523061}
   mapBorder: {fileID: 1780939664}
   Itempref: {fileID: -63303828460261586, guid: 297aac2ab21379e4e95b6ff100c585d6, type: 3}
@@ -28586,6 +28586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerUI: {fileID: 550523006}
   towerStatBar: {fileID: 1137801653}
+  towerStatText: {fileID: 0}
   towerButtons: {fileID: 2009820018}
   skillImage: {fileID: 1253667334}
   skillCoolTimeImage: {fileID: 1564320378}
@@ -28598,6 +28599,7 @@ MonoBehaviour:
   keySettingPanal: {fileID: 161511721}
   inventoryUIManager: {fileID: 466174379}
   isTarget: 0
+  quickSlot: {fileID: 0}
 --- !u!1 &1169776964
 GameObject:
   m_ObjectHideFlags: 0
@@ -55886,7 +55888,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 33791
+    m_Bits: 34815
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

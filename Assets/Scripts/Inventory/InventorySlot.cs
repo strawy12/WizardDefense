@@ -79,6 +79,8 @@ public class InventorySlot : Button, IPointerClickHandler
 
         TargetItemImage.sprite = targetItem.itemSprite;
         TargetItemImage.gameObject.SetActive(true);
+        DataManager.Instance.SetInventoryData(currentIndex, targetItem.itemData, targetItemCnt, slotType.Contains("Quick"));
+
     }
 
     private void SelectSlot()
@@ -108,7 +110,7 @@ public class InventorySlot : Button, IPointerClickHandler
             TargetItemImage.gameObject.SetActive(true);
         }
 
-        DataManager.Instance.SetInventoryData(currentIndex, item.itemData, currentIndex, slotType.Contains("Quick"));
+        DataManager.Instance.SetInventoryData(currentIndex, item.itemData, targetItemCnt, slotType.Contains("Quick"));
 
     }
 
@@ -117,7 +119,7 @@ public class InventorySlot : Button, IPointerClickHandler
         targetItem = null;
         currentIndex = 0;
         TargetItemImage.gameObject.SetActive(false);
-        DataManager.Instance.SetInventoryData(currentIndex, null, currentIndex, slotType.Contains("Quick"));
+        DataManager.Instance.SetInventoryData(currentIndex, null, targetItemCnt, slotType.Contains("Quick"));
     }
 
 

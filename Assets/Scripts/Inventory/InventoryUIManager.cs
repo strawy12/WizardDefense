@@ -65,7 +65,7 @@ public class InventoryUIManager : MonoBehaviour
         int index = 0;
         for(int i = 0; i < itemSlots.Length; i++)
         {
-            if(inventoryDatas[i].item.item_ID != "")
+            if(inventoryDatas[i].item != null && inventoryDatas[i].item.item_ID != "")
             {
                 item = GameManager.Instance.Data.ConversionToItemBase(inventoryDatas[i].item);
                 itemSlots[i]?.Init(item);
