@@ -1681,6 +1681,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &130765287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2248,6 +2250,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &160762845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3060,6 +3064,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &224122208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3910,6 +3916,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &287394877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5325,6 +5333,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &400998794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5906,6 +5916,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &446435806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10643,6 +10655,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPicker: {fileID: 512004155}
   slotSettingPanal: {fileID: 1022021819}
+  quickSlotTrs: {fileID: 0}
+  itemSlotTrs: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  itemImage: {fileID: 0}
 --- !u!1001 &782059176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10698,6 +10714,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11128894, guid: e4f9dd72888c08b40bdcb84783214559, type: 3}
+      propertyPath: m_Animations.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11128894, guid: e4f9dd72888c08b40bdcb84783214559, type: 3}
+      propertyPath: m_Animations.Array.data[4]
+      value: 
+      objectReference: {fileID: 7400000, guid: 90a5672458d810b4ebca81030bb927ec, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4f9dd72888c08b40bdcb84783214559, type: 3}
 --- !u!1 &783009584
@@ -11098,6 +11122,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &826526511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11338,6 +11364,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &832197870
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11927,6 +11955,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &851515971
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12110,6 +12140,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!4 &866160919 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9112178923625913373, guid: 876ef929cda978e45afec4d83a2b4f1f, type: 3}
@@ -14947,6 +14979,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &1089421228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16105,10 +16139,12 @@ MonoBehaviour:
   gameState: 0
   inGameState: 0
   tpsCamera: {fileID: 0}
+  uiCamara: {fileID: 0}
   screenCenter: {x: 0, y: 0, z: 0}
   boundary: {fileID: 7660168442070018560}
   player: {fileID: 0}
-  home: {fileID: 516763626}
+  pointTower: {fileID: 0}
+  Itempref: {fileID: 0}
   selectedTower: {fileID: 0}
   censorTower: {fileID: 0}
   selectedMonster: {fileID: 0}
@@ -16173,7 +16209,9 @@ MonoBehaviour:
   monsterDatas: {fileID: 11400000, guid: 3636dff01b0d4a74d82adf8ae4ce018f, type: 2}
   patterns: {fileID: 11400000, guid: de201f73ed1734a478c7f35ac8acba4a, type: 2}
   waveDatas: {fileID: 0}
+  itemDatas: {fileID: 0}
   monsterPrefabs: {fileID: 11400000, guid: 387029c9b58ace24ab9c6384232977fc, type: 2}
+  itemSprites: {fileID: 0}
 --- !u!114 &1168447617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16211,6 +16249,7 @@ MonoBehaviour:
   timeText: {fileID: 0}
   skipKeyText: {fileID: 0}
   keySettingPanal: {fileID: 0}
+  inventoryUIManager: {fileID: 0}
   isTarget: 0
 --- !u!1 &1180629946
 GameObject:
@@ -17342,6 +17381,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1229215087
 GameObject:
   m_ObjectHideFlags: 0
@@ -17691,6 +17732,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &1241687715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19256,6 +19299,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1355134171
 GameObject:
   m_ObjectHideFlags: 0
@@ -20397,6 +20442,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &1419403880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21090,6 +21137,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1444827512
 GameObject:
   m_ObjectHideFlags: 0
@@ -21211,6 +21260,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1454744002
 GameObject:
   m_ObjectHideFlags: 0
@@ -21332,6 +21383,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!4 &1467528309 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9097874626667010210, guid: 8a910e6cb72592945a884457364a70e2, type: 3}
@@ -21773,6 +21826,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &1481065759
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22269,6 +22324,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &1511901124
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22924,7 +22981,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31920
+  m_Name: pb_Mesh48078
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23374,6 +23431,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &1568269930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23632,6 +23691,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &1582980038
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23939,6 +24000,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &1593536510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28977,6 +29040,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1961337792
 GameObject:
   m_ObjectHideFlags: 0
@@ -29572,6 +29637,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &2018427593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30683,6 +30750,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &2096695503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30866,6 +30935,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &2108986300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31186,6 +31257,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &2135855915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33828,7 +33901,6 @@ MonoBehaviour:
   needText: {fileID: 3190338561575225150}
   towerImage: {fileID: 3190338561069028515}
   buildBtn: {fileID: 3190338560725300369}
-  previewOutBtn: {fileID: 0}
   curRune: 0
   towerList:
   - energy: 10
@@ -33846,8 +33918,6 @@ MonoBehaviour:
   - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
   - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
   needMax: 0
-  previewCamera: {fileID: 0}
-  towerMom: {fileID: 0}
   tpsController: {fileID: 0}
 --- !u!4 &3190338561154849371
 Transform:
