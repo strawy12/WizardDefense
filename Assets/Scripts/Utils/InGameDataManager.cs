@@ -9,11 +9,14 @@ public class InGameDataManager : MonoBehaviour
     [SerializeField] private MonsterDatas monsterDatas;
     [SerializeField] private Patterns patterns;
     [SerializeField] private Waves waveDatas;
+    [SerializeField] private ItemDatas itemDatas;
+
     [SerializeField] private MonsterPrefabDatas monsterPrefabs;
+    [SerializeField] private ItemSpriteDatas itemSprites;
 
     private void Awake()
     {
-        //DownLoadInGameData();
+        DownLoadInGameData();
     }
 
     public void DownLoadInGameData()
@@ -29,12 +32,22 @@ public class InGameDataManager : MonoBehaviour
             patterns = Resources.Load<Patterns>(SAVE_PATH + "Patterns");
         }
 
+        if(itemDatas == null)
+        {
+            itemDatas = Resources.Load<ItemDatas>(SAVE_PATH + "ItemDatas");
+        }
+
         if (monsterPrefabs == null)
         {
             monsterPrefabs = Resources.Load<MonsterPrefabDatas>(SAVE_PATH + "MonsterPrefabDatas");
         }
 
-        if(waveDatas == null)
+        if(itemSprites == null)
+        {
+            itemSprites = Resources.Load<ItemSpriteDatas>(SAVE_PATH + "ItemSpriteDatas");
+        }
+
+        if (waveDatas == null)
         {
             waveDatas = Resources.Load<Waves>(SAVE_PATH + "Waves");
         }
@@ -45,10 +58,9 @@ public class InGameDataManager : MonoBehaviour
     private IEnumerator DataDownLoad()
     {
         yield return StartMonsterDataDownLoad();
+        yield return StartItemDataDownLoad();
         yield return StartWavePatternDataDownLoad();
         yield return StartWaveDataDownLoad();
-
-        StartCoroutine(GameManager.Instance.Wave.StartWave());
     }
 
     #region Monster Data
@@ -109,7 +121,7 @@ public class InGameDataManager : MonoBehaviour
 
     #endregion
 
-    #region WavePatternData
+    #region WavePattern Data
 
     private IEnumerator StartWavePatternDataDownLoad()
     {
@@ -316,6 +328,63 @@ public class InGameDataManager : MonoBehaviour
 
     #endregion
 
+    #region Item Data
+
+    private IEnumerator StartItemDataDownLoad()
+    {
+        const string UPDATEURL = "https://docs.google.com/spreadsheets/d/1RbsXVREigxOpq7ozlbjoLSYzNgFlV6enstlbATOXQ-4/export?format=tsv&gid=1191904830&range=A1";
+        UnityWebRequest www = UnityWebRequest.Get(UPDATEURL);
+        yield return www.SendWebRequest();
+        if (www.downloadHandler.text == itemDatas.updateVersion && !www.downloadHandler.text.Contains("T"))
+        {
+            yield break;
+        }
+
+        itemDatas.updateVersion = www.downloadHandler.text;
+        yield return DownLoadItemDatas();
+    }
+    private IEnumerator DownLoadItemDatas()
+    {
+        const string URL = "https://docs.google.com/spreadsheets/d/1RbsXVREigxOpq7ozlbjoLSYzNgFlV6enstlbATOXQ-4/export?format=tsv&gid=1191904830&range=B2:D19";
+
+        UnityWebRequest www = UnityWebRequest.Get(URL);
+
+        yield return www.SendWebRequest();
+
+        string data = www.downloadHandler.text;
+
+        SetItemDatas(data);
+    }
+    private void SetItemDatas(string data)
+    {
+        string[] row = data.Split('\n');
+        string[] column;
+        int rowSize = row.Length;
+        int colummSize = row[0].Split('\t').Length;
+        ItemData itemData = null;
+
+        for (int i = 0; i < rowSize; i++)
+        {
+            column = row[i].Split('\t');
+            for (int j = 0; j < colummSize; j++)
+            {
+                if (i >= itemDatas.itemDataList.Count)
+                {
+                    itemDatas.itemDataList.Add(new ItemData(column[0], column[1], (PropertyType)Enum.Parse(typeof(PropertyType), column[2])));
+                }
+
+                else
+                {
+                    itemData = itemDatas.itemDataList[i];
+                    itemData.item_ID = column[0];
+                    itemData.itemName = column[1];
+                    itemData.itemType = (PropertyType)Enum.Parse(typeof(PropertyType), column[2]);
+                }
+            }
+        }
+    }
+
+    #endregion
     #region GetData
 
     public MonsterBase Find_SetMonsterBase(string monster_ID, MonsterInfo info)
@@ -327,9 +396,20 @@ public class InGameDataManager : MonoBehaviour
 
     public MonsterMove FindMonsterPrefab(string monster_ID)
     {
-        MonsterMove monsterPref = monsterPrefabs.monsterPrefabDatas.Find((prefab) => prefab.monster_ID.Equals(monster_ID)).monster_Prefab;
+        return monsterPrefabs.FindMonsterPrefab(monster_ID);
+    }
 
-        return monsterPref;
+    public Sprite FindItemSprite(string item_ID)
+    {
+        return itemSprites.FindItemSprite(item_ID);
+    }
+
+    public ItemBase GetItemBase(int index)
+    {
+        if (index >= itemDatas.Length) return null;
+        ItemData data = itemDatas.itemDataList[index];
+        ItemBase item = new ItemBase(data, FindItemSprite(data.item_ID));
+        return item;
     }
 
     public PatternData FindPatternData(string patternData_ID)

@@ -29,6 +29,11 @@ public class HpBar : MonoBehaviour
 
     public void UpdateHpBar(float hp)
     {
+        if(maxHp == 0)
+        {
+            UpdateHpText(hp);
+            return;
+        }
         float value = (1f / maxHp) * hp;
 
         frontHpPanal.transform.DOScaleX(value, 0.2f);

@@ -27,6 +27,7 @@ public class TpsController : MonoBehaviour
     private bool isTargetTower = false;
 
     private MonsterMove targetMonster;
+    private ItemObject targetItem;
 
     private Animator animator;
     private Rigidbody myrigid;
@@ -37,6 +38,8 @@ public class TpsController : MonoBehaviour
     {
         myrigid = GetComponent<Rigidbody>();
         animator = characterBody.GetComponent<Animator>();
+        EventManager<ItemBase>.StartListening(ConstantManager.INVENTORY_DROP, DropItem);
+        EventManager.StartListening(ConstantManager.TURNON_INVENTORY, StopPlayer);
     }
 
     private void Update()
@@ -84,7 +87,15 @@ public class TpsController : MonoBehaviour
     }
     private void LookAround()
     {
+<<<<<<< HEAD
         if (GameManager.Instance.gameState == GameState.Setting || GameManager.Instance.gameState == GameState.InGameSetting) return;
+=======
+        if (GameManager.Instance.gameState == GameState.Setting)
+        {
+            
+            return;
+        }
+>>>>>>> OIF
 
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * sensivity, Input.GetAxis("Mouse Y") * sensivity);
         Vector3 cameraAngle = cameraArm.rotation.eulerAngles;
@@ -168,11 +179,15 @@ public class TpsController : MonoBehaviour
         var cam = GameManager.Instance.tpsCamera;
 
         Hit_TowerArea(cam);
+<<<<<<< HEAD
         Hit_Monster(cam);
         Hit_Tower(cam);
+=======
+        Hit_Unit(cam);
+>>>>>>> OIF
     }
 
-    private void Hit_Monster(Camera cam)
+    private void Hit_Unit(Camera cam)
     {
         Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance * 2, Color.red);
 
@@ -190,6 +205,18 @@ public class TpsController : MonoBehaviour
                     targetMonster.GetInfo();
                     targetMonster.ShowOutLine(true);
                     GameManager.Instance.selectedMonster = targetMonster;
+                    return;
+                }
+            }
+
+            if(hit.transform.CompareTag("Item"))
+            {
+                Debug.Log("dd");
+                targetItem = hit.transform.GetComponent<ItemObject>();
+
+                if(targetItem != null)
+                {
+                    targetItem.GetInfo();
                     return;
                 }
             }
@@ -259,5 +286,16 @@ public class TpsController : MonoBehaviour
         {
             tower?.ShowOutLine(false);
         }
+    }
+
+    private void DropItem(ItemBase item)
+    {
+        GameManager.Instance.SpawnItem(item, transform.position);
+    }
+    
+    private void StopPlayer()
+    {
+        animator.Play("Stand");
+        animator.SetBool("isMove", false);
     }
 }
