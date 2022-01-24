@@ -26,7 +26,7 @@ public class TowerAttack : MonoBehaviour
     void Awake()
     {
         pool = FindObjectOfType<PoolManager>();
-        outline = GetComponent<Outline>();
+        outline = GetComponentInChildren<Outline>();
         useSkillTime = 100f;
 
         TowerBuild();
@@ -294,7 +294,7 @@ public class TowerAttack : MonoBehaviour
 
     public void ShowOutLine(bool isShow)
     {
-        outline ??= GetComponent<Outline>();
+        outline ??= GetComponentInChildren<Outline>();
 
         if (isShow)
         {
