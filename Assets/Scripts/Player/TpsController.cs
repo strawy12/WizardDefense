@@ -53,12 +53,12 @@ public class TpsController : MonoBehaviour
                 {
                     GameManager.Instance.UIManager.Chang();
                 }
-                else
-                {
-                    TowerBase tower = GameManager.Instance.censorTower.towerBase;
-                    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
-                    GameManager.Instance.UIManager.ShowTowerStatBar(true, tower.attackPower, tower.fireRate);
-                }
+                //else
+                //{
+                //    TowerBase tower = GameManager.Instance.censorTower.towerBase;
+                //    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
+                //    GameManager.Instance.UIManager.ShowTowerStatBar(true, tower.attackPower, tower.fireRate);
+                //}
             }
 
             else if (GameManager.Instance.inGameState == InGameState.DefenseTime && GameManager.Instance.selectedTower == null)
