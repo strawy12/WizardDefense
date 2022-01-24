@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 7280627589862013460}
   - component: {fileID: 7280627589862013461}
   m_Layer: 0
-  m_Name: Tower 2
+  m_Name: PreView
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
     distance: 10
     hp: 0
   muzzlePosition: {fileID: 7280627589289538551}
-  boundary: {fileID: 7622507184708523043}
+  boundary: {fileID: 1422488582}
   useSkillTime: 0
   selectedTime: 0
   skill:

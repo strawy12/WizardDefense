@@ -2051,6 +2051,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &130099461
 GameObject:
   m_ObjectHideFlags: 0
@@ -2506,6 +2508,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &161511721
 GameObject:
   m_ObjectHideFlags: 0
@@ -3437,6 +3441,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &218129201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5586,6 +5592,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &286010261
 GameObject:
   m_ObjectHideFlags: 0
@@ -7558,6 +7566,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &417089260
 GameObject:
   m_ObjectHideFlags: 0
@@ -7967,6 +7977,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &451244550
 GameObject:
   m_ObjectHideFlags: 0
@@ -13039,6 +13051,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPicker: {fileID: 512004155}
   slotSettingPanal: {fileID: 1022021819}
+  quickSlotTrs: {fileID: 0}
+  itemSlotTrs: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  itemImage: {fileID: 0}
 --- !u!1 &785160515
 GameObject:
   m_ObjectHideFlags: 0
@@ -13430,6 +13446,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &825828309
 GameObject:
   m_ObjectHideFlags: 0
@@ -13704,6 +13722,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &848788543
 GameObject:
   m_ObjectHideFlags: 0
@@ -13945,6 +13965,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!4 &855702642 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5014232762165236815, guid: 4d2ee6718a77be248bbb47f1bea38aec, type: 3}
@@ -14071,6 +14093,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &861915963
 GameObject:
   m_ObjectHideFlags: 0
@@ -17615,6 +17639,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1086590528
 GameObject:
   m_ObjectHideFlags: 0
@@ -20198,10 +20224,13 @@ MonoBehaviour:
   gameState: 0
   inGameState: 0
   tpsCamera: {fileID: 3981799114135569593}
+  uiCamara: {fileID: 681700284}
   screenCenter: {x: 0, y: 0, z: 0}
   boundary: {fileID: 7660168442070018560}
   player: {fileID: 3981799115404936990}
-  home: {fileID: 0}
+  pointTower: {fileID: 0}
+  mapBorder: {fileID: 0}
+  Itempref: {fileID: 0}
   selectedTower: {fileID: 0}
   censorTower: {fileID: 0}
   selectedMonster: {fileID: 0}
@@ -20266,7 +20295,9 @@ MonoBehaviour:
   monsterDatas: {fileID: 11400000, guid: 3636dff01b0d4a74d82adf8ae4ce018f, type: 2}
   patterns: {fileID: 11400000, guid: de201f73ed1734a478c7f35ac8acba4a, type: 2}
   waveDatas: {fileID: 11400000, guid: 2477b6a49e94d6a4f9d481ade889746e, type: 2}
+  itemDatas: {fileID: 0}
   monsterPrefabs: {fileID: 11400000, guid: 387029c9b58ace24ab9c6384232977fc, type: 2}
+  itemSprites: {fileID: 0}
 --- !u!114 &1168447617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21206,6 +21237,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1226962387
 GameObject:
   m_ObjectHideFlags: 0
@@ -21564,6 +21597,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1243776455
 GameObject:
   m_ObjectHideFlags: 0
@@ -23496,6 +23531,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1362694839
 GameObject:
   m_ObjectHideFlags: 0
@@ -24158,6 +24195,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1416954175
 GameObject:
   m_ObjectHideFlags: 0
@@ -24553,6 +24592,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1444827512
 GameObject:
   m_ObjectHideFlags: 0
@@ -24674,6 +24715,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1454744002
 GameObject:
   m_ObjectHideFlags: 0
@@ -24795,6 +24838,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1001 &1459843302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25421,6 +25466,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1486674182
 GameObject:
   m_ObjectHideFlags: 0
@@ -25836,6 +25883,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1515095405
 GameObject:
   m_ObjectHideFlags: 0
@@ -26417,6 +26466,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1569356184
 GameObject:
   m_ObjectHideFlags: 0
@@ -26808,6 +26859,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1584310480
 GameObject:
   m_ObjectHideFlags: 0
@@ -27235,6 +27288,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1596623779
 GameObject:
   m_ObjectHideFlags: 0
@@ -32193,6 +32248,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &1961337792
 GameObject:
   m_ObjectHideFlags: 0
@@ -32998,6 +33055,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &2023930489
 GameObject:
   m_ObjectHideFlags: 0
@@ -33969,6 +34028,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &2096437151
 GameObject:
   m_ObjectHideFlags: 0
@@ -34431,6 +34492,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!1 &2112661767
 GameObject:
   m_ObjectHideFlags: 0
@@ -34772,6 +34835,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  currentState: 0
+  slotType: 
 --- !u!114 &709248455684854460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37305,7 +37370,6 @@ MonoBehaviour:
   needText: {fileID: 3190338561575225150}
   towerImage: {fileID: 3190338561069028515}
   buildBtn: {fileID: 3190338560725300369}
-  previewOutBtn: {fileID: 0}
   curRune: 0
   towerList:
   - energy: 10
@@ -37323,7 +37387,6 @@ MonoBehaviour:
   - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
   - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
   needMax: 0
-  towerMom: {fileID: 252666117}
   tpsController: {fileID: 3981799115404936984}
 --- !u!4 &3190338561154849371
 Transform:
@@ -41716,8 +41779,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterBody: {fileID: 2107198034}
-  cameraArm: {fileID: 3981799114009212094}
   towerPos: {x: 0, y: 0, z: 0}
+  cameraArm: {fileID: 3981799114009212094}
   normalSpeed: 5
   runSpeed: 10
   sensivity: 3
@@ -41732,7 +41795,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3981799115404936990}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.4, y: -27.53, z: 66.8}
+  m_LocalPosition: {x: 20.4, y: -27.8, z: 66.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1717729473}

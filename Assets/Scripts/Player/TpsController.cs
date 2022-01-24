@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class TpsController : MonoBehaviour
 {
     [SerializeField] private Transform characterBody;
+    public Vector3 towerPos;
 
     [SerializeField] private Transform cameraArm;
 
@@ -25,6 +25,7 @@ public class TpsController : MonoBehaviour
     private bool isJump;
     private bool isTarget = false;
     private bool isTargetTower = false;
+    private bool isTowerRun;
 
     private MonsterMove targetMonster;
     private ItemObject targetItem;
@@ -33,6 +34,9 @@ public class TpsController : MonoBehaviour
     private Rigidbody myrigid;
 
     private TowerAttack tower;
+
+    private float fieldOfView;
+
 
     private void Start()
     {
@@ -47,7 +51,7 @@ public class TpsController : MonoBehaviour
         if (GameManager.Instance.gameState == GameState.Setting) return;
 
         PlayerSet();
-
+        Debug.Log(GameManager.Instance.UIManager.IsFMarkActive());
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
         {
             if (GameManager.Instance.inGameState == InGameState.BreakTime)
@@ -72,6 +76,27 @@ public class TpsController : MonoBehaviour
                 GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
             }
         }
+
+        if (Input.GetMouseButtonDown(0) && GameManager.Instance.censorTower != null && !isTowerRun)
+        {
+            towerPos = GameManager.Instance.censorTower.transform.position - new Vector3(0f, 0f, 5f);
+            if (Vector3.Distance(towerPos, transform.position) < 10f || GameManager.Instance.UIManager.IsFMarkActive()) return;
+            fieldOfView = 3f * Vector3.Distance(towerPos, transform.position);
+            fieldOfView = Mathf.Clamp(fieldOfView, 60f, 120f);
+
+            GameManager.Instance.tpsCamera.fieldOfView = fieldOfView;
+            isTowerRun = true;
+
+            transform.DOMove(towerPos, 1f).OnComplete(() =>
+            {
+                isTowerRun = false;
+            });
+        }
+
+        if (GameManager.Instance.tpsCamera.fieldOfView > 60f)
+        {
+            GameManager.Instance.tpsCamera.fieldOfView -= Time.deltaTime * (fieldOfView - 60f);
+        }
     }
 
     private void PlayerSet()
@@ -81,7 +106,8 @@ public class TpsController : MonoBehaviour
         if (GameManager.Instance.gameState == GameState.InGameSetting) return;
 
         LookAround();
-        Jump();
+        //Jump();
+        Fly();
         Run();
         Hit();
     }
@@ -129,7 +155,7 @@ public class TpsController : MonoBehaviour
 
             characterBody.forward = moveDir;
 
-            transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
+            //transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
 
             transform.position += moveDir * speed * Time.deltaTime;
         }
@@ -142,6 +168,26 @@ public class TpsController : MonoBehaviour
         {
             myrigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             isJump = true;
+        }
+    }
+
+    private void Fly()
+    {
+        float speed = 8f;
+        if (isRun) speed *= 2f;
+
+        if (Input.GetButton(ConstantManager.KEYINPUT_JUMP) && !isJump)
+        {
+            Vector3 flyPos = transform.position;
+            flyPos.y += 0.1f;
+            transform.position += Vector3.up * Time.deltaTime * speed;
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            Vector3 downPos = transform.position;
+            downPos.y -= 0.1f;
+            transform.position += Vector3.down * Time.deltaTime * speed;
         }
     }
 
@@ -246,25 +292,36 @@ public class TpsController : MonoBehaviour
 
     private void Hit_Tower(Camera cam)
     {
-        Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance * 3, Color.white);
-
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitTowerAreaInfo, maxDistance * 3))
+        Debug.DrawRay(cam.transform.position, cam.transform.forward * 999f, Color.white);
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitTowerAreaInfo, 999f))
         {
             if (hitTowerAreaInfo.transform.gameObject.CompareTag(ConstantManager.TOWER_TAG))
             {
                 tower = hitTowerAreaInfo.collider.gameObject.GetComponent<TowerAttack>();
                 GameManager.Instance.censorTower = tower;
 
+
                 if (!tower.isBuilding)
                 {
-                    isTargetTower = true;
-                    GameManager.Instance.UIManager.FMarkTrue();
+                    if (GameManager.Instance.inGameState == InGameState.DefenseTime)
+                    {
+                        if (Vector3.Distance(transform.position, tower.transform.position) > 10f)
+                        {
+                            isTargetTower = false;
+                            GameManager.Instance.UIManager.FMarkFalse();
+                        }
+                        else
+                        {
+                            GameManager.Instance.UIManager.FMarkTrue();
+                            isTargetTower = true;
+                        }
+                    }
+
                     tower.ShowOutLine(true);
                 }
 
                 else
                 {
-                    GameManager.Instance.UIManager.FMarkFalse();
                     tower.ShowOutLine(false);
                     isTargetTower = false;
                 }
@@ -272,11 +329,14 @@ public class TpsController : MonoBehaviour
             else
             {
                 tower?.ShowOutLine(false);
+                GameManager.Instance.censorTower = null;
+                isTargetTower = false;
             }
         }
         else
         {
             tower?.ShowOutLine(false);
+            isTargetTower = false;
         }
     }
 
