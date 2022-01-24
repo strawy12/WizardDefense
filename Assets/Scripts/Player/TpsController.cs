@@ -56,27 +56,6 @@ public class TpsController : MonoBehaviour
         if (GameManager.Instance.gameState == GameState.Setting) return;
 
         PlayerSet();
-<<<<<<< HEAD
-        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
-        {
-            if (GameManager.Instance.censorTower == null && isTarget)
-            {
-                GameManager.Instance.UIManager.Chang();
-            }
-            //else
-            //{
-            //    TowerBase tower = GameManager.Instance.censorTower.towerBase;
-            //    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
-            //    GameManager.Instance.UIManager.ShowTowerStatBar(true, tower.attackPower, tower.fireRate);
-            //}
-
-            if (GameManager.Instance.inGameState == InGameState.DefenseTime && GameManager.Instance.selectedTower == null && isTargetTower)
-            {
-                GameManager.Instance.censorTower?.ZoomInTower();
-                GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
-=======
-        Debug.Log(isTargetTowerArea);
-
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
         {
 
@@ -102,7 +81,7 @@ public class TpsController : MonoBehaviour
                 if (isTargetTower && GameManager.Instance.selectedTower == null)
                 {
                     GameManager.Instance.censorTower?.ZoomInTower();
-                    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
+                    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
                 }
 
                 else if(isTargetItem && targetPropertyEnegy != null)
@@ -111,7 +90,6 @@ public class TpsController : MonoBehaviour
                     targetPropertyEnegy = null;
                 }
 
->>>>>>> OIF
             }
         }
 
@@ -282,19 +260,11 @@ public class TpsController : MonoBehaviour
                 }
             }
 
-<<<<<<< HEAD
-            if (hit.transform.CompareTag("Item"))
-=======
             if (hit.transform.CompareTag("Property Item"))
->>>>>>> OIF
             {
                 targetPropertyEnegy = hit.transform.GetComponent<PropertyItemObject>();
 
-<<<<<<< HEAD
-                if (targetItem != null)
-=======
                 if (targetPropertyEnegy != null)
->>>>>>> OIF
                 {
                     GameManager.Instance.selectedPropertyItem?.ShowOutLine(false);
                     targetPropertyEnegy.ShowOutLine(true);
