@@ -5,8 +5,8 @@ using UnityEngine;
 public class TpsController : MonoBehaviour
 {
     [SerializeField] private Transform characterBody;
-
     [SerializeField] private Transform cameraArm;
+    public Vector3 originalRot;
 
     [Header("이동속도")] [SerializeField] private float normalSpeed = 5f;
     [Header("달리기속도")] [SerializeField] private float runSpeed = 8f;
@@ -78,7 +78,8 @@ public class TpsController : MonoBehaviour
         if (GameManager.Instance.gameState == GameState.InGameSetting) return;
 
         LookAround();
-        Jump();
+        //Jump();
+        Fly();
         Run();
         Hit();
     }
@@ -120,9 +121,8 @@ public class TpsController : MonoBehaviour
             Vector3 lookForWard = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
             Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
             Vector3 moveDir = lookForWard * moveInput.y + lookRight * moveInput.x;
-
             //characterBody.forward = lookForWard;
-            characterBody.forward = moveDir;
+            characterBody.forward += moveDir;
 
             transform.position += moveDir * speed * Time.deltaTime;
         }
@@ -135,6 +135,26 @@ public class TpsController : MonoBehaviour
         {
             myrigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             isJump = true;
+        }
+    }
+
+    private void Fly()
+    {
+        float speed = 8f;
+        if (isRun) speed *= 2f;
+
+        if (Input.GetButton(ConstantManager.KEYINPUT_JUMP) && !isJump)
+        {
+            Vector3 flyPos = transform.position;
+            flyPos.y += 0.1f;
+            transform.position += Vector3.up * Time.deltaTime * speed;
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            Vector3 downPos = transform.position;
+            downPos.y -= 0.1f;
+            transform.position += Vector3.down * Time.deltaTime * speed;
         }
     }
 
