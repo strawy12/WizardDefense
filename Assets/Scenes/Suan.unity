@@ -28585,7 +28585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preViewChang: {fileID: 1610652456}
   tower:
-  - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
+  - {fileID: 7280627589862013462, guid: 70c7a0d374a0945459bfbe510a96fe9b, type: 3}
   - {fileID: 7280627589862013462, guid: 0c92ef1628b27e545b03ce3b2d9df1e2, type: 3}
   - {fileID: 7280627589862013462, guid: 195ef4f504113e7448c876dd77672007, type: 3}
   mother: {fileID: 0}
@@ -37952,9 +37952,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preViewChang: {fileID: 1348291061832422126}
   tower:
-  - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
-  - {fileID: 7280627589862013462, guid: 0c92ef1628b27e545b03ce3b2d9df1e2, type: 3}
-  - {fileID: 7280627589862013462, guid: 195ef4f504113e7448c876dd77672007, type: 3}
+  - {fileID: 8111902715623880198, guid: 435440ec572e6a94b878a08893459ebc, type: 3}
+  - {fileID: 8111902715623880198, guid: 435440ec572e6a94b878a08893459ebc, type: 3}
+  - {fileID: 8111902715623880198, guid: 435440ec572e6a94b878a08893459ebc, type: 3}
   mother: {fileID: 471206245}
 --- !u!4 &1348291061832422125
 Transform:
@@ -40630,9 +40630,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c683367ab752f6e4b9f68bfe531b831a, type: 3}
   - {fileID: 21300000, guid: 74945da075e15a8458bd6eb6a256efcd, type: 3}
   tower:
-  - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
-  - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
-  - {fileID: 7280627589862013462, guid: d27934ef26be7834d8fb75fa72f53933, type: 3}
+  - {fileID: 7280627589862013462, guid: 70c7a0d374a0945459bfbe510a96fe9b, type: 3}
+  - {fileID: 7280627589862013462, guid: 0c92ef1628b27e545b03ce3b2d9df1e2, type: 3}
+  - {fileID: 7280627589862013462, guid: 195ef4f504113e7448c876dd77672007, type: 3}
   needMax: 0
   tpsController: {fileID: 3981799115404936984}
 --- !u!4 &3190338561154849371
