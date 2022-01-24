@@ -322,6 +322,11 @@ public class UIManager : MonoBehaviour
         currentUIPanels.Remove(panel);
     }
 
+    public void AddCurrentPanels(GameObject panel)
+    {
+        currentUIPanels.Add(panel);
+    }
+
     public void SetCurEquipBtn(EquipmentButton button)
     {
         currentEquipButton = button;

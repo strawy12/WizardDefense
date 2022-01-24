@@ -19537,7 +19537,7 @@ RectTransform:
   - {fileID: 1899502339}
   - {fileID: 1865605737}
   m_Father: {fileID: 3190338561830825708}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -24059,7 +24059,7 @@ Transform:
   - {fileID: 692508598}
   - {fileID: 356545414}
   m_Father: {fileID: 3190338561830825708}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &983873107
 MonoBehaviour:
@@ -24074,7 +24074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preViewChang: {fileID: 983873105}
-  tower: {fileID: 0}
+  tower: {fileID: 7280627589862013462, guid: 1019941e3b59b5a4f8e660b2e103d82d, type: 3}
 --- !u!4 &985202393 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3799578387175572401, guid: 85b67c305e731644981723bb07cc1a46, type: 3}
@@ -54293,8 +54293,8 @@ RectTransform:
   - {fileID: 550523005}
   - {fileID: 1463555056}
   - {fileID: 3190338562441343484}
-  - {fileID: 983873106}
   - {fileID: 790365574}
+  - {fileID: 983873106}
   - {fileID: 466174378}
   - {fileID: 292482972}
   m_Father: {fileID: 0}
