@@ -68,8 +68,18 @@ public class UIManager : MonoBehaviour
             SetCurrentPanels();
         }
 
+<<<<<<< HEAD
         //Debug.Log(IsFMarkActive());
 
+=======
+        if(Input.GetKeyDown(KeyManager.keySettings[KeyAction.Inventory]))
+        {
+            if (settingPanel.activeSelf) return;
+
+            turnOnInventory = !turnOnInventory;
+            TurnOnInventory(turnOnInventory);
+        }
+>>>>>>> OIF
     }
 
     public void SetTimer(float time)
@@ -79,6 +89,7 @@ public class UIManager : MonoBehaviour
 
     public void ActiveBreakTimeUI(bool isActive)
     {
+
         breakTimeUI.SetActive(isActive);
         skipKeyText.text = KeyManager.keySettings[KeyAction.Skip].ToString();
     }
@@ -133,7 +144,7 @@ public class UIManager : MonoBehaviour
         //}
     }
 
-    private void ActiveSettingPanel()
+    public void ActiveSettingPanel()
     {
         CursorLocked(settingPanel.activeSelf);
         if (settingPanel.activeSelf)
@@ -221,6 +232,8 @@ public class UIManager : MonoBehaviour
 
     public void Chang()
     {
+        if (settingPanel.activeSelf) return;
+
         CursorLocked(false);
 
         isArea = !isArea;
