@@ -44,9 +44,9 @@ public class TpsController : MonoBehaviour
     {
         if (GameManager.Instance.gameState == GameState.Setting) return;
         PlayerSet();
+
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
         {
-
             if (GameManager.Instance.inGameState == InGameState.BreakTime)
             {
                 GameManager.Instance.UIManager.Chang();

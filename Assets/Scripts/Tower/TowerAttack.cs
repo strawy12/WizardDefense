@@ -73,7 +73,7 @@ public class TowerAttack : MonoBehaviour
     {
         isBuilding = true;
         float firstPosY = -40f;
-        float lastPosY = -26f;
+        float lastPosY = -26.5f;
         transform.DOMoveY(firstPosY, 0f);
         //transform.DOMoveY(transform.localScale.y * 0.5f/* + 5f*/, 2f).OnComplete(() => isBuilding = false);
         transform.DOMoveY(lastPosY, 2f).OnComplete(() => isBuilding = false);
