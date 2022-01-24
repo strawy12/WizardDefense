@@ -150,7 +150,7 @@ public class TowerAttack : MonoBehaviour
         {
             if (Vector3.Distance(enemies[i].transform.position, transform.position) > towerBase.distance) continue;
 
-            distance = Vector3.Distance(enemies[i].transform.position, GameManager.Instance.home.transform.position);
+            distance = Vector3.Distance(enemies[i].transform.position, GameManager.Instance.pointTower.transform.position);
 
             if (distance < minDistance && enemies[i].virtualHP > 0)
             {

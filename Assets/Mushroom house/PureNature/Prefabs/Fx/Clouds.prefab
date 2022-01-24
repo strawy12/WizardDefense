@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2026250792155139495}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Clouds
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: 9f0b2b73cd2301e46ab5b0f3572efbc4, type: 3}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5907811708922442129}
   - component: {fileID: 7531552288547059302}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,4 +78,3 @@ MonoBehaviour:
   volumeSize: 500
   quadMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
   cloudsMaterial: {fileID: 2100000, guid: d2bdf1500ddac6f47ac91c7b4bfeb77c, type: 2}
-  enableGpuInstancing: 1

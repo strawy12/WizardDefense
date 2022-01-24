@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5389816177587033005}
   - component: {fileID: 4966837402955488408}
   - component: {fileID: 1394182016780697474}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OakTree03_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,6 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -80,6 +81,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1187102002385758528
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1959838072336806906}
   - component: {fileID: 6730807757767001227}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OakTree03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +154,7 @@ GameObject:
   - component: {fileID: 2261719811837363831}
   - component: {fileID: 4018596875387568378}
   - component: {fileID: 1299348585773577679}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OakTree03_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,6 +198,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -221,6 +224,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4308769287646123435
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +236,7 @@ GameObject:
   - component: {fileID: 6906299956474294890}
   - component: {fileID: 1456037706967684706}
   - component: {fileID: 6577650502639150977}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OakTree03_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,6 +280,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -300,3 +305,4 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}

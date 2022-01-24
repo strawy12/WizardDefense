@@ -18,6 +18,8 @@ public class InventoryUIManager : MonoBehaviour
     private InventorySlot selectSlot;
     private ItemBase selectItem;
 
+    public CanvasGroup canvasGroup;
+
     [SerializeField] private Image itemImage;
 
 
@@ -27,6 +29,7 @@ public class InventoryUIManager : MonoBehaviour
     {
         quickSlots = quickSlotTrs.GetChild(0).GetComponentsInChildren<InventoryQuickSlot>();
         itemSlots = itemSlotTrs.GetChild(0).GetComponentsInChildren<InventorySlot>();
+        canvasGroup = GetComponent<CanvasGroup>();
 
         EventManager<InventorySlot>.StartListening(ConstantManager.INVENTORY_CLICK_LEFT, SelectSlot);
         EventManager<InventorySlot>.StartListening(ConstantManager.INVENTORY_CLICK_RIGHT, SettingSlot);
@@ -44,6 +47,13 @@ public class InventoryUIManager : MonoBehaviour
         {
             itemImage.rectTransform.position = GameManager.Instance.MousePos;
         }
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.UIManager.ResetTurnOnInventory();
+
+        canvasGroup.alpha = 0f;
     }
 
     private void SelectSlot(InventorySlot slot)

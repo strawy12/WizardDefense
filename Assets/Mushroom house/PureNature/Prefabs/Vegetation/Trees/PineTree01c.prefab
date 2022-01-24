@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7364108114158579070}
   - component: {fileID: 7333400080339603396}
   - component: {fileID: 2676454668902797261}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PineTree01_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,6 +56,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,6 +82,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!136 &2676454668902797261
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -105,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8202271493555087705}
   - component: {fileID: 5046297832656839858}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PineTree01c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +164,7 @@ GameObject:
   - component: {fileID: 3575135244820194638}
   - component: {fileID: 6924125512645752515}
   - component: {fileID: 7771221059409610328}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PineTree01_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,6 +208,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -230,3 +233,4 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}

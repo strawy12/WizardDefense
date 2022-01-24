@@ -28,7 +28,7 @@ public class GameManager : MonoSingleton<GameManager>
     #region InGame
     public GameObject boundary;
     public GameObject player;
-    public GameObject home;
+    public GameObject pointTower;
     public ItemObject Itempref;
 
     public TowerAttack selectedTower;
@@ -131,12 +131,9 @@ public class GameManager : MonoSingleton<GameManager>
         breakTime = 0f;
     }
 
-<<<<<<< HEAD
-=======
     public void SpawnItem(ItemBase data, Vector3 spawnPos)
     {
         ItemObject item = Instantiate(Itempref, spawnPos, Quaternion.identity);
         item.item = data;
     }
->>>>>>> OIF
 }

@@ -40,7 +40,7 @@ public class UIManager : MonoBehaviour
 
     [Header("사용자 지정 키 전용")]
     [SerializeField] private GameObject keySettingPanal;
-    [SerializeField] private CanvasGroup inventoryCanvasGroup;
+    [SerializeField] private InventoryUIManager inventoryUIManager;
 
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
@@ -323,21 +323,20 @@ public class UIManager : MonoBehaviour
         return FMark.activeSelf;
     }
 
-<<<<<<< HEAD
     private void SetGameState(GameState gameState)
     {
         GameManager.Instance.gameState = gameState;
-=======
+    }
     private void TurnOnInventory(bool turnOn)
     {
         if(turnOn)
         {
             GameManager.Instance.gameState = GameState.Setting;
             CursorLocked(false);
-            inventoryCanvasGroup.gameObject.SetActive(true);
-            inventoryCanvasGroup.DOKill();
-            inventoryCanvasGroup.DOFade(1f, 0.25f).SetUpdate(true);
-            currentUIPanels.Add(inventoryCanvasGroup.gameObject);
+            inventoryUIManager.gameObject.SetActive(true);
+            inventoryUIManager.canvasGroup.DOKill();
+            inventoryUIManager.canvasGroup.DOFade(1f, 0.25f).SetUpdate(true);
+            currentUIPanels.Add(inventoryUIManager.gameObject);
             EventManager.TriggerEvent(ConstantManager.TURNON_INVENTORY);
         }
 
@@ -345,10 +344,14 @@ public class UIManager : MonoBehaviour
         {
             GameManager.Instance.gameState = GameState.Playing;
             CursorLocked(true);
-            inventoryCanvasGroup.DOKill();
-            inventoryCanvasGroup.DOFade(0f, 0.25f).SetUpdate(true).OnComplete(() => inventoryCanvasGroup.gameObject.SetActive(false));
-            currentUIPanels.Remove(inventoryCanvasGroup.gameObject);
+            inventoryUIManager.canvasGroup.DOKill();
+            inventoryUIManager.canvasGroup.DOFade(0f, 0.25f).SetUpdate(true).OnComplete(() => inventoryUIManager.gameObject.SetActive(false));
+            currentUIPanels.Remove(inventoryUIManager.gameObject);
         }
->>>>>>> OIF
+    }
+
+    public void ResetTurnOnInventory()
+    {
+        turnOnInventory = false;
     }
 }

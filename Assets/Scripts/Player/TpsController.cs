@@ -87,16 +87,8 @@ public class TpsController : MonoBehaviour
     }
     private void LookAround()
     {
-<<<<<<< HEAD
         if (GameManager.Instance.gameState == GameState.Setting || GameManager.Instance.gameState == GameState.InGameSetting) return;
-=======
-        if (GameManager.Instance.gameState == GameState.Setting)
-        {
-            
-            return;
-        }
->>>>>>> OIF
-
+        
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * sensivity, Input.GetAxis("Mouse Y") * sensivity);
         Vector3 cameraAngle = cameraArm.rotation.eulerAngles;
         float x = cameraAngle.x - mouseDelta.y;
@@ -179,12 +171,8 @@ public class TpsController : MonoBehaviour
         var cam = GameManager.Instance.tpsCamera;
 
         Hit_TowerArea(cam);
-<<<<<<< HEAD
-        Hit_Monster(cam);
         Hit_Tower(cam);
-=======
         Hit_Unit(cam);
->>>>>>> OIF
     }
 
     private void Hit_Unit(Camera cam)
