@@ -15,12 +15,12 @@ public class PointTower : MonoBehaviour
     private void Start()
     {
         currentHp = maxHp;
-        EventManager<int>.TriggerEvent(ConstantManager.POINTTOWER_INIT, maxHp);
+        EventManager<float>.TriggerEvent(ConstantManager.POINTTOWER_INIT, maxHp);
     }
 
     public void Damaged(int attackDamage)
     {
         currentHp -= attackDamage;
-        EventManager<int>.TriggerEvent(ConstantManager.POINTTOWER_DAMAGED, currentHp);
+        EventManager<float>.TriggerEvent(ConstantManager.POINTTOWER_DAMAGED, currentHp);
     }
 }

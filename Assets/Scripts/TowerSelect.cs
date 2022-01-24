@@ -36,16 +36,6 @@ public class TowerSelect : MonoBehaviour
         SetValue(0);
     }
 
-    public void OnClickTower2()
-    {
-        SetValue(1);
-    }
-
-    public void OnClickTower3()
-    {
-        SetValue(2);
-    }
-
     private void UpdateUI()
     {
         needText.text = $"{curRune} / {needMax}";
@@ -102,7 +92,8 @@ public class TowerSelect : MonoBehaviour
     {
         GameObject a = null;
 
-        TowerNum(a);
+        a = Instantiate(tower[0], buildTrn);
+        a.transform.SetParent(null);
         Destroy(buildObj);
     }
 
@@ -116,28 +107,5 @@ public class TowerSelect : MonoBehaviour
         {
             buildBtn.interactable = false;
         }
-    }
-    
-    private void TowerNum(GameObject _tower)
-    {
-        switch (selectTower)
-        {
-            case 0:
-                _tower = Instantiate(tower[0], buildTrn);
-                break;
-
-            case 1:
-                _tower = Instantiate(tower[1], buildTrn);
-                break;
-
-            case 2:
-                _tower = Instantiate(tower[2], buildTrn);
-                break;
-
-            default:
-                break;
-        }
-
-        _tower.transform.SetParent(null);
     }
 }

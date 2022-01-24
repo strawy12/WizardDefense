@@ -5,20 +5,20 @@ using UnityEngine;
 public class PreView : MonoBehaviour
 {
     [Header("프리뷰 창")] [SerializeField] private GameObject preViewChang = null;
-    [Header("타워 배열")] [SerializeField] private GameObject[] tower = null;
+    [Header("타워 사정거리")] [SerializeField] private GameObject tower = null;
 
-    public Transform mother;
-
-    private GameObject _tower;
+    private GameObject a;
     private bool isPreView = false;
 
     public void OnClickpreView()
     {
         CheckPreView();
+        OnClick1();
     }
 
     public void OnClickPreViewOut()
     {
+        Destroy(a);
         CheckPreView();
     }
 
@@ -38,39 +38,7 @@ public class PreView : MonoBehaviour
 
     public void OnClick1()
     {
-        Destroy(_tower);
-        Towerr(0);
-    }
-
-    public void OnClick2()
-    {
-        Destroy(_tower);
-        Towerr(1);
-    }
-
-    public void OnClick3()
-    {
-        Destroy(_tower);
-        Towerr(2);
-    }
-
-    private void Towerr(int t)
-    {
-        _tower = Instantiate(tower[t], TowerSelect.buildTrn);
-
-        _tower.transform.SetParent(mother);
-    }
-
-    private void DeleteChild()
-    {
-        for (int i = 0; i < mother.transform.childCount; i++)
-        {
-            Destroy(transform.GetChild(i).gameObject);
-        }
-    }
-
-    private void TowerBuild(int num)
-    {
-        Instantiate(tower[num]);
+        a = Instantiate(tower, TowerSelect.buildTrn);
+        a.transform.SetParent(null);
     }
 }

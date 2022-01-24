@@ -37,6 +37,7 @@ public class InventoryUIManager : MonoBehaviour
         EventManager.StartListening(ConstantManager.INVENTORY_CLICK_DROPBTN, DropEvent);
         EventManager.StartListening(ConstantManager.INVENTORY_CLICK_EQUIPBTN, EquipEvent);
         EventManager.StartListening(ConstantManager.INVENTORY_CLICK_BACKGROUND, SelectItemDropEvent);
+        EventManager.StartListening(ConstantManager.TURNOFF_INVENTORY, () => canvasGroup.alpha = 0f);
     }
 
     private void Update()
@@ -51,9 +52,7 @@ public class InventoryUIManager : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.Instance.UIManager.ResetTurnOnInventory();
-
-        canvasGroup.alpha = 0f;
+        EventManager.TriggerEvent(ConstantManager.TURNOFF_INVENTORY);
     }
 
     private void SelectSlot(InventorySlot slot)
