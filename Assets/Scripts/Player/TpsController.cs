@@ -52,7 +52,6 @@ public class TpsController : MonoBehaviour
         if (GameManager.Instance.gameState == GameState.Setting) return;
 
         PlayerSet();
-        Debug.Log(GameManager.Instance.UIManager.IsFMarkActive());
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
         {
             if (GameManager.Instance.inGameState == InGameState.BreakTime)
@@ -151,18 +150,10 @@ public class TpsController : MonoBehaviour
             Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
             Vector3 moveDir = lookForWard * moveInput.y + lookRight * moveInput.x;
 
-            //characterBody.forward = lookForWard;
-            characterBody.forward += moveDir;
-
-<<<<<<< HEAD
-
             characterBody.forward += moveDir;
 
             //transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
-=======
             transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
->>>>>>> develop
-
             transform.position += moveDir * speed * Time.deltaTime;
         }
     }
