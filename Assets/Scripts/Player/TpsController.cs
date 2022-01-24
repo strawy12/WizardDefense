@@ -44,6 +44,7 @@ public class TpsController : MonoBehaviour
         animator = characterBody.GetComponent<Animator>();
         EventManager<ItemBase>.StartListening(ConstantManager.INVENTORY_DROP, DropItem);
         EventManager.StartListening(ConstantManager.TURNON_INVENTORY, StopPlayer);
+        EventManager<float>.StartListening(ConstantManager.CHANGE_SENSITVITY, SetSentivity);
     }
 
     private void Update()
@@ -151,11 +152,16 @@ public class TpsController : MonoBehaviour
             Vector3 moveDir = lookForWard * moveInput.y + lookRight * moveInput.x;
 
             //characterBody.forward = lookForWard;
+            characterBody.forward += moveDir;
 
+<<<<<<< HEAD
 
             characterBody.forward += moveDir;
 
             //transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
+=======
+            transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
+>>>>>>> develop
 
             transform.position += moveDir * speed * Time.deltaTime;
         }
@@ -349,5 +355,10 @@ public class TpsController : MonoBehaviour
     {
         animator.Play("Stand");
         animator.SetBool("isMove", false);
+    }
+
+    private void SetSentivity(float value)
+    {
+        sensivity = value;
     }
 }

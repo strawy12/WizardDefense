@@ -40,10 +40,13 @@ public class UIManager : MonoBehaviour
 
     [Header("사용자 지정 키 전용")]
     [SerializeField] private GameObject keySettingPanal;
+    [SerializeField] private InventoryUIManager inventoryUIManager;
+
 
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
     private bool isArea;
+    private bool turnOnInventory;
     [HideInInspector] public bool isTarget;
 
     void Start()
@@ -68,8 +71,13 @@ public class UIManager : MonoBehaviour
             SetCurrentPanels();
         }
 
-        //Debug.Log(IsFMarkActive());
+        if(Input.GetKeyDown(KeyManager.keySettings[KeyAction.Inventory]))
+        {
+            if (settingPanel.activeSelf) return;
 
+            turnOnInventory = !turnOnInventory;
+            TurnOnInventory(turnOnInventory);
+        }
     }
 
     public void SetTimer(float time)
@@ -79,6 +87,7 @@ public class UIManager : MonoBehaviour
 
     public void ActiveBreakTimeUI(bool isActive)
     {
+
         breakTimeUI.SetActive(isActive);
         skipKeyText.text = KeyManager.keySettings[KeyAction.Skip].ToString();
     }
@@ -133,7 +142,7 @@ public class UIManager : MonoBehaviour
         //}
     }
 
-    private void ActiveSettingPanel()
+    public void ActiveSettingPanel()
     {
         CursorLocked(settingPanel.activeSelf);
         if (settingPanel.activeSelf)
@@ -221,6 +230,8 @@ public class UIManager : MonoBehaviour
 
     public void Chang()
     {
+        if (settingPanel.activeSelf) return;
+
         CursorLocked(false);
 
         isArea = !isArea;
@@ -320,5 +331,28 @@ public class UIManager : MonoBehaviour
     private void SetGameState(GameState gameState)
     {
         GameManager.Instance.gameState = gameState;
+    }
+
+    private void TurnOnInventory(bool turnOn)
+    {
+        if (turnOn)
+        {
+            GameManager.Instance.gameState = GameState.Setting;
+            CursorLocked(false);
+            inventoryUIManager.gameObject.SetActive(true);
+            inventoryUIManager.canvasGroup.DOKill();
+            inventoryUIManager.canvasGroup.DOFade(1f, 0.25f).SetUpdate(true);
+            currentUIPanels.Add(inventoryUIManager.gameObject);
+            EventManager.TriggerEvent(ConstantManager.TURNON_INVENTORY);
+        }
+
+        else
+        {
+            GameManager.Instance.gameState = GameState.Playing;
+            CursorLocked(true);
+            inventoryUIManager.canvasGroup.DOKill();
+            inventoryUIManager.canvasGroup.DOFade(0f, 0.25f).SetUpdate(true).OnComplete(() => inventoryUIManager.gameObject.SetActive(false));
+            currentUIPanels.Remove(inventoryUIManager.gameObject);
+        }
     }
 }
