@@ -3177,7 +3177,7 @@ RectTransform:
   m_GameObject: {fileID: 117525327}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.000766, y: 1.000766, z: 1.000766}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 878528492}
   - {fileID: 1777036422}
@@ -12023,7 +12023,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 892, y: -236}
+  m_AnchoredPosition: {x: 892, y: -236.00003}
   m_SizeDelta: {x: -1439.9999, y: -750.18146}
   m_Pivot: {x: -0.5, y: 0.9}
 --- !u!114 &381679771
@@ -19656,8 +19656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 20
-  currentNum: 14
+  property: 1
   runeImg: {fileID: 653137628}
   runeText: {fileID: 667812791}
   towerSelect: {fileID: 878528491}
@@ -21847,8 +21846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 20
-  currentNum: 14
+  property: 2
   runeImg: {fileID: 1293044685}
   runeText: {fileID: 538666119}
   towerSelect: {fileID: 878528491}
@@ -27773,8 +27771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 20
-  currentNum: 14
+  property: 5
   runeImg: {fileID: 2115606015}
   runeText: {fileID: 1145632497}
   towerSelect: {fileID: 878528491}
@@ -33624,8 +33621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 20
-  currentNum: 14
+  property: 3
   runeImg: {fileID: 356243463}
   runeText: {fileID: 94921529}
   towerSelect: {fileID: 878528491}
@@ -40214,8 +40210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 20
-  currentNum: 14
+  property: 4
   runeImg: {fileID: 496051228}
   runeText: {fileID: 1389324542}
   towerSelect: {fileID: 878528491}
@@ -46892,8 +46887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 20
-  currentNum: 14
+  property: 6
   runeImg: {fileID: 950798305}
   runeText: {fileID: 1486763326}
   towerSelect: {fileID: 878528491}

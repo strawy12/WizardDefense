@@ -33,4 +33,9 @@ public static class ConstantManager
 
     public const string PICKUP_ENERGY = "PU_EG";
     public const string ADD_ENERGY = "AD_EG";
+
+    public const string OPEN_BUILDPANEL = "OP_BP";
+    public const string BUILDUI_ADDRUNE = "BD_AR";
+    public const string BUILDUI_SUBRUNE = "BD_SR";
+    public const string RETURN_RUNEVALUE = "RT_RV";
 }
