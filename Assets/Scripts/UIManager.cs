@@ -70,7 +70,7 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(isClosePreView)
+            if (isClosePreView)
             {
                 SetCurrentPanels();
             }
