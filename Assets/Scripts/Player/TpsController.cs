@@ -29,7 +29,7 @@ public class TpsController : MonoBehaviour
     private bool isTowerRun;
 
     private MonsterMove targetMonster;
-    private PropertyItemObject targetPropertyEnegy;
+    private ItemObject targetItem;
 
     private Animator animator;
     private Rigidbody myrigid;
@@ -84,10 +84,10 @@ public class TpsController : MonoBehaviour
                     GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
                 }
 
-                else if(isTargetItem && targetPropertyEnegy != null)
+                else if (isTargetItem && targetItem != null)
                 {
-                    targetPropertyEnegy.AddPropertyEnergy();
-                    targetPropertyEnegy = null;
+                    targetItem.PickUpItem();
+                    targetItem = null;
                 }
 
             }
@@ -232,9 +232,9 @@ public class TpsController : MonoBehaviour
     {
         var cam = GameManager.Instance.tpsCamera;
 
-        Hit_Unit(cam);
         Hit_TowerArea(cam);
         Hit_Tower(cam);
+        Hit_Unit(cam);
     }
 
     private void Hit_Unit(Camera cam)
@@ -260,17 +260,18 @@ public class TpsController : MonoBehaviour
                 }
             }
 
-            if (hit.transform.CompareTag("Property Item"))
+            if (hit.transform.CompareTag("Item"))
             {
-                targetPropertyEnegy = hit.transform.GetComponent<PropertyItemObject>();
+                targetItem = hit.transform.GetComponent<ItemObject>();
 
-                if (targetPropertyEnegy != null)
+                if (targetItem != null)
                 {
-                    GameManager.Instance.selectedPropertyItem?.ShowOutLine(false);
-                    targetPropertyEnegy.ShowOutLine(true);
-                    GameManager.Instance.selectedPropertyItem = targetPropertyEnegy;
-                    isTargetItem = true;
+                    GameManager.Instance.selectedItem?.ShowOutLine(false);
+                    targetItem.GetInfo();
+                    targetItem.ShowOutLine(true);
+                    GameManager.Instance.selectedItem = targetItem;
                     GameManager.Instance.UIManager.FMarkTrue();
+                    isTargetItem = true;
                     return;
                 }
             }
@@ -382,4 +383,6 @@ public class TpsController : MonoBehaviour
         DataManager.Instance.PlayerData.sensitivityValue = value;
         DataManager.Instance.SaveToJson();
     }
+
+
 }

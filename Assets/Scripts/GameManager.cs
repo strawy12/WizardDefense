@@ -30,12 +30,12 @@ public class GameManager : MonoSingleton<GameManager>
     public TpsController player;
     public GameObject pointTower;
     public Transform mapBorder;
-    public PropertyItemObject Itempref;
+    public ItemObject Itempref;
 
     public TowerAttack selectedTower;
     public TowerAttack censorTower;
     public MonsterMove selectedMonster;
-    public PropertyItemObject selectedPropertyItem;
+    public ItemObject selectedItem;
 
     public List<MonsterMove> enemies { get; private set; } = new List<MonsterMove>();
     public List<Attribute> attributes = new List<Attribute>();
@@ -134,10 +134,12 @@ public class GameManager : MonoSingleton<GameManager>
         breakTime = 0f;
     }
 
-    public void SpawnPropertyItem(PropertyType type, Vector3 spawnPos)
+    public void SpawnItem(ItemBase item, Vector3 spawnPos)
     {
-        PropertyItemObject item = Instantiate(Itempref, spawnPos, Quaternion.identity);
-        item.currentPropertyType = type;
+        if (item == null) return;
+
+        ItemObject itemObj = Instantiate(Itempref, spawnPos, Quaternion.identity);
+        itemObj.item = item;
     }
 
     public Vector3 ConversionBoundPosition(Vector3 pos)

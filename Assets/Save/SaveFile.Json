@@ -1,34 +1,34 @@
 ﻿{
     "bgmSoundVolume": 0.5,
     "effectSoundVolume": 0.5,
-    "sensitivityValue": 100.0,
+    "sensitivityValue": 15.0,
     "inventoryList": [
         {
             "index": 0,
             "item": {
-                "item_ID": "I_FireCrystal",
-                "itemName": "불 수정",
-                "itemType": 1
+                "item_ID": "I_CrystalVoid",
+                "itemName": "공허 수정",
+                "itemType": 5
             },
-            "count": 0,
+            "count": 1,
             "isQuitSlot": false
         },
         {
             "index": 1,
             "item": {
-                "item_ID": "I_FireMushroom",
-                "itemName": "불 버섯",
+                "item_ID": "I_FireCrystal",
+                "itemName": "불 수정",
                 "itemType": 1
             },
-            "count": 0,
+            "count": 3,
             "isQuitSlot": false
         },
         {
             "index": 2,
             "item": {
-                "item_ID": "I_Coal",
-                "itemName": "석탄",
-                "itemType": 1
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -36,9 +36,9 @@
         {
             "index": 3,
             "item": {
-                "item_ID": "I_WaterCrystal",
-                "itemName": "물 수정",
-                "itemType": 2
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -46,9 +46,9 @@
         {
             "index": 4,
             "item": {
-                "item_ID": "I_HolyTear",
-                "itemName": "신성한 눈물",
-                "itemType": 2
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -56,9 +56,9 @@
         {
             "index": 5,
             "item": {
-                "item_ID": "I_BottleWithIcecap",
-                "itemName": "만년설이 담긴 병",
-                "itemType": 2
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -66,9 +66,9 @@
         {
             "index": 6,
             "item": {
-                "item_ID": "I_TerraCrystal",
-                "itemName": "대지 수정",
-                "itemType": 3
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -76,9 +76,9 @@
         {
             "index": 7,
             "item": {
-                "item_ID": "I_VenomRose",
-                "itemName": "독 장미",
-                "itemType": 3
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -86,9 +86,9 @@
         {
             "index": 8,
             "item": {
-                "item_ID": "I_GolemParts",
-                "itemName": "골램 조각",
-                "itemType": 3
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -96,9 +96,9 @@
         {
             "index": 9,
             "item": {
-                "item_ID": "I_CrystalAir",
-                "itemName": "공기 수정",
-                "itemType": 6
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -106,9 +106,9 @@
         {
             "index": 10,
             "item": {
-                "item_ID": "I_FrozenCloud",
-                "itemName": "얼어 붙은 구름",
-                "itemType": 6
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -116,9 +116,9 @@
         {
             "index": 11,
             "item": {
-                "item_ID": "I_SunOre",
-                "itemName": "태양 원석",
-                "itemType": 6
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -126,9 +126,9 @@
         {
             "index": 12,
             "item": {
-                "item_ID": "I_CrystalHoly",
-                "itemName": "신성 수정",
-                "itemType": 4
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -136,9 +136,9 @@
         {
             "index": 13,
             "item": {
-                "item_ID": "I_BottleWithWave",
-                "itemName": "파동이 담긴 병",
-                "itemType": 4
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -146,9 +146,9 @@
         {
             "index": 14,
             "item": {
-                "item_ID": "I_ShadowParts",
-                "itemName": "그림자 조각",
-                "itemType": 4
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -156,9 +156,9 @@
         {
             "index": 15,
             "item": {
-                "item_ID": "I_CrystalVoid",
-                "itemName": "공허 수정",
-                "itemType": 5
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -166,9 +166,9 @@
         {
             "index": 16,
             "item": {
-                "item_ID": "I_EternalFire",
-                "itemName": "영생의 불꽃",
-                "itemType": 5
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -176,9 +176,9 @@
         {
             "index": 17,
             "item": {
-                "item_ID": "I_VoidGap",
-                "itemName": "공허의 틈",
-                "itemType": 5
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
             "count": 0,
             "isQuitSlot": false
@@ -401,7 +401,7 @@
         },
         {
             "type": 2,
-            "count": 1
+            "count": 0
         },
         {
             "type": 3,
@@ -431,7 +431,7 @@
         },
         {
             "keyAction": 2,
-            "keyCode": 103
+            "keyCode": 113
         },
         {
             "keyAction": 3,

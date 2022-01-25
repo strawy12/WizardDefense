@@ -19,6 +19,7 @@ public class MonsterMove : MonoBehaviour
     private Vector3 currentDir = Vector3.zero;
     private Transform targetPoint = null;
 
+    private ItemBase currentItem;
 
     private UnitInfo unitInfo;
 
@@ -47,6 +48,11 @@ public class MonsterMove : MonoBehaviour
 
     public void Init(MonsterBase monsterBase, Transform target)
     {
+        if(monsterBase.dropItem != null)
+        {
+            currentItem = monsterBase.dropItem;
+        }
+
         this.monsterBase = monsterBase;
         currentHp = monsterBase.info.maxHp;
         finished_Init = true;
@@ -95,7 +101,13 @@ public class MonsterMove : MonoBehaviour
     public void Dead()
     {
         GameManager.Instance.enemies.Remove(this);
-        GameManager.Instance.SpawnPropertyItem(monsterBase.monsterType, transform.position);
+
+        if(currentItem != null)
+        {
+                GameManager.Instance.SpawnItem(currentItem, transform.position);
+        }
+        
+
         Destroy(gameObject);
     }
 

@@ -31,6 +31,6 @@ public static class ConstantManager
 
     public const string VIEW_UNITINFO = "VW_UI";
 
-    public const string PICKUP_ENERGY = "PU_EG";
+    public const string PICKUP_ITEM = "PU_IT";
     public const string ADD_ENERGY = "AD_EG";
 }
