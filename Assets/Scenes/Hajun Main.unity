@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.49172282, g: 0.6827094, b: 0.78677964, a: 1}
+  m_IndirectSpecularColor: {r: 0.49192142, g: 0.68285924, b: 0.7869214, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1771,7 +1771,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 892, y: -236.00003}
+  m_AnchoredPosition: {x: 892, y: -236.00005}
   m_SizeDelta: {x: -1439.9999, y: -750.18146}
   m_Pivot: {x: -0.5, y: 0.9}
 --- !u!114 &61055338
@@ -2179,7 +2179,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.85}
   m_AnchorMax: {x: 0.5, y: 0.85}
-  m_AnchoredPosition: {x: -634, y: 91.76184}
+  m_AnchoredPosition: {x: -634, y: 91.761826}
   m_SizeDelta: {x: 289, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &74031202
@@ -24491,6 +24491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preViewChang: {fileID: 983873105}
   tower: {fileID: 0}
+  towerChang: {fileID: 0}
 --- !u!4 &985202393 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3799578387175572401, guid: 85b67c305e731644981723bb07cc1a46, type: 3}
@@ -28598,6 +28599,7 @@ MonoBehaviour:
   skipKeyText: {fileID: 274195227}
   keySettingPanal: {fileID: 161511721}
   inventoryUIManager: {fileID: 466174379}
+  isClosePreView: 0
   isTarget: 0
   quickSlot: {fileID: 0}
 --- !u!1 &1169776964
@@ -40860,7 +40862,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1052928252}
   m_HandleRect: {fileID: 1052928251}
   m_Direction: 2
-  m_Value: 0.9999997
+  m_Value: 1.0000002
   m_Size: 0.68277943
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -51660,11 +51662,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 40
-  currentNum: 37
+  property: 0
   runeImg: {fileID: 3190338561278081307}
   runeText: {fileID: 3190338561185436434}
-  towerSelect: {fileID: 3190338561154849370}
 --- !u!222 &3190338560902274043
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -51727,11 +51727,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 40
-  currentNum: 35
+  property: 0
   runeImg: {fileID: 3190338561466515648}
   runeText: {fileID: 3190338562353676499}
-  towerSelect: {fileID: 3190338561154849370}
 --- !u!222 &3190338560968564074
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -52305,7 +52303,6 @@ MonoBehaviour:
   tower:
   - {fileID: 7280627589862013462, guid: 70c7a0d374a0945459bfbe510a96fe9b, type: 3}
   needMax: 0
-  tpsController: {fileID: 3981799115404936984}
 --- !u!4 &3190338561154849371
 Transform:
   m_ObjectHideFlags: 0
@@ -52859,11 +52856,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 20
-  currentNum: 5
+  property: 0
   runeImg: {fileID: 3190338562054428644}
   runeText: {fileID: 3190338562534701857}
-  towerSelect: {fileID: 3190338561154849370}
 --- !u!222 &3190338561325773597
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -52937,11 +52932,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 5
-  currentNum: 5
+  property: 0
   runeImg: {fileID: 3190338561219843223}
   runeText: {fileID: 3190338561849102682}
-  towerSelect: {fileID: 3190338561154849370}
 --- !u!222 &3190338561343923164
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -54741,11 +54734,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 30
-  currentNum: 20
+  property: 0
   runeImg: {fileID: 3190338561694839671}
   runeText: {fileID: 3190338561393603355}
-  towerSelect: {fileID: 3190338561154849370}
 --- !u!1 &3190338562225818980
 GameObject:
   m_ObjectHideFlags: 0
@@ -55143,11 +55134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 40
-  currentNum: 30
+  property: 0
   runeImg: {fileID: 3190338561018780058}
   runeText: {fileID: 3190338560707704042}
-  towerSelect: {fileID: 3190338561154849370}
 --- !u!222 &3190338562303828906
 CanvasRenderer:
   m_ObjectHideFlags: 0
