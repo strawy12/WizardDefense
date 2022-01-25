@@ -1,26 +1,26 @@
 ﻿{
     "bgmSoundVolume": 0.5,
     "effectSoundVolume": 0.5,
-    "sensitivityValue": 15.0,
+    "sensitivityValue": 3.122962713241577,
     "inventoryList": [
         {
             "index": 0,
             "item": {
-                "item_ID": "I_CrystalVoid",
-                "itemName": "공허 수정",
-                "itemType": 5
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
-            "count": 1,
+            "count": 0,
             "isQuitSlot": false
         },
         {
             "index": 1,
             "item": {
-                "item_ID": "I_FireCrystal",
-                "itemName": "불 수정",
-                "itemType": 1
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
-            "count": 3,
+            "count": 0,
             "isQuitSlot": false
         },
         {
@@ -354,6 +354,16 @@
             "isQuitSlot": false
         },
         {
+            "index": 35,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
             "index": 0,
             "item": {
                 "item_ID": "",
@@ -401,7 +411,7 @@
         },
         {
             "type": 2,
-            "count": 0
+            "count": 1
         },
         {
             "type": 3,

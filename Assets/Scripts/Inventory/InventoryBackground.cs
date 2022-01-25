@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoyBackground : Button
+public class InventoryBackground : Button
 {
     protected override void Start()
     {

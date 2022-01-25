@@ -152,7 +152,7 @@ public class GameManager : MonoSingleton<GameManager>
         float additionZ = mapBorder.position.z;
 
         pos.x = Mathf.Clamp(pos.x, -x + additionX, x + additionX);
-        pos.y = Mathf.Clamp(pos.y, -35f, y + additionY);
+        pos.y = Mathf.Clamp(pos.y, -28f, y + additionY);
         pos.z = Mathf.Clamp(pos.z, -z + additionZ, z + additionZ);
 
         return pos;

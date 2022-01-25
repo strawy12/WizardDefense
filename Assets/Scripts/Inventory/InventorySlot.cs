@@ -75,7 +75,7 @@ public class InventorySlot : Button, IPointerClickHandler
         }
     }
 
-    public void Init(ItemBase item, int count)
+    public virtual void Init(ItemBase item, int count)
     {
         targetItem = item;
         targetItem.count = count;
@@ -131,6 +131,7 @@ public class InventorySlot : Button, IPointerClickHandler
 
 
         UpdateItemCountText(targetItem.count);
+        DataManager.Instance.SetInventoryData(currentIndex, targetItem.itemData, targetItem.count, slotType.Contains("Quick"));
 
     }
 
@@ -138,6 +139,20 @@ public class InventorySlot : Button, IPointerClickHandler
     {
         targetItemCountText.text = count.ToString();
 
+    }
+
+    public void DropItem()
+    {
+        if (targetItem.count > 1)
+        {
+            targetItem.count--;
+            UpdateItemCountText(targetItem.count);
+        }
+
+        else
+        {
+            ResetSlot();
+        }
     }
 
     public virtual void ResetSlot()

@@ -66,6 +66,12 @@ public class TpsController : MonoBehaviour
 
                     GameManager.Instance.UIManager.Chang();
                 }
+
+                else if (isTargetItem && targetItem != null)
+                {
+                    targetItem.PickUpItem();
+                    targetItem = null;
+                }
                 //else
                 //{
                 //    TowerBase tower = GameManager.Instance.censorTower.towerBase;
@@ -125,6 +131,8 @@ public class TpsController : MonoBehaviour
         Fly();
         Run();
         Hit();
+
+        transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
     }
     private void LookAround()
     {
@@ -363,7 +371,7 @@ public class TpsController : MonoBehaviour
 
     private void DropItem(ItemBase item)
     {
-        //GameManager.Instance.SpawnItem(item, transform.position);
+        GameManager.Instance.SpawnItem(item, transform.position);
     }
 
     private void StopPlayer()
