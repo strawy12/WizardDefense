@@ -66,14 +66,12 @@ public class GameManager : MonoSingleton<GameManager>
         gameState = GameState.Setting;
         waveManager = GetComponent<WaveManager>();
         dataManager = GetComponent<InGameDataManager>();
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
 
         mainCam = FindObjectOfType<CameraMove>();
         UIManager = GetComponent<UIManager>();
         KeyManager = GetComponent<KeyManager>();
         gameState = GameState.Playing;
-        //StartCoroutine(SpawnEnemies());
-
     }
 
     void Start()
