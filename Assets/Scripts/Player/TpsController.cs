@@ -59,7 +59,13 @@ public class TpsController : MonoBehaviour
         PlayerSet();
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
         {
-            if (GameManager.Instance.censorTower == null && isTargetTowerArea)
+            if (isTargetItem && targetItem != null)
+            {
+                targetItem.PickUpItem();
+                targetItem = null;
+            }
+
+            else if (GameManager.Instance.censorTower == null && isTargetTowerArea)
             {
 
                 GameManager.Instance.UIManager.Chang();
@@ -71,11 +77,7 @@ public class TpsController : MonoBehaviour
                 GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
             }
 
-            else if (isTargetItem && targetItem != null)
-            {
-                targetItem.PickUpItem();
-                targetItem = null;
-            }
+            
 
         }
 
@@ -260,6 +262,8 @@ public class TpsController : MonoBehaviour
                     GameManager.Instance.selectedItem = targetItem;
                     GameManager.Instance.UIManager.FMarkTrue();
                     isTargetItem = true;
+                    isTargetTower = false;
+                    isTargetTowerArea = false;
                     return;
                 }
             }
@@ -323,10 +327,11 @@ public class TpsController : MonoBehaviour
                         {
                             GameManager.Instance.UIManager.FMarkTrue();
                             isTargetTower = true;
-                            isTargetItem = false;
+                            isTargetTowerArea = false;
                         }
                     }
                     isTargetTower = true;
+                    isTargetTowerArea = false;
                     tower.ShowOutLine(true);
                 }
 

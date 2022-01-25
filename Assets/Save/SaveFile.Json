@@ -1,16 +1,16 @@
 ﻿{
     "bgmSoundVolume": 0.5,
     "effectSoundVolume": 0.5,
-    "sensitivityValue": 3.122962713241577,
+    "sensitivityValue": 15.0,
     "inventoryList": [
         {
             "index": 0,
             "item": {
-                "item_ID": "",
-                "itemName": "",
-                "itemType": 0
+                "item_ID": "I_FireCrystal",
+                "itemName": "불 수정",
+                "itemType": 1
             },
-            "count": 0,
+            "count": 2,
             "isQuitSlot": false
         },
         {
@@ -407,27 +407,27 @@
     "havedEnergyList": [
         {
             "type": 1,
-            "count": 0
+            "count": 122
         },
         {
             "type": 2,
-            "count": 1
+            "count": 132
         },
         {
             "type": 3,
-            "count": 0
+            "count": 116
         },
         {
             "type": 6,
-            "count": 0
+            "count": 126
         },
         {
             "type": 4,
-            "count": 0
+            "count": 122
         },
         {
             "type": 5,
-            "count": 0
+            "count": 96
         }
     ],
     "keyInputDataList": [
