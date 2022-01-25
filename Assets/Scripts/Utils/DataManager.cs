@@ -75,7 +75,7 @@ public class DataManager : MonoSingleton<DataManager>
 
     private void AddInventoryList()
     {
-        for(int i = 0; i < 35; i++)
+        for(int i = 0; i < 36; i++)
         {
             playerData.inventoryList.Add(new InventoryData(i, false));
         }

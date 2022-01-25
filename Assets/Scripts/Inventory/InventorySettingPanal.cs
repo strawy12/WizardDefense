@@ -42,6 +42,12 @@ public class InventorySettingPanal : MonoBehaviour, IPointerClickHandler
     {
         EventManager.TriggerEvent(ConstantManager.INVENTORY_CLICK_DROPBTN);
         TurnOffSettingPanal();
+    }    
+    
+    public void OnClickDivideBtn()
+    {
+        EventManager.TriggerEvent(ConstantManager.INVENTORY_CLICK_DIVIDEBTN);
+        TurnOffSettingPanal();
     }
 
     public void OnClickEquipBtn()

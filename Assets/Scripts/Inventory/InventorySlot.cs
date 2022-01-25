@@ -10,17 +10,35 @@ public class InventorySlot : Button, IPointerClickHandler
 
     public ItemBase targetItem;
 
+    public string TargetItemName 
+    {
+        get 
+        { 
+            if(targetItem == null)
+            {
+                return "";
+            }
+
+            if(targetItem.itemData == null)
+            {
+                return "";
+            }
+
+            return targetItem.itemData.itemName; 
+        } 
+    }
+
     public Image TargetItemImage { get; private set; }
+
+    public Text targetItemCountText = null;
 
     public InventorySlotState currentState;
 
     private int currentIndex;
-    private int targetItemCnt;
 
     protected Image currentImage;
 
     private ButtonClickedEvent onClick_Right;
-    private bool isItemAdd = false;
 
     public string slotType = "";
 
@@ -30,6 +48,7 @@ public class InventorySlot : Button, IPointerClickHandler
         rectTransform = GetComponent<RectTransform>();
         currentImage = GetComponent<Image>();
         TargetItemImage = transform.GetChild(0).GetComponent<Image>();
+        targetItemCountText = transform.GetChild(1).GetComponent<Text>();
         onClick_Right = new ButtonClickedEvent();
         currentState = InventorySlotState.Idle;
         currentIndex = transform.GetSiblingIndex();
@@ -56,30 +75,23 @@ public class InventorySlot : Button, IPointerClickHandler
         }
     }
 
-    public void Init(ItemBase item)
+    public virtual void Init(ItemBase item, int count)
     {
         targetItem = item;
+        targetItem.count = count;
+        UpdateItemCountText(targetItem.count);
         TargetItemImage.sprite = targetItem.itemSprite;
         TargetItemImage.gameObject.SetActive(true);
     }
 
-    private void AddTargetItem()
+    public void AddTargetItem(ItemBase item)
     {
-        if (isItemAdd) return;
-        isItemAdd = true;
-        onClick.AddListener(SelectSlot);
-        onClick.RemoveListener(AddTargetItem);
-        targetItem = GameManager.Instance.Data.GetItemBase(currentIndex);
-
-
-        if (targetItem == null)
-        {
-            return;
-        }
-
-        TargetItemImage.sprite = targetItem.itemSprite;
+        targetItem = item;
+        TargetItemImage.sprite = targetItem?.itemSprite;
+        targetItem.count = 1;
+        UpdateItemCountText(targetItem.count);
         TargetItemImage.gameObject.SetActive(true);
-        DataManager.Instance.SetInventoryData(currentIndex, targetItem.itemData, targetItemCnt, slotType.Contains("Quick"));
+        DataManager.Instance.SetInventoryData(currentIndex, targetItem.itemData, targetItem.count, slotType.Contains("Quick"));
 
     }
 
@@ -93,6 +105,13 @@ public class InventorySlot : Button, IPointerClickHandler
     private void SettingSlot()
     {
         EventManager<InventorySlot>.TriggerEvent(ConstantManager.INVENTORY_CLICK_RIGHT, this);
+    }
+
+    public void IncreaseItem()
+    {
+        targetItem.count++;
+        UpdateItemCountText(targetItem.count);
+        DataManager.Instance.SetInventoryData(currentIndex, targetItem.itemData, targetItem.count, slotType.Contains("Quick"));
     }
 
     public virtual void ChangeTargetItem(ItemBase item)
@@ -110,16 +129,38 @@ public class InventorySlot : Button, IPointerClickHandler
             TargetItemImage.gameObject.SetActive(true);
         }
 
-        DataManager.Instance.SetInventoryData(currentIndex, item.itemData, targetItemCnt, slotType.Contains("Quick"));
 
+        UpdateItemCountText(targetItem.count);
+        DataManager.Instance.SetInventoryData(currentIndex, targetItem.itemData, targetItem.count, slotType.Contains("Quick"));
+
+    }
+
+    private void UpdateItemCountText(int count)
+    {
+        targetItemCountText.text = count.ToString();
+
+    }
+
+    public void DropItem()
+    {
+        if (targetItem.count > 1)
+        {
+            targetItem.count--;
+            UpdateItemCountText(targetItem.count);
+        }
+
+        else
+        {
+            ResetSlot();
+        }
     }
 
     public virtual void ResetSlot()
     {
         targetItem = null;
-        currentIndex = 0;
+        UpdateItemCountText(0);
         TargetItemImage.gameObject.SetActive(false);
-        DataManager.Instance.SetInventoryData(currentIndex, null, targetItemCnt, slotType.Contains("Quick"));
+        DataManager.Instance.SetInventoryData(currentIndex, null, 0, slotType.Contains("Quick"));
     }
 
 

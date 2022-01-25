@@ -29,7 +29,7 @@ public class TpsController : MonoBehaviour
     private bool isTowerRun;
 
     private MonsterMove targetMonster;
-    private PropertyItemObject targetPropertyEnegy;
+    private ItemObject targetItem;
 
     private Animator animator;
     private Rigidbody myrigid;
@@ -61,7 +61,27 @@ public class TpsController : MonoBehaviour
         {
             if (GameManager.Instance.censorTower == null/* && isTargetTowerArea*/)
             {
+<<<<<<< HEAD
                 GameManager.Instance.UIManager.Chang();
+=======
+                if (GameManager.Instance.censorTower == null && isTargetTowerArea)
+                {
+
+                    GameManager.Instance.UIManager.Chang();
+                }
+
+                else if (isTargetItem && targetItem != null)
+                {
+                    targetItem.PickUpItem();
+                    targetItem = null;
+                }
+                //else
+                //{
+                //    TowerBase tower = GameManager.Instance.censorTower.towerBase;
+                //    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
+                //    GameManager.Instance.UIManager.ShowTowerStatBar(true, tower.attackPower, tower.fireRate);
+                //}
+>>>>>>> OIF
             }
             //else
             //{
@@ -74,9 +94,25 @@ public class TpsController : MonoBehaviour
             //gameObject.SetActive(false);
             if (isTargetTower && GameManager.Instance.selectedTower == null)
             {
+<<<<<<< HEAD
                 GameManager.Instance.censorTower?.ZoomInTower();
                 GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
             }
+=======
+                //tower.ZoomInTower();
+                //gameObject.SetActive(false);
+                if (isTargetTower && GameManager.Instance.selectedTower == null)
+                {
+                    GameManager.Instance.censorTower?.ZoomInTower();
+                    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
+                }
+
+                else if (isTargetItem && targetItem != null)
+                {
+                    targetItem.PickUpItem();
+                    targetItem = null;
+                }
+>>>>>>> OIF
 
             else if (isTargetItem && targetPropertyEnegy != null)
             {
@@ -118,6 +154,8 @@ public class TpsController : MonoBehaviour
         Fly();
         Run();
         Hit();
+
+        transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
     }
     private void LookAround()
     {
@@ -225,9 +263,9 @@ public class TpsController : MonoBehaviour
     {
         var cam = GameManager.Instance.tpsCamera;
 
-        Hit_Unit(cam);
         Hit_TowerArea(cam);
         Hit_Tower(cam);
+        Hit_Unit(cam);
     }
 
     private void Hit_Unit(Camera cam)
@@ -253,17 +291,18 @@ public class TpsController : MonoBehaviour
                 }
             }
 
-            if (hit.transform.CompareTag("Property Item"))
+            if (hit.transform.CompareTag("Item"))
             {
-                targetPropertyEnegy = hit.transform.GetComponent<PropertyItemObject>();
+                targetItem = hit.transform.GetComponent<ItemObject>();
 
-                if (targetPropertyEnegy != null)
+                if (targetItem != null)
                 {
-                    GameManager.Instance.selectedPropertyItem?.ShowOutLine(false);
-                    targetPropertyEnegy.ShowOutLine(true);
-                    GameManager.Instance.selectedPropertyItem = targetPropertyEnegy;
-                    isTargetItem = true;
+                    GameManager.Instance.selectedItem?.ShowOutLine(false);
+                    targetItem.GetInfo();
+                    targetItem.ShowOutLine(true);
+                    GameManager.Instance.selectedItem = targetItem;
                     GameManager.Instance.UIManager.FMarkTrue();
+                    isTargetItem = true;
                     return;
                 }
             }
@@ -356,7 +395,7 @@ public class TpsController : MonoBehaviour
 
     private void DropItem(ItemBase item)
     {
-        //GameManager.Instance.SpawnItem(item, transform.position);
+        GameManager.Instance.SpawnItem(item, transform.position);
     }
 
     private void StopPlayer()
@@ -377,8 +416,12 @@ public class TpsController : MonoBehaviour
         DataManager.Instance.SaveToJson();
     }
 
+<<<<<<< HEAD
     public float GetMaxDistance()
     {
         return maxDistance;
     }
+=======
+
+>>>>>>> OIF
 }
