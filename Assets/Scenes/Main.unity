@@ -188,7 +188,7 @@ RectTransform:
   m_GameObject: {fileID: 1011739}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99934936, y: 0.99934936, z: 0.99934936}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1025461346}
   m_Father: {fileID: 3190338561830825708}
@@ -3177,7 +3177,7 @@ RectTransform:
   m_GameObject: {fileID: 117525327}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.000766, y: 1.000766, z: 1.000766}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 878528492}
   - {fileID: 1777036422}
@@ -5937,7 +5937,7 @@ RectTransform:
   m_GameObject: {fileID: 218307648}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99934936, y: 0.99934936, z: 0.99934936}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 230748478}
   - {fileID: 1412167379}
@@ -12023,7 +12023,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 892, y: -236}
+  m_AnchoredPosition: {x: 892, y: -236.00003}
   m_SizeDelta: {x: -1439.9999, y: -750.18146}
   m_Pivot: {x: -0.5, y: 0.9}
 --- !u!114 &381679771
@@ -12299,7 +12299,7 @@ Transform:
   m_GameObject: {fileID: 392301579}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.000766, y: 1.000766, z: 1.000766}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1647637907}
   - {fileID: 421211163}
@@ -12320,6 +12320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preViewChang: {fileID: 392301579}
   tower: {fileID: 7280627589862013462, guid: 1019941e3b59b5a4f8e660b2e103d82d, type: 3}
+  towerChang: {fileID: 117525327}
 --- !u!1001 &393167298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15789,7 +15790,7 @@ RectTransform:
   m_GameObject: {fileID: 550523004}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99851936, y: 0.99851936, z: 0.99851936}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2009820018}
   - {fileID: 827974704}
@@ -19655,11 +19656,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 20
-  currentNum: 14
+  property: 1
   runeImg: {fileID: 653137628}
   runeText: {fileID: 667812791}
-  towerSelect: {fileID: 878528491}
 --- !u!114 &761357729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21846,11 +21845,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 20
-  currentNum: 14
+  property: 2
   runeImg: {fileID: 1293044685}
   runeText: {fileID: 538666119}
-  towerSelect: {fileID: 878528491}
 --- !u!114 &851741786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22518,7 +22515,6 @@ MonoBehaviour:
   tower:
   - {fileID: 7280627589862013462, guid: 70c7a0d374a0945459bfbe510a96fe9b, type: 3}
   needMax: 0
-  a: 0
 --- !u!4 &878528492
 Transform:
   m_ObjectHideFlags: 0
@@ -27772,11 +27768,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 20
-  currentNum: 14
+  property: 5
   runeImg: {fileID: 2115606015}
   runeText: {fileID: 1145632497}
-  towerSelect: {fileID: 878528491}
 --- !u!114 &1114893489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28977,6 +28971,7 @@ MonoBehaviour:
   skipKeyText: {fileID: 274195227}
   keySettingPanal: {fileID: 161511721}
   inventoryUIManager: {fileID: 1958308019}
+  isClosePreView: 0
   isTarget: 0
   quickSlot: {fileID: 790365573}
 --- !u!1 &1169776964
@@ -33622,11 +33617,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 20
-  currentNum: 14
+  property: 3
   runeImg: {fileID: 356243463}
   runeText: {fileID: 94921529}
-  towerSelect: {fileID: 878528491}
 --- !u!114 &1341532380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36558,7 +36551,7 @@ RectTransform:
   m_GameObject: {fileID: 1456379888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99934936, y: 0.99934936, z: 0.99934936}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1958409908}
   - {fileID: 74031201}
@@ -36696,7 +36689,7 @@ RectTransform:
   m_GameObject: {fileID: 1463555055}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99934936, y: 0.99934936, z: 0.99934936}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 327387930}
   m_Father: {fileID: 3190338561830825708}
@@ -40212,11 +40205,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 20
-  currentNum: 14
+  property: 4
   runeImg: {fileID: 496051228}
   runeText: {fileID: 1389324542}
-  towerSelect: {fileID: 878528491}
 --- !u!114 &1617132120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46890,11 +46881,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4d55ae2008f343ab668eb3eba1ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNum: 20
-  currentNum: 14
+  property: 6
   runeImg: {fileID: 950798305}
   runeText: {fileID: 1486763326}
-  towerSelect: {fileID: 878528491}
 --- !u!114 &1884034694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49464,7 +49453,7 @@ RectTransform:
   m_GameObject: {fileID: 1998496020}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99934936, y: 0.99934936, z: 0.99934936}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1537410765}
   - {fileID: 483556663}
