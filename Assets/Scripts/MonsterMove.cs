@@ -24,10 +24,13 @@ public class MonsterMove : MonoBehaviour
 
     private Outline outline;
 
+    private ParticleSystem particle;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         outline = GetComponent<Outline>();
+        particle = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Start()
@@ -41,7 +44,7 @@ public class MonsterMove : MonoBehaviour
         if (!finished_Init) return;
         if (agent.velocity.magnitude > 0.2f && agent.remainingDistance <= 3f)
         {
-           AttackPointTower();
+            AttackPointTower();
         }
     }
 
@@ -79,7 +82,9 @@ public class MonsterMove : MonoBehaviour
 
     public void Damaged(int damage)
     {
+        Debug.Log("¸ÂÀ½");
         currentHp -= damage;
+        particle.Play();
 
         if (currentHp <= 0)
         {
@@ -118,13 +123,13 @@ public class MonsterMove : MonoBehaviour
 
     public void ShowOutLine(bool isShow)
     {
-        if(isShow)
+        if (isShow)
         {
-            outline.OutlineWidth = outline.thisOutLine;
+            outline.OutlineColor = Color.yellow;
         }
         else
         {
-            outline.OutlineWidth = 0f;
+            outline.OutlineColor = new Color32(255, 68, 68, 255);
         }
     }
 }
