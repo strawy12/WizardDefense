@@ -18,6 +18,7 @@ public class TowerSelect : MonoBehaviour
     [Header("타워들 오브젝트 배열")] [SerializeField] private GameObject[] tower;
 
     [HideInInspector] public int needMax;
+    [HideInInspector] public bool a;
 
     public static Transform buildTrn;
     public static GameObject buildObj;
@@ -54,8 +55,16 @@ public class TowerSelect : MonoBehaviour
 
     public void AddRune()
     {
-        curRune++;
-        UpdateUI();
+        if (curRune >= needMax)
+        {
+            a = true;
+        }   
+        else
+        {
+            a = false;
+            curRune++;
+            UpdateUI();
+        }
     }
 
     public void MinusRune()
