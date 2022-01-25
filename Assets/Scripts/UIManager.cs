@@ -240,26 +240,14 @@ public class UIManager : MonoBehaviour
     {
         if (settingPanel.activeSelf) return;
 
+        EventManager.TriggerEvent(ConstantManager.OPEN_BUILDPANEL);
+
         CursorLocked(false);
+        FMark.SetActive(false);
+        buildChang.SetActive(true);
+        currentUIPanels.Add(buildChang);
 
-        isArea = !isArea;
-        if (isArea)
-        {
-            FMark.SetActive(false);
-            buildChang.SetActive(true);
-            currentUIPanels.Add(buildChang);
-
-            SetGameState(GameState.InGameSetting);
-        }
-        else
-        {
-            FMark.SetActive(false);
-            buildChang.SetActive(false);
-            currentUIPanels.Remove(buildChang);
-
-            SetGameState(GameState.Playing);
-        }
-
+        SetGameState(GameState.InGameSetting);
     }
 
     public void OnClickOutChang()
