@@ -90,7 +90,17 @@ public class TowerAttack : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse0) && curFireTime > towerBase.handFireRate)
         {
-            InstantiateOrPooling(pool.GetPoolObject(EPoolingType.DefaultBullet).gameObject);
+            CameraMove cam = GameManager.Instance.mainCam;
+            RaycastHit hitInfo;
+            Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.blue);
+
+
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, towerBase.distance, LayerMask.GetMask("Enemy")))
+            {
+                hitInfo.transform.gameObject.GetComponent<MonsterMove>()?.Damaged(towerBase.attackPower);
+            }
+
             curFireTime = 0f;
         }
     }

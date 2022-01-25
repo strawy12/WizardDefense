@@ -35,6 +35,7 @@ public class TpsController : MonoBehaviour
     private Rigidbody myrigid;
 
     private TowerAttack tower;
+    private Area area;
 
     private float fieldOfView;
 
@@ -58,39 +59,31 @@ public class TpsController : MonoBehaviour
         PlayerSet();
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
         {
-
-            if (GameManager.Instance.inGameState == InGameState.BreakTime)
+            if (GameManager.Instance.censorTower == null/* && isTargetTowerArea*/)
             {
-                if (GameManager.Instance.censorTower == null && isTargetTowerArea)
-                {
+                GameManager.Instance.UIManager.Chang();
+            }
+            //else
+            //{
+            //    TowerBase tower = GameManager.Instance.censorTower.towerBase;
+            //    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
+            //    GameManager.Instance.UIManager.ShowTowerStatBar(true, tower.attackPower, tower.fireRate);
+            //}
 
-                    GameManager.Instance.UIManager.Chang();
-                }
-                //else
-                //{
-                //    TowerBase tower = GameManager.Instance.censorTower.towerBase;
-                //    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
-                //    GameManager.Instance.UIManager.ShowTowerStatBar(true, tower.attackPower, tower.fireRate);
-                //}
+            //tower.ZoomInTower();
+            //gameObject.SetActive(false);
+            if (isTargetTower && GameManager.Instance.selectedTower == null)
+            {
+                GameManager.Instance.censorTower?.ZoomInTower();
+                GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
             }
 
-            else if (GameManager.Instance.inGameState == InGameState.DefenseTime)
+            else if (isTargetItem && targetPropertyEnegy != null)
             {
-                //tower.ZoomInTower();
-                //gameObject.SetActive(false);
-                if (isTargetTower && GameManager.Instance.selectedTower == null)
-                {
-                    GameManager.Instance.censorTower?.ZoomInTower();
-                    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
-                }
-
-                else if(isTargetItem && targetPropertyEnegy != null)
-                {
-                    targetPropertyEnegy.AddPropertyEnergy();
-                    targetPropertyEnegy = null;
-                }
-
+                targetPropertyEnegy.AddPropertyEnergy();
+                targetPropertyEnegy = null;
             }
+
         }
 
         if (Input.GetMouseButtonDown(0) && GameManager.Instance.censorTower != null && !isTowerRun)
@@ -294,7 +287,8 @@ public class TpsController : MonoBehaviour
             {
                 TowerSelect.buildTrn = hitTowerAreaInfo.transform;
                 GameManager.Instance.UIManager.FMarkTrue();
-                hitTowerAreaInfo.transform.GetComponent<Area>()?.ShowOutline(true);
+                area = hitTowerAreaInfo.transform.GetComponent<Area>();
+                area.ShowOutline(true);
                 isTargetItem = false;
                 isTargetTowerArea = true;
             }
@@ -303,8 +297,8 @@ public class TpsController : MonoBehaviour
             {
                 GameManager.Instance.UIManager.AreaCheack();
                 GameManager.Instance.UIManager.FMarkFalse();
-                hitTowerAreaInfo.transform.GetComponent<Area>()?.ShowOutline(false);
-                isTargetTowerArea = false;
+                area?.ShowOutline(false);
+                //isTargetTowerArea = false;
             }
         }
     }
@@ -371,9 +365,9 @@ public class TpsController : MonoBehaviour
         animator.SetBool("isMove", false);
     }
 
-    public void TargetingTowerArea()
+    public void TargetingTowerArea(bool isTarget)
     {
-        isTargetTowerArea = true;
+        isTargetTowerArea = isTarget;
     }
 
     private void SetSentivity(float value)
