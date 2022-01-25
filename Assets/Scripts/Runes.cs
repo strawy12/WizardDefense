@@ -27,11 +27,11 @@ public class Runes : MonoBehaviour
         }
         else
         {
-            if(towerSelect.a==false)
+            if (towerSelect.a == false)
             {
+                towerSelect.AddRune();
                 indexNum++;
                 currentNum--;
-                towerSelect.AddRune();
                 UpdateText();
             }
         }

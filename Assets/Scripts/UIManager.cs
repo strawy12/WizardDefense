@@ -45,6 +45,7 @@ public class UIManager : MonoBehaviour
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
     private bool isArea;
+    [HideInInspector] public bool isClosePreView;
     private bool turnOnInventory;
     [HideInInspector] public bool isTarget;
 
@@ -69,7 +70,10 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SetCurrentPanels();
+            if(isClosePreView)
+            {
+                SetCurrentPanels();
+            }
         }
 
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Inventory]))
