@@ -45,6 +45,7 @@ public class UIManager : MonoBehaviour
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
     private bool isArea;
+    [HideInInspector] public bool isClosePreView;
     private bool turnOnInventory;
     [HideInInspector] public bool isTarget;
 
@@ -69,7 +70,10 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SetCurrentPanels();
+            if (isClosePreView)
+            {
+                SetCurrentPanels();
+            }
         }
 
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Inventory]))
@@ -198,7 +202,6 @@ public class UIManager : MonoBehaviour
 
     public void ShowTowerStatBar(bool isShow, int attack = 0, float speed = 0)
     {
-        Debug.Log("ff");
         towerStatBar.gameObject.SetActive(isShow);
         towerStatText.text = string.Format("공격력 {0}\n공격속도 {1}", attack, speed);
     }

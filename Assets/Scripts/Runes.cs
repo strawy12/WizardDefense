@@ -11,7 +11,6 @@ public class Runes : MonoBehaviour
     [SerializeField] private Text runeText;
     public TowerSelect towerSelect;
 
-
     private int indexNum = 0;   // Á¦ÀÛ´ë¿¡ ³ÖÀº ·é °¹¼ö
 
     private void Start()
@@ -28,9 +27,9 @@ public class Runes : MonoBehaviour
         }
         else
         {
+            towerSelect.AddRune();
             indexNum++;
             currentNum--;
-            towerSelect.AddRune();
             UpdateText();
         }
     }
@@ -62,7 +61,7 @@ public class Runes : MonoBehaviour
 
     private void RuneNumCheck()
     {
-        if(currentNum==0)
+        if (currentNum == 0)
         {
             runeImg.color = new Color(0.6f, 0.6f, 0.6f, 1f);
         }
@@ -70,5 +69,10 @@ public class Runes : MonoBehaviour
         {
             runeImg.color = new Color(1, 1f, 1f, 1f);
         }
+    }
+
+    private void SetMaxNum()
+    {
+        maxNum = currentNum;
     }
 }
