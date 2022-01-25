@@ -18579,8 +18579,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1814220972}
   m_HandleRect: {fileID: 1814220971}
   m_Direction: 2
-  m_Value: 0.9999997
-  m_Size: 0.68277943
+  m_Value: 1.0000002
+  m_Size: 0.6827794
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -31189,8 +31189,8 @@ MonoBehaviour:
   targetItemCountText: {fileID: 132835442}
   currentState: 0
   slotType: QuickSlot
-  linkSlotImage: {fileID: 0}
-  linkSlotText: {fileID: 0}
+  linkSlotImage: {fileID: 73745129}
+  linkSlotText: {fileID: 862819820}
 --- !u!114 &1216852331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31471,8 +31471,8 @@ MonoBehaviour:
   targetItemCountText: {fileID: 427338247}
   currentState: 0
   slotType: QuickSlot
-  linkSlotImage: {fileID: 0}
-  linkSlotText: {fileID: 0}
+  linkSlotImage: {fileID: 1186163757}
+  linkSlotText: {fileID: 315149982}
 --- !u!114 &1222278600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41045,8 +41045,8 @@ MonoBehaviour:
   targetItemCountText: {fileID: 681678494}
   currentState: 0
   slotType: QuickSlot
-  linkSlotImage: {fileID: 0}
-  linkSlotText: {fileID: 0}
+  linkSlotImage: {fileID: 1112923286}
+  linkSlotText: {fileID: 923099797}
 --- !u!114 &1714676025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41612,8 +41612,8 @@ MonoBehaviour:
   targetItemCountText: {fileID: 240005849}
   currentState: 0
   slotType: QuickSlot
-  linkSlotImage: {fileID: 0}
-  linkSlotText: {fileID: 0}
+  linkSlotImage: {fileID: 237290255}
+  linkSlotText: {fileID: 1194206064}
 --- !u!114 &1730815078
 MonoBehaviour:
   m_ObjectHideFlags: 0
