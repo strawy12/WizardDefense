@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image towerUI;
 
     [SerializeField] private Image towerStatBar;
-    private Text towerStatText;
+    [SerializeField] private Text towerStatText;
 
     [SerializeField] private Transform towerButtons;
 
@@ -40,11 +40,15 @@ public class UIManager : MonoBehaviour
 
     [Header("사용자 지정 키 전용")]
     [SerializeField] private GameObject keySettingPanal;
+    [SerializeField] private InventoryUIManager inventoryUIManager;
 
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
     private bool isArea;
+    private bool turnOnInventory;
     [HideInInspector] public bool isTarget;
+
+    public GameObject quickSlot;
 
     void Start()
     {
@@ -61,15 +65,20 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        //ShowSkillUI(GameManager.Instance.selectedTower);
+        ShowSkillUI(GameManager.Instance.selectedTower);
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SetCurrentPanels();
         }
 
-        //Debug.Log(IsFMarkActive());
+        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Inventory]))
+        {
+            if (settingPanel.activeSelf) return;
 
+            turnOnInventory = !turnOnInventory;
+            TurnOnInventory(turnOnInventory);
+        }
     }
 
     public void SetTimer(float time)
@@ -79,6 +88,7 @@ public class UIManager : MonoBehaviour
 
     public void ActiveBreakTimeUI(bool isActive)
     {
+
         breakTimeUI.SetActive(isActive);
         skipKeyText.text = KeyManager.keySettings[KeyAction.Skip].ToString();
     }
@@ -133,16 +143,19 @@ public class UIManager : MonoBehaviour
         //}
     }
 
-    private void ActiveSettingPanel()
+    public void ActiveSettingPanel()
     {
         CursorLocked(settingPanel.activeSelf);
+
         if (settingPanel.activeSelf)
         {
             ActiveUIPanalState(false);
+            Time.timeScale = 1f;
         }
         else
         {
             ActiveUIPanalState(true);
+            Time.timeScale = 0f;
         }
 
         settingPanel.SetActive(!settingPanel.activeSelf);
@@ -150,28 +163,28 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region TowerUI
-    public void ShowSkillUI(TowerAttack tower, bool isActive)
+    public void ShowSkillUI(TowerAttack tower)
     {
-        if (!isActive)
+        if (tower == null)
         {
             towerUI.gameObject.SetActive(false);
             skillCoolTimeImage.fillAmount = 0f;
-            currentUIPanels.Remove(towerUI.gameObject);
+            return;
         }
 
         else
         {
-            if(towerUI.gameObject.activeSelf)
-            {
-                towerUI.gameObject.SetActive(false);
-                SetGameState(GameState.Playing);
-                currentUIPanels.Remove(towerUI.gameObject);
-                return;
-            }
+            //if (towerUI.gameObject.activeSelf)
+            //{
+            //    towerUI.gameObject.SetActive(false);
+            //    SetGameState(GameState.Playing);
+            //    //currentUIPanels.Remove(towerUI.gameObject);
+            //    return;
+            //}
 
             towerUI.gameObject.SetActive(true);
             towerButtons.gameObject.SetActive(GameManager.Instance.inGameState == InGameState.BreakTime);
-            currentUIPanels.Add(towerUI.gameObject);
+            //currentUIPanels.Add(towerUI.gameObject);
 
             CursorLocked(false);
             SetGameState(GameState.InGameSetting);
@@ -185,6 +198,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowTowerStatBar(bool isShow, int attack = 0, float speed = 0)
     {
+        Debug.Log("ff");
         towerStatBar.gameObject.SetActive(isShow);
         towerStatText.text = string.Format("공격력 {0}\n공격속도 {1}", attack, speed);
     }
@@ -221,6 +235,8 @@ public class UIManager : MonoBehaviour
 
     public void Chang()
     {
+        if (settingPanel.activeSelf) return;
+
         CursorLocked(false);
 
         isArea = !isArea;
@@ -306,6 +322,11 @@ public class UIManager : MonoBehaviour
         currentUIPanels.Remove(panel);
     }
 
+    public void AddCurrentPanels(GameObject panel)
+    {
+        currentUIPanels.Add(panel);
+    }
+
     public void SetCurEquipBtn(EquipmentButton button)
     {
         currentEquipButton = button;
@@ -320,5 +341,29 @@ public class UIManager : MonoBehaviour
     private void SetGameState(GameState gameState)
     {
         GameManager.Instance.gameState = gameState;
+    }
+
+    private void TurnOnInventory(bool turnOn)
+    {
+        if (turnOn)
+        {
+            GameManager.Instance.gameState = GameState.Setting;
+            CursorLocked(false);
+            inventoryUIManager.gameObject.SetActive(true);
+            inventoryUIManager.canvasGroup.blocksRaycasts = true;
+            inventoryUIManager.canvasGroup.DOKill();
+            inventoryUIManager.canvasGroup.DOFade(1f, 0.25f).SetUpdate(true);
+            currentUIPanels.Add(inventoryUIManager.gameObject);
+            EventManager.TriggerEvent(ConstantManager.TURNON_INVENTORY);
+        }
+
+        else
+        {
+            GameManager.Instance.gameState = GameState.Playing;
+            CursorLocked(true);
+            inventoryUIManager.canvasGroup.DOKill();
+            inventoryUIManager.canvasGroup.DOFade(0f, 0.25f).SetUpdate(true).OnComplete(() => EventManager.TriggerEvent(ConstantManager.TURNOFF_INVENTORY));
+            currentUIPanels.Remove(inventoryUIManager.gameObject);
+        }
     }
 }

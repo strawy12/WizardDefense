@@ -9,6 +9,8 @@ public static class ConstantManager
     public const string INVENTORY_CLICK_BACKGROUND = "IN_C_BG";
     public const string INVENTORY_DROP = "IN_DP";
 
+    public const string CHANGE_SENSITVITY = "CH_SV";
+
     public const string TURNON_INVENTORY = "TO_IN";
     public const string TURNOFF_INVENTORY = "TF_IN";
 
@@ -24,8 +26,11 @@ public static class ConstantManager
     public const string TOWER_TAG = "Tower";
     public const string ENEMY_TAG = "Enemy";
 
-    public const float BREAK_TIME = 30f;
+    public const float BREAK_TIME = 180f;
     public const string CLICK_KEYSETTINGBTN = "CK_KSB";
 
     public const string VIEW_UNITINFO = "VW_UI";
+
+    public const string PICKUP_ENERGY = "PU_EG";
+    public const string ADD_ENERGY = "AD_EG";
 }

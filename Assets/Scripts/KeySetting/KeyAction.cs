@@ -1,9 +1,5 @@
 public enum KeyAction
 {
-    Forward,
-    Back,
-    Left,
-    Right,
     Jump,
     Run,
     Skill,

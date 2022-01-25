@@ -20,6 +20,7 @@ public class TowerAttack : MonoBehaviour
     public Skill skill;
 
     public bool isBuilding;
+    public GameObject towerUnit;
 
     private Outline outline;
 
@@ -33,7 +34,7 @@ public class TowerAttack : MonoBehaviour
 
         Vector3 scale = transform.localScale;
         scale.y = scale.x;
-        boundary.gameObject.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * 2f * (1 / scale.x);
+        boundary.gameObject.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) *  (2f / scale.x);
         boundary.gameObject.SetActive(true);
     }
 
@@ -142,7 +143,8 @@ public class TowerAttack : MonoBehaviour
         List<MonsterMove> enemies = GameManager.Instance.enemies;
         if (enemies.Count == 0) return false;
 
-        float minDistance = 100f;
+        Debug.Log(enemies.Count);
+        float minDistance = 999f;
         float distance;
         targetEnemy = null;
 
@@ -189,16 +191,19 @@ public class TowerAttack : MonoBehaviour
 
         GameManager.Instance.tpsCamera.enabled = false;
 
-        Vector3 cameraPosition = transform.position;
-        cameraPosition.y += 2f;
-        muzzlePosition.transform.position = cameraPosition;
+        Vector3 cameraPosition = muzzlePosition.transform.position;
+        cameraPosition.y += 1.2f;
         GameManager.Instance.mainCam.CameraMoveToPosition(cameraPosition, 1f);
         //이거 fireRate 다름
         GameManager.Instance.UIManager.ShowTowerStatBar(true, towerBase.attackPower, towerBase.fireRate);
+        GameManager.Instance.UIManager.quickSlot.SetActive(false);
 
         GameManager.Instance.selectedTower = this;
         towerState = TowerState.InControl;
         selectedTime = 0f;
+
+        towerUnit.SetActive(false);
+        GameManager.Instance.player.gameObject.SetActive(false);
 
         ShowBoundary(true);
         ChangeBoundaryColor(Color.red);
@@ -209,15 +214,20 @@ public class TowerAttack : MonoBehaviour
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && selectedTime > 1f)
         {
             //고정값이니 바꾸어도 됨
-            GameManager.Instance.player.SetActive(true);
+            GameManager.Instance.player.gameObject.SetActive(true);
 
             Vector3 pos = GameManager.Instance.tpsCamera.transform.position;
             Vector3 rot = GameManager.Instance.tpsCamera.transform.parent.eulerAngles;
             GameManager.Instance.mainCam.ZoomOutCamera(pos, rot, 1f);
-            //GameManager.Instance.UIManager.ShowTowerStatBar(true);    
+            GameManager.Instance.UIManager.quickSlot.SetActive(true);
+            GameManager.Instance.gameState = GameState.Playing;
+
+            GameManager.Instance.UIManager.ShowTowerStatBar(false);
             GameManager.Instance.selectedTower = null;
 
             curFireTime = 0f;
+            towerUnit.SetActive(true);
+            GameManager.Instance.player.gameObject.SetActive(true);
 
             towerState = TowerState.OutControl;
         }
@@ -289,6 +299,7 @@ public class TowerAttack : MonoBehaviour
 
     public void ChangeBoundaryColor(Color color)
     {
+        color.a = 0.4f;
         boundary.color = color;
     }
 

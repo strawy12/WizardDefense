@@ -29,10 +29,12 @@ public class PreView : MonoBehaviour
         if (isPreView)
         {
             preViewChang.SetActive(true);
+            GameManager.Instance.UIManager.AddCurrentPanels(preViewChang);
         }
         else
         {
             preViewChang.SetActive(false);
+            GameManager.Instance.UIManager.RemoveCurrentPanels(preViewChang);
         }
     }
 

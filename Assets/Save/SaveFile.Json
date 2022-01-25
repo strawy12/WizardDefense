@@ -1,0 +1,473 @@
+﻿{
+    "bgmSoundVolume": 0.5,
+    "effectSoundVolume": 0.5,
+    "sensitivityValue": 7.317422389984131,
+    "inventoryList": [
+        {
+            "index": 0,
+            "item": {
+                "item_ID": "I_FireCrystal",
+                "itemName": "불 수정",
+                "itemType": 1
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 1,
+            "item": {
+                "item_ID": "I_FireMushroom",
+                "itemName": "불 버섯",
+                "itemType": 1
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 2,
+            "item": {
+                "item_ID": "I_Coal",
+                "itemName": "석탄",
+                "itemType": 1
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 3,
+            "item": {
+                "item_ID": "I_WaterCrystal",
+                "itemName": "물 수정",
+                "itemType": 2
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 4,
+            "item": {
+                "item_ID": "I_HolyTear",
+                "itemName": "신성한 눈물",
+                "itemType": 2
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 5,
+            "item": {
+                "item_ID": "I_BottleWithIcecap",
+                "itemName": "만년설이 담긴 병",
+                "itemType": 2
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 6,
+            "item": {
+                "item_ID": "I_TerraCrystal",
+                "itemName": "대지 수정",
+                "itemType": 3
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 7,
+            "item": {
+                "item_ID": "I_VenomRose",
+                "itemName": "독 장미",
+                "itemType": 3
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 8,
+            "item": {
+                "item_ID": "I_GolemParts",
+                "itemName": "골램 조각",
+                "itemType": 3
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 9,
+            "item": {
+                "item_ID": "I_CrystalAir",
+                "itemName": "공기 수정",
+                "itemType": 6
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 10,
+            "item": {
+                "item_ID": "I_FrozenCloud",
+                "itemName": "얼어 붙은 구름",
+                "itemType": 6
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 11,
+            "item": {
+                "item_ID": "I_SunOre",
+                "itemName": "태양 원석",
+                "itemType": 6
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 12,
+            "item": {
+                "item_ID": "I_CrystalHoly",
+                "itemName": "신성 수정",
+                "itemType": 4
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 13,
+            "item": {
+                "item_ID": "I_BottleWithWave",
+                "itemName": "파동이 담긴 병",
+                "itemType": 4
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 14,
+            "item": {
+                "item_ID": "I_ShadowParts",
+                "itemName": "그림자 조각",
+                "itemType": 4
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 15,
+            "item": {
+                "item_ID": "I_CrystalVoid",
+                "itemName": "공허 수정",
+                "itemType": 5
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 16,
+            "item": {
+                "item_ID": "I_EternalFire",
+                "itemName": "영생의 불꽃",
+                "itemType": 5
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 17,
+            "item": {
+                "item_ID": "I_VoidGap",
+                "itemName": "공허의 틈",
+                "itemType": 5
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 18,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 19,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 20,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 21,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 22,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 23,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 24,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 25,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 26,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 27,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 28,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 29,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 30,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 31,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 32,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 33,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 34,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": false
+        },
+        {
+            "index": 0,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": true
+        },
+        {
+            "index": 1,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": true
+        },
+        {
+            "index": 2,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": true
+        },
+        {
+            "index": 3,
+            "item": {
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
+            },
+            "count": 0,
+            "isQuitSlot": true
+        }
+    ],
+    "havedEnergyList": [
+        {
+            "type": 1,
+            "count": 0
+        },
+        {
+            "type": 2,
+            "count": 1
+        },
+        {
+            "type": 3,
+            "count": 0
+        },
+        {
+            "type": 6,
+            "count": 0
+        },
+        {
+            "type": 4,
+            "count": 0
+        },
+        {
+            "type": 5,
+            "count": 0
+        }
+    ],
+    "keyInputDataList": [
+        {
+            "keyAction": 0,
+            "keyCode": 32
+        },
+        {
+            "keyAction": 1,
+            "keyCode": 304
+        },
+        {
+            "keyAction": 2,
+            "keyCode": 103
+        },
+        {
+            "keyAction": 3,
+            "keyCode": 9
+        },
+        {
+            "keyAction": 4,
+            "keyCode": 102
+        },
+        {
+            "keyAction": 5,
+            "keyCode": 286
+        },
+        {
+            "keyAction": 6,
+            "keyCode": 114
+        },
+        {
+            "keyAction": 7,
+            "keyCode": 118
+        },
+        {
+            "keyAction": 8,
+            "keyCode": 49
+        },
+        {
+            "keyAction": 9,
+            "keyCode": 50
+        },
+        {
+            "keyAction": 10,
+            "keyCode": 51
+        },
+        {
+            "keyAction": 11,
+            "keyCode": 52
+        }
+    ]
+}

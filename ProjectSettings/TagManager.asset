@@ -12,6 +12,7 @@ TagManager:
   - AreaTrigger
   - Wall
   - Item
+  - Property Item
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Player
   - AreaTrigger
   - Wall
-  - 
+  - Item
   - 
   - 
   - 
@@ -46,6 +47,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Enemy
+    uniqueID: 3514627763
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

@@ -95,6 +95,7 @@ public class MonsterMove : MonoBehaviour
     public void Dead()
     {
         GameManager.Instance.enemies.Remove(this);
+        GameManager.Instance.SpawnPropertyItem(monsterBase.monsterType, transform.position);
         Destroy(gameObject);
     }
 

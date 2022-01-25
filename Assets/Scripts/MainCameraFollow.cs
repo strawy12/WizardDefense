@@ -17,12 +17,12 @@ public class MainCameraFollow : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F5))
+        if(Input.GetKeyDown(KeyManager.keySettings[KeyAction.ChangeView]))
         {
             ChangeView();
         }
 
-        if(Input.GetKeyUp(KeyCode.F5))
+        if(Input.GetKeyUp(KeyManager.keySettings[KeyAction.ChangeView]))
         {
             ChangeView();
         }

@@ -163,6 +163,7 @@ MonoBehaviour:
     attributeName: 
     skillSprite: {fileID: 0}
   isBuilding: 0
+  towerUnit: {fileID: 6313140628273409394}
 --- !u!1 &7622507184708523043
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +214,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c8712d87dfca6cd40a11b9475f0f18ea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -235,7 +236,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -5657516368756229084, guid: c7e210d9446aed347bd9cf7ea2c7806c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6745098}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
