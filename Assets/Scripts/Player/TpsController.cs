@@ -59,65 +59,22 @@ public class TpsController : MonoBehaviour
         PlayerSet();
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
         {
-            if (GameManager.Instance.censorTower == null/* && isTargetTowerArea*/)
+            if (GameManager.Instance.censorTower == null && isTargetTowerArea)
             {
-<<<<<<< HEAD
+
                 GameManager.Instance.UIManager.Chang();
-=======
-                if (GameManager.Instance.censorTower == null && isTargetTowerArea)
-                {
-
-                    GameManager.Instance.UIManager.Chang();
-                }
-
-                else if (isTargetItem && targetItem != null)
-                {
-                    targetItem.PickUpItem();
-                    targetItem = null;
-                }
-                //else
-                //{
-                //    TowerBase tower = GameManager.Instance.censorTower.towerBase;
-                //    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
-                //    GameManager.Instance.UIManager.ShowTowerStatBar(true, tower.attackPower, tower.fireRate);
-                //}
->>>>>>> OIF
             }
-            //else
-            //{
-            //    TowerBase tower = GameManager.Instance.censorTower.towerBase;
-            //    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
-            //    GameManager.Instance.UIManager.ShowTowerStatBar(true, tower.attackPower, tower.fireRate);
-            //}
 
-            //tower.ZoomInTower();
-            //gameObject.SetActive(false);
-            if (isTargetTower && GameManager.Instance.selectedTower == null)
+            else if (isTargetTower && GameManager.Instance.selectedTower == null)
             {
-<<<<<<< HEAD
                 GameManager.Instance.censorTower?.ZoomInTower();
                 GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
             }
-=======
-                //tower.ZoomInTower();
-                //gameObject.SetActive(false);
-                if (isTargetTower && GameManager.Instance.selectedTower == null)
-                {
-                    GameManager.Instance.censorTower?.ZoomInTower();
-                    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
-                }
 
-                else if (isTargetItem && targetItem != null)
-                {
-                    targetItem.PickUpItem();
-                    targetItem = null;
-                }
->>>>>>> OIF
-
-            else if (isTargetItem && targetPropertyEnegy != null)
+            else if (isTargetItem && targetItem != null)
             {
-                targetPropertyEnegy.AddPropertyEnergy();
-                targetPropertyEnegy = null;
+                targetItem.PickUpItem();
+                targetItem = null;
             }
 
         }
@@ -416,12 +373,8 @@ public class TpsController : MonoBehaviour
         DataManager.Instance.SaveToJson();
     }
 
-<<<<<<< HEAD
     public float GetMaxDistance()
     {
         return maxDistance;
     }
-=======
-
->>>>>>> OIF
 }
