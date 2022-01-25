@@ -25,7 +25,6 @@ public class TowerSelect : MonoBehaviour
 
     private int selectTower;
 
-    public TpsController tpsController;
 
     private void Start()
     {
