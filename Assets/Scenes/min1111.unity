@@ -28010,13 +28010,14 @@ MonoBehaviour:
   uiCamara: {fileID: 681700284}
   screenCenter: {x: 0, y: 0, z: 0}
   boundary: {fileID: 7660168442070018560}
-  player: {fileID: 3981799115404936990}
+  player: {fileID: 3981799115404936984}
   pointTower: {fileID: 1151523061}
   mapBorder: {fileID: 1780939664}
-  Itempref: {fileID: 0}
+  Itempref: {fileID: -63303828460261586, guid: 297aac2ab21379e4e95b6ff100c585d6, type: 3}
   selectedTower: {fileID: 0}
   censorTower: {fileID: 0}
   selectedMonster: {fileID: 0}
+  selectedPropertyItem: {fileID: 0}
   attributes:
   - attributeName: "\uBD88"
     sprite: {fileID: 0}
