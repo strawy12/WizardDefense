@@ -23798,8 +23798,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 26
+    m_Font: {fileID: 12800000, guid: 0d94a88ce4a53294096437a4ddb6e86f, type: 3}
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -28978,6 +28978,7 @@ MonoBehaviour:
   skipKeyText: {fileID: 274195227}
   keySettingPanal: {fileID: 161511721}
   inventoryUIManager: {fileID: 1958308019}
+  isClosePreView: 0
   isTarget: 0
   quickSlot: {fileID: 790365573}
 --- !u!1 &1169776964

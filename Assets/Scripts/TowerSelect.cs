@@ -54,16 +54,9 @@ public class TowerSelect : MonoBehaviour
 
     public void AddRune()
     {
-        if (curRune >= needMax)
-        {
-            a = true;
-        }   
-        else
-        {
-            a = false;
-            curRune++;
-            UpdateUI();
-        }
+        a = false;
+        curRune++;
+        UpdateUI();
     }
 
     public void MinusRune()
