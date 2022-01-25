@@ -17867,14 +17867,14 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.8848366, b: 0.5707547, a: 1}
-  m_Intensity: 0.5
+  m_Color: {r: 1, g: 0.96403486, b: 0.82452834, a: 1}
+  m_Intensity: 0.29
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -40827,7 +40827,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1052928252}
   m_HandleRect: {fileID: 1052928251}
   m_Direction: 2
-  m_Value: 1.0000006
+  m_Value: 0.9999997
   m_Size: 0.68277943
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -56142,7 +56142,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &3981799115404936990
 GameObject:
