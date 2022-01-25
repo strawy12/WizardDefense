@@ -98,11 +98,13 @@ public class TowerAttack : MonoBehaviour
     private void SetMuzzleRotation()
     {
         //Ray ray = GameManager.Instance.mainCam.cam.ScreenPointToRay(GameManager.Instance.screenCenter);
-        Ray ray = GameManager.Instance.mainCam.cam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+        CameraMove cam = GameManager.Instance.mainCam;
         RaycastHit hitInfo;
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * 100f, Color.blue);
 
-        if (Physics.Raycast(ray, out hitInfo, 999f))
+
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward,out hitInfo, towerBase.distance))
         {
             //muzzlePosition.localEulerAngles = GameManager.Instance.mainCam.transform.localEulerAngles;
             //Debug.DrawRay(muzzlePosition.position, hitInfo.point - muzzlePosition.position, Color.red);
@@ -251,7 +253,7 @@ public class TowerAttack : MonoBehaviour
     #region Skill
     private void OnUseSKill()
     {
-        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Skill]) && towerState == TowerState.InControl)
+        if (Input.GetKeyDown/*(KeyManager.keySettings[KeyAction.Skill])*/(KeyCode.Q) && towerState == TowerState.InControl)
         {
             skill = GetSkill();
 

@@ -198,7 +198,6 @@ public class UIManager : MonoBehaviour
 
     public void ShowTowerStatBar(bool isShow, int attack = 0, float speed = 0)
     {
-        Debug.Log("ff");
         towerStatBar.gameObject.SetActive(isShow);
         towerStatText.text = string.Format("공격력 {0}\n공격속도 {1}", attack, speed);
     }

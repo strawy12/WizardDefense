@@ -382,4 +382,9 @@ public class TpsController : MonoBehaviour
         DataManager.Instance.PlayerData.sensitivityValue = value;
         DataManager.Instance.SaveToJson();
     }
+
+    public float GetMaxDistance()
+    {
+        return maxDistance;
+    }
 }
