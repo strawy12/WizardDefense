@@ -324,4 +324,10 @@ public class UIManager : MonoBehaviour
         panal.transform.DOKill();
         panal.transform.DOScaleY(1f, 0.3f).SetUpdate(true);
     }
+
+    public void OnClickOutGame()
+    {
+        Debug.Log("Out Game");
+        Application.Quit();
+    }
 }

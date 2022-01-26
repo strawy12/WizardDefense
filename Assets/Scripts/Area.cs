@@ -31,6 +31,8 @@ public class Area : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, target.position) < distance)
             {
+                if (target == null) Debug.Log("Å¸°Ù »ç¶óÁü");
+
                 TowerSelect.buildObj = gameObject;
                 TowerSelect.buildTrn = gameObject.transform;
                 GameManager.Instance.player.TargetingTowerArea(true);
