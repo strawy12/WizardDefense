@@ -16,6 +16,7 @@ public class WaveManager : MonoBehaviour
 
     private Transform currentSpawnPoint;
 
+    private int currentSpawnCnt = 0;
     private int waveIndex = 0;
     private int currentPatternCnt = 0;
     private float nextPatternDelay = 0f;
@@ -93,7 +94,7 @@ public class WaveManager : MonoBehaviour
             for (int j = 0; j < currentSpawnInfo.spawnCount; j++)
             {
                 monster = Instantiate(currentMonsterPref, currentSpawnPoint.position, Quaternion.identity);
-                monster.Init(currentMonsterBase, targetPoint);
+                monster.Init(currentMonsterBase, targetPoint, currentSpawnCnt++);
 
                 yield return new WaitForSeconds(currentPattern.monsterSpawnDelay);
             }

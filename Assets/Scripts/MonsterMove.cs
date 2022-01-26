@@ -12,10 +12,10 @@ public class MonsterMove : MonoBehaviour
     private NavMeshAgent agent;
     private SkinnedMeshRenderer meshRenderer;
 
-    public float RemainingDistance { get { return agent.remainingDistance; } }
-
     private float currentHp = 0;
     public float virtualHP;
+
+    public int SpawnOrder { get; private set; }
 
     private bool finished_Init = false;
 
@@ -64,7 +64,7 @@ public class MonsterMove : MonoBehaviour
         }
     }
 
-    public void Init(MonsterBase monsterBase, Transform target)
+    public void Init(MonsterBase monsterBase, Transform target, int spawnOrder)
     {
         if(monsterBase.dropItem != null)
         {
@@ -76,6 +76,7 @@ public class MonsterMove : MonoBehaviour
         currentHp = monsterBase.info.maxHp;
         finished_Init = true;
         targetPoint = target;
+        SpawnOrder = spawnOrder;
         agent.SetDestination(targetPoint.position);
         GameManager.Instance.enemies.Add(this);
         finished_Init = true;
@@ -139,10 +140,9 @@ public class MonsterMove : MonoBehaviour
 
     public void Dead()
     {
-        anim.Play("BANGBNAG");
-
         GameManager.Instance.enemies.Remove(this);
-        isDead = true;
+        Destroy(gameObject);
+        //isDead = true;
     }
 
     public void AttackPointTower()

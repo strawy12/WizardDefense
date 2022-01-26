@@ -168,7 +168,6 @@ public class GameManager : MonoSingleton<GameManager>
 
         if (inGameState == InGameState.BreakTime)
         {
-            Debug.Log("dd");
             EventManager.TriggerEvent(ConstantManager.START_BREAKTIME);
         }
 

@@ -157,18 +157,20 @@ public class TowerAttack : MonoBehaviour
 
         float minDistance = 999f;
         float distance;
+        int minSpawnOrder = 999;
         targetEnemy = null;
 
         for (int i = 0; i < enemies.Count; i++)
         {
-            if (Vector3.Distance(enemies[i].transform.position, transform.position) > towerBase.distance) continue;
+            distance = Vector3.Distance(enemies[i].transform.position, transform.position);
 
-            distance = enemies[i].RemainingDistance;
+            if (distance > towerBase.distance) continue;
 
-            if (distance < minDistance && enemies[i].virtualHP > 0)
+            if (distance < minDistance && enemies[i].virtualHP > 0 && enemies[i].SpawnOrder < minSpawnOrder)
             {
                 targetEnemy = enemies[i];
                 minDistance = distance;
+                minSpawnOrder = enemies[i].SpawnOrder;
             }
         }
 

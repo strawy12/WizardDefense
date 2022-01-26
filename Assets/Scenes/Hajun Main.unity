@@ -46884,7 +46884,7 @@ MonoBehaviour:
   targetPicker: {fileID: 1076203164}
   slotSettingPanal: {fileID: 1010614761}
   quickSlotTrs: {fileID: 1939634306}
-  itemSlotTrs: {fileID: 1134647197}
+  itemSlotTrs: {fileID: 1617396629}
   canvasGroup: {fileID: 1958308020}
   itemImage: {fileID: 804364858}
 --- !u!225 &1958308020
