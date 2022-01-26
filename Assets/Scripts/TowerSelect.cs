@@ -102,6 +102,10 @@ public class TowerSelect : MonoBehaviour
         a = Instantiate(tower[0], buildTrn);
         a.transform.SetParent(null);
         Destroy(buildObj);
+        if(GameManager.Instance.UIManager.currentUIPanels.Count > 0)
+        {
+            GameManager.Instance.UIManager.currentUIPanels.RemoveAt(GameManager.Instance.UIManager.currentUIPanels.Count - 1);
+        }
     }
 
     private void CheckCanBuild()

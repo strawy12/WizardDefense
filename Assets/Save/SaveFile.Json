@@ -411,23 +411,23 @@
         },
         {
             "type": 2,
-            "count": 2
+            "count": 5
         },
         {
             "type": 3,
-            "count": 5
+            "count": 3
         },
         {
             "type": 6,
-            "count": 5
-        },
-        {
-            "type": 4,
             "count": 0
         },
         {
+            "type": 4,
+            "count": 6
+        },
+        {
             "type": 5,
-            "count": 2
+            "count": 0
         }
     ],
     "keyInputDataList": [

@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject Help;
     public ObjectSound UiSound;
 
-    private List<GameObject> currentUIPanels = new List<GameObject>();
+    public List<GameObject> currentUIPanels = new List<GameObject>();
 
     public TowerSelect towerSelect;
 
