@@ -224,8 +224,6 @@ public class TpsController : MonoBehaviour
 
             characterBody.forward += moveDir;
 
-            //transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
-            transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
             transform.position += moveDir * speed * Time.deltaTime;
         }
     }

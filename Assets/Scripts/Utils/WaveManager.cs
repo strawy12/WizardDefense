@@ -96,11 +96,12 @@ public class WaveManager : MonoBehaviour
                 monster = Instantiate(currentMonsterPref, currentSpawnPoint.position, Quaternion.identity);
                 monster.Init(currentMonsterBase, targetPoint, currentSpawnCnt++);
 
+               
+
                 yield return new WaitForSeconds(currentPattern.monsterSpawnDelay);
             }
 
         }
-
     }
 
     private void SetSpawnDirTrn()

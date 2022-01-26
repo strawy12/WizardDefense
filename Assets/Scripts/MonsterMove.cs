@@ -8,6 +8,7 @@ using DG.Tweening;
 public class MonsterMove : MonoBehaviour
 {
     [SerializeField] private MonsterBase monsterBase;
+    private GameObject slimeSkin;
 
     private NavMeshAgent agent;
     private SkinnedMeshRenderer meshRenderer;
@@ -15,9 +16,8 @@ public class MonsterMove : MonoBehaviour
     private float currentHp = 0;
     public float virtualHP;
 
-    public int SpawnOrder { get; private set; }
-
     private bool finished_Init = false;
+    private bool isDead = false;
 
     private Vector3 currentDir = Vector3.zero;
     private Transform targetPoint = null;
@@ -29,12 +29,10 @@ public class MonsterMove : MonoBehaviour
     private Outline outline;
 
     private ParticleSystem particle;
-    public float RemainingDistance { get { return agent.remainingDistance; } }
+    private Animation anim;
+    public int SpawnOrder { get; private set; }
 
 
-    private Animation anim = null;
-
-    private bool isDead = false;
 
     private void Awake()
     {
@@ -43,6 +41,10 @@ public class MonsterMove : MonoBehaviour
         anim = GetComponentInChildren<Animation>();
         particle = GetComponentInChildren<ParticleSystem>();
         meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
+        slimeSkin = transform.GetChild(1).gameObject;
+        Material material = Instantiate(meshRenderer.sharedMaterials[1]);
+        meshRenderer.sharedMaterials[1] = material;
     }
 
     private void Start()
@@ -55,7 +57,7 @@ public class MonsterMove : MonoBehaviour
     {
         if (!finished_Init) return;
         if (agent.velocity.magnitude > 0.2f && agent.remainingDistance <= 3f)
-        {   
+        {
             AttackPointTower();
         }
 
@@ -67,19 +69,19 @@ public class MonsterMove : MonoBehaviour
 
     public void Init(MonsterBase monsterBase, Transform target, int spawnOrder)
     {
-        if(monsterBase.dropItem != null)
+        if (monsterBase.dropItem != null)
         {
             currentItem = monsterBase.dropItem;
         }
-
         anim.Play("Org_Slime_Walk");
         this.monsterBase = monsterBase;
+        SpawnOrder = spawnOrder;
         currentHp = monsterBase.info.maxHp;
         finished_Init = true;
         targetPoint = target;
-        SpawnOrder = spawnOrder;
         agent.SetDestination(targetPoint.position);
         GameManager.Instance.enemies.Add(this);
+
         finished_Init = true;
     }
 
@@ -110,26 +112,30 @@ public class MonsterMove : MonoBehaviour
 
         if (currentHp <= 0)
         {
-            if(currentItem != null && currentItem.itemData != null && currentItem.itemData.itemName != "")
+            if (currentItem != null && currentItem.itemData != null && currentItem.itemData.itemName != "")
             {
-                if(Random.Range(0, 100) < 20)
+                if (Random.Range(0, 100) < 20)
                 {
                     GameManager.Instance.SpawnItem(currentItem, transform.position);
                 }
             }
+
             Dead();
         }
         else
         {
+
+
             StartCoroutine(OnDamaged());
         }
     }
 
     private IEnumerator OnDamaged()
     {
-        meshRenderer.materials[1].color = new Color32(255, 0, 0, 143);  
+        //meshRenderer.materials[1].color = new Color32(255, 0, 0, 143);
+        meshRenderer.materials[1].SetColor("_Color", Color.red);
         yield return new WaitForSeconds(0.1f);
-        meshRenderer.materials[1].color = Color.clear;
+        meshRenderer.materials[1].SetColor("_Color", Color.clear);
     }
 
     public void VirtualDamaged(int power)
@@ -139,15 +145,19 @@ public class MonsterMove : MonoBehaviour
 
     public void Dead()
     {
+
         GameManager.Instance.enemies.Remove(this);
-        Destroy(gameObject);
-        //isDead = true;
+
+        agent.enabled = false;
+        anim.Stop();
+        slimeSkin.transform.DOScaleY(0f, 2f).OnComplete(() => Destroy(gameObject));
     }
 
     public void AttackPointTower()
     {
         EventManager<int>.TriggerEvent(ConstantManager.MONSTER_ATTACK, monsterBase.info.attackPower);
-        Dead();
+        isDead = true;
+        anim.Play("Org_Slime_Attack01");
     }
 
     public void GetInfo()
