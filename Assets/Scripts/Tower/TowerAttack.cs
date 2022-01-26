@@ -220,7 +220,7 @@ public class TowerAttack : MonoBehaviour
         GameManager.Instance.selectedTower = this;
         towerState = TowerState.InControl;
         selectedTime = 0f;
-
+        GameManager.Instance.UIManager.CursorLocked(true);
         towerUnit.SetActive(false);
         GameManager.Instance.player.playerSkin.SetActive(false);
 
