@@ -20,12 +20,14 @@ public class PreView : MonoBehaviour
 
     public void OnClickpreView()
     {
+        GameManager.Instance.UIManager.UiSound.PlaySound(0);
         CheckPreView();
         OnClick1();
     }
 
     public void OnClickPreViewOut()
     {
+        GameManager.Instance.UIManager.UiSound.PlaySound(0);
         Destroy(a);
         CheckPreView();
     }

@@ -36,6 +36,7 @@ public class TowerSelect : MonoBehaviour
 
     public void OnClickTower1()
     {
+        GameManager.Instance.UIManager.UiSound.PlaySound(0);
         SetValue(0);
     }
 
@@ -57,12 +58,14 @@ public class TowerSelect : MonoBehaviour
 
     public void AddRune()
     {
+        GameManager.Instance.UIManager.UiSound.PlaySound(1);
         curRune++;
         UpdateUI();
     }
 
     public void SubRune()
     {
+        GameManager.Instance.UIManager.UiSound.PlaySound(2);
         if (needMax > 0)
         {
             curRune--;
@@ -78,6 +81,7 @@ public class TowerSelect : MonoBehaviour
     {
         if (curRune >= needMax)
         {
+        GameManager.Instance.UIManager.UiSound.PlaySound(3);
             EventManager.TriggerEvent(ConstantManager.RETURN_RUNEVALUE);
             curRune -= needMax;
             GameManager.Instance.UIManager.OnClickOutChang();

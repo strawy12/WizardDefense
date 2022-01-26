@@ -326,6 +326,7 @@ public class UIManager : MonoBehaviour
 
     public void OnclickHelp(GameObject panal)
     {
+        UiSound.PlaySound(0);
         panal.SetActive(true);
         currentUIPanels.Add(panal);
         panal.transform.DOKill();
