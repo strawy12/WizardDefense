@@ -60,6 +60,7 @@ public class KeyPanel : MonoBehaviour
 
     private void OnSelect()
     {
+        GameManager.Instance.UIManager.UiSound.PlaySound(1);
         GameManager.Instance.UIManager.ResetKeyPanel();
         GameManager.Instance.UIManager.ActiveKeySettingPanal(true);
         isSelect = true;

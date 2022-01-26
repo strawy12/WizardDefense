@@ -42,8 +42,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject keySettingPanal;
     [SerializeField] private InventoryUIManager inventoryUIManager;
 
-    [Header("UI 소리")]
-    [SerializeField] private ObjectSound UiSound;
+    public ObjectSound UiSound;
 
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
@@ -146,7 +145,6 @@ public class UIManager : MonoBehaviour
             skillCoolTimeImage.fillAmount = 0f;
             return;
         }
-
         else
         {
             towerUI.gameObject.SetActive(true);
@@ -164,6 +162,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowTowerStatBar(bool isShow, int attack = 0, float speed = 0)
     {
+        UiSound.PlaySound(0);
         towerStatBar.gameObject.SetActive(isShow);
         towerStatText.text = string.Format("공격력 {0}\n공격속도 {1}", attack, speed);
     }
@@ -172,6 +171,7 @@ public class UIManager : MonoBehaviour
     #region Tower Build UI
     public void ActivePanal(GameObject panal)
     {
+        UiSound.PlaySound(0);
         panal.SetActive(true);
         currentUIPanels.Add(panal);
         panal.transform.DOKill();
@@ -180,6 +180,7 @@ public class UIManager : MonoBehaviour
 
     public void ActiveKeySettingPanal(bool isActive)
     {
+        UiSound.PlaySound(0);
         if (isActive)
         {
             ActivePanal(keySettingPanal);
@@ -223,6 +224,8 @@ public class UIManager : MonoBehaviour
 
     public void ActiveUIPanalState(bool isActive)
     {
+        UiSound.PlaySound(0);
+
         if (isActive)
         {
             SetGameState(GameState.InGameSetting);
@@ -297,6 +300,7 @@ public class UIManager : MonoBehaviour
 
     private void TurnOnInventory(bool turnOn)
     {
+        UiSound.PlaySound(0);
         if (turnOn)
         {
             GameManager.Instance.gameState = GameState.Setting;
