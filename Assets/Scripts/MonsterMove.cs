@@ -27,7 +27,8 @@ public class MonsterMove : MonoBehaviour
     private Outline outline;
 
     private ParticleSystem particle;
-    public float RemainingDistance { get { return agent.remainingDistance; } }
+    public int SpawnOrder { get; private set; }
+
 
 
     private void Awake()
@@ -56,7 +57,7 @@ public class MonsterMove : MonoBehaviour
         }
     }
 
-    public void Init(MonsterBase monsterBase, Transform target)
+    public void Init(MonsterBase monsterBase, Transform target, int spawnOrder)
     {
         if (monsterBase.dropItem != null)
         {
@@ -64,6 +65,7 @@ public class MonsterMove : MonoBehaviour
         }
 
         this.monsterBase = monsterBase;
+        SpawnOrder = spawnOrder;
         currentHp = monsterBase.info.maxHp;
         finished_Init = true;
         targetPoint = target;
