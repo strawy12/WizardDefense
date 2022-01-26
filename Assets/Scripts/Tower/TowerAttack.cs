@@ -163,7 +163,7 @@ public class TowerAttack : MonoBehaviour
         {
             if (Vector3.Distance(enemies[i].transform.position, transform.position) > towerBase.distance) continue;
 
-            distance = Vector3.Distance(enemies[i].transform.position, GameManager.Instance.pointTower.transform.position);
+            distance = enemies[i].RemainingDistance;
 
             if (distance < minDistance && enemies[i].virtualHP > 0)
             {
@@ -202,6 +202,8 @@ public class TowerAttack : MonoBehaviour
 
         GameManager.Instance.tpsCamera.enabled = false;
 
+        GameManager.Instance.SetPlayerState(PlayerState.TowerControl);
+
         Vector3 cameraPosition = muzzlePosition.transform.position;
         cameraPosition.y += 1.2f;
         GameManager.Instance.mainCam.CameraMoveToPosition(cameraPosition, 1f);
@@ -214,7 +216,7 @@ public class TowerAttack : MonoBehaviour
         selectedTime = 0f;
 
         towerUnit.SetActive(false);
-        GameManager.Instance.player.gameObject.SetActive(false);
+        GameManager.Instance.player.playerSkin.SetActive(false);
 
         ShowBoundary(true);
         ChangeBoundaryColor(Color.red);
@@ -238,9 +240,11 @@ public class TowerAttack : MonoBehaviour
 
             curFireTime = 0f;
             towerUnit.SetActive(true);
-            GameManager.Instance.player.gameObject.SetActive(true);
+            GameManager.Instance.player.playerSkin.SetActive(true);
 
             towerState = TowerState.OutControl;
+            GameManager.Instance.SetPlayerState(PlayerState.Idle);
+
         }
     }
 

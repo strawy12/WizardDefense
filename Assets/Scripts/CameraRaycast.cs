@@ -6,11 +6,11 @@ public class CameraRaycast : MonoBehaviour
 {
     MonsterMove targetMonster;
     Camera cam;
-    float maxDistance;
+    float maxDistance = 25f;
+
     private void Start()
     {
         cam = GetComponent<Camera>();
-        maxDistance = GameManager.Instance.player.GetMaxDistance();
     }
 
     private void Update()
@@ -20,8 +20,6 @@ public class CameraRaycast : MonoBehaviour
 
     private void Hit_Unit(Camera cam)
     {
-        Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance * 2, Color.red);
-
         RaycastHit[] hits = Physics.RaycastAll(cam.transform.position, cam.transform.forward, maxDistance * 2);
 
         foreach (var hit in hits)
