@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 public class TpsController : MonoBehaviour
@@ -7,6 +8,8 @@ public class TpsController : MonoBehaviour
     public Vector3 towerPos;
 
     [SerializeField] private Transform cameraArm;
+    public GameObject playerSkin = null;
+
 
     [Header("이동속도")] [SerializeField] private float normalSpeed = 5f;
     [Header("달리기속도")] [SerializeField] private float runSpeed = 8f;
@@ -14,6 +17,7 @@ public class TpsController : MonoBehaviour
     [Header("점프 힘")] [SerializeField] private float jumpPower = 2f;
     [Header("밀리는 힘")] [SerializeField] private float backPower = 2f;
     [Header("레이저 길이")] [SerializeField] private float maxDistance = 10f;
+    [Header("사운드 거리")] [SerializeField] private float maxSoundDistance = 30f;
 
     private float speed;
     private RaycastHit hitTowerAreaInfo;
@@ -37,6 +41,9 @@ public class TpsController : MonoBehaviour
     private TowerAttack tower;
     private Area area;
 
+    private ObjectSound monsterSound;
+
+
     private float fieldOfView;
 
 
@@ -44,19 +51,26 @@ public class TpsController : MonoBehaviour
     {
         EventManager<float>.StartListening(ConstantManager.CHANGE_SENSITVITY, SetSentivity);
     }
+
     private void Start()
     {
         myrigid = GetComponent<Rigidbody>();
+        monsterSound = transform.GetChild(1).GetComponent<ObjectSound>();
         animator = characterBody.GetComponent<Animator>();
+        EventManager<Vector3>.StartListening(ConstantManager.MONSTER_ATTACKED, MonsterAttackSound);
+
         EventManager<ItemBase>.StartListening(ConstantManager.INVENTORY_DROP, DropItem);
         EventManager.StartListening(ConstantManager.TURNON_INVENTORY, StopPlayer);
+        StartCoroutine(PlayMonsterMovementSound());
     }
 
     private void Update()
     {
         if (GameManager.Instance.gameState == GameState.Setting) return;
+        if (GameManager.Instance.playerState == PlayerState.TowerControl) return;
 
         PlayerSet();
+
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
         {
             if (isTargetItem && targetItem != null)
@@ -77,7 +91,7 @@ public class TpsController : MonoBehaviour
                 GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
             }
 
-            
+
 
         }
 
@@ -116,6 +130,60 @@ public class TpsController : MonoBehaviour
 
         transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
     }
+
+    private IEnumerator PlayMonsterMovementSound()
+    {
+        while (true)
+        {
+            FindMonster();
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    private void FindMonster()
+    {
+        float minDistance = 999f;
+        Collider[] hits = Physics.OverlapSphere(transform.position, maxSoundDistance, LayerMask.GetMask("Enemy"));
+
+        foreach (var hit in hits)
+        {
+            float distance = Vector3.Distance(transform.position, hit.transform.position);
+
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+            }
+        }
+
+        if (minDistance == 999f || hits.Length == 0) return;
+        minDistance = Mathf.Clamp(minDistance, 0f, maxSoundDistance);
+        float distanseVolume = (maxSoundDistance - minDistance) / maxSoundDistance;
+        DistanceProportionalValue(distanseVolume);
+
+        monsterSound.PlaySound(0);
+    }
+
+    private void DistanceProportionalValue(float distanseVolume)
+    {
+        monsterSound.audioSource.volume = Mathf.Lerp(0f, monsterSound.initVolume, distanseVolume);
+
+        if (monsterSound.audioSource.volume < 0.1f)
+        {
+            monsterSound.audioSource.volume = 0.12f;
+        }
+    }
+
+    private void MonsterAttackSound(Vector3 pos)
+    {
+        float distance = Vector3.Distance(transform.position, pos);
+        float minDistance = Mathf.Clamp(distance, 0f, maxSoundDistance);
+        float distanseVolume = (maxSoundDistance - minDistance) / maxSoundDistance;
+
+        DistanceProportionalValue(distanseVolume);
+
+        monsterSound.PlaySound(1);
+    }
+
     private void LookAround()
     {
         if (GameManager.Instance.gameState == GameState.Setting || GameManager.Instance.gameState == GameState.InGameSetting) return;

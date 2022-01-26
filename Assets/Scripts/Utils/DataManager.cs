@@ -33,15 +33,10 @@ public class DataManager : MonoSingleton<DataManager>
         }
 
         LoadFromJson();
+
+        AddHavedEnergyList();
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.F1))
-        {
-            RandomPickEnergy();
-        }
-    }
     private void LoadFromJson()
     {
         if (File.Exists(SAVE_PATH + SAVE_FILE))
@@ -71,9 +66,6 @@ public class DataManager : MonoSingleton<DataManager>
         playerData.effectSoundVolume = defaultSound;
         playerData.sensitivityValue = 15f;
 
-        playerData.inventoryList = new List<InventoryData>();
-        playerData.havedEnergyList = new List<EnergyData>();
-        playerData.keyInputDataList = new List<KeyInputData>();
 
         AddHavedEnergyList();
         AddkeyInputDataList();
@@ -83,7 +75,9 @@ public class DataManager : MonoSingleton<DataManager>
 
     private void AddInventoryList()
     {
-        for(int i = 0; i < 36; i++)
+        playerData.inventoryList = new List<InventoryData>();
+
+        for (int i = 0; i < 36; i++)
         {
             playerData.inventoryList.Add(new InventoryData(i, false));
         }
@@ -96,6 +90,8 @@ public class DataManager : MonoSingleton<DataManager>
 
     private void AddkeyInputDataList()
     {
+        playerData.keyInputDataList = new List<KeyInputData>();
+
         playerData.keyInputDataList.Add(new KeyInputData(KeyAction.Jump, KeyCode.Space));
         playerData.keyInputDataList.Add(new KeyInputData(KeyAction.Run, KeyCode.LeftShift));
         playerData.keyInputDataList.Add(new KeyInputData(KeyAction.Skill, KeyCode.Q));
@@ -113,6 +109,8 @@ public class DataManager : MonoSingleton<DataManager>
 
     private void AddHavedEnergyList()
     {
+        playerData.havedEnergyList = new List<EnergyData>();
+
         playerData.havedEnergyList.Add(new EnergyData(PropertyType.Fire, 0));
         playerData.havedEnergyList.Add(new EnergyData(PropertyType.Water, 0));
         playerData.havedEnergyList.Add(new EnergyData(PropertyType.Terra, 0));
@@ -121,6 +119,8 @@ public class DataManager : MonoSingleton<DataManager>
         playerData.havedEnergyList.Add(new EnergyData(PropertyType.Void, 0));
 
         RandomPickEnergy();
+
+        SaveToJson();
     }
 
     private void RandomPickEnergy()

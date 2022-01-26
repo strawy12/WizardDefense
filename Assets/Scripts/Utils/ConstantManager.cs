@@ -22,7 +22,7 @@ public static class ConstantManager
     public const string POINTTOWER_DAMAGED = "PT_DG";
     public const string POINTTOWER_INIT = "PT_IN";
 
-    public const string MONSTER_ATTACK = "MN_AT";
+    public const string MONSTER_ATTACK = "MS_AT";
 
     public const string TOWER_TAG = "Tower";
     public const string ENEMY_TAG = "Enemy";
@@ -39,4 +39,9 @@ public static class ConstantManager
     public const string BUILDUI_ADDRUNE = "BD_AR";
     public const string BUILDUI_SUBRUNE = "BD_SR";
     public const string RETURN_RUNEVALUE = "RT_RV";
+
+    public const string START_BREAKTIME = "ST_BT";
+    public const string START_DEFENSETIME = "ST_DT";
+
+    public const string MONSTER_ATTACKED = "MS_ATD";
 }

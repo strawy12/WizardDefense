@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
     public GameState gameState;
-    public InGameState inGameState;
+    public InGameState inGameState { get; private set; }
+    public PlayerState playerState { get; private set; }
 
     #region About Camera
     public CameraMove mainCam { get; private set; }
@@ -77,6 +78,7 @@ public class GameManager : MonoSingleton<GameManager>
     void Start()
     {
         gameState = GameState.Playing;
+        playerState = PlayerState.Idle;
         screenCenter = (new Vector3(mainCam.cam.pixelWidth / 2, mainCam.cam.pixelHeight / 2));
         EnterBreakTime();
         SetPlayerSentivity();
@@ -105,7 +107,7 @@ public class GameManager : MonoSingleton<GameManager>
             if (breakTime < 0)
             {
                 UIManager.ActiveBreakTimeUI(false);
-                inGameState = InGameState.DefenseTime;
+                SetInGameState(InGameState.DefenseTime);
                 StartCoroutine(Wave.StartWave());
             }
         }
@@ -123,7 +125,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void EnterBreakTime()
     {
         breakTime = ConstantManager.BREAK_TIME;
-        inGameState = InGameState.BreakTime;
+        SetInGameState(InGameState.BreakTime);
         UIManager.ActiveBreakTimeUI(true);
     }
 
@@ -158,5 +160,25 @@ public class GameManager : MonoSingleton<GameManager>
     private void SetPlayerSentivity()
     {
         EventManager<float>.TriggerEvent(ConstantManager.CHANGE_SENSITVITY, DataManager.Instance.PlayerData.sensitivityValue);
+    }
+
+    public void SetInGameState(InGameState state)
+    {
+        inGameState = state;
+
+        if (inGameState == InGameState.BreakTime)
+        {
+            Debug.Log("dd");
+            EventManager.TriggerEvent(ConstantManager.START_BREAKTIME);
+        }
+
+        else if(inGameState == InGameState.DefenseTime)
+        {
+            EventManager.TriggerEvent(ConstantManager.START_DEFENSETIME);
+        }
+    }
+    public void SetPlayerState(PlayerState state)
+    {
+        playerState = state;
     }
 }

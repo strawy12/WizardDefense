@@ -13,6 +13,7 @@ TagManager:
   - Wall
   - Item
   - Property Item
+  - BGM
   layers:
   - Default
   - TransparentFX
