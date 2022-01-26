@@ -31,7 +31,7 @@ public class MonsterMove : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        outline = GetComponent<Outline>();
+        outline = GetComponentInChildren<Outline>();
         particle = GetComponentInChildren<ParticleSystem>();
         meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
@@ -94,6 +94,7 @@ public class MonsterMove : MonoBehaviour
         Debug.Log("¸ÂÀ½");
         currentHp -= damage;
         particle.Play();
+
 
         if (currentHp <= 0)
         {
