@@ -164,6 +164,7 @@ MonoBehaviour:
     skillSprite: {fileID: 0}
   isBuilding: 0
   towerUnit: {fileID: 6313140628273409394}
+  bullet: {fileID: 1900756431413560, guid: 529eb4216865eba419c1a4a68d0b0388, type: 3}
 --- !u!1 &7622507184708523043
 GameObject:
   m_ObjectHideFlags: 0

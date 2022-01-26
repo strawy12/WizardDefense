@@ -12,8 +12,6 @@ public class MonsterMove : MonoBehaviour
     private NavMeshAgent agent;
     private SkinnedMeshRenderer meshRenderer;
 
-    public float RemainingDistance { get { return agent.remainingDistance; } }
-
     private float currentHp = 0;
     public float virtualHP;
 
@@ -29,14 +27,15 @@ public class MonsterMove : MonoBehaviour
     private Outline outline;
 
     private ParticleSystem particle;
+    public float RemainingDistance { get { return agent.remainingDistance; } }
+
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        outline = GetComponent<Outline>();
+        outline = GetComponentInChildren<Outline>();
         particle = GetComponentInChildren<ParticleSystem>();
         meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
-
     }
 
     private void Start()
@@ -93,24 +92,17 @@ public class MonsterMove : MonoBehaviour
 
     public void Damaged(int damage)
     {
+        Debug.Log("¸ÂÀ½");
         currentHp -= damage;
         particle.Play();
 
+
         if (currentHp <= 0)
         {
-            if (currentItem != null && currentItem.itemData != null && currentItem.itemData.itemName != "")
-            {
-                if (Random.Range(0, 100) < 20)
-                {
-                    GameManager.Instance.SpawnItem(currentItem, transform.position);
-                }
-            }
-
             Dead();
         }
         else
         {
-            EventManager<Vector3>.TriggerEvent(ConstantManager.MONSTER_ATTACKED, transform.position);
             StartCoroutine(OnDamaged());
         }
     }
@@ -119,7 +111,7 @@ public class MonsterMove : MonoBehaviour
     {
         meshRenderer.materials[1].color = new Color32(255, 0, 0, 143);  
         yield return new WaitForSeconds(0.1f);
-        meshRenderer.materials[1].color = new Color32(0, 0, 0, 0);
+        meshRenderer.materials[1].color = Color.clear;
     }
 
     public void VirtualDamaged(int power)
@@ -130,6 +122,12 @@ public class MonsterMove : MonoBehaviour
     public void Dead()
     {
         GameManager.Instance.enemies.Remove(this);
+
+        if(currentItem != null)
+        {
+                GameManager.Instance.SpawnItem(currentItem, transform.position);
+        }
+        
 
         Destroy(gameObject);
     }
@@ -162,7 +160,6 @@ public class MonsterMove : MonoBehaviour
             outline.OutlineColor = new Color32(255, 68, 68, 255);
         }
     }
-
 }
 public struct UnitInfo
 {

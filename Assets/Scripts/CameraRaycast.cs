@@ -21,18 +21,21 @@ public class CameraRaycast : MonoBehaviour
     private void Hit_Unit(Camera cam)
     {
         RaycastHit[] hits = Physics.RaycastAll(cam.transform.position, cam.transform.forward, maxDistance * 2);
-
+        MonsterMove curMonster;
         foreach (var hit in hits)
         {
             if (hit.transform.CompareTag("Enemy"))
             {
-                targetMonster = hit.transform.GetComponent<MonsterMove>();
+                curMonster = hit.transform.GetComponent<MonsterMove>();
 
-                if (targetMonster != null)
+                if (curMonster != null)
                 {
+                    targetMonster?.ShowOutLine(false);
                     GameManager.Instance.selectedMonster?.ShowOutLine(false);
-                    targetMonster.GetInfo();
+
+                    targetMonster = curMonster;
                     targetMonster.ShowOutLine(true);
+                    targetMonster.GetInfo();
                     GameManager.Instance.selectedMonster = targetMonster;
                     return;
                 }
