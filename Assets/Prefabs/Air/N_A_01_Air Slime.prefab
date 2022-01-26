@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 0.53209996, y: 0.53209996, z: 0.53209996}
   m_Children: []
   m_Father: {fileID: 3881391225757310643}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &8359724401376675331
 SpriteRenderer:
@@ -113,8 +113,8 @@ Transform:
   m_LocalPosition: {x: -1.8419979, y: 2.13, z: 59.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2572712366527265659}
   - {fileID: 2936447270266455175}
+  - {fileID: 2572712366527265659}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -207,7 +207,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f158e23ee87c51b4b9457d847841ecdf, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f158e23ee87c51b4b9457d847841ecdf, type: 3}
       propertyPath: m_LocalScale.x
@@ -331,6 +331,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  outlineFillMaterial: {fileID: 0}
   thisOutLine: 10
 --- !u!1001 &5659636632187123168
 PrefabInstance:

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DataManager : MonoSingleton<DataManager>
 {
-    [SerializeField] private float defaultSound = 0.5f;
+    [SerializeField] private float defaultSound = 0.3f;
     [SerializeField] private PlayerData playerData;
 
     public PlayerData PlayerData { get { return playerData; } }
@@ -64,7 +64,7 @@ public class DataManager : MonoSingleton<DataManager>
 
         playerData.bgmSoundVolume = defaultSound;
         playerData.effectSoundVolume = defaultSound;
-        playerData.sensitivityValue = 15f;
+        playerData.sensitivityValue = 50f;
 
 
         AddHavedEnergyList();

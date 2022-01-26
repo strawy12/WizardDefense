@@ -17945,7 +17945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c4a3ae3e4c38d478572818e1595211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSound: 0.5
+  defaultSound: 0.3
   playerData:
     bgmSoundVolume: 0
     effectSoundVolume: 0
