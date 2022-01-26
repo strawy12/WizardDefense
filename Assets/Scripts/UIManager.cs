@@ -41,6 +41,8 @@ public class UIManager : MonoBehaviour
     [Header("사용자 지정 키 전용")]
     [SerializeField] private GameObject keySettingPanal;
     [SerializeField] private InventoryUIManager inventoryUIManager;
+    [Header("시작 화면")]
+    [SerializeField] private GameObject StartScene;
 
     public ObjectSound UiSound;
 
@@ -52,31 +54,35 @@ public class UIManager : MonoBehaviour
     [HideInInspector] public bool isClosePreView;
     private bool turnOnInventory;
     [HideInInspector] public bool isTarget;
-
     public GameObject quickSlot;
-
+    private bool isStarted = false;
     void Start()
     {
+        Time.timeScale = 0;
         towerStatText = towerStatBar.GetComponentInChildren<Text>();
     }
 
     private void Update()
     {
-        ShowSkillUI(GameManager.Instance.selectedTower);
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if(isStarted)
         {
-            SetCurrentPanels();
-        }
+            ShowSkillUI(GameManager.Instance.selectedTower);
 
-        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Inventory]))
-        {
-            if (settingPanel.activeSelf || buildChang.activeSelf) return;
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SetCurrentPanels();
+            }
 
-            turnOnInventory = !turnOnInventory;
-            TurnOnInventory(turnOnInventory);
+            if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Inventory]))
+            {
+                if (settingPanel.activeSelf || buildChang.activeSelf) return;
+
+                turnOnInventory = !turnOnInventory;
+                TurnOnInventory(turnOnInventory);
+            }
         }
     }
+        
 
     public void SetTimer(float time)
     {
@@ -131,7 +137,6 @@ public class UIManager : MonoBehaviour
             ActiveUIPanalState(true);
             Time.timeScale = 0f;
         }
-
         settingPanel.SetActive(!settingPanel.activeSelf);
     }
     #endregion
@@ -172,12 +177,13 @@ public class UIManager : MonoBehaviour
     public void ActivePanal(GameObject panal)
     {
         UiSound.PlaySound(0);
+        StartScene.SetActive(false);
         panal.SetActive(true);
         currentUIPanels.Add(panal);
         panal.transform.DOKill();
         panal.transform.DOScaleY(1f, 0.3f).SetUpdate(true);
     }
-
+     
     public void ActiveKeySettingPanal(bool isActive)
     {
         UiSound.PlaySound(0);
@@ -335,6 +341,16 @@ public class UIManager : MonoBehaviour
 
     public void OnClickOutGame()
     {
+        UiSound.PlaySound(0);
         Application.Quit();
+    }
+
+    public void StartGame()
+    {
+        UiSound.PlaySound(0);
+        StartScene.SetActive(false);
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        isStarted = true;
     }
 }

@@ -1,16 +1,16 @@
 ﻿{
     "bgmSoundVolume": 0.5,
     "effectSoundVolume": 0.5,
-    "sensitivityValue": 15.0,
+    "sensitivityValue": 26.200000762939454,
     "inventoryList": [
         {
             "index": 0,
             "item": {
-                "item_ID": "I_WaterCrystal",
-                "itemName": "물 수정",
-                "itemType": 2
+                "item_ID": "",
+                "itemName": "",
+                "itemType": 0
             },
-            "count": 1,
+            "count": 0,
             "isQuitSlot": false
         },
         {
@@ -366,21 +366,21 @@
         {
             "index": 0,
             "item": {
-                "item_ID": "",
-                "itemName": "",
-                "itemType": 0
+                "item_ID": "I_CrystalAir",
+                "itemName": "공기 수정",
+                "itemType": 6
             },
-            "count": 0,
+            "count": 2,
             "isQuitSlot": true
         },
         {
             "index": 1,
             "item": {
-                "item_ID": "",
-                "itemName": "",
-                "itemType": 0
+                "item_ID": "I_WaterCrystal",
+                "itemName": "물 수정",
+                "itemType": 2
             },
-            "count": 0,
+            "count": 1,
             "isQuitSlot": true
         },
         {
@@ -411,11 +411,11 @@
         },
         {
             "type": 2,
-            "count": 3
+            "count": 4
         },
         {
             "type": 3,
-            "count": 4
+            "count": 3
         },
         {
             "type": 6,
@@ -423,11 +423,11 @@
         },
         {
             "type": 4,
-            "count": 7
+            "count": 4
         },
         {
             "type": 5,
-            "count": 3
+            "count": 6
         }
     ],
     "keyInputDataList": [
