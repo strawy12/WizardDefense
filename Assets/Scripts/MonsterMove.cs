@@ -39,12 +39,8 @@ public class MonsterMove : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-<<<<<<< HEAD
         outline = GetComponentInChildren<Outline>();
-=======
         anim = GetComponentInChildren<Animation>();
-        outline = GetComponent<Outline>();
->>>>>>> OIF
         particle = GetComponentInChildren<ParticleSystem>();
         meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
     }
@@ -114,6 +110,13 @@ public class MonsterMove : MonoBehaviour
 
         if (currentHp <= 0)
         {
+            if(currentItem != null && currentItem.itemData != null && currentItem.itemData.itemName != "")
+            {
+                if(Random.Range(0, 100) < 20)
+                {
+                    GameManager.Instance.SpawnItem(currentItem, transform.position);
+                }
+            }
             Dead();
         }
         else
@@ -137,16 +140,6 @@ public class MonsterMove : MonoBehaviour
     public void Dead()
     {
         GameManager.Instance.enemies.Remove(this);
-<<<<<<< HEAD
-
-        if(currentItem != null)
-        {
-                GameManager.Instance.SpawnItem(currentItem, transform.position);
-        }
-        
-
-=======
->>>>>>> OIF
         Destroy(gameObject);
         //isDead = true;
     }

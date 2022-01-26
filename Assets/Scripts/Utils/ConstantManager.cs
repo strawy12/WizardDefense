@@ -44,4 +44,5 @@ public static class ConstantManager
     public const string START_DEFENSETIME = "ST_DT";
 
     public const string MONSTER_ATTACKED = "MS_ATD";
+    public const string FIRE_BYPLAYER = "FR_BP";
 }

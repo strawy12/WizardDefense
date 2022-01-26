@@ -335,7 +335,6 @@ public class UIManager : MonoBehaviour
 
     public void OnClickOutGame()
     {
-        Debug.Log("Out Game");
         Application.Quit();
     }
 }
