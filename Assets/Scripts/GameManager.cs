@@ -82,7 +82,6 @@ public class GameManager : MonoSingleton<GameManager>
         screenCenter = (new Vector3(mainCam.cam.pixelWidth / 2, mainCam.cam.pixelHeight / 2));
         EnterBreakTime();
         SetPlayerSentivity();
-
     }
 
     private void Init()
@@ -168,7 +167,6 @@ public class GameManager : MonoSingleton<GameManager>
 
         if (inGameState == InGameState.BreakTime)
         {
-            Debug.Log("dd");
             EventManager.TriggerEvent(ConstantManager.START_BREAKTIME);
         }
 

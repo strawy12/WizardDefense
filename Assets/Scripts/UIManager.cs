@@ -42,6 +42,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject keySettingPanal;
     [SerializeField] private InventoryUIManager inventoryUIManager;
 
+    [Header("UI ¼Ò¸®")]
+    [SerializeField] private ObjectSound UiSound;
+
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
     public TowerSelect towerSelect;
@@ -90,6 +93,7 @@ public class UIManager : MonoBehaviour
 
     private void SetCurrentPanels()
     {
+        UiSound.PlaySound(0);
         if (currentUIPanels.Count > 0)
         {
             currentUIPanels[currentUIPanels.Count - 1].gameObject.SetActive(false);
@@ -117,7 +121,6 @@ public class UIManager : MonoBehaviour
     public void ActiveSettingPanel()
     {
         CursorLocked(settingPanel.activeSelf);
-
 
         if (settingPanel.activeSelf)
         {
