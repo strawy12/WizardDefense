@@ -100,7 +100,6 @@ public class WaveManager : MonoBehaviour
             }
 
         }
-
     }
 
     private void SetSpawnDirTrn()

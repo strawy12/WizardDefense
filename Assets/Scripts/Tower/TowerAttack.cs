@@ -90,8 +90,6 @@ public class TowerAttack : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse0) && curFireTime > towerBase.handFireRate)
         {
-            GameManager.Instance.UIManager.UiSound.PlaySound(4);
-
             CameraMove cam = GameManager.Instance.mainCam;
             RaycastHit hitInfo;
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
@@ -160,20 +158,18 @@ public class TowerAttack : MonoBehaviour
 
         float minDistance = 999f;
         float distance;
-        int minSpawnOrder = 999;
         targetEnemy = null;
 
         for (int i = 0; i < enemies.Count; i++)
         {
-            distance = Vector3.Distance(enemies[i].transform.position, transform.position);
+            if (Vector3.Distance(enemies[i].transform.position, transform.position) > towerBase.distance) continue;
 
-            if (distance > towerBase.distance) continue;
+            distance = enemies[i].RemainingDistance;
 
-            if (distance < minDistance && enemies[i].virtualHP > 0 && enemies[i].SpawnOrder < minSpawnOrder)
+            if (distance < minDistance && enemies[i].virtualHP > 0)
             {
                 targetEnemy = enemies[i];
                 minDistance = distance;
-                minSpawnOrder = enemies[i].SpawnOrder;
             }
         }
 

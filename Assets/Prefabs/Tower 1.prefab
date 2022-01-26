@@ -150,7 +150,7 @@ MonoBehaviour:
       attributeName: "\uB178\uBA40"
       sprite: {fileID: 0}
     fireRate: 1
-    handFireRate: 0.8
+    handFireRate: 0.5
     distance: 25
     hp: 0
   muzzlePosition: {fileID: 7280627589289538551}
