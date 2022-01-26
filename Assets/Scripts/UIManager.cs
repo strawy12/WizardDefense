@@ -53,8 +53,6 @@ public class UIManager : MonoBehaviour
 
     public GameObject quickSlot;
 
-    private bool isBuildChang;
-
     void Start()
     {
         towerStatText = towerStatBar.GetComponentInChildren<Text>();
@@ -71,7 +69,7 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Inventory]))
         {
-            if (settingPanel.activeSelf || isBuildChang == true) return;
+            if (settingPanel.activeSelf || buildChang.activeSelf) return;
 
             turnOnInventory = !turnOnInventory;
             TurnOnInventory(turnOnInventory);
@@ -200,7 +198,6 @@ public class UIManager : MonoBehaviour
     {
         if (settingPanel.activeSelf) return;
 
-        isBuildChang = true;
         EventManager.TriggerEvent(ConstantManager.OPEN_BUILDPANEL);
 
         CursorLocked(false);
@@ -213,7 +210,6 @@ public class UIManager : MonoBehaviour
 
     public void OnClickOutChang()
     {
-        isBuildChang = false;
         FMark.SetActive(false);
         buildChang.SetActive(false);
         ActiveUIPanalState(false);

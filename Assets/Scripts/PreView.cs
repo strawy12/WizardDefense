@@ -6,7 +6,6 @@ public class PreView : MonoBehaviour
 {
     [Header("프리뷰 창")] [SerializeField] private GameObject preViewChang = null;
     [Header("타워 사정거리")] [SerializeField] private GameObject tower = null;
-    [Header("포탑 설치 창")] [SerializeField] private GameObject towerChang = null;
 
     private GameObject a;
     private bool isPreView = false;
@@ -21,7 +20,6 @@ public class PreView : MonoBehaviour
 
     public void OnClickpreView()
     {
-        towerChang.SetActive(false);
         CheckPreView();
         OnClick1();
     }
@@ -30,7 +28,6 @@ public class PreView : MonoBehaviour
     {
         Destroy(a);
         CheckPreView();
-        towerChang.SetActive(true);
     }
 
     private void CheckPreView()
