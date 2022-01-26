@@ -43,7 +43,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private InventoryUIManager inventoryUIManager;
     [Header("시작 화면")]
     [SerializeField] private GameObject StartScene;
-
+    [Header("시작 도움말")]
+    [SerializeField] private GameObject Help;
     public ObjectSound UiSound;
 
     private List<GameObject> currentUIPanels = new List<GameObject>();
@@ -349,8 +350,14 @@ public class UIManager : MonoBehaviour
     {
         UiSound.PlaySound(0);
         StartScene.SetActive(false);
+        Help.SetActive(false);
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         isStarted = true;
+    }
+    public void StartButton()
+    {
+        UiSound.PlaySound(0);
+        StartScene.SetActive(false);
     }
 }
