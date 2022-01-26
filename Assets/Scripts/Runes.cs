@@ -15,6 +15,9 @@ public class Runes : MonoBehaviour
     [SerializeField] private Image runeImg;
     [SerializeField] private Text runeText;
 
+    private float clickTime;
+    private bool isClick;
+
     private int indexNum = 0;   // Á¦ÀÛ´ë¿¡ ³ÖÀº ·é °¹¼ö
 
     private void Start()
@@ -27,6 +30,8 @@ public class Runes : MonoBehaviour
 
     public void OnClickPlus()
     {
+        if (GameManager.Instance.UIManager.towerSelect.isMax) return;
+
         if (leftNum <= 0)
         {
             return;
@@ -78,5 +83,32 @@ public class Runes : MonoBehaviour
         currentEnergtData.count -= indexNum;
         indexNum = 0;
         DataManager.Instance.SaveToJson();
+    }
+
+    public void PointerDownPlus()
+    {
+        isClick = true;
+        clickTime += Time.deltaTime;
+        if (clickTime > 1)
+        {
+
+        }
+    }
+
+    public void PointerUpPlus()
+    {
+        isClick = false;
+    }
+
+    private void CheckClick()
+    {
+        if(isClick)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 }
