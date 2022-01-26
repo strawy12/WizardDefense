@@ -92,10 +92,8 @@ public class MonsterMove : MonoBehaviour
 
     public void Damaged(int damage)
     {
-        Debug.Log("¸ÂÀ½");
         currentHp -= damage;
         particle.Play();
-
 
         if (currentHp <= 0)
         {

@@ -75,9 +75,8 @@ public class TowerAttack : MonoBehaviour
     {
         isBuilding = true;
         float firstPosY = -40f;
-        float lastPosY = -26.5f;
+        float lastPosY = -25.7f;
         transform.DOMoveY(firstPosY, 0f);
-        //transform.DOMoveY(transform.localScale.y * 0.5f/* + 5f*/, 2f).OnComplete(() => isBuilding = false);
         transform.DOMoveY(lastPosY, 2f).OnComplete(() => isBuilding = false);
     }
 
@@ -136,7 +135,6 @@ public class TowerAttack : MonoBehaviour
     private void InstantiateOrPooling(GameObject obj)
     {
         bool isTargeting = SetTargetEnemy();
-
         if (towerState == TowerState.InControl || isTargeting)
         {
             obj.GetComponent<BulletMove>().Init(this);
@@ -154,6 +152,7 @@ public class TowerAttack : MonoBehaviour
     #region ToFire
     public bool SetTargetEnemy()
     {
+
         List<MonsterMove> enemies = GameManager.Instance.enemies;
         if (enemies.Count == 0) return false;
 
@@ -166,6 +165,7 @@ public class TowerAttack : MonoBehaviour
             if (Vector3.Distance(enemies[i].transform.position, transform.position) > towerBase.distance) continue;
 
             distance = enemies[i].RemainingDistance;
+            Debug.Log(distance);
 
             if (distance < minDistance && enemies[i].virtualHP > 0)
             {
