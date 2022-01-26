@@ -10301,6 +10301,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  outlineFillMaterial: {fileID: 0}
   thisOutLine: 10
 --- !u!1 &517087437
 GameObject:
@@ -11428,6 +11429,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  outlineFillMaterial: {fileID: 0}
   thisOutLine: 10
 --- !u!4 &586046735 stripped
 Transform:
@@ -16361,6 +16363,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  outlineFillMaterial: {fileID: 0}
   thisOutLine: 10
 --- !u!1 &888560592
 GameObject:
@@ -18064,6 +18067,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  outlineFillMaterial: {fileID: 0}
   thisOutLine: 10
 --- !u!1 &1010614759
 GameObject:
@@ -18188,6 +18192,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  outlineFillMaterial: {fileID: 0}
   thisOutLine: 10
 --- !u!1 &1025461345
 GameObject:
@@ -20427,6 +20432,7 @@ MonoBehaviour:
   skipKeyText: {fileID: 274195227}
   keySettingPanal: {fileID: 7097061253542787309}
   inventoryUIManager: {fileID: 1958308019}
+  StartScene: {fileID: 0}
   UiSound: {fileID: 3981799115404936991}
   towerSelect: {fileID: 878528491}
   isClosePreView: 0
@@ -21179,6 +21185,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  outlineFillMaterial: {fileID: 0}
   thisOutLine: 10
 --- !u!1 &1215768787
 GameObject:
@@ -22741,6 +22748,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  outlineFillMaterial: {fileID: 0}
   thisOutLine: 10
 --- !u!1 &1314641235
 GameObject:
@@ -31314,6 +31322,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  outlineFillMaterial: {fileID: 0}
   thisOutLine: 10
 --- !u!1 &1871764907
 GameObject:

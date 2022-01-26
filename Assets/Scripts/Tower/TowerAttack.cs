@@ -90,7 +90,10 @@ public class TowerAttack : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse0) && curFireTime > towerBase.handFireRate)
         {
+            GameManager.Instance.UIManager.UiSound.PlaySound(4);
             CameraMove cam = GameManager.Instance.mainCam;
+            Vector3 originPos = cam.transform.position;
+            cam.transform.DOShakePosition(0.25f).OnComplete(() => cam.transform.DOMove(originPos, 0.2f));
             RaycastHit hitInfo;
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.blue);

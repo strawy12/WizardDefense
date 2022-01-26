@@ -8,6 +8,7 @@ using DG.Tweening;
 public class MonsterMove : MonoBehaviour
 {
     [SerializeField] private MonsterBase monsterBase;
+    private GameObject slimeSkin;
 
     private NavMeshAgent agent;
     private SkinnedMeshRenderer meshRenderer;
@@ -16,6 +17,7 @@ public class MonsterMove : MonoBehaviour
     public float virtualHP;
 
     private bool finished_Init = false;
+    private bool isDead = false;
 
     private Vector3 currentDir = Vector3.zero;
     private Transform targetPoint = null;
@@ -27,6 +29,7 @@ public class MonsterMove : MonoBehaviour
     private Outline outline;
 
     private ParticleSystem particle;
+    private Animation anim;
     public int SpawnOrder { get; private set; }
 
 
@@ -35,9 +38,11 @@ public class MonsterMove : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         outline = GetComponentInChildren<Outline>();
+        anim = GetComponentInChildren<Animation>();
         particle = GetComponentInChildren<ParticleSystem>();
         meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
+        slimeSkin = transform.GetChild(1).gameObject;
         Material material = Instantiate(meshRenderer.sharedMaterials[1]);
         meshRenderer.sharedMaterials[1] = material;
     }
@@ -55,6 +60,11 @@ public class MonsterMove : MonoBehaviour
         {
             AttackPointTower();
         }
+
+        if(isDead && !anim.isPlaying)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Init(MonsterBase monsterBase, Transform target, int spawnOrder)
@@ -63,12 +73,7 @@ public class MonsterMove : MonoBehaviour
         {
             currentItem = monsterBase.dropItem;
         }
-<<<<<<< HEAD
-
-=======
-        anim.Play();
         anim.Play("Org_Slime_Walk");
->>>>>>> OIF
         this.monsterBase = monsterBase;
         SpawnOrder = spawnOrder;
         currentHp = monsterBase.info.maxHp;
@@ -107,10 +112,20 @@ public class MonsterMove : MonoBehaviour
 
         if (currentHp <= 0)
         {
+            if (currentItem != null && currentItem.itemData != null && currentItem.itemData.itemName != "")
+            {
+                if (Random.Range(0, 100) < 20)
+                {
+                    GameManager.Instance.SpawnItem(currentItem, transform.position);
+                }
+            }
+
             Dead();
         }
         else
         {
+
+
             StartCoroutine(OnDamaged());
         }
     }
@@ -130,23 +145,19 @@ public class MonsterMove : MonoBehaviour
 
     public void Dead()
     {
-        //anim.Play("BANGBNAG");
 
         GameManager.Instance.enemies.Remove(this);
 
-        if (currentItem != null)
-        {
-            GameManager.Instance.SpawnItem(currentItem, transform.position);
-        }
-
-
-        Destroy(gameObject);
+        agent.enabled = false;
+        anim.Stop();
+        slimeSkin.transform.DOScaleY(0f, 2f).OnComplete(() => Destroy(gameObject));
     }
 
     public void AttackPointTower()
     {
         EventManager<int>.TriggerEvent(ConstantManager.MONSTER_ATTACK, monsterBase.info.attackPower);
-        Dead();
+        isDead = true;
+        anim.Play("Org_Slime_Attack01");
     }
 
     public void GetInfo()
