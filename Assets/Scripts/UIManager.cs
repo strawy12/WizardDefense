@@ -95,11 +95,11 @@ public class UIManager : MonoBehaviour
             currentUIPanels[currentUIPanels.Count - 1].gameObject.SetActive(false);
             currentUIPanels.RemoveAt(currentUIPanels.Count - 1);
 
-            //if (currentUIPanels.Count == 0)
-            //{
-            //    ActiveUIPanalState(false);
-            //    CursorLocked(true);
-            //}
+            if (currentUIPanels.Count == 0 && settingPanel.activeSelf == false)
+            {
+                ActiveUIPanalState(false);
+                CursorLocked(true);
+            }
         }
         else
         {
