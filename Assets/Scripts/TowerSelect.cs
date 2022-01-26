@@ -82,13 +82,12 @@ public class TowerSelect : MonoBehaviour
             curRune -= needMax;
             GameManager.Instance.UIManager.OnClickOutChang();
             GameManager.Instance.UIManager.FMarkFalse();
-            Debug.Log("설치성공");
             UpdateUI();
             SelectTower();
         }
         else
         {
-            Debug.Log("룬이 부족하자나;;");
+            return;
         }
     }
 

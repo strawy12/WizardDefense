@@ -77,7 +77,7 @@ public class TpsController : MonoBehaviour
                 GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
             }
 
-            
+
 
         }
 
@@ -285,6 +285,7 @@ public class TpsController : MonoBehaviour
         {
             if (hitTowerAreaInfo.transform.gameObject.CompareTag("area"))
             {
+                TowerSelect.buildObj = hitTowerAreaInfo.transform.gameObject;
                 TowerSelect.buildTrn = hitTowerAreaInfo.transform;
                 GameManager.Instance.UIManager.FMarkTrue();
                 area = hitTowerAreaInfo.transform.GetComponent<Area>();
