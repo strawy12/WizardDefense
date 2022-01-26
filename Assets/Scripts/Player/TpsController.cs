@@ -444,8 +444,8 @@ public class TpsController : MonoBehaviour
 
     private void SetSentivity(float value)
     {
-        sensivity = value;
-        DataManager.Instance.PlayerData.sensitivityValue = value;
+        sensivity = Mathf.Lerp(0, 30, value / 100);
+        DataManager.Instance.PlayerData.sensitivityValue = sensivity;
         DataManager.Instance.SaveToJson();
     }
 
