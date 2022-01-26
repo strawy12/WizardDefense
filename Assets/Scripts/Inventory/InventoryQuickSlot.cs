@@ -16,6 +16,21 @@ public class InventoryQuickSlot : InventorySlot
         base.Start();
     }
 
+    public override void Init(ItemBase item, int count)
+    {
+        base.Init(item, count);
+
+        linkSlotImage.sprite = TargetItemImage.sprite;
+        if (linkSlotImage != null)
+        {
+            linkSlotImage.gameObject.SetActive(true);
+        }
+        else
+        {
+            linkSlotImage.gameObject.SetActive(false);
+        }
+    }
+
     public override void ChangeTargetItem(ItemBase item)
     {
         base.ChangeTargetItem(item);
@@ -35,6 +50,9 @@ public class InventoryQuickSlot : InventorySlot
     {
         base.ResetSlot();
         linkSlotImage.sprite = null;
+        Debug.Log("¿¿æ÷");
         linkSlotImage.gameObject.SetActive(false);
+        Debug.Log(linkSlotImage.gameObject.activeSelf);
+
     }
 }

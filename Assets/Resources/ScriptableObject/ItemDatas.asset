@@ -12,5 +12,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dcf8ec51fa3da14e85f5414fa1cf4de, type: 3}
   m_Name: ItemDatas
   m_EditorClassIdentifier: 
-  updateVersion: 
-  itemDataList: []
+  updateVersion: T.0.0.1
+  itemDataList:
+  - item_ID: I_FireCrystal
+    itemName: "\uBD88 \uC218\uC815"
+    itemType: 1
+  - item_ID: I_FireMushroom
+    itemName: "\uBD88 \uBC84\uC12F"
+    itemType: 1
+  - item_ID: I_Coal
+    itemName: "\uC11D\uD0C4"
+    itemType: 1
+  - item_ID: I_WaterCrystal
+    itemName: "\uBB3C \uC218\uC815"
+    itemType: 2
+  - item_ID: I_HolyTear
+    itemName: "\uC2E0\uC131\uD55C \uB208\uBB3C"
+    itemType: 2
+  - item_ID: I_BottleWithIcecap
+    itemName: "\uB9CC\uB144\uC124\uC774 \uB2F4\uAE34 \uBCD1"
+    itemType: 2
+  - item_ID: I_TerraCrystal
+    itemName: "\uB300\uC9C0 \uC218\uC815"
+    itemType: 3
+  - item_ID: I_VenomRose
+    itemName: "\uB3C5 \uC7A5\uBBF8"
+    itemType: 3
+  - item_ID: I_GolemParts
+    itemName: "\uACE8\uB7A8 \uC870\uAC01"
+    itemType: 3
+  - item_ID: I_CrystalAir
+    itemName: "\uACF5\uAE30 \uC218\uC815"
+    itemType: 6
+  - item_ID: I_FrozenCloud
+    itemName: "\uC5BC\uC5B4 \uBD99\uC740 \uAD6C\uB984"
+    itemType: 6
+  - item_ID: I_SunOre
+    itemName: "\uD0DC\uC591 \uC6D0\uC11D"
+    itemType: 6
+  - item_ID: I_CrystalHoly
+    itemName: "\uC2E0\uC131 \uC218\uC815"
+    itemType: 4
+  - item_ID: I_BottleWithWave
+    itemName: "\uD30C\uB3D9\uC774 \uB2F4\uAE34 \uBCD1"
+    itemType: 4
+  - item_ID: I_ShadowParts
+    itemName: "\uADF8\uB9BC\uC790 \uC870\uAC01"
+    itemType: 4
+  - item_ID: I_CrystalVoid
+    itemName: "\uACF5\uD5C8 \uC218\uC815"
+    itemType: 5
+  - item_ID: I_EternalFire
+    itemName: "\uC601\uC0DD\uC758 \uBD88\uAF43"
+    itemType: 5
+  - item_ID: I_VoidGap
+    itemName: "\uACF5\uD5C8\uC758 \uD2C8"
+    itemType: 5

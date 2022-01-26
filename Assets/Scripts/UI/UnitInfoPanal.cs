@@ -39,6 +39,7 @@ public class UnitInfoPanal : MonoBehaviour
             {
                 ClearPanal();
                 GameManager.Instance.selectedMonster?.ShowOutLine(false);
+                GameManager.Instance.selectedItem?.ShowOutLine(false);
             }
         }
     }
@@ -47,6 +48,7 @@ public class UnitInfoPanal : MonoBehaviour
     private void UpdateInfo(UnitInfo info)
     {
         unitNameText.text = info.unitName;
+        unitImage.sprite = info.unitSprite;
         unitStatText.text = string.Format("공격력 : {0:0.00}\n방어력 : {1:0.00}", info.attackPower, info.defence);
         //unitImage.sprite = info.unitSprite;
         unitHp.InitHpBar(info.maxHp);

@@ -6,6 +6,7 @@ public static class ConstantManager
     public const string INVENTORY_CLICK_MOVEBTN = "IN_C_MB";
     public const string INVENTORY_CLICK_DROPBTN = "IN_C_DB";
     public const string INVENTORY_CLICK_EQUIPBTN = "IN_C_EB";
+    public const string INVENTORY_CLICK_DIVIDEBTN = "IN_C_DVB";
     public const string INVENTORY_CLICK_BACKGROUND = "IN_C_BG";
     public const string INVENTORY_DROP = "IN_DP";
 
@@ -31,6 +32,11 @@ public static class ConstantManager
 
     public const string VIEW_UNITINFO = "VW_UI";
 
-    public const string PICKUP_ENERGY = "PU_EG";
+    public const string PICKUP_ITEM = "PU_IT";
     public const string ADD_ENERGY = "AD_EG";
+
+    public const string OPEN_BUILDPANEL = "OP_BP";
+    public const string BUILDUI_ADDRUNE = "BD_AR";
+    public const string BUILDUI_SUBRUNE = "BD_SR";
+    public const string RETURN_RUNEVALUE = "RT_RV";
 }
