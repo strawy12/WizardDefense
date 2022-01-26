@@ -17093,7 +17093,7 @@ Camera:
   m_Depth: -2
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2047
+    m_Bits: 34815
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -19829,7 +19829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyLeftSpawnPoint: {fileID: 1961337793}
   enemyRightSpawnPoint: {fileID: 893993276}
-  targetPoint: {fileID: 0}
+  targetPoint: {fileID: 1288962892}
 --- !u!114 &1168447616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35034,8 +35034,8 @@ Transform:
   - {fileID: 1204160037}
   - {fileID: 2008455071}
   - {fileID: 26340783}
-  - {fileID: 1448460550}
   - {fileID: 1269257155}
+  - {fileID: 1448460550}
   - {fileID: 858652086}
   - {fileID: 1610529597}
   - {fileID: 1982280767}

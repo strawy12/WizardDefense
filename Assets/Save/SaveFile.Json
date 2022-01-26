@@ -407,7 +407,7 @@
     "havedEnergyList": [
         {
             "type": 1,
-            "count": 0
+            "count": 2
         },
         {
             "type": 2,
@@ -415,7 +415,7 @@
         },
         {
             "type": 3,
-            "count": 0
+            "count": 2
         },
         {
             "type": 6,
@@ -423,7 +423,7 @@
         },
         {
             "type": 4,
-            "count": 0
+            "count": 6
         },
         {
             "type": 5,
