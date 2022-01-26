@@ -63,7 +63,12 @@ public class MonsterMove : MonoBehaviour
         {
             currentItem = monsterBase.dropItem;
         }
+<<<<<<< HEAD
 
+=======
+        anim.Play();
+        anim.Play("Org_Slime_Walk");
+>>>>>>> OIF
         this.monsterBase = monsterBase;
         SpawnOrder = spawnOrder;
         currentHp = monsterBase.info.maxHp;
@@ -125,6 +130,8 @@ public class MonsterMove : MonoBehaviour
 
     public void Dead()
     {
+        //anim.Play("BANGBNAG");
+
         GameManager.Instance.enemies.Remove(this);
 
         if (currentItem != null)
