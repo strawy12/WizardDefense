@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class ItemBase
 {
     public ItemData itemData;
     public Sprite itemSprite;
 
+    public int count;
+
     public ItemBase(ItemData data, Sprite sprite)
     {
         itemData = new ItemData(data.item_ID, data.itemName, data.itemType);
         itemSprite = sprite;
+        count = 0;
     }
 }
 

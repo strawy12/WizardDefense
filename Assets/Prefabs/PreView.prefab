@@ -124,8 +124,7 @@ GameObject:
   - component: {fileID: 7280627589862013466}
   - component: {fileID: 7280627589862013467}
   - component: {fileID: 7280627589862013460}
-  - component: {fileID: 7280627589862013461}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: PreView
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -140,7 +139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7280627589862013462}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5, z: 0}
+  m_LocalPosition: {x: 0, y: 4.61, z: 0}
   m_LocalScale: {x: 2.5, y: 8, z: 2.5}
   m_Children:
   - {fileID: 7280627589289538551}
@@ -212,39 +211,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7280627589862013461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7280627589862013462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea457b02d75340e44a6129a78774305a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerBase:
-    name: "\uB178\uBA40\uD3EC\uD0D1"
-    attackPower: 5
-    level: 0
-    attribute:
-      attributeName: "\uB178\uBA40"
-      sprite: {fileID: 0}
-    fireRate: 1
-    handFireRate: 0.2
-    distance: 10
-    hp: 0
-  muzzlePosition: {fileID: 7280627589289538551}
-  boundary: {fileID: 1422488582}
-  useSkillTime: 0
-  selectedTime: 0
-  skill:
-    bulletPrefab: {fileID: 8341332336548344853, guid: afac6c302e358fd449a981ad469ab00a, type: 3}
-    coolTime: 0
-    attributeName: 
-    skillSprite: {fileID: 0}
-  isBuilding: 0
 --- !u!1 &7622507184708523043
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7098593624091938457}
   - component: {fileID: 1422488582}
-  m_Layer: 3
+  m_Layer: 16
   m_Name: Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +283,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -5657516368756229084, guid: c7e210d9446aed347bd9cf7ea2c7806c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6745098}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.62352943}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -334,6 +300,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7280627589862013465}
     m_Modifications:
+    - target: {fileID: -9093864610450326273, guid: 1a5bd88d57150b24d8ab1a99d33ecf21, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: -9059250087214276255, guid: 1a5bd88d57150b24d8ab1a99d33ecf21, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -406,9 +376,25 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 14a23704a2ed2ff4aa0d192f17d17db7, type: 2}
+    - target: {fileID: 255796341139548692, guid: 1a5bd88d57150b24d8ab1a99d33ecf21, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1a5bd88d57150b24d8ab1a99d33ecf21, type: 3}
       propertyPath: m_Name
       value: tower
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1a5bd88d57150b24d8ab1a99d33ecf21, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594243245622329198, guid: 1a5bd88d57150b24d8ab1a99d33ecf21, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7880441209312002256, guid: 1a5bd88d57150b24d8ab1a99d33ecf21, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a5bd88d57150b24d8ab1a99d33ecf21, type: 3}

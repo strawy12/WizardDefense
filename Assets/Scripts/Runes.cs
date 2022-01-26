@@ -5,64 +5,63 @@ using UnityEngine.UI;
 
 public class Runes : MonoBehaviour
 {
-    [SerializeField] private int maxNum;    // ·é ÃÖ´ë°¹¼ö
-    [SerializeField] private int currentNum;    // ÇöÀç ·é °¹¼ö
+    private EnergyData currentEnergtData;
+
+    private int leftNum { get { return currentEnergtData.count - indexNum; } }    // »ç¿ë ÈÄ ³²Àº
+    private int currentNum { get { return currentEnergtData.count; } }   // ÇöÀç ·é
+
+    [SerializeField] private PropertyType property;
+
     [SerializeField] private Image runeImg;
     [SerializeField] private Text runeText;
-    public TowerSelect towerSelect;
-
 
     private int indexNum = 0;   // Á¦ÀÛ´ë¿¡ ³ÖÀº ·é °¹¼ö
 
     private void Start()
     {
+        currentEnergtData = DataManager.Instance.GetEnergyData(property);
+        EventManager.StartListening(ConstantManager.OPEN_BUILDPANEL, UpdateText);
+        EventManager.StartListening(ConstantManager.RETURN_RUNEVALUE, ReturnRune);
         UpdateText();
     }
 
     public void OnClickPlus()
     {
-        if (currentNum == 0)
+        if (leftNum <= 0)
         {
-            currentNum = 0;
-            UpdateText();
+            return;
         }
         else
         {
             indexNum++;
-            currentNum--;
-            towerSelect.AddRune();
             UpdateText();
+            EventManager.TriggerEvent(ConstantManager.BUILDUI_ADDRUNE);
         }
     }
 
     public void OnClickMinus()
     {
-        if (indexNum == 0)
+        if (indexNum <= 0)
         {
-            indexNum = 0;
-            UpdateText();
+            return;
         }
         else
         {
-            if (towerSelect.curRune != 0)
-            {
-                indexNum--;
-                currentNum++;
-                towerSelect.MinusRune();
-                UpdateText();
-            }
+            indexNum--;
+            UpdateText();
+            EventManager.TriggerEvent(ConstantManager.BUILDUI_SUBRUNE);
         }
     }
 
     private void UpdateText()
     {
-        runeText.text = $"{currentNum} / {maxNum}";
+        runeText.text = $"{leftNum} / {currentNum}";
         RuneNumCheck();
     }
 
     private void RuneNumCheck()
     {
-        if(currentNum==0)
+        if (currentNum == 0)
         {
             runeImg.color = new Color(0.6f, 0.6f, 0.6f, 1f);
         }
@@ -70,5 +69,14 @@ public class Runes : MonoBehaviour
         {
             runeImg.color = new Color(1, 1f, 1f, 1f);
         }
+    }
+
+    private void ReturnRune()
+    {
+        if (indexNum == 0) return;
+
+        currentEnergtData.count -= indexNum;
+        indexNum = 0;
+        DataManager.Instance.SaveToJson();
     }
 }

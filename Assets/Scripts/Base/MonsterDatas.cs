@@ -24,14 +24,15 @@ public class MonsterBase
     public string monsterId;
     public PropertyType monsterType;
     public MonsterInfo  info;
-    public List<ItemDatas> dropItemList;
+    public ItemBase dropItem;
 
 
-    public MonsterBase(string id,string name, PropertyType type)
+    public MonsterBase(string id,string name, PropertyType type, ItemBase item)
     {
         monsterName = name;
         monsterId = id;
-        this.monsterType = type;
+        monsterType = type;
+        dropItem = item;
         info = null;
     }
 
@@ -40,6 +41,7 @@ public class MonsterBase
         monsterName = baseData.monsterName;
         monsterId = baseData.monsterId;
         monsterType = baseData.monsterType;
+        dropItem = baseData.dropItem;
         this.info = info;
     }
 }

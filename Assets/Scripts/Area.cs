@@ -36,12 +36,14 @@ public class Area : MonoBehaviour
             {
                 TowerSelect.buildObj = gameObject;
                 TowerSelect.buildTrn = gameObject.transform;
+                GameManager.Instance.player.TargetingTowerArea(true);
                 GameManager.Instance.UIManager.FMarkTrue();
                 ShowOutline(true);
             }
             else
             {
                 GameManager.Instance.UIManager.FMarkFalse();
+                GameManager.Instance.player.TargetingTowerArea(false);
                 ShowOutline(false);
             }
         }

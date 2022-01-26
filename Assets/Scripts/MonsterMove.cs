@@ -10,6 +10,7 @@ public class MonsterMove : MonoBehaviour
     [SerializeField] private MonsterBase monsterBase;
 
     private NavMeshAgent agent;
+    private SkinnedMeshRenderer meshRenderer;
 
     private float currentHp = 0;
     public float virtualHP;
@@ -19,15 +20,21 @@ public class MonsterMove : MonoBehaviour
     private Vector3 currentDir = Vector3.zero;
     private Transform targetPoint = null;
 
+    private ItemBase currentItem;
 
     private UnitInfo unitInfo;
 
     private Outline outline;
 
+    private ParticleSystem particle;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         outline = GetComponent<Outline>();
+        particle = GetComponentInChildren<ParticleSystem>();
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
     }
 
     private void Start()
@@ -40,13 +47,18 @@ public class MonsterMove : MonoBehaviour
     {
         if (!finished_Init) return;
         if (agent.velocity.magnitude > 0.2f && agent.remainingDistance <= 3f)
-        {
-           AttackPointTower();
+        {   
+            AttackPointTower();
         }
     }
 
     public void Init(MonsterBase monsterBase, Transform target)
     {
+        if(monsterBase.dropItem != null)
+        {
+            currentItem = monsterBase.dropItem;
+        }
+
         this.monsterBase = monsterBase;
         currentHp = monsterBase.info.maxHp;
         finished_Init = true;
@@ -79,12 +91,25 @@ public class MonsterMove : MonoBehaviour
 
     public void Damaged(int damage)
     {
+        Debug.Log("¸ÂÀ½");
         currentHp -= damage;
+        particle.Play();
 
         if (currentHp <= 0)
         {
             Dead();
         }
+        else
+        {
+            StartCoroutine(OnDamaged());
+        }
+    }
+
+    private IEnumerator OnDamaged()
+    {
+        meshRenderer.materials[1].color = new Color32(255, 0, 0, 143);  
+        yield return new WaitForSeconds(0.1f);
+        meshRenderer.materials[1].color = Color.clear;
     }
 
     public void VirtualDamaged(int power)
@@ -95,6 +120,13 @@ public class MonsterMove : MonoBehaviour
     public void Dead()
     {
         GameManager.Instance.enemies.Remove(this);
+
+        if(currentItem != null)
+        {
+                GameManager.Instance.SpawnItem(currentItem, transform.position);
+        }
+        
+
         Destroy(gameObject);
     }
 
@@ -117,13 +149,13 @@ public class MonsterMove : MonoBehaviour
 
     public void ShowOutLine(bool isShow)
     {
-        if(isShow)
+        if (isShow)
         {
-            outline.OutlineWidth = outline.thisOutLine;
+            outline.OutlineColor = Color.yellow;
         }
         else
         {
-            outline.OutlineWidth = 0f;
+            outline.OutlineColor = new Color32(255, 68, 68, 255);
         }
     }
 }

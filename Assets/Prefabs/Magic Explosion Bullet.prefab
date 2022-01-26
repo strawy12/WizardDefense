@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ePoolingType: 1
-  speed: 0.1
+  speed: 0.4
 --- !u!135 &2953235607940232973
 SphereCollider:
   m_ObjectHideFlags: 0

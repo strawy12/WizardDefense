@@ -31,13 +31,20 @@ public class InventoryUIManager : MonoBehaviour
         itemSlots = itemSlotTrs.GetChild(0).GetComponentsInChildren<InventorySlot>();
         canvasGroup = GetComponent<CanvasGroup>();
 
+        InitItemSlot();
+
         EventManager<InventorySlot>.StartListening(ConstantManager.INVENTORY_CLICK_LEFT, SelectSlot);
         EventManager<InventorySlot>.StartListening(ConstantManager.INVENTORY_CLICK_RIGHT, SettingSlot);
+
         EventManager.StartListening(ConstantManager.INVENTORY_CLICK_MOVEBTN, SettingMoveEvent);
         EventManager.StartListening(ConstantManager.INVENTORY_CLICK_DROPBTN, DropEvent);
         EventManager.StartListening(ConstantManager.INVENTORY_CLICK_EQUIPBTN, EquipEvent);
+        EventManager.StartListening(ConstantManager.INVENTORY_CLICK_DIVIDEBTN, DivideEvent);
         EventManager.StartListening(ConstantManager.INVENTORY_CLICK_BACKGROUND, SelectItemDropEvent);
-        EventManager.StartListening(ConstantManager.TURNOFF_INVENTORY, () => canvasGroup.alpha = 0f);
+        EventManager.StartListening(ConstantManager.TURNOFF_INVENTORY, TurnOffInventory);
+
+        EventManager<ItemBase>.StartListening(ConstantManager.PICKUP_ITEM, PickUpItem);
+
     }
 
     private void Update()
@@ -53,6 +60,52 @@ public class InventoryUIManager : MonoBehaviour
     private void OnDisable()
     {
         EventManager.TriggerEvent(ConstantManager.TURNOFF_INVENTORY);
+    }
+
+    private void InitItemSlot()
+    {
+        List<InventoryData> inventoryDatas = DataManager.Instance.PlayerData.inventoryList;
+        ItemBase item = null;
+        int index = 0;
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            if (inventoryDatas[i].item != null && inventoryDatas[i].item.item_ID != "")
+            {
+                item = GameManager.Instance.Data.ConversionToItemBase(inventoryDatas[i].item);
+                itemSlots[i]?.Init(item, inventoryDatas[i].count);
+            }
+        }
+
+        for (int i = itemSlots.Length; i < inventoryDatas.Count; i++)
+        {
+            if (inventoryDatas[i].item != null && inventoryDatas[i].item.item_ID != "")
+            {
+                index = i - itemSlots.Length;
+                item = GameManager.Instance.Data.ConversionToItemBase(inventoryDatas[i].item);
+                quickSlots[index]?.Init(item, inventoryDatas[i].count);
+            }
+        }
+    }
+
+    private void PickUpItem(ItemBase item)
+    {
+        InventorySlot inventorySlot = null;
+
+        foreach (var slot in itemSlots)
+        {
+            if (inventorySlot == null && slot.TargetItemName == "")
+            {
+                inventorySlot = slot;
+            }
+
+            if (slot.TargetItemName == item.itemData.itemName)
+            {
+                slot.IncreaseItem();
+                return;
+            }
+        }
+
+        inventorySlot.AddTargetItem(item);
     }
 
     private void SelectSlot(InventorySlot slot)
@@ -117,11 +170,11 @@ public class InventoryUIManager : MonoBehaviour
     {
         if (selectItem != null)
         {
-            if (slot.targetItem == null)
+            if (slot.TargetItemName == "")
             {
-                slot.ChangeTargetItem(selectItem);
-                selectItem = null;
                 selectSlot = slot;
+                selectSlot.ChangeTargetItem(selectItem);
+                selectItem = null;
                 selectSlot.currentState = InventorySlotState.Idle;
                 ReleaseMoveEvent();
             }
@@ -140,7 +193,7 @@ public class InventoryUIManager : MonoBehaviour
 
         else
         {
-            if (slot.targetItem == null)
+            if (slot.TargetItemName == "")
             {
                 selectSlot = slot;
                 slot.currentState = InventorySlotState.Idle;
@@ -211,25 +264,45 @@ public class InventoryUIManager : MonoBehaviour
 
     //}
 
+    private void DivideEvent()
+    {
+        if (selectSlot.TargetItemName == "") return;
+        EventManager<PropertyType>.TriggerEvent(ConstantManager.ADD_ENERGY, selectSlot.targetItem.itemData.itemType);
+        selectSlot.DropItem();
+    }
+
     private void DropEvent()
     {
+        if (selectSlot.targetItem == null) return;
         EventManager<ItemBase>.TriggerEvent(ConstantManager.INVENTORY_DROP, selectSlot.targetItem);
-        selectSlot.ResetSlot();
+        selectSlot.DropItem();
     }
 
     private void SelectItemDropEvent()
     {
-        if (selectItem == null) return;
+        if (selectItem == null || selectItem.count <= 0) return;
 
         EventManager<ItemBase>.TriggerEvent(ConstantManager.INVENTORY_DROP, selectItem);
-        selectSlot.ResetSlot();
-        ReleaseMoveEvent();
-        selectItem = null;
+
+        if(selectItem.count > 1)
+        {
+            selectItem.count--;
+        }
+
+        else 
+        {
+            selectItem.count--;
+            ReleaseMoveEvent();
+            selectItem = null;
+        }
+        
     }
 
     private void EquipEvent()
     {
-        if(selectSlot.slotType.Contains("Quick"))
+        if (selectSlot.TargetItemName == "") return;
+
+        if (selectSlot.slotType.Contains("Quick"))
         {
             UnEquipItem();
         }
@@ -244,7 +317,7 @@ public class InventoryUIManager : MonoBehaviour
     {
         foreach (var slot in quickSlots)
         {
-            if (slot.targetItem == null)
+            if (slot.TargetItemName == "")
             {
                 slot.ChangeTargetItem(selectSlot.targetItem);
                 selectSlot.ResetSlot();
@@ -262,7 +335,7 @@ public class InventoryUIManager : MonoBehaviour
     {
         foreach (var slot in itemSlots)
         {
-            if (slot.targetItem == null)
+            if (slot.TargetItemName == "")
             {
                 slot.ChangeTargetItem(selectSlot.targetItem);
                 selectSlot.ResetSlot();
@@ -274,5 +347,11 @@ public class InventoryUIManager : MonoBehaviour
 
         itemSlots[0].ChangeTargetItem(selectSlot.targetItem);
         selectSlot.ChangeTargetItem(tempItem);
+    }
+
+    private void TurnOffInventory()
+    {
+        canvasGroup.alpha = 0f;
+        canvasGroup.blocksRaycasts = false;
     }
 }

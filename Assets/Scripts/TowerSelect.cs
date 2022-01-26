@@ -24,11 +24,14 @@ public class TowerSelect : MonoBehaviour
 
     private int selectTower;
 
-    public TpsController tpsController;
 
     private void Start()
     {
         OnClickTower1();
+        EventManager.StartListening(ConstantManager.BUILDUI_ADDRUNE, AddRune);
+        EventManager.StartListening(ConstantManager.BUILDUI_SUBRUNE, SubRune);
+        
+
     }
 
     public void OnClickTower1()
@@ -58,7 +61,7 @@ public class TowerSelect : MonoBehaviour
         UpdateUI();
     }
 
-    public void MinusRune()
+    public void SubRune()
     {
         if (needMax > 0)
         {
@@ -75,6 +78,7 @@ public class TowerSelect : MonoBehaviour
     {
         if (curRune >= needMax)
         {
+            EventManager.TriggerEvent(ConstantManager.RETURN_RUNEVALUE);
             curRune -= needMax;
             GameManager.Instance.UIManager.OnClickOutChang();
             GameManager.Instance.UIManager.FMarkFalse();

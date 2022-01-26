@@ -20,6 +20,7 @@ public class TowerAttack : MonoBehaviour
     public Skill skill;
 
     public bool isBuilding;
+    public GameObject towerUnit;
 
     private Outline outline;
 
@@ -33,7 +34,7 @@ public class TowerAttack : MonoBehaviour
 
         Vector3 scale = transform.localScale;
         scale.y = scale.x;
-        boundary.gameObject.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * 2f * (1 / scale.x);
+        boundary.gameObject.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) *  (2f / scale.x);
         boundary.gameObject.SetActive(true);
     }
 
@@ -89,7 +90,17 @@ public class TowerAttack : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse0) && curFireTime > towerBase.handFireRate)
         {
-            InstantiateOrPooling(pool.GetPoolObject(EPoolingType.DefaultBullet).gameObject);
+            CameraMove cam = GameManager.Instance.mainCam;
+            RaycastHit hitInfo;
+            Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.blue);
+
+
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, towerBase.distance, LayerMask.GetMask("Enemy")))
+            {
+                hitInfo.transform.gameObject.GetComponent<MonsterMove>()?.Damaged(towerBase.attackPower);
+            }
+
             curFireTime = 0f;
         }
     }
@@ -97,11 +108,13 @@ public class TowerAttack : MonoBehaviour
     private void SetMuzzleRotation()
     {
         //Ray ray = GameManager.Instance.mainCam.cam.ScreenPointToRay(GameManager.Instance.screenCenter);
-        Ray ray = GameManager.Instance.mainCam.cam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+        CameraMove cam = GameManager.Instance.mainCam;
         RaycastHit hitInfo;
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * 100f, Color.blue);
 
-        if (Physics.Raycast(ray, out hitInfo, 999f))
+
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward,out hitInfo, towerBase.distance))
         {
             //muzzlePosition.localEulerAngles = GameManager.Instance.mainCam.transform.localEulerAngles;
             //Debug.DrawRay(muzzlePosition.position, hitInfo.point - muzzlePosition.position, Color.red);
@@ -142,7 +155,7 @@ public class TowerAttack : MonoBehaviour
         List<MonsterMove> enemies = GameManager.Instance.enemies;
         if (enemies.Count == 0) return false;
 
-        float minDistance = 100f;
+        float minDistance = 999f;
         float distance;
         targetEnemy = null;
 
@@ -189,16 +202,19 @@ public class TowerAttack : MonoBehaviour
 
         GameManager.Instance.tpsCamera.enabled = false;
 
-        Vector3 cameraPosition = transform.position;
-        cameraPosition.y += 2f;
-        muzzlePosition.transform.position = cameraPosition;
+        Vector3 cameraPosition = muzzlePosition.transform.position;
+        cameraPosition.y += 1.2f;
         GameManager.Instance.mainCam.CameraMoveToPosition(cameraPosition, 1f);
         //이거 fireRate 다름
         GameManager.Instance.UIManager.ShowTowerStatBar(true, towerBase.attackPower, towerBase.fireRate);
+        GameManager.Instance.UIManager.quickSlot.SetActive(false);
 
         GameManager.Instance.selectedTower = this;
         towerState = TowerState.InControl;
         selectedTime = 0f;
+
+        towerUnit.SetActive(false);
+        GameManager.Instance.player.gameObject.SetActive(false);
 
         ShowBoundary(true);
         ChangeBoundaryColor(Color.red);
@@ -209,15 +225,20 @@ public class TowerAttack : MonoBehaviour
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && selectedTime > 1f)
         {
             //고정값이니 바꾸어도 됨
-            GameManager.Instance.player.SetActive(true);
+            GameManager.Instance.player.gameObject.SetActive(true);
 
             Vector3 pos = GameManager.Instance.tpsCamera.transform.position;
             Vector3 rot = GameManager.Instance.tpsCamera.transform.parent.eulerAngles;
             GameManager.Instance.mainCam.ZoomOutCamera(pos, rot, 1f);
-            //GameManager.Instance.UIManager.ShowTowerStatBar(true);    
+            GameManager.Instance.UIManager.quickSlot.SetActive(true);
+            GameManager.Instance.gameState = GameState.Playing;
+
+            GameManager.Instance.UIManager.ShowTowerStatBar(false);
             GameManager.Instance.selectedTower = null;
 
             curFireTime = 0f;
+            towerUnit.SetActive(true);
+            GameManager.Instance.player.gameObject.SetActive(true);
 
             towerState = TowerState.OutControl;
         }
@@ -241,7 +262,7 @@ public class TowerAttack : MonoBehaviour
     #region Skill
     private void OnUseSKill()
     {
-        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Skill]) && towerState == TowerState.InControl)
+        if (Input.GetKeyDown/*(KeyManager.keySettings[KeyAction.Skill])*/(KeyCode.Q) && towerState == TowerState.InControl)
         {
             skill = GetSkill();
 
@@ -289,6 +310,7 @@ public class TowerAttack : MonoBehaviour
 
     public void ChangeBoundaryColor(Color color)
     {
+        color.a = 0.4f;
         boundary.color = color;
     }
 

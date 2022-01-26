@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -57,8 +58,8 @@ public class InGameDataManager : MonoBehaviour
 
     private IEnumerator DataDownLoad()
     {
-        yield return StartMonsterDataDownLoad();
         yield return StartItemDataDownLoad();
+        yield return StartMonsterDataDownLoad();
         yield return StartWavePatternDataDownLoad();
         yield return StartWaveDataDownLoad();
     }
@@ -80,7 +81,7 @@ public class InGameDataManager : MonoBehaviour
     }
     private IEnumerator DownLoadMonsterDatas()
     {
-        const string URL = "https://docs.google.com/spreadsheets/d/1RbsXVREigxOpq7ozlbjoLSYzNgFlV6enstlbATOXQ-4/export?format=tsv&gid=0&range=B2:D";
+        const string URL = "https://docs.google.com/spreadsheets/d/1RbsXVREigxOpq7ozlbjoLSYzNgFlV6enstlbATOXQ-4/export?format=tsv&gid=0&range=B2:E19";
 
         UnityWebRequest www = UnityWebRequest.Get(URL);
 
@@ -98,22 +99,36 @@ public class InGameDataManager : MonoBehaviour
         int colummSize = row[0].Split('\t').Length;
         MonsterBase monsterBase = null;
 
+        string id = "";
+        string name = "";
+        string itemId = "";
+        PropertyType type;
+        ItemBase item = null;
+
         for (int i = 0; i < rowSize; i++)
         {
             column = row[i].Split('\t');
             for (int j = 0; j < colummSize; j++)
             {
+                id = column[0];
+                name = column[1];
+                type = (PropertyType)Enum.Parse(typeof(PropertyType), column[2]);
+                column[3] = Regex.Replace(column[3], "[^a-zA-Z_]", "");
+                item = FindItemBase(column[3]);
+
                 if (i >= monsterDatas.monsterDatas.Count)
                 {
-                    monsterDatas.monsterDatas.Add(new MonsterBase(column[0], column[1], (PropertyType)Enum.Parse(typeof(PropertyType), column[2])));
+
+                    monsterDatas.monsterDatas.Add(new MonsterBase(id, name, type, item));
                 }
 
                 else
                 {
                     monsterBase = monsterDatas.monsterDatas[i];
-                    monsterBase.monsterId = column[0];
-                    monsterBase.monsterName = column[1];
-                    monsterBase.monsterType = (PropertyType)Enum.Parse(typeof(PropertyType), column[2]);
+                    monsterBase.monsterId = id;
+                    monsterBase.monsterName = name;
+                    monsterBase.monsterType = type;
+                    monsterBase.dropItem = item;
                 }
             }
         }
@@ -404,10 +419,25 @@ public class InGameDataManager : MonoBehaviour
         return itemSprites.FindItemSprite(item_ID);
     }
 
+    public ItemBase FindItemBase(string item_ID)
+    {
+        if (item_ID.Equals("NULL")) return null;
+
+        ItemData data = itemDatas.itemDataList.Find((item) => item.item_ID == item_ID);
+        ItemBase item = new ItemBase(data, FindItemSprite(data.item_ID));
+        return item;
+    }
+
     public ItemBase GetItemBase(int index)
     {
         if (index >= itemDatas.Length) return null;
         ItemData data = itemDatas.itemDataList[index];
+        ItemBase item = new ItemBase(data, FindItemSprite(data.item_ID));
+        return item;
+    }
+
+    public ItemBase ConversionToItemBase(ItemData data)
+    {
         ItemBase item = new ItemBase(data, FindItemSprite(data.item_ID));
         return item;
     }

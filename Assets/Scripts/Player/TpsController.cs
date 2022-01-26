@@ -23,8 +23,9 @@ public class TpsController : MonoBehaviour
     private bool jDown;
     private bool isRun;
     private bool isJump;
-    private bool isTarget = false;
+    private bool isTargetItem = false;
     private bool isTargetTower = false;
+    private bool isTargetTowerArea = false;
     private bool isTowerRun;
 
     private MonsterMove targetMonster;
@@ -34,17 +35,21 @@ public class TpsController : MonoBehaviour
     private Rigidbody myrigid;
 
     private TowerAttack tower;
+    private Area area;
 
     private float fieldOfView;
 
 
+    private void Awake()
+    {
+        EventManager<float>.StartListening(ConstantManager.CHANGE_SENSITVITY, SetSentivity);
+    }
     private void Start()
     {
         myrigid = GetComponent<Rigidbody>();
         animator = characterBody.GetComponent<Animator>();
         EventManager<ItemBase>.StartListening(ConstantManager.INVENTORY_DROP, DropItem);
         EventManager.StartListening(ConstantManager.TURNON_INVENTORY, StopPlayer);
-        EventManager<float>.StartListening(ConstantManager.CHANGE_SENSITVITY, SetSentivity);
     }
 
     private void Update()
@@ -52,30 +57,28 @@ public class TpsController : MonoBehaviour
         if (GameManager.Instance.gameState == GameState.Setting) return;
 
         PlayerSet();
-        Debug.Log(GameManager.Instance.UIManager.IsFMarkActive());
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && GameManager.Instance.UIManager.IsFMarkActive())
         {
-            if (GameManager.Instance.inGameState == InGameState.BreakTime)
+            if (isTargetItem && targetItem != null)
             {
-                if (GameManager.Instance.censorTower == null)
-                {
-                    GameManager.Instance.UIManager.Chang();
-                }
-                //else
-                //{
-                //    TowerBase tower = GameManager.Instance.censorTower.towerBase;
-                //    GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
-                //    GameManager.Instance.UIManager.ShowTowerStatBar(true, tower.attackPower, tower.fireRate);
-                //}
+                targetItem.PickUpItem();
+                targetItem = null;
             }
 
-            else if (GameManager.Instance.inGameState == InGameState.DefenseTime && GameManager.Instance.selectedTower == null)
+            else if (GameManager.Instance.censorTower == null && isTargetTowerArea)
             {
-                //tower.ZoomInTower();
-                //gameObject.SetActive(false);
-                GameManager.Instance.censorTower?.ZoomInTower();
-                GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower, true);
+
+                GameManager.Instance.UIManager.Chang();
             }
+
+            else if (isTargetTower && GameManager.Instance.selectedTower == null)
+            {
+                GameManager.Instance.censorTower?.ZoomInTower();
+                GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
+            }
+
+            
+
         }
 
         if (Input.GetMouseButtonDown(0) && GameManager.Instance.censorTower != null && !isTowerRun)
@@ -102,20 +105,21 @@ public class TpsController : MonoBehaviour
 
     private void PlayerSet()
     {
-        Move();
 
         if (GameManager.Instance.gameState == GameState.InGameSetting) return;
-
+        Move();
         LookAround();
         //Jump();
         Fly();
         Run();
         Hit();
+
+        transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
     }
     private void LookAround()
     {
         if (GameManager.Instance.gameState == GameState.Setting || GameManager.Instance.gameState == GameState.InGameSetting) return;
-        
+
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * sensivity, Input.GetAxis("Mouse Y") * sensivity);
         Vector3 cameraAngle = cameraArm.rotation.eulerAngles;
         float x = cameraAngle.x - mouseDelta.y;
@@ -151,11 +155,10 @@ public class TpsController : MonoBehaviour
             Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
             Vector3 moveDir = lookForWard * moveInput.y + lookRight * moveInput.x;
 
-            //characterBody.forward = lookForWard;
             characterBody.forward += moveDir;
 
+            //transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
             transform.position = GameManager.Instance.ConversionBoundPosition(transform.position);
-
             transform.position += moveDir * speed * Time.deltaTime;
         }
     }
@@ -175,7 +178,7 @@ public class TpsController : MonoBehaviour
         float speed = 8f;
         if (isRun) speed *= 2f;
 
-        if (Input.GetButton(ConstantManager.KEYINPUT_JUMP) && !isJump)
+        if (Input.GetKey(KeyManager.keySettings[KeyAction.Jump]) && !isJump)
         {
             Vector3 flyPos = transform.position;
             flyPos.y += 0.1f;
@@ -242,22 +245,36 @@ public class TpsController : MonoBehaviour
                     targetMonster.GetInfo();
                     targetMonster.ShowOutLine(true);
                     GameManager.Instance.selectedMonster = targetMonster;
+                    isTargetItem = false;
                     return;
                 }
             }
 
-            if(hit.transform.CompareTag("Item"))
+            if (hit.transform.CompareTag("Item"))
             {
-                Debug.Log("dd");
                 targetItem = hit.transform.GetComponent<ItemObject>();
 
-                if(targetItem != null)
+                if (targetItem != null)
                 {
+                    GameManager.Instance.selectedItem?.ShowOutLine(false);
                     targetItem.GetInfo();
+                    targetItem.ShowOutLine(true);
+                    GameManager.Instance.selectedItem = targetItem;
+                    GameManager.Instance.UIManager.FMarkTrue();
+                    isTargetItem = true;
+                    isTargetTower = false;
+                    isTargetTowerArea = false;
                     return;
                 }
             }
+
+            else
+            {
+                isTargetItem = false;
+            }
         }
+
+        isTargetItem = false;
     }
 
     private void Hit_TowerArea(Camera cam)
@@ -266,26 +283,23 @@ public class TpsController : MonoBehaviour
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitTowerAreaInfo, maxDistance))
         {
-            if (hitTowerAreaInfo.transform.gameObject.CompareTag("area") && GameManager.Instance.inGameState == InGameState.BreakTime)
+            if (hitTowerAreaInfo.transform.gameObject.CompareTag("area"))
             {
                 TowerSelect.buildTrn = hitTowerAreaInfo.transform;
                 GameManager.Instance.UIManager.FMarkTrue();
-                hitTowerAreaInfo.transform.GetComponent<Area>()?.ShowOutline(true);
-                isTarget = true;
+                area = hitTowerAreaInfo.transform.GetComponent<Area>();
+                area.ShowOutline(true);
+                isTargetItem = false;
+                isTargetTowerArea = true;
             }
 
             else
             {
                 GameManager.Instance.UIManager.AreaCheack();
                 GameManager.Instance.UIManager.FMarkFalse();
-                hitTowerAreaInfo.transform.GetComponent<Area>()?.ShowOutline(false);
-                isTarget = false;
+                area?.ShowOutline(false);
+                //isTargetTowerArea = false;
             }
-        }
-
-        else
-        {
-            isTarget = false;
         }
     }
 
@@ -313,9 +327,11 @@ public class TpsController : MonoBehaviour
                         {
                             GameManager.Instance.UIManager.FMarkTrue();
                             isTargetTower = true;
+                            isTargetTowerArea = false;
                         }
                     }
-
+                    isTargetTower = true;
+                    isTargetTowerArea = false;
                     tower.ShowOutLine(true);
                 }
 
@@ -343,15 +359,27 @@ public class TpsController : MonoBehaviour
     {
         GameManager.Instance.SpawnItem(item, transform.position);
     }
-    
+
     private void StopPlayer()
     {
         animator.Play("Stand");
         animator.SetBool("isMove", false);
     }
 
+    public void TargetingTowerArea(bool isTarget)
+    {
+        isTargetTowerArea = isTarget;
+    }
+
     private void SetSentivity(float value)
     {
         sensivity = value;
+        DataManager.Instance.PlayerData.sensitivityValue = value;
+        DataManager.Instance.SaveToJson();
+    }
+
+    public float GetMaxDistance()
+    {
+        return maxDistance;
     }
 }

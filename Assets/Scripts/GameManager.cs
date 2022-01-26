@@ -27,7 +27,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     #region InGame
     public GameObject boundary;
-    public GameObject player;
+    public TpsController player;
     public GameObject pointTower;
     public Transform mapBorder;
     public ItemObject Itempref;
@@ -35,6 +35,7 @@ public class GameManager : MonoSingleton<GameManager>
     public TowerAttack selectedTower;
     public TowerAttack censorTower;
     public MonsterMove selectedMonster;
+    public ItemObject selectedItem;
 
     public List<MonsterMove> enemies { get; private set; } = new List<MonsterMove>();
     public List<Attribute> attributes = new List<Attribute>();
@@ -71,8 +72,6 @@ public class GameManager : MonoSingleton<GameManager>
         UIManager = GetComponent<UIManager>();
         KeyManager = GetComponent<KeyManager>();
         gameState = GameState.Playing;
-        //StartCoroutine(SpawnEnemies());
-
     }
 
     void Start()
@@ -80,6 +79,7 @@ public class GameManager : MonoSingleton<GameManager>
         gameState = GameState.Playing;
         screenCenter = (new Vector3(mainCam.cam.pixelWidth / 2, mainCam.cam.pixelHeight / 2));
         EnterBreakTime();
+        SetPlayerSentivity();
 
     }
 
@@ -132,10 +132,12 @@ public class GameManager : MonoSingleton<GameManager>
         breakTime = 0f;
     }
 
-    public void SpawnItem(ItemBase data, Vector3 spawnPos)
+    public void SpawnItem(ItemBase item, Vector3 spawnPos)
     {
-        ItemObject item = Instantiate(Itempref, spawnPos, Quaternion.identity);
-        item.item = data;
+        if (item == null) return;
+
+        ItemObject itemObj = Instantiate(Itempref, spawnPos, Quaternion.identity);
+        itemObj.item = item;
     }
 
     public Vector3 ConversionBoundPosition(Vector3 pos)
@@ -148,9 +150,13 @@ public class GameManager : MonoSingleton<GameManager>
         float additionZ = mapBorder.position.z;
 
         pos.x = Mathf.Clamp(pos.x, -x + additionX, x + additionX);
-        pos.y = Mathf.Clamp(pos.y, -35f, y + additionY);
+        pos.y = Mathf.Clamp(pos.y, -28f, y + additionY);
         pos.z = Mathf.Clamp(pos.z, -z + additionZ, z + additionZ);
 
         return pos;
+    }
+    private void SetPlayerSentivity()
+    {
+        EventManager<float>.TriggerEvent(ConstantManager.CHANGE_SENSITVITY, DataManager.Instance.PlayerData.sensitivityValue);
     }
 }
