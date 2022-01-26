@@ -30,9 +30,14 @@ public class MonsterMove : MonoBehaviour
 
     private ParticleSystem particle;
 
+    private Animation anim = null;
+
+    private bool isDead = false;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponentInChildren<Animation>();
         outline = GetComponent<Outline>();
         particle = GetComponentInChildren<ParticleSystem>();
         meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
@@ -52,6 +57,11 @@ public class MonsterMove : MonoBehaviour
         {   
             AttackPointTower();
         }
+
+        if(isDead && !anim.isPlaying)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Init(MonsterBase monsterBase, Transform target)
@@ -61,13 +71,13 @@ public class MonsterMove : MonoBehaviour
             currentItem = monsterBase.dropItem;
         }
 
+        anim.Play("Org_Slime_Walk");
         this.monsterBase = monsterBase;
         currentHp = monsterBase.info.maxHp;
         finished_Init = true;
         targetPoint = target;
         agent.SetDestination(targetPoint.position);
         GameManager.Instance.enemies.Add(this);
-
         finished_Init = true;
     }
 
@@ -129,9 +139,10 @@ public class MonsterMove : MonoBehaviour
 
     public void Dead()
     {
-        GameManager.Instance.enemies.Remove(this);
+        anim.Play("BANGBNAG");
 
-        Destroy(gameObject);
+        GameManager.Instance.enemies.Remove(this);
+        isDead = true;
     }
 
     public void AttackPointTower()

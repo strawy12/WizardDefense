@@ -298,7 +298,7 @@ public class TpsController : MonoBehaviour
     {
         Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance * 2, Color.red);
 
-        RaycastHit[] hits = Physics.RaycastAll(cam.transform.position, cam.transform.forward, maxDistance * 2);
+        RaycastHit[] hits = Physics.RaycastAll(cam.transform.position, cam.transform.forward, maxDistance * 6);
 
         foreach (var hit in hits)
         {
