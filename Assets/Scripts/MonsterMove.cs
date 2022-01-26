@@ -10,6 +10,7 @@ public class MonsterMove : MonoBehaviour
     [SerializeField] private MonsterBase monsterBase;
 
     private NavMeshAgent agent;
+    private SkinnedMeshRenderer meshRenderer;
 
     private float currentHp = 0;
     public float virtualHP;
@@ -19,6 +20,7 @@ public class MonsterMove : MonoBehaviour
     private Vector3 currentDir = Vector3.zero;
     private Transform targetPoint = null;
 
+    private ItemBase currentItem;
 
     private UnitInfo unitInfo;
 
@@ -31,6 +33,8 @@ public class MonsterMove : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         outline = GetComponent<Outline>();
         particle = GetComponentInChildren<ParticleSystem>();
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
     }
 
     private void Start()
@@ -43,13 +47,18 @@ public class MonsterMove : MonoBehaviour
     {
         if (!finished_Init) return;
         if (agent.velocity.magnitude > 0.2f && agent.remainingDistance <= 3f)
-        {
+        {   
             AttackPointTower();
         }
     }
 
     public void Init(MonsterBase monsterBase, Transform target)
     {
+        if(monsterBase.dropItem != null)
+        {
+            currentItem = monsterBase.dropItem;
+        }
+
         this.monsterBase = monsterBase;
         currentHp = monsterBase.info.maxHp;
         finished_Init = true;
@@ -90,6 +99,17 @@ public class MonsterMove : MonoBehaviour
         {
             Dead();
         }
+        else
+        {
+            StartCoroutine(OnDamaged());
+        }
+    }
+
+    private IEnumerator OnDamaged()
+    {
+        meshRenderer.materials[1].color = new Color32(255, 0, 0, 143);  
+        yield return new WaitForSeconds(0.1f);
+        meshRenderer.materials[1].color = Color.clear;
     }
 
     public void VirtualDamaged(int power)
@@ -100,7 +120,13 @@ public class MonsterMove : MonoBehaviour
     public void Dead()
     {
         GameManager.Instance.enemies.Remove(this);
-        GameManager.Instance.SpawnPropertyItem(monsterBase.monsterType, transform.position);
+
+        if(currentItem != null)
+        {
+                GameManager.Instance.SpawnItem(currentItem, transform.position);
+        }
+        
+
         Destroy(gameObject);
     }
 

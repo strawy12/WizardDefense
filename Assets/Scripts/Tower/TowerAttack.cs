@@ -155,7 +155,6 @@ public class TowerAttack : MonoBehaviour
         List<MonsterMove> enemies = GameManager.Instance.enemies;
         if (enemies.Count == 0) return false;
 
-        Debug.Log(enemies.Count);
         float minDistance = 999f;
         float distance;
         targetEnemy = null;

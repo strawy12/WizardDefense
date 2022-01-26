@@ -34,6 +34,14 @@ public class DataManager : MonoSingleton<DataManager>
 
         LoadFromJson();
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            RandomPickEnergy();
+        }
+    }
     private void LoadFromJson()
     {
         if (File.Exists(SAVE_PATH + SAVE_FILE))
@@ -75,7 +83,7 @@ public class DataManager : MonoSingleton<DataManager>
 
     private void AddInventoryList()
     {
-        for(int i = 0; i < 35; i++)
+        for(int i = 0; i < 36; i++)
         {
             playerData.inventoryList.Add(new InventoryData(i, false));
         }
@@ -111,6 +119,18 @@ public class DataManager : MonoSingleton<DataManager>
         playerData.havedEnergyList.Add(new EnergyData(PropertyType.Air, 0));
         playerData.havedEnergyList.Add(new EnergyData(PropertyType.Holy, 0));
         playerData.havedEnergyList.Add(new EnergyData(PropertyType.Void, 0));
+
+        RandomPickEnergy();
+    }
+
+    private void RandomPickEnergy()
+    {
+        int randomIndex = 0;
+        for(int i = 0; i < 25; i++)
+        {
+            randomIndex = Random.Range(0, 6);
+            playerData.havedEnergyList[randomIndex].count++;
+        }
     }
 
     public void SetKeyInput(KeyAction keyAction, KeyCode keyCode)
