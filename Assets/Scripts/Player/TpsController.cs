@@ -67,7 +67,6 @@ public class TpsController : MonoBehaviour
 
             else if (GameManager.Instance.censorTower == null && isTargetTowerArea)
             {
-
                 GameManager.Instance.UIManager.Chang();
             }
 
