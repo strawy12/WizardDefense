@@ -44,6 +44,8 @@ public class UIManager : MonoBehaviour
 
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
+    public TowerSelect towerSelect;
+
     private bool isArea;
     [HideInInspector] public bool isClosePreView;
     private bool turnOnInventory;
@@ -54,14 +56,6 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         towerStatText = towerStatBar.GetComponentInChildren<Text>();
-
-        //InstantiatePanel();
-
-        //for (int i = 0; i < settingButtonsParent.childCount; i++)
-        //{
-        //    Button button = settingButtonsParent.GetChild(i).GetComponent<Button>();
-        //    button.onClick.AddListener(() => OnClickSettingButton(button.transform.GetSiblingIndex()));
-        //}
     }
 
     private void Update()
@@ -70,15 +64,12 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //if (isClosePreView)
-            {
-                SetCurrentPanels();
-            }
+            SetCurrentPanels();
         }
 
         if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Inventory]))
         {
-            if (settingPanel.activeSelf) return;
+            if (settingPanel.activeSelf || buildChang.activeSelf) return;
 
             turnOnInventory = !turnOnInventory;
             TurnOnInventory(turnOnInventory);
@@ -104,7 +95,7 @@ public class UIManager : MonoBehaviour
             currentUIPanels[currentUIPanels.Count - 1].gameObject.SetActive(false);
             currentUIPanels.RemoveAt(currentUIPanels.Count - 1);
 
-            if (currentUIPanels.Count == 0)
+            if (currentUIPanels.Count == 0 && settingPanel.activeSelf == false)
             {
                 ActiveUIPanalState(false);
                 CursorLocked(true);
@@ -117,39 +108,16 @@ public class UIManager : MonoBehaviour
     }
 
     #region Setting Panel
-    //private void OnClickSettingButton(int index)
-    //{
-    //    for (int i = 0; i < settingPanelsParent.childCount; i++)
-    //    {
-    //        settingPanelsParent.GetChild(i).gameObject.SetActive(i == index);
-    //    }
-    //}
-
-    //private void InstantiatePanel()
-    //{
-    //    for (int i = 0; i < (int)KeyAction.Count; i++)
-    //    {
-    //        GameObject panel = Instantiate(keyPanelTemplate, keyPanelTemplate.transform.parent);
-    //        KeyPanel keyPanel = panel.GetComponent<KeyPanel>();
-    //        keyPanel.Initialize(i);
-    //        keyPanels.Add(keyPanel);
-    //    }
-
-    //    keyPanelTemplate.SetActive(false);
-    //}
 
     public void ResetKeyPanel()
     {
         EventManager.TriggerEvent(ConstantManager.CLICK_KEYSETTINGBTN);
-        //foreach (KeyPanel panel in keyPanels)
-        //{
-        //    panel.ResetData();
-        //}
     }
 
     public void ActiveSettingPanel()
     {
         CursorLocked(settingPanel.activeSelf);
+
 
         if (settingPanel.activeSelf)
         {
@@ -178,17 +146,8 @@ public class UIManager : MonoBehaviour
 
         else
         {
-            //if (towerUI.gameObject.activeSelf)
-            //{
-            //    towerUI.gameObject.SetActive(false);
-            //    SetGameState(GameState.Playing);
-            //    //currentUIPanels.Remove(towerUI.gameObject);
-            //    return;
-            //}
-
             towerUI.gameObject.SetActive(true);
             towerButtons.gameObject.SetActive(GameManager.Instance.inGameState == InGameState.BreakTime);
-            //currentUIPanels.Add(towerUI.gameObject);
 
             CursorLocked(false);
             SetGameState(GameState.InGameSetting);
@@ -252,7 +211,6 @@ public class UIManager : MonoBehaviour
 
     public void OnClickOutChang()
     {
-        isArea = !isArea;
         FMark.SetActive(false);
         buildChang.SetActive(false);
         ActiveUIPanalState(false);
@@ -352,9 +310,18 @@ public class UIManager : MonoBehaviour
         {
             GameManager.Instance.gameState = GameState.Playing;
             CursorLocked(true);
+            inventoryUIManager.canvasGroup.blocksRaycasts = false;
             inventoryUIManager.canvasGroup.DOKill();
             inventoryUIManager.canvasGroup.DOFade(0f, 0.25f).SetUpdate(true).OnComplete(() => EventManager.TriggerEvent(ConstantManager.TURNOFF_INVENTORY));
             currentUIPanels.Remove(inventoryUIManager.gameObject);
         }
+    }
+
+    public void OnclickHelp(GameObject panal)
+    {
+        panal.SetActive(true);
+        currentUIPanels.Add(panal);
+        panal.transform.DOKill();
+        panal.transform.DOScaleY(1f, 0.3f).SetUpdate(true);
     }
 }

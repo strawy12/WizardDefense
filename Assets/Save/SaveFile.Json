@@ -6,11 +6,11 @@
         {
             "index": 0,
             "item": {
-                "item_ID": "",
-                "itemName": "",
-                "itemType": 0
+                "item_ID": "I_WaterCrystal",
+                "itemName": "물 수정",
+                "itemType": 2
             },
-            "count": 0,
+            "count": 1,
             "isQuitSlot": false
         },
         {
@@ -407,27 +407,27 @@
     "havedEnergyList": [
         {
             "type": 1,
-            "count": 4
+            "count": 6
         },
         {
             "type": 2,
-            "count": 5
-        },
-        {
-            "type": 3,
-            "count": 0
-        },
-        {
-            "type": 6,
-            "count": 4
-        },
-        {
-            "type": 4,
             "count": 3
         },
         {
+            "type": 3,
+            "count": 4
+        },
+        {
+            "type": 6,
+            "count": 3
+        },
+        {
+            "type": 4,
+            "count": 6
+        },
+        {
             "type": 5,
-            "count": 10
+            "count": 3
         }
     ],
     "keyInputDataList": [
@@ -437,7 +437,7 @@
         },
         {
             "keyAction": 1,
-            "keyCode": 304
+            "keyCode": 106
         },
         {
             "keyAction": 2,

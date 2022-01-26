@@ -28,12 +28,15 @@ public class MonsterMove : MonoBehaviour
 
     private ParticleSystem particle;
 
+    private Animation anime;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         outline = GetComponentInChildren<Outline>();
         particle = GetComponentInChildren<ParticleSystem>();
         meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        anime = GetComponentInChildren<Animation>();
 
     }
 

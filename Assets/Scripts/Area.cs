@@ -8,14 +8,11 @@ public class Area : MonoBehaviour
     [SerializeField] protected Transform target;
     [SerializeField] protected float distance = 4f;
 
-    private bool isArea;
-
     Outline outline;
 
     protected virtual void Start()    
     {
         rb = GetComponent<Rigidbody>();
-        //target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         target = GameManager.Instance.player.transform;
         outline = GetComponent<Outline>();
     }
