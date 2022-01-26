@@ -35,7 +35,7 @@ public class TowerAttack : MonoBehaviour
 
         Vector3 scale = transform.localScale;
         scale.y = scale.x;
-        boundary.gameObject.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) *  (2f / scale.x);
+        boundary.gameObject.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * (2f / scale.x);
         boundary.gameObject.SetActive(true);
     }
 
@@ -100,7 +100,7 @@ public class TowerAttack : MonoBehaviour
 
             InstantiateBulletEffect(ray.GetPoint(towerBase.distance));
 
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, towerBase.distance, LayerMask.GetMask("Enemy")))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, towerBase.distance + 2f, LayerMask.GetMask("Enemy")))
             {
                 hitInfo.transform.gameObject.GetComponent<MonsterMove>()?.Damaged(towerBase.attackPower);
             }
@@ -118,7 +118,7 @@ public class TowerAttack : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * 100f, Color.blue);
 
 
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward,out hitInfo, towerBase.distance))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, towerBase.distance))
         {
             //muzzlePosition.localEulerAngles = GameManager.Instance.mainCam.transform.localEulerAngles;
             //Debug.DrawRay(muzzlePosition.position, hitInfo.point - muzzlePosition.position, Color.red);
