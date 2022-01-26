@@ -165,7 +165,6 @@ public class TowerAttack : MonoBehaviour
             if (Vector3.Distance(enemies[i].transform.position, transform.position) > towerBase.distance) continue;
 
             distance = enemies[i].RemainingDistance;
-            Debug.Log(distance);
 
             if (distance < minDistance && enemies[i].virtualHP > 0)
             {

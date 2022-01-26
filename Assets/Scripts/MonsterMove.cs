@@ -36,6 +36,9 @@ public class MonsterMove : MonoBehaviour
         outline = GetComponentInChildren<Outline>();
         particle = GetComponentInChildren<ParticleSystem>();
         meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
+        Material material = Instantiate(meshRenderer.sharedMaterials[1]);
+        meshRenderer.sharedMaterials[1] = material;
     }
 
     private void Start()
@@ -48,14 +51,14 @@ public class MonsterMove : MonoBehaviour
     {
         if (!finished_Init) return;
         if (agent.velocity.magnitude > 0.2f && agent.remainingDistance <= 3f)
-        {   
+        {
             AttackPointTower();
         }
     }
 
     public void Init(MonsterBase monsterBase, Transform target)
     {
-        if(monsterBase.dropItem != null)
+        if (monsterBase.dropItem != null)
         {
             currentItem = monsterBase.dropItem;
         }
@@ -107,9 +110,10 @@ public class MonsterMove : MonoBehaviour
 
     private IEnumerator OnDamaged()
     {
-        meshRenderer.materials[1].color = new Color32(255, 0, 0, 143);  
+        //meshRenderer.materials[1].color = new Color32(255, 0, 0, 143);
+        meshRenderer.materials[1].SetColor("_Color", Color.red);
         yield return new WaitForSeconds(0.1f);
-        meshRenderer.materials[1].color = Color.clear;
+        meshRenderer.materials[1].SetColor("_Color", Color.clear);
     }
 
     public void VirtualDamaged(int power)
@@ -121,11 +125,11 @@ public class MonsterMove : MonoBehaviour
     {
         GameManager.Instance.enemies.Remove(this);
 
-        if(currentItem != null)
+        if (currentItem != null)
         {
-                GameManager.Instance.SpawnItem(currentItem, transform.position);
+            GameManager.Instance.SpawnItem(currentItem, transform.position);
         }
-        
+
 
         Destroy(gameObject);
     }

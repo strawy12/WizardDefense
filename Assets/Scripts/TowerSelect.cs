@@ -81,7 +81,7 @@ public class TowerSelect : MonoBehaviour
     {
         if (curRune >= needMax)
         {
-        GameManager.Instance.UIManager.UiSound.PlaySound(3);
+            GameManager.Instance.UIManager.UiSound.PlaySound(3);
             EventManager.TriggerEvent(ConstantManager.RETURN_RUNEVALUE);
             curRune -= needMax;
             GameManager.Instance.UIManager.OnClickOutChang();

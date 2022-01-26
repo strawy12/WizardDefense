@@ -85,7 +85,7 @@ public class Outline : MonoBehaviour
 
     private Renderer[] renderers;
     private Material outlineMaskMaterial;
-    private Material outlineFillMaterial;
+    public Material outlineFillMaterial;
 
     private bool needsUpdate;
 
@@ -113,9 +113,9 @@ public class Outline : MonoBehaviour
 
     void OnEnable()
     {
+        Debug.Log("sdf");
         foreach (var renderer in renderers)
         {
-
             // Append outline shaders
             var materials = renderer.sharedMaterials.ToList();
 
@@ -151,7 +151,6 @@ public class Outline : MonoBehaviour
         if (needsUpdate)
         {
             needsUpdate = false;
-
             UpdateMaterialProperties();
         }
     }
@@ -181,7 +180,6 @@ public class Outline : MonoBehaviour
 
     void Bake()
     {
-
         // Generate smooth normals for each mesh
         var bakedMeshes = new HashSet<Mesh>();
 
@@ -204,7 +202,6 @@ public class Outline : MonoBehaviour
 
     void LoadSmoothNormals()
     {
-
         // Retrieve or generate smooth normals
         foreach (var meshFilter in GetComponentsInChildren<MeshFilter>())
         {
@@ -274,7 +271,6 @@ public class Outline : MonoBehaviour
 
     void UpdateMaterialProperties()
     {
-
         // Apply properties according to mode
         outlineFillMaterial.SetColor("_OutlineColor", outlineColor);
 
