@@ -316,4 +316,12 @@ public class UIManager : MonoBehaviour
             currentUIPanels.Remove(inventoryUIManager.gameObject);
         }
     }
+
+    public void OnclickHelp(GameObject panal)
+    {
+        panal.SetActive(true);
+        currentUIPanels.Add(panal);
+        panal.transform.DOKill();
+        panal.transform.DOScaleY(1f, 0.3f).SetUpdate(true);
+    }
 }
