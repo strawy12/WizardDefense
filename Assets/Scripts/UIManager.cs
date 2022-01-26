@@ -48,6 +48,8 @@ public class UIManager : MonoBehaviour
 
     public TowerSelect towerSelect;
 
+    private Text fMarkText;
+
     private bool isArea;
     [HideInInspector] public bool isClosePreView;
     private bool turnOnInventory;
@@ -58,6 +60,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         towerStatText = towerStatBar.GetComponentInChildren<Text>();
+        fMarkText = FMark.GetComponentInChildren<Text>();
     }
 
     private void Update()
@@ -206,7 +209,7 @@ public class UIManager : MonoBehaviour
         EventManager.TriggerEvent(ConstantManager.OPEN_BUILDPANEL);
 
         CursorLocked(false);
-        FMark.SetActive(false);
+        FMarkFalse();
         buildChang.SetActive(true);
         currentUIPanels.Add(buildChang);
 
@@ -215,7 +218,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickOutChang()
     {
-        FMark.SetActive(false);
+        FMarkFalse();
         buildChang.SetActive(false);
         ActiveUIPanalState(false);
         CursorLocked(true);
@@ -262,6 +265,13 @@ public class UIManager : MonoBehaviour
 
     public void FMarkTrue()
     {
+        string interactionKey = KeyManager.keySettings[KeyAction.Interaction].ToString();
+        if (interactionKey.Length > 1)
+        {
+            interactionKey = interactionKey[0].ToString();
+        }
+
+        fMarkText.text = interactionKey;
         FMark.SetActive(true);
         isTarget = true;
     }

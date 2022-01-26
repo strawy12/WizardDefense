@@ -33,6 +33,7 @@ public class KeyPanel : MonoBehaviour
 
         if (curEvent.keyCode.ToString() == "None") return;
         if (KeyManager.keySettings.ContainsValue(curEvent.keyCode)) return;
+        if (CheckMoveKeyEqual(curEvent.keyCode)) return;
         if (isSelect && curEvent.isKey)
         {
             if (curEvent.keyCode == KeyCode.Escape)
@@ -51,6 +52,21 @@ public class KeyPanel : MonoBehaviour
             GameManager.Instance.UIManager.ActiveKeySettingPanal(false);
             GameManager.Instance.KeyManager.SetKeySetting(currentKeyAction, Event.current.keyCode);
         }
+    }
+
+    private bool CheckMoveKeyEqual(KeyCode keycode)
+    {
+        if(keycode == KeyCode.W || keycode == KeyCode.A || keycode == KeyCode.S || keycode == KeyCode.D)
+        {
+            return true;
+        }
+
+        if (keycode == KeyCode.UpArrow || keycode == KeyCode.DownArrow || keycode == KeyCode.LeftArrow || keycode == KeyCode.RightArrow)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void Initialize()

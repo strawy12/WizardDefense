@@ -71,7 +71,7 @@ public class MonsterMove : MonoBehaviour
         {
             currentItem = monsterBase.dropItem;
         }
-
+        anim.Play();
         anim.Play("Org_Slime_Walk");
         this.monsterBase = monsterBase;
         currentHp = monsterBase.info.maxHp;
@@ -139,6 +139,8 @@ public class MonsterMove : MonoBehaviour
 
     public void Dead()
     {
+        //anim.Play("BANGBNAG");
+
         GameManager.Instance.enemies.Remove(this);
         Destroy(gameObject);
         //isDead = true;
