@@ -39,12 +39,6 @@ public class Area : MonoBehaviour
                 GameManager.Instance.UIManager.FMarkTrue();
                 ShowOutline(true);
             }
-            else
-            {
-                GameManager.Instance.UIManager.FMarkFalse();
-                GameManager.Instance.player.TargetingTowerArea(false);
-                ShowOutline(false);
-            }
         }
     }
 

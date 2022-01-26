@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.49172282, g: 0.6827094, b: 0.78677964, a: 1}
+  m_IndirectSpecularColor: {r: 0.20326297, g: 0.41703874, b: 0.5724305, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12147,7 +12147,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preViewChang: {fileID: 392301579}
   tower: {fileID: 7280627589862013462, guid: 1019941e3b59b5a4f8e660b2e103d82d, type: 3}
-  towerChang: {fileID: 117525327}
 --- !u!1001 &393167298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18580,7 +18579,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1814220971}
   m_Direction: 2
   m_Value: 1.0000002
-  m_Size: 0.6827794
+  m_Size: 0.68277943
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -19732,6 +19731,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b099cd7591651734facc0a5f67ed8880, type: 3}
   - {fileID: 8300000, guid: 4295cba52025a38488838e8aeb3008db, type: 3}
   audioSource: {fileID: 0}
+  initVolume: 0
 --- !u!114 &699054349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29812,6 +29812,7 @@ MonoBehaviour:
   skipKeyText: {fileID: 274195227}
   keySettingPanal: {fileID: 161511721}
   inventoryUIManager: {fileID: 1958308019}
+  towerSelect: {fileID: 878528491}
   isClosePreView: 0
   isTarget: 0
   quickSlot: {fileID: 790365573}
@@ -33139,6 +33140,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6d906e0e855070144838b0b567563b7c, type: 3}
   - {fileID: 8300000, guid: ae50f49d5106e38489dec12f246c656b, type: 3}
   audioSource: {fileID: 0}
+  initVolume: 0
 --- !u!82 &1303063972
 AudioSource:
   m_ObjectHideFlags: 0
@@ -46882,7 +46884,7 @@ MonoBehaviour:
   targetPicker: {fileID: 1076203164}
   slotSettingPanal: {fileID: 1010614761}
   quickSlotTrs: {fileID: 1939634306}
-  itemSlotTrs: {fileID: 1134647197}
+  itemSlotTrs: {fileID: 1617396629}
   canvasGroup: {fileID: 1958308020}
   itemImage: {fileID: 804364858}
 --- !u!225 &1958308020

@@ -15,6 +15,8 @@ public class MonsterMove : MonoBehaviour
     private float currentHp = 0;
     public float virtualHP;
 
+    public int SpawnOrder { get; private set; }
+
     private bool finished_Init = false;
 
     private Vector3 currentDir = Vector3.zero;
@@ -30,10 +32,19 @@ public class MonsterMove : MonoBehaviour
     public float RemainingDistance { get { return agent.remainingDistance; } }
 
 
+    private Animation anim = null;
+
+    private bool isDead = false;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+<<<<<<< HEAD
         outline = GetComponentInChildren<Outline>();
+=======
+        anim = GetComponentInChildren<Animation>();
+        outline = GetComponent<Outline>();
+>>>>>>> OIF
         particle = GetComponentInChildren<ParticleSystem>();
         meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
     }
@@ -51,22 +62,28 @@ public class MonsterMove : MonoBehaviour
         {   
             AttackPointTower();
         }
+
+        if(isDead && !anim.isPlaying)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    public void Init(MonsterBase monsterBase, Transform target)
+    public void Init(MonsterBase monsterBase, Transform target, int spawnOrder)
     {
         if(monsterBase.dropItem != null)
         {
             currentItem = monsterBase.dropItem;
         }
 
+        anim.Play("Org_Slime_Walk");
         this.monsterBase = monsterBase;
         currentHp = monsterBase.info.maxHp;
         finished_Init = true;
         targetPoint = target;
+        SpawnOrder = spawnOrder;
         agent.SetDestination(targetPoint.position);
         GameManager.Instance.enemies.Add(this);
-
         finished_Init = true;
     }
 
@@ -120,6 +137,7 @@ public class MonsterMove : MonoBehaviour
     public void Dead()
     {
         GameManager.Instance.enemies.Remove(this);
+<<<<<<< HEAD
 
         if(currentItem != null)
         {
@@ -127,7 +145,10 @@ public class MonsterMove : MonoBehaviour
         }
         
 
+=======
+>>>>>>> OIF
         Destroy(gameObject);
+        //isDead = true;
     }
 
     public void AttackPointTower()

@@ -296,9 +296,7 @@ public class TpsController : MonoBehaviour
 
     private void Hit_Unit(Camera cam)
     {
-        Debug.DrawRay(cam.transform.position, cam.transform.forward * maxDistance * 2, Color.red);
-
-        RaycastHit[] hits = Physics.RaycastAll(cam.transform.position, cam.transform.forward, maxDistance * 2);
+        RaycastHit[] hits = Physics.RaycastAll(cam.transform.position, cam.transform.forward, maxDistance * 6);
 
         foreach (var hit in hits)
         {
@@ -356,6 +354,7 @@ public class TpsController : MonoBehaviour
                 TowerSelect.buildTrn = hitTowerAreaInfo.transform;
                 GameManager.Instance.UIManager.FMarkTrue();
                 area = hitTowerAreaInfo.transform.GetComponent<Area>();
+
                 area.ShowOutline(true);
                 isTargetItem = false;
                 isTargetTowerArea = true;
@@ -369,11 +368,17 @@ public class TpsController : MonoBehaviour
                 //isTargetTowerArea = false;
             }
         }
+
+        else
+        {
+            GameManager.Instance.UIManager.AreaCheack();
+            GameManager.Instance.UIManager.FMarkFalse();
+            area?.ShowOutline(false);
+        }
     }
 
     private void Hit_Tower(Camera cam)
     {
-        Debug.DrawRay(cam.transform.position, cam.transform.forward * 999f, Color.white);
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitTowerAreaInfo, 999f))
         {
             if (hitTowerAreaInfo.transform.gameObject.CompareTag(ConstantManager.TOWER_TAG))
