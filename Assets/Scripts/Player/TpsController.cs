@@ -55,7 +55,7 @@ public class TpsController : MonoBehaviour
     private void Start()
     {
         myrigid = GetComponent<Rigidbody>();
-        monsterSound = transform.GetChild(1).GetComponent<ObjectSound>();
+        //monsterSound = transform.GetChild(1).GetComponent<ObjectSound>();
         animator = characterBody.GetComponent<Animator>();
         EventManager<Vector3>.StartListening(ConstantManager.MONSTER_ATTACKED, MonsterAttackSound);
 
@@ -157,9 +157,9 @@ public class TpsController : MonoBehaviour
         if (minDistance == 999f || hits.Length == 0) return;
         minDistance = Mathf.Clamp(minDistance, 0f, maxSoundDistance);
         float distanseVolume = (maxSoundDistance - minDistance) / maxSoundDistance;
-        DistanceProportionalValue(distanseVolume);
+        //DistanceProportionalValue(distanseVolume);
 
-        monsterSound.PlaySound(0);
+        //monsterSound.PlaySound(0);
     }
 
     private void DistanceProportionalValue(float distanseVolume)
@@ -178,9 +178,9 @@ public class TpsController : MonoBehaviour
         float minDistance = Mathf.Clamp(distance, 0f, maxSoundDistance);
         float distanseVolume = (maxSoundDistance - minDistance) / maxSoundDistance;
 
-        DistanceProportionalValue(distanseVolume);
+        //DistanceProportionalValue(distanseVolume);
 
-        monsterSound.PlaySound(1);
+        //monsterSound.PlaySound(1);
     }
 
     private void LookAround()

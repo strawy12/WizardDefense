@@ -27,8 +27,8 @@ public class MonsterMove : MonoBehaviour
     private Outline outline;
 
     private ParticleSystem particle;
+    public float RemainingDistance { get { return agent.remainingDistance; } }
 
-    private Animation anime;
 
     private void Awake()
     {
@@ -36,8 +36,6 @@ public class MonsterMove : MonoBehaviour
         outline = GetComponentInChildren<Outline>();
         particle = GetComponentInChildren<ParticleSystem>();
         meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        anime = GetComponentInChildren<Animation>();
-
     }
 
     private void Start()

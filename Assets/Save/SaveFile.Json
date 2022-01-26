@@ -407,7 +407,7 @@
     "havedEnergyList": [
         {
             "type": 1,
-            "count": 6
+            "count": 0
         },
         {
             "type": 2,
@@ -415,11 +415,11 @@
         },
         {
             "type": 3,
-            "count": 4
+            "count": 0
         },
         {
             "type": 6,
-            "count": 3
+            "count": 2
         },
         {
             "type": 4,
@@ -427,7 +427,7 @@
         },
         {
             "type": 5,
-            "count": 3
+            "count": 6
         }
     ],
     "keyInputDataList": [

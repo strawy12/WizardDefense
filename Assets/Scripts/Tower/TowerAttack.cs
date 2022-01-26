@@ -23,6 +23,7 @@ public class TowerAttack : MonoBehaviour
     public GameObject towerUnit;
 
     private Outline outline;
+    [SerializeField] private GameObject bullet;
 
     void Awake()
     {
@@ -95,6 +96,7 @@ public class TowerAttack : MonoBehaviour
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.blue);
 
+            InstantiateBulletEffect(ray.direction);
 
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, towerBase.distance, LayerMask.GetMask("Enemy")))
             {
@@ -329,5 +331,11 @@ public class TowerAttack : MonoBehaviour
         {
             outline.OutlineWidth = 0f;
         }
+    }
+
+    private void InstantiateBulletEffect(Vector3 point)
+    {
+        GameObject bulletEffect = Instantiate(bullet);
+        bulletEffect.transform.rotation.SetLookRotation(point);
     }
 }
