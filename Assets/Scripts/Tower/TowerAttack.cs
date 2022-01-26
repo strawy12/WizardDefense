@@ -96,7 +96,7 @@ public class TowerAttack : MonoBehaviour
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.blue);
 
-            InstantiateBulletEffect(ray.direction);
+            InstantiateBulletEffect(ray.GetPoint(towerBase.distance));
 
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, towerBase.distance, LayerMask.GetMask("Enemy")))
             {
@@ -336,6 +336,7 @@ public class TowerAttack : MonoBehaviour
     private void InstantiateBulletEffect(Vector3 point)
     {
         GameObject bulletEffect = Instantiate(bullet);
-        bulletEffect.transform.rotation.SetLookRotation(point);
+        bulletEffect.transform.position = muzzlePosition.position;
+        bulletEffect.transform.LookAt(point);
     }
 }
