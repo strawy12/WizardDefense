@@ -113,7 +113,6 @@ public class Outline : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("sdf");
         foreach (var renderer in renderers)
         {
             // Append outline shaders
