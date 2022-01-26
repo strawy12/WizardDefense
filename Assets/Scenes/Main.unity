@@ -28971,6 +28971,7 @@ MonoBehaviour:
   skipKeyText: {fileID: 274195227}
   keySettingPanal: {fileID: 161511721}
   inventoryUIManager: {fileID: 1958308019}
+  towerSelect: {fileID: 878528491}
   isClosePreView: 0
   isTarget: 0
   quickSlot: {fileID: 790365573}

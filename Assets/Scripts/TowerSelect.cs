@@ -22,6 +22,8 @@ public class TowerSelect : MonoBehaviour
     public static Transform buildTrn;
     public static GameObject buildObj;
 
+    public bool isMax { get { return curRune >= needMax; } }
+
     private int selectTower;
 
 
@@ -30,8 +32,6 @@ public class TowerSelect : MonoBehaviour
         OnClickTower1();
         EventManager.StartListening(ConstantManager.BUILDUI_ADDRUNE, AddRune);
         EventManager.StartListening(ConstantManager.BUILDUI_SUBRUNE, SubRune);
-        
-
     }
 
     public void OnClickTower1()

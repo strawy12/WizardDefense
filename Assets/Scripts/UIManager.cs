@@ -44,6 +44,8 @@ public class UIManager : MonoBehaviour
 
     private List<GameObject> currentUIPanels = new List<GameObject>();
 
+    public TowerSelect towerSelect;
+
     private bool isArea;
     [HideInInspector] public bool isClosePreView;
     private bool turnOnInventory;
