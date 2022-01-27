@@ -14,37 +14,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSpriteDatas:
   - itemId: I_FireCrystal
-    itemSprite: {fileID: 21300000, guid: adba5a644b5f6d2479d960d09589e8fc, type: 3}
+    itemSprite: {fileID: 21300000, guid: 6897d4a8fa7a3e349952930c5b2f9fcd, type: 3}
   - itemId: I_FireMushroom
     itemSprite: {fileID: -7634698977955767800, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
   - itemId: I_Coal
     itemSprite: {fileID: 3996138432854981312, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
   - itemId: I_WaterCrystal
-    itemSprite: {fileID: 21300000, guid: 665c45002c1e0d64c8e23ba7ccb4ab8b, type: 3}
+    itemSprite: {fileID: 21300000, guid: 4b6137b0648af8f4ab077626d6e1c734, type: 3}
   - itemId: I_HolyTear
     itemSprite: {fileID: -8809284872407378732, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
   - itemId: I_BottleWithIcecap
     itemSprite: {fileID: 7798176430303134427, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
   - itemId: I_TerraCrystal
-    itemSprite: {fileID: 21300000, guid: b7630f6efa23a714e875fed04a44bf96, type: 3}
+    itemSprite: {fileID: 21300000, guid: cb53a086be5ed9246ba1aa742626607e, type: 3}
   - itemId: I_VenomRose
     itemSprite: {fileID: -7436705337072871680, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
   - itemId: I_GolemParts
     itemSprite: {fileID: 430185730278402344, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
   - itemId: I_CrystalAir
-    itemSprite: {fileID: 21300000, guid: 36e34a1c1d19287479963cc4f2fbfeeb, type: 3}
+    itemSprite: {fileID: 21300000, guid: b33926af9b070d84f90cb272e2e3eac5, type: 3}
   - itemId: I_FrozenCloud
     itemSprite: {fileID: 6853479487659562942, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
   - itemId: I_SunOre
     itemSprite: {fileID: -5889097526070578767, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
   - itemId: I_CrystalHoly
-    itemSprite: {fileID: 21300000, guid: 063a5eb0249bec543baaefde9bc164e4, type: 3}
+    itemSprite: {fileID: 21300000, guid: 630b6413542c50c4299aa9248c78d625, type: 3}
   - itemId: I_BottleWithWave
     itemSprite: {fileID: 14152417229983804, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
   - itemId: I_ShadowParts
     itemSprite: {fileID: 2367165233766041728, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
   - itemId: I_CrystalVoid
-    itemSprite: {fileID: 21300000, guid: 6801b5a354768ef44864b66d18593f3d, type: 3}
+    itemSprite: {fileID: 21300000, guid: cf5ca6fc1a42b0e44913cff3f90ea02b, type: 3}
   - itemId: I_EternalFire
     itemSprite: {fileID: -2080429644947752335, guid: f000bc4a4dadcdd48a1523a1ce7a0f77, type: 3}
   - itemId: I_VoidGap

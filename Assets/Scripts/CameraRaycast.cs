@@ -21,7 +21,8 @@ public class CameraRaycast : MonoBehaviour
     private void Hit_Unit(Camera cam)
     {
         //레이어 마스크 써주기
-        RaycastHit[] hits = Physics.RaycastAll(cam.transform.position, cam.transform.forward, maxDistance * 2);
+        Debug.DrawRay(cam.transform.position, cam.transform.forward * (maxDistance + 12f), Color.green);
+        RaycastHit[] hits = Physics.RaycastAll(cam.transform.position, cam.transform.forward, maxDistance + 12f);
         MonsterMove curMonster;
         foreach (var hit in hits)
         {

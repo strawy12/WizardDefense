@@ -58,7 +58,7 @@ public class UIManager : MonoBehaviour
     private bool turnOnInventory;
     [HideInInspector] public bool isTarget;
     public GameObject quickSlot;
-    private bool isStarted = false;
+    public bool isStarted = false;
     void Start()
     {
         Time.timeScale = 0;
@@ -97,7 +97,13 @@ public class UIManager : MonoBehaviour
     {
 
         breakTimeUI.SetActive(isActive);
-        skipKeyText.text = KeyManager.keySettings[KeyAction.Skip].ToString();
+        string interactionKey = KeyManager.keySettings[KeyAction.Skip].ToString();
+        if (interactionKey.Length > 1)
+        {
+            interactionKey = interactionKey[0].ToString();
+        }
+
+        skipKeyText.text = interactionKey;
     }
 
     private void SetCurrentPanels()

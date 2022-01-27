@@ -19,6 +19,12 @@ public class SoundManager : MonoSingleton<SoundManager>
         InitAudioSource();
     }
 
+    private void Start()
+    {
+        BGMVolume(DataManager.Instance.PlayerData.bgmSoundVolume);
+        EffectVolume(DataManager.Instance.PlayerData.effectSoundVolume);
+    }
+
     public void InitAudioSource()
     {
         AudioSource[] audioSources = FindObjectsOfType<AudioSource>();

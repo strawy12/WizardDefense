@@ -94,7 +94,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         if (inGameState == InGameState.BreakTime && gameState != GameState.Setting)
         {
-            if (Input.GetKeyUp(KeyManager.keySettings[KeyAction.Skip]))
+            if (Input.GetKeyUp(KeyManager.keySettings[KeyAction.Skip]) && UIManager.isStarted)
             {
                 SkipBreakTime();
             }

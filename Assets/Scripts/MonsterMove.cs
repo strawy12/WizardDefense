@@ -156,8 +156,8 @@ public class MonsterMove : MonoBehaviour
     public void AttackPointTower()
     {
         EventManager<int>.TriggerEvent(ConstantManager.MONSTER_ATTACK, monsterBase.info.attackPower);
-        isDead = true;
-        anim.Play("Org_Slime_Attack01");
+        GameManager.Instance.enemies.Remove(this);
+        Destroy(gameObject);
     }
 
     public void GetInfo()

@@ -96,11 +96,10 @@ public class TowerAttack : MonoBehaviour
             cam.transform.DOShakePosition(0.25f).OnComplete(() => cam.transform.DOMove(originPos, 0.2f));
             RaycastHit hitInfo;
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.blue);
 
             InstantiateBulletEffect(ray.GetPoint(towerBase.distance));
 
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, towerBase.distance + 2f, LayerMask.GetMask("Enemy")))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, towerBase.distance + 12f, LayerMask.GetMask("Enemy")))
             {
                 hitInfo.transform.gameObject.GetComponent<MonsterMove>()?.Damaged(towerBase.attackPower);
             }
@@ -115,7 +114,6 @@ public class TowerAttack : MonoBehaviour
         CameraMove cam = GameManager.Instance.mainCam;
         RaycastHit hitInfo;
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.blue);
 
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, towerBase.distance))
