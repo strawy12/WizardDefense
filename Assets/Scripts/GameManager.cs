@@ -142,6 +142,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public Vector3 ConversionBoundPosition(Vector3 pos)
     {
+        return pos;
         float x = mapBorder.localScale.x / 2;
         float additionX = mapBorder.position.x;
         float y = mapBorder.localScale.y - 5f;

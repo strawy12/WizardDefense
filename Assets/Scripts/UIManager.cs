@@ -61,9 +61,11 @@ public class UIManager : MonoBehaviour
     public bool isStarted = false;
     void Start()
     {
-        Time.timeScale = 0;
-        towerStatText = towerStatBar.GetComponentInChildren<Text>();
+        // Time.timeScale = 0;
+         towerStatText = towerStatBar.GetComponentInChildren<Text>();
         fMarkText = FMark.GetComponentInChildren<Text>();
+        StartGame();
+
     }
 
     private void Update()
@@ -79,6 +81,7 @@ public class UIManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Inventory]))
             {
+                Debug.Log("¤·¤·");
                 if (settingPanel.activeSelf || buildChang.activeSelf) return;
 
                 turnOnInventory = !turnOnInventory;
@@ -365,8 +368,8 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         UiSound.PlaySound(0);
-        StartScene.SetActive(false);
-        Help.SetActive(false);
+        //StartScene.SetActive(false);
+        //Help.SetActive(false);
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         isStarted = true;

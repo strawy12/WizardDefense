@@ -1,7 +1,7 @@
 ﻿{
-    "bgmSoundVolume": 0.0,
-    "effectSoundVolume": 0.0,
-    "sensitivityValue": 33.47544860839844,
+    "bgmSoundVolume": 0.30000001192092898,
+    "effectSoundVolume": 0.30000001192092898,
+    "sensitivityValue": 50.0,
     "inventoryList": [
         {
             "index": 0,
@@ -407,11 +407,11 @@
     "havedEnergyList": [
         {
             "type": 1,
-            "count": 2
+            "count": 4
         },
         {
             "type": 2,
-            "count": 4
+            "count": 3
         },
         {
             "type": 3,
@@ -419,15 +419,15 @@
         },
         {
             "type": 6,
-            "count": 4
+            "count": 2
         },
         {
             "type": 4,
-            "count": 0
+            "count": 8
         },
         {
             "type": 5,
-            "count": 2
+            "count": 3
         }
     ],
     "keyInputDataList": [

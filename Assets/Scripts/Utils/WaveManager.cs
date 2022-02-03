@@ -106,6 +106,9 @@ public class WaveManager : MonoBehaviour
 
     private void SetSpawnDirTrn()
     {
+
+        currentSpawnPoint = enemyLeftSpawnPoint;
+        return;
         switch (currentPattern.direction)
         {
             case DirectionType.Left:

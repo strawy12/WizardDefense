@@ -44,12 +44,12 @@ public class MainCameraFollow : MonoBehaviour
     private void MainCameraOn()
     {
         mainCamera.enabled = true;
-        subCamera.enabled = false;
+        //subCamera.enabled = false;
     }
 
     private void SubCameraOn()
     {
-        subCamera.enabled = true;
+        //subCamera.enabled = true;
         mainCamera.enabled = false;
     }
 }
