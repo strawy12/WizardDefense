@@ -11,4 +11,6 @@ public class PanelBase : MonoBehaviour
     [SerializeField] protected Image productImage;
 
     public virtual void Init() { }
+    public virtual void Init(int index) { }
+    public virtual void UpdateData() { }
 }

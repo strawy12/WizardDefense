@@ -5,18 +5,18 @@ using UnityEngine;
 [System.Serializable]
 public class TowerRoot
 {
-    [SerializeField] private string name;
-    [SerializeField] [TextArea] private string info;
-    [SerializeField] private int price;
-    [SerializeField] private int value;
-    [SerializeField] private Sprite rootImage;
+    public string name;
+    [TextArea] public string info;
+    public int price;
+    public int value;
+    public Sprite rootImage;
 }
 
 [System.Serializable]
 public class Roots
 {
-    [SerializeField] private int index;
-    [SerializeField] private List<TowerRoot> roots;
+    public int index;
+    public List<TowerRoot> roots;
 }
 
 [CreateAssetMenu(fileName = "TowerRoots", menuName = "Scriptable Object/TowerRoots")]

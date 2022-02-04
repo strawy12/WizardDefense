@@ -22,7 +22,9 @@ public class UIManager : MonoBehaviour
 
     #region Panels Various
     [Header("패널 UI")]
-
+    [SerializeField] private GameObject towerUpgradeUI;
+    [SerializeField] private GameObject availablePanelTemplate;
+    private List<PanelBase> availablePanels = new List<PanelBase>();
     #endregion
 
     [Header("설정창")]
@@ -60,15 +62,16 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         // Time.timeScale = 0;
-         towerStatText = towerStatBar.GetComponentInChildren<Text>();
+        towerStatText = towerStatBar.GetComponentInChildren<Text>();
         fMarkText = FMark.GetComponentInChildren<Text>();
         StartGame();
 
+        InstantiatePanels(availablePanelTemplate, availablePanels, 3);
     }
 
     private void Update()
     {
-        if(isStarted)
+        if (isStarted)
         {
             ShowSkillUI(GameManager.Instance.selectedTower);
 
@@ -87,7 +90,7 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-        
+
 
     public void SetTimer(float time)
     {
@@ -184,6 +187,40 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    #region Tower Upgrade UI
+    private void InstantiatePanels(GameObject panel, List<PanelBase> panels, int count, Transform position = null)
+    {
+        position ??= panel.transform.parent;
+
+        for (int i = 0; i < count; i++)
+        {
+            GameObject obj = Instantiate(panel, position);
+            PanelBase panelBase = obj.GetComponent<PanelBase>();
+            panelBase.Init(i);
+            panels.Add(panelBase);
+        }
+
+        panel.gameObject.SetActive(false);
+    }
+
+    public void UpdateAvailablePanels()
+    {
+        foreach(PanelBase panel in availablePanels)
+        {
+            panel.UpdateData();
+        }
+    }
+
+    public void ShowTowerUpgradeUI()
+    {
+        towerUpgradeUI.SetActive(true);
+        currentUIPanels.Add(towerUpgradeUI);
+        UpdateAvailablePanels();
+        SetGameState(GameState.InGameSetting);
+        CursorLocked(false);
+    }
+    #endregion
+
     #region Tower Build UI
     public void ActivePanal(GameObject panal)
     {
@@ -194,7 +231,7 @@ public class UIManager : MonoBehaviour
         panal.transform.DOKill();
         panal.transform.DOScaleY(1f, 0.3f).SetUpdate(true);
     }
-     
+
     public void ActiveKeySettingPanal(bool isActive)
     {
         UiSound.PlaySound(0);

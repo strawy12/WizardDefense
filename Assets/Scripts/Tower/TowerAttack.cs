@@ -69,29 +69,6 @@ public class TowerAttack : MonoBehaviour
         transform.DOMoveY(lastPosY, 2f).OnComplete(() => isBuilding = false);
     }
 
-    #region Fire
-    private void FireByPlayer()
-    {
-        if (Input.GetKey(KeyCode.Mouse0) && curFireTime > towerBase.handFireRate)
-        {
-            GameManager.Instance.UIManager.UiSound.PlaySound(4);
-            CameraMove cam = GameManager.Instance.mainCam;
-            Vector3 originPos = cam.transform.position;
-            cam.transform.DOShakePosition(0.25f).OnComplete(() => cam.transform.DOMove(originPos, 0.2f));
-            RaycastHit hitInfo;
-            Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-
-            InstantiateBulletEffect(ray.GetPoint(towerBase.distance));
-
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, towerBase.distance + 12f, LayerMask.GetMask("Enemy")))
-            {
-                hitInfo.transform.gameObject.GetComponent<MonsterMove>()?.Damaged(towerBase.attackPower);
-            }
-
-            curFireTime = 0f;
-        }
-    }
-
     private void SetMuzzleRotation()
     {
         //Ray ray = GameManager.Instance.mainCam.cam.ScreenPointToRay(GameManager.Instance.screenCenter);
@@ -132,7 +109,6 @@ public class TowerAttack : MonoBehaviour
         }
     }
 
-    #endregion
 
     #region ToFire
     public bool SetTargetEnemy()

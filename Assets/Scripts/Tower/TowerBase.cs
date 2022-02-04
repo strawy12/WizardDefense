@@ -1,11 +1,20 @@
+using System.Collections.Generic;
+
 [System.Serializable]
 public class TowerBase
 {
     public string name;
     public int attackPower;
-    public int level;
     public float fireRate;
-    public float handFireRate;
     public float distance;
-    public int hp;
+
+    public List<int> availableRootIndexes;
+    public CurrentTowerRoot currentRoot;
+}
+
+[System.Serializable]
+public class CurrentTowerRoot
+{
+    public int rootIndex;
+    public int index;
 }

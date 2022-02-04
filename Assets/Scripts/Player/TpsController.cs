@@ -86,7 +86,8 @@ public class TpsController : MonoBehaviour
 
             else if (isTargetTower && GameManager.Instance.selectedTower == null)
             {
-                GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
+                //GameManager.Instance.UIManager.ShowSkillUI(GameManager.Instance.censorTower);
+                GameManager.Instance.UIManager.ShowTowerUpgradeUI();
             }
         }
 

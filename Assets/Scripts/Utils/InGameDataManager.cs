@@ -34,7 +34,7 @@ public class InGameDataManager : MonoBehaviour
             patterns = Resources.Load<Patterns>(SAVE_PATH + "Patterns");
         }
 
-        if(itemDatas == null)
+        if (itemDatas == null)
         {
             itemDatas = Resources.Load<ItemDatas>(SAVE_PATH + "ItemDatas");
         }
@@ -44,7 +44,7 @@ public class InGameDataManager : MonoBehaviour
             monsterPrefabs = Resources.Load<MonsterPrefabDatas>(SAVE_PATH + "MonsterPrefabDatas");
         }
 
-        if(itemSprites == null)
+        if (itemSprites == null)
         {
             itemSprites = Resources.Load<ItemSpriteDatas>(SAVE_PATH + "ItemSpriteDatas");
         }
@@ -295,7 +295,7 @@ public class InGameDataManager : MonoBehaviour
                 executionCnt = int.Parse(column[2]);
                 existBoss = column[3].Equals("TRUE");
 
-                if(existBoss)
+                if (existBoss)
                 {
                     bossID = column[4];
                 }
@@ -460,6 +460,11 @@ public class InGameDataManager : MonoBehaviour
         return waveDatas.waves[index];
     }
 
+    public TowerRoot GetTowerRoots(int rootIndex, int index)
+    {
+        Roots roots = towerRoots.towerRoots.Find(x => x.index == rootIndex);
+        return roots.roots[index];
+    }
     #endregion
 
 
