@@ -12,7 +12,6 @@ public class TowerAttack : MonoBehaviour
     private MonsterMove targetEnemy;
     private PoolManager pool;
 
-    private TowerState towerState;
     private float curFireTime = 0f;
     public float useSkillTime = 0f;
     public float selectedTime = 0f;
@@ -46,26 +45,16 @@ public class TowerAttack : MonoBehaviour
         SetMuzzleRotation();
         SkillCoolTime();
 
-        if (towerState == TowerState.OutControl)
+        Fire();
+
+        if (IsInBoundary())
         {
-            Fire();
-
-            if (IsInBoundary())
-            {
-                ChangeBoundaryColor(Color.white);
-                ShowBoundary(true);
-            }
-            else
-            {
-                ShowBoundary(false);
-            }
+            ChangeBoundaryColor(Color.white);
+            ShowBoundary(true);
         }
-
         else
         {
-            CameraMove();
-            ZoomOutTower();
-            FireByPlayer();
+            ShowBoundary(false);
         }
 
         OnUseSKill();
@@ -74,15 +63,10 @@ public class TowerAttack : MonoBehaviour
     private void TowerBuild()
     {
         isBuilding = true;
-        float firstPosY = -40f;
-        float lastPosY = -25.7f;
+        float firstPosY = -20f;
+        float lastPosY = 9f;
         transform.DOMoveY(firstPosY, 0f);
         transform.DOMoveY(lastPosY, 2f).OnComplete(() => isBuilding = false);
-    }
-
-    public void EquipItems()
-    {
-        //GameManager.Instance.UIManager.
     }
 
     #region Fire
@@ -136,7 +120,7 @@ public class TowerAttack : MonoBehaviour
     private void InstantiateOrPooling(GameObject obj)
     {
         bool isTargeting = SetTargetEnemy();
-        if (towerState == TowerState.InControl || isTargeting)
+        if (isTargeting)
         {
             obj.GetComponent<BulletMove>().Init(this);
             obj.GetComponent<BulletAttack>().Init(this);
@@ -175,10 +159,7 @@ public class TowerAttack : MonoBehaviour
             }
         }
 
-        if (towerState == TowerState.OutControl)
-        {
-            targetEnemy?.VirtualDamaged(towerBase.attackPower);
-        }
+        targetEnemy?.VirtualDamaged(towerBase.attackPower);
 
         return (targetEnemy != null);
     }
@@ -200,81 +181,17 @@ public class TowerAttack : MonoBehaviour
     #endregion
 
     #region Control
-    public void ZoomInTower()
-    {
-        GameManager.Instance.mainCam.cam.enabled = true;
-
-        GameManager.Instance.tpsCamera.enabled = false;
-
-        GameManager.Instance.SetPlayerState(PlayerState.TowerControl);
-
-        Vector3 cameraPosition = muzzlePosition.transform.position;
-        cameraPosition.y += 1.2f;
-        GameManager.Instance.mainCam.CameraMoveToPosition(cameraPosition, 1f);
-        //이거 fireRate 다름
-        GameManager.Instance.UIManager.ShowTowerStatBar(true, towerBase.attackPower, towerBase.fireRate);
-        GameManager.Instance.UIManager.quickSlot.SetActive(false);
-
-        GameManager.Instance.selectedTower = this;
-        towerState = TowerState.InControl;
-        selectedTime = 0f;
-        towerUnit.SetActive(false);
-        GameManager.Instance.player.playerSkin.SetActive(false);
-
-        ShowBoundary(true);
-        ChangeBoundaryColor(Color.red);
-
-        GameManager.Instance.UIManager.CursorLocked(true);
-    }
-
-    private void ZoomOutTower()
-    {
-        if (Input.GetKeyDown(KeyManager.keySettings[KeyAction.Interaction]) && selectedTime > 1f)
-        {
-            //고정값이니 바꾸어도 됨
-            GameManager.Instance.player.gameObject.SetActive(true);
-
-            Vector3 pos = GameManager.Instance.tpsCamera.transform.position;
-            Vector3 rot = GameManager.Instance.tpsCamera.transform.parent.eulerAngles;
-            GameManager.Instance.mainCam.ZoomOutCamera(pos, rot, 1f);
-            GameManager.Instance.UIManager.quickSlot.SetActive(true);
-            GameManager.Instance.gameState = GameState.Playing;
-
-            GameManager.Instance.UIManager.ShowTowerStatBar(false);
-            GameManager.Instance.selectedTower = null;
-
-            curFireTime = 0f;
-            towerUnit.SetActive(true);
-            GameManager.Instance.player.playerSkin.SetActive(true);
-
-            towerState = TowerState.OutControl;
-            GameManager.Instance.SetPlayerState(PlayerState.Idle);
-
-        }
-    }
-
     private void ShowBoundary(bool isActive)
     {
         boundary.gameObject.SetActive(isActive);
-    }
-
-    private void CameraMove()
-    {
-        if (GameManager.Instance.gameState == GameState.Setting) return;
-
-        Vector2 mouse = GameManager.Instance.inputAxis * 4f;
-        Quaternion rot = GameManager.Instance.mainCam.transform.rotation;
-        GameManager.Instance.mainCam.ChangeLocalEulerAngle(new Vector3(Mathf.Clamp(-mouse.y + rot.eulerAngles.x, 0, 80), mouse.x + rot.eulerAngles.y, 0f));
     }
     #endregion
 
     #region Skill
     private void OnUseSKill()
     {
-        if (Input.GetKeyDown/*(KeyManager.keySettings[KeyAction.Skill])*/(KeyCode.Q) && towerState == TowerState.InControl)
+        if (Input.GetKeyDown/*(KeyManager.keySettings[KeyAction.Skill])*/(KeyCode.Q))
         {
-            skill = GetSkill();
-
             if (!CheckSkillCoolTime()) return;
 
             GameObject obj = pool.GetPoolObject(skill.bulletPrefab.PoolType).gameObject;
@@ -282,11 +199,6 @@ public class TowerAttack : MonoBehaviour
 
             useSkillTime = 0f;
         }
-    }
-
-    private Skill GetSkill()
-    {
-        return GameManager.Instance.skills.Find(skill => skill.attributeName == towerBase.attribute.attributeName);
     }
 
     private void SkillCoolTime()
@@ -301,19 +213,9 @@ public class TowerAttack : MonoBehaviour
     #endregion
 
     #region GetSet
-    public void SetAttribute(Attribute attribute)
-    {
-        towerBase.attribute = attribute;
-    }
-
     public MonsterMove GetTargetEnemy()
     {
         return targetEnemy;
-    }
-
-    public TowerState GetTowerState()
-    {
-        return towerState;
     }
     #endregion
 

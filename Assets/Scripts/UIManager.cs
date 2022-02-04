@@ -18,8 +18,6 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Image skillImage;
     [SerializeField] private Image skillCoolTimeImage;
-
-    private EquipmentButton currentEquipButton;
     #endregion
 
     #region Panels Various
@@ -306,11 +304,6 @@ public class UIManager : MonoBehaviour
     public void AddCurrentPanels(GameObject panel)
     {
         currentUIPanels.Add(panel);
-    }
-
-    public void SetCurEquipBtn(EquipmentButton button)
-    {
-        currentEquipButton = button;
     }
     #endregion
 

@@ -14,6 +14,7 @@ public class InGameDataManager : MonoBehaviour
 
     [SerializeField] private MonsterPrefabDatas monsterPrefabs;
     [SerializeField] private ItemSpriteDatas itemSprites;
+    [SerializeField] private TowerRoots towerRoots;
 
     private void Awake()
     {
