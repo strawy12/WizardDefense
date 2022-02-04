@@ -47,6 +47,7 @@ public class AvailableRootPanel : PanelBase
 
         nameText.text = root.name;
         infoText.text = root.info;
+        priceText.text = string.Format("{0}MP", root.price);
         productImage.sprite = root.rootImage;
     }
 }
