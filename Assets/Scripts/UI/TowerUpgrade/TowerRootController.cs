@@ -48,14 +48,28 @@ public class TowerRootController : MonoBehaviour
                 rootPanels[i][j].UpdateRoot(tower);
             }
         }
+
+        FirstSelect(tower);
     }
 
     public void UpdateSelectedRoot(TowerRoot root)
     {
+        Deselect();
         elementNameText.text = root.name;
         elementInfoText.text = root.info;
         elementPriceText.text = string.Format("{0}MP 소모", root.price);
         elementImage.sprite = root.rootImage;
+    }
+
+    private void Deselect()
+    {
+        for (int i = 0; i < rootPanels.Count; i++)
+        {
+            for (int j = 0; j < rootPanels[i].Length; j++)
+            {
+                rootPanels[i][j].Deselect();
+            }
+        }
     }
 
     public void ShowRootView()
@@ -80,5 +94,18 @@ public class TowerRootController : MonoBehaviour
 
         GameManager.Instance.UIManager.UpdateAvailablePanels();
         Debug.Log("강화");
+    }
+
+    private void FirstSelect(TowerBase tower)
+    {
+        if(tower.currentRoot.rootIndex == 0)
+        {
+            rootPanels[0][0].OnSelected();
+        }
+        else
+        {
+            int index = tower.availableRootIndexes.FindIndex(x => x == tower.currentRoot.rootIndex);
+            rootPanels[index][tower.currentRoot.index].OnSelected();
+        }
     }
 }

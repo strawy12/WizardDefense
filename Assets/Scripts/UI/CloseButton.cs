@@ -15,6 +15,7 @@ public class CloseButton : MonoBehaviour
         button.onClick.AddListener(() =>
         {
             GameManager.Instance.UIManager.RemoveCurrentPanels(parentPanel);
+            parentPanel.gameObject.SetActive(false);
         });
     }
 }

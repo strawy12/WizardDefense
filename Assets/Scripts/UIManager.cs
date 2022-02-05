@@ -214,11 +214,21 @@ public class UIManager : MonoBehaviour
 
     public void ShowTowerUpgradeUI()
     {
-        towerUpgradeUI.SetActive(true);
-        currentUIPanels.Add(towerUpgradeUI);
-        UpdateAvailablePanels();
-        SetGameState(GameState.InGameSetting);
-        CursorLocked(false);
+        CursorLocked(towerUpgradeUI.activeSelf);
+
+        if(towerUpgradeUI.activeSelf)
+        {
+            towerUpgradeUI.SetActive(false);
+            currentUIPanels.Remove(towerUpgradeUI);
+            SetGameState(GameState.Playing);
+        }
+        else
+        {
+            towerUpgradeUI.SetActive(true);
+            currentUIPanels.Add(towerUpgradeUI);
+            UpdateAvailablePanels();
+            SetGameState(GameState.InGameSetting);
+        }
     }
 
     public void DeselectAvailablePanels()

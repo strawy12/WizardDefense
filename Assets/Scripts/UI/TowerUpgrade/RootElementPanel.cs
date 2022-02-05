@@ -10,6 +10,7 @@ public class RootElementPanel : MonoBehaviour
 
     [SerializeField] private Text nameText;
     [SerializeField] private Image image;
+    [SerializeField] private ParticleSystem particle;
 
     private TowerRoot root;
 
@@ -46,8 +47,17 @@ public class RootElementPanel : MonoBehaviour
         image.sprite = root.rootImage;
     }
 
-    private void OnSelected()
+    public void OnSelected()
     {
         GameManager.Instance.UIManager.RootView.UpdateSelectedRoot(root);
+        particle.gameObject.SetActive(true);
+        particle.Play();
+        particle.Play();
+    }
+
+    public void Deselect()
+    {
+        particle.Stop();
+        particle.gameObject.SetActive(false);
     }
 }
