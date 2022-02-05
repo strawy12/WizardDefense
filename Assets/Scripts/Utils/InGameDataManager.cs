@@ -460,13 +460,30 @@ public class InGameDataManager : MonoBehaviour
         return waveDatas.waves[index];
     }
 
-    public TowerRoot GetTowerRoots(int rootIndex, int index)
+    public TowerRoot GetTowerRoot(int rootIndex, int index)
     {
         Roots roots = towerRoots.towerRoots.Find(x => x.index == rootIndex);
         return roots.roots[index];
     }
+
+    public int GetRootsCount(int rootIndex)
+    {
+        Roots roots = towerRoots.towerRoots.Find(x => x.index == rootIndex);
+        return roots.roots.Count;
+    }
+
+    public string GetTowerRootData(TowerRoot root)
+    {
+        for (int i = 0; i < towerRoots.towerRoots.Count; i++)
+        {
+            for (int j = 0; j < towerRoots.towerRoots[i].roots.Count; j++)
+            {
+                if(root.name == towerRoots.towerRoots[i].roots[j].name)
+                    return towerRoots.towerRoots[i].index.ToString() + "," + j.ToString();
+            }
+        }
+
+        return "";
+    }
     #endregion
-
-
-
 }

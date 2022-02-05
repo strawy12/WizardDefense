@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject towerUpgradeUI;
     [SerializeField] private GameObject availablePanelTemplate;
     private List<PanelBase> availablePanels = new List<PanelBase>();
+    public TowerRootController RootView;
     #endregion
 
     [Header("¼³Á¤Ã¢")]
@@ -205,7 +206,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateAvailablePanels()
     {
-        foreach(PanelBase panel in availablePanels)
+        foreach (PanelBase panel in availablePanels)
         {
             panel.UpdateData();
         }
@@ -218,6 +219,24 @@ public class UIManager : MonoBehaviour
         UpdateAvailablePanels();
         SetGameState(GameState.InGameSetting);
         CursorLocked(false);
+    }
+
+    public void DeselectAvailablePanels()
+    {
+        foreach (PanelBase panel in availablePanels)
+        {
+            panel.Deselect();
+        }
+    }
+
+    public TowerRoot GetCurrentSelectedRoot()
+    {
+        foreach (PanelBase panel in availablePanels)
+        {
+            if (panel.GetIsSelected())
+                return panel.GetRoot();
+        }
+        return null;
     }
     #endregion
 

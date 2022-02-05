@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AvailableRootPanel : PanelBase
 {
     private int index;
+    protected TowerRoot root;
 
     private void Start()
     {
-        index = transform.GetSiblingIndex() - 1;
+        if (transform.GetSiblingIndex() == 1)
+            isSelected = true;
+
+        GetComponent<Button>().onClick.AddListener(() => OnSelect());
     }
+
     public override void UpdateData()
     {
         TowerBase tower = GameManager.Instance.censorTower.towerBase;
+        index = transform.GetSiblingIndex() - 1;
 
         //아직 아무 루트도 선택하지 않았을 때
         if (tower.currentRoot.rootIndex == 0)
@@ -36,19 +43,42 @@ public class AvailableRootPanel : PanelBase
         }
 
         gameObject.SetActive(false);
+        root = null;
     }
 
     private void UpdateUI()
     {
         gameObject.SetActive(true);
         TowerBase tower = GameManager.Instance.censorTower.towerBase;
+        if (tower.currentRoot.rootIndex != 0 && tower.currentRoot.index >= GameManager.Instance.Data.GetRootsCount(tower.currentRoot.rootIndex) - 1)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            root = GameManager.Instance.Data.GetTowerRoot(tower.availableRootIndexes[index], tower.currentRoot.index + 1);
 
-        TowerRoot root = GameManager.Instance.Data.GetTowerRoots(tower.availableRootIndexes[index], tower.currentRoot.index);
+            nameText.text = root.name;
+            infoText.text = root.info;
+            priceText.text = string.Format("{0}MP", root.price);
+            productImage.sprite = root.rootImage;
+        }
+    }
 
-        nameText.text = root.name;
-        infoText.text = root.info;
-        priceText.text = string.Format("{0}MP", root.price);
-        productImage.sprite = root.rootImage;
+    public override void OnSelect()
+    {
+        GameManager.Instance.UIManager.DeselectAvailablePanels();
+        isSelected = true;
+    }
+
+    public override void Deselect()
+    {
+        isSelected = false;
+    }
+
+    public override TowerRoot GetRoot()
+    {
+        return root;
     }
 }
 

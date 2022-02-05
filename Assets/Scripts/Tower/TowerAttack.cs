@@ -29,13 +29,10 @@ public class TowerAttack : MonoBehaviour
         pool = FindObjectOfType<PoolManager>();
         outline = GetComponentInChildren<Outline>();
         useSkillTime = 100f;
-
+        towerBase.currentRoot.index = -1;
+        towerBase.currentRoot.rootIndex = 0;
         TowerBuild();
-
-        Vector3 scale = transform.localScale;
-        scale.y = scale.x;
-        boundary.gameObject.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * (2f / scale.x);
-        boundary.gameObject.SetActive(true);
+        SetBoundary();
     }
 
     private void Update()
@@ -58,6 +55,14 @@ public class TowerAttack : MonoBehaviour
         }
 
         OnUseSKill();
+    }
+
+    private void SetBoundary()
+    {
+        Vector3 scale = transform.localScale;
+        scale.y = scale.x;
+        boundary.gameObject.transform.localScale = new Vector2(towerBase.distance, towerBase.distance) * (2f / scale.x);
+        boundary.gameObject.SetActive(true);
     }
 
     private void TowerBuild()
@@ -144,7 +149,6 @@ public class TowerAttack : MonoBehaviour
     public bool IsInBoundary()
     {
         List<MonsterMove> enemies = GameManager.Instance.enemies;
-        Vector2 pos;
 
         for (int i = 0; i < enemies.Count; i++)
         {
