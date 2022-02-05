@@ -7,6 +7,7 @@ public class AvailableRootPanel : PanelBase
 {
     private int index;
     protected TowerRoot root;
+    [SerializeField] private Image image;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class AvailableRootPanel : PanelBase
     {
         TowerBase tower = GameManager.Instance.censorTower.towerBase;
         index = transform.GetSiblingIndex() - 1;
+        if (index == 0) OnSelect();
 
         //아직 아무 루트도 선택하지 않았을 때
         if (tower.currentRoot.rootIndex == 0)
@@ -68,12 +70,14 @@ public class AvailableRootPanel : PanelBase
     public override void OnSelect()
     {
         GameManager.Instance.UIManager.DeselectAvailablePanels();
+        image.color = Color.gray;
         isSelected = true;
     }
 
     public override void Deselect()
     {
         isSelected = false;
+        image.color = Color.white;
     }
 
     public override TowerRoot GetRoot()

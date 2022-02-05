@@ -13,13 +13,17 @@ public class TowerRootController : MonoBehaviour
 
     [Header("Control Root Panels")]
     private List<RootElementPanel[]> rootPanels = new List<RootElementPanel[]>();
-    [SerializeField] List<Transform> rootParentTransforms;
+    private List<RectTransform> lines = new List<RectTransform>();
+
+    [SerializeField] private List<Transform> rootParentTransforms;
+    [SerializeField] private GameObject rootView;
 
     void Awake()
     {
         for (int i = 0; i < rootParentTransforms.Count; i++)
         {
             rootPanels.Add(rootParentTransforms[i].GetComponentsInChildren<RootElementPanel>());
+            lines.Add(rootParentTransforms[i].parent.GetChild(0).GetComponent<RectTransform>());
         }
 
         InitializeRoots();
@@ -42,6 +46,12 @@ public class TowerRootController : MonoBehaviour
         for (int i = 0; i < rootPanels.Count; i++)
         {
             rootParentTransforms[i].parent.gameObject.SetActive(i < tower.availableRootIndexes.Count);
+
+            if (i < tower.availableRootIndexes.Count)
+            {
+                int maxCount = GameManager.Instance.Data.GetRootsCount(tower.availableRootIndexes[i]);
+                lines[i].sizeDelta = new Vector2(120f * maxCount, lines[i].sizeDelta.y);
+            }
 
             for (int j = 0; j < rootPanels[i].Length; j++)
             {
@@ -74,10 +84,9 @@ public class TowerRootController : MonoBehaviour
 
     public void ShowRootView()
     {
-        gameObject.SetActive(true);
-        GameManager.Instance.UIManager.currentUIPanels.Add(gameObject);
+        rootView.SetActive(true);
+        GameManager.Instance.UIManager.currentUIPanels.Add(rootView);
         UpdateRoots();
-        //UpdateSelectedRoot(GameManager.Instance.Data.GetTowerRoots(GameManager.Instance.censorTower.towerBase.availableRootIndexes[0], 0));
     }
 
     public void OnEnforcement()
@@ -98,7 +107,7 @@ public class TowerRootController : MonoBehaviour
 
     private void FirstSelect(TowerBase tower)
     {
-        if(tower.currentRoot.rootIndex == 0)
+        if (tower.currentRoot.rootIndex == 0)
         {
             rootPanels[0][0].OnSelected();
         }
