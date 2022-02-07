@@ -407,27 +407,27 @@
     "havedEnergyList": [
         {
             "type": 1,
-            "count": 5
+            "count": 3
         },
         {
             "type": 2,
-            "count": 2
+            "count": 7
         },
         {
             "type": 3,
-            "count": 6
+            "count": 7
         },
         {
             "type": 6,
-            "count": 4
+            "count": 1
         },
         {
             "type": 4,
-            "count": 2
+            "count": 3
         },
         {
             "type": 5,
-            "count": 6
+            "count": 4
         }
     ],
     "keyInputDataList": [
