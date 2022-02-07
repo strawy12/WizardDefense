@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b7a9844caa7474d91832f25d7f6a21, type: 3}
+  m_Name: TowerRoots
+  m_EditorClassIdentifier: Assembly-CSharp::TowerRoots
+  towerRoots:
+  - index: 1
+    roots:
+    - name: "\uBE60\uB978 \uC2DC\uC804"
+      info: "\uD0C0\uC6CC\uC758 \uAE30\uBCF8 \uACF5\uACA9 \uC18D\uB3C4\uAC00 30%
+        \uC99D\uAC00\uD55C\uB2E4.\r"
+      price: 300
+      value: 30
+      rootImage: {fileID: 21300000, guid: af88e637281e9a548aa31d1cb76a0486, type: 3}
+    - name: "\uC608\uB9AC\uD55C \uB9C8\uC11D"
+      info: "\uD0C0\uC6CC\uC758 \uCE58\uBA85\uD0C0 \uD655\uB960\uC774 15% \uC99D\uAC00\uD55C\uB2E4.\r"
+      price: 700
+      value: 15
+      rootImage: {fileID: 21300000, guid: 7d053d3b3746a204bb3be41bbecff78f, type: 3}
+    - name: "\uB450\uAC1C\uC758 \uBCF4\uC11D"
+      info: "\uD0C0\uC6CC\uC5D0 \uC801\uC744 \uACF5\uACA9\uD558\uB294 \uC218\uC815\uC774
+        \uD558\uB098 \uB354 \uC0DD\uAE34\uB2E4.\r"
+      price: 1200
+      value: 1
+      rootImage: {fileID: 21300000, guid: eed1ebcab0d6c3743950949d537f1f5b, type: 3}
+    - name: "\uBD09\uC778\uC11D"
+      info: "10\uCD08\uC5D0 \uD55C\uBC88 \uACF5\uACA9 \uC0AC\uAC70\uB9AC \uB0B4\uC758
+        \uBAA8\uB4E0 \uC801\uC744 1\uCD08\uB3D9\uC548 \uC815\uC9C0 \uC2DC\uD0A8\uB2E4.\r"
+      price: 1800
+      value: 10
+      rootImage: {fileID: 21300000, guid: aa9220a4630dfef45adbd0c6f1be9d0a, type: 3}
+    - name: "\uBC18\uC0AC\uC758 \uB8EC"
+      info: "\uACF5\uACA9\uC774 \uC801\uC5D0\uAC8C \uBA85\uC911\uD558\uACE0 \uB2E4\uC74C
+        \uC801\uC5D0\uAC8C\uB85C \uBC18\uC0AC\uB418\uC5B4 \uB098\uAC04\uB2E4.\r"
+      price: 2500
+      value: 0
+      rootImage: {fileID: 21300000, guid: 8ad5b66611fa4b9419df448ff4163468, type: 3}
+  - index: 2
+    roots:
+    - name: "\uB9C8\uB825 \uD3ED\uBC1C"
+      info: "5\uCD08\uC5D0 \uD55C\uBC88 \uD0C0\uC6CC\uC5D0\uC11C \uAC15\uD55C \uAD6C\uCCB4\uB97C
+        \uB0A0\uB9B0\uB2E4.\r"
+      price: 500
+      value: 5
+      rootImage: {fileID: 21300000, guid: af88e637281e9a548aa31d1cb76a0486, type: 3}
+  - index: 3
+    roots:
+    - name: "\uC784\uC2DC"
+      info: "5\uCD08\uC5D0 \uD55C\uBC88 \uD0C0\uC6CC\uC5D0\uC11C \uAC15\uD55C \uAD6C\uCCB4\uB97C
+        \uB0A0\uB9B0\uB2E4.\r"
+      price: 500
+      value: 5
+      rootImage: {fileID: 21300000, guid: af88e637281e9a548aa31d1cb76a0486, type: 3}

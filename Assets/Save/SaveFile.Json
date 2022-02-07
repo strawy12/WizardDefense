@@ -411,11 +411,11 @@
         },
         {
             "type": 2,
-            "count": 2
+            "count": 8
         },
         {
             "type": 3,
-            "count": 6
+            "count": 2
         },
         {
             "type": 6,
@@ -427,7 +427,7 @@
         },
         {
             "type": 5,
-            "count": 6
+            "count": 4
         }
     ],
     "keyInputDataList": [

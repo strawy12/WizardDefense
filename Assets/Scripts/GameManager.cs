@@ -39,7 +39,6 @@ public class GameManager : MonoSingleton<GameManager>
     public ItemObject selectedItem;
 
     public List<MonsterMove> enemies { get; private set; } = new List<MonsterMove>();
-    public List<Attribute> attributes = new List<Attribute>();
     public List<Skill> skills = new List<Skill>();
 
     public Vector2 inputAxis;

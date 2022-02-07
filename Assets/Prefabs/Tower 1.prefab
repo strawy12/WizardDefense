@@ -241,14 +241,12 @@ MonoBehaviour:
   towerBase:
     name: "\uB178\uBA40\uD3EC\uD0D1"
     attackPower: 5
-    level: 0
-    attribute:
-      attributeName: "\uB178\uBA40"
-      sprite: {fileID: 0}
     fireRate: 1
-    handFireRate: 0.5
     distance: 25
-    hp: 0
+    availableRootIndexes: 0100000002000000
+    currentRoot:
+      rootIndex: 0
+      index: 0
   muzzlePosition: {fileID: 7280627589289538551}
   boundary: {fileID: 1422488582}
   useSkillTime: 0

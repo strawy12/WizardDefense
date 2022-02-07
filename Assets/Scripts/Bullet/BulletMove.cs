@@ -6,7 +6,6 @@ public class BulletMove : PoolObject
 {
     private TowerAttack towerAttack;
     private MonsterMove targetEnemy;
-    private TowerState state;
 
     private SphereCollider col;
     private float originRad;
@@ -22,16 +21,7 @@ public class BulletMove : PoolObject
 
     private void Update()
     {
-        if (state == TowerState.OutControl)
-        {
-            Move_OutControl();
-        }
-
-        else
-        {
-            Move_InControl();
-        }
-
+        Move_InControl();
         transform.Translate(Vector3.forward * speed, Space.Self);
     }
 
@@ -39,25 +29,15 @@ public class BulletMove : PoolObject
     public void Init(TowerAttack towerAttack)
     {
         this.towerAttack = towerAttack;
-        state = towerAttack.GetTowerState();
-
-        if (state == TowerState.OutControl)
-        {
             targetEnemy = towerAttack.GetTargetEnemy();
             col.radius = originRad;
-        }
-
-        else
-        {
-            col.radius = originRad * 2.5f;
-        }
     }
     #endregion
 
     #region Fire
     private void Move_OutControl()
     {
-        if(targetEnemy != null)
+        if (targetEnemy != null)
         {
             transform.LookAt(targetEnemy.transform);
         }

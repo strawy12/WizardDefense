@@ -43,7 +43,6 @@ public class PatternData
         this.monsterSpawnDelay = monsterSpawnDelay;
         this.monsterInfoList = monsterInfoList;
     }
-
 }
 
 [CreateAssetMenu(fileName = "Patterns", menuName = "Scriptable Object/Patterns")]

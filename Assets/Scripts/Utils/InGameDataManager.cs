@@ -14,6 +14,7 @@ public class InGameDataManager : MonoBehaviour
 
     [SerializeField] private MonsterPrefabDatas monsterPrefabs;
     [SerializeField] private ItemSpriteDatas itemSprites;
+    [SerializeField] private TowerRoots towerRoots;
 
     private void Awake()
     {
@@ -33,7 +34,7 @@ public class InGameDataManager : MonoBehaviour
             patterns = Resources.Load<Patterns>(SAVE_PATH + "Patterns");
         }
 
-        if(itemDatas == null)
+        if (itemDatas == null)
         {
             itemDatas = Resources.Load<ItemDatas>(SAVE_PATH + "ItemDatas");
         }
@@ -43,7 +44,7 @@ public class InGameDataManager : MonoBehaviour
             monsterPrefabs = Resources.Load<MonsterPrefabDatas>(SAVE_PATH + "MonsterPrefabDatas");
         }
 
-        if(itemSprites == null)
+        if (itemSprites == null)
         {
             itemSprites = Resources.Load<ItemSpriteDatas>(SAVE_PATH + "ItemSpriteDatas");
         }
@@ -294,7 +295,7 @@ public class InGameDataManager : MonoBehaviour
                 executionCnt = int.Parse(column[2]);
                 existBoss = column[3].Equals("TRUE");
 
-                if(existBoss)
+                if (existBoss)
                 {
                     bossID = column[4];
                 }
@@ -459,8 +460,30 @@ public class InGameDataManager : MonoBehaviour
         return waveDatas.waves[index];
     }
 
+    public TowerRoot GetTowerRoot(int rootIndex, int index)
+    {
+        Roots roots = towerRoots.towerRoots.Find(x => x.index == rootIndex);
+        return roots.roots[index];
+    }
+
+    public int GetRootsCount(int rootIndex)
+    {
+        Roots roots = towerRoots.towerRoots.Find(x => x.index == rootIndex);
+        return roots.roots.Count;
+    }
+
+    public string GetTowerRootData(TowerRoot root)
+    {
+        for (int i = 0; i < towerRoots.towerRoots.Count; i++)
+        {
+            for (int j = 0; j < towerRoots.towerRoots[i].roots.Count; j++)
+            {
+                if(root.name == towerRoots.towerRoots[i].roots[j].name)
+                    return towerRoots.towerRoots[i].index.ToString() + "," + j.ToString();
+            }
+        }
+
+        return "";
+    }
     #endregion
-
-
-
 }
