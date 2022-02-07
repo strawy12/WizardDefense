@@ -68,8 +68,8 @@ public class TowerAttack : MonoBehaviour
     private void TowerBuild()
     {
         isBuilding = true;
-        float firstPosY = -20f;
-        float lastPosY = 9f;
+        float firstPosY = -8f;
+        float lastPosY = 5.04f;
         transform.DOMoveY(firstPosY, 0f);
         transform.DOMoveY(lastPosY, 2f).OnComplete(() => isBuilding = false);
     }
